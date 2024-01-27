@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "prettify": "^0.1.7"
+    "prettier": "3.2.4"
   }
 }
