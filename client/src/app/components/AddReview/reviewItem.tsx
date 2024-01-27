@@ -9,6 +9,8 @@ const ReviewItem = () => {
       <p>
         Review Item
       </p>
+      <input placeholder="Add item"></input>
+      
     </div>
   )
 
