@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,79 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Property {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  number     String
+  apartment  String?
+  street     String
+  postcode   String
+  city       String
+  avg_rating Int?
+
+  reviews Review[]
+}
+
+model Review {
+  review_id                       Int      @id @default(autoincrement())
+  review_date                     DateTime @default(now())
+  t_start                         DateTime
+  t_end                           DateTime
+  cleanliness                     Int
+  cleanliness_comment             String?
+  maintenance                     Int
+  maintenance_comment             String?
+  value_for_money                 Int
+  value_for_money_comment         String?
+  deposit_handling                Int
+  deposit_handling_comment        String?
+  amenities                       Int
+  amenities_comment               String?
+  landlord_responsiveness         Int
+  landlord_responsiveness_comment String?
+  monthly_rent                    Int
+  monthly_bill                    Int
+  council_tax                     Int
+  general_comment                 String
+
+  property_id Int
+  property    Property @relation(fields: [property_id], references: [id])
+
+  tenant_id Int
+  tenant    Tenant @relation(fields: [tenant_id], references: [tenant_id])
+
+  photos Photo[]
+}
+
+model Tenant {
+  tenant_id  Int    @id @default(autoincrement())
+  email      String @unique
+  first_name String
+  last_name  String
+  password   String
+
+  reviews Review[]
+
+  searches Search[]
+}
+
+model Photo {
+  photo_id Int    @id @default(autoincrement())
+  url      String
+  tag      String
+
+  review_id Int
+  review    Review @relation(fields: [review_id], references: [review_id])
+}
+
+model Search {
+  search_id   Int      @id @default(autoincrement())
+  search_date DateTime @default(now())
+  review_id   Int
+
+  tenant_id Int
+  tenant    Tenant @relation(fields: [tenant_id], references: [tenant_id])
 }
