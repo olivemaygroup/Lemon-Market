@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   Thinking the top logo bar and burger.
 */
 
-
 export default function RootLayout({
   children,
 }: Readonly<{

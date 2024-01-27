@@ -6,11 +6,9 @@ export default function PropertyDetail() {
   return (
     <main className={styles.main}>
       <TopImageScroll></TopImageScroll>
-    <div className={styles.description}>
-      <p>
-        Property Detail
-      </p>
-    </div>
+      <div className={styles.description}>
+        <p>Property Detail</p>
+      </div>
     </main>
   );
 }

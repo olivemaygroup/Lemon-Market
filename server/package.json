@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@koa/cors": "^5.0.0",
+    "@prisma/client": "^5.8.1",
     "@types/cors": "^2.8.17",
     "@types/koa": "^2.14.0",
     "@types/koa-bodyparser": "^4.3.12",
