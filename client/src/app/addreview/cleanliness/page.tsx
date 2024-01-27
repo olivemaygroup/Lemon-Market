@@ -20,12 +20,10 @@ const dispatch = useDispatch()
 export default function Cleanliness() {
   return (
     <main className={styles.main}>
-    <div className={styles.description}>
-      <p>
-        Add cleanliness
-      </p>
-    </div>
+      <div className={styles.description}>
+        <p>Add cleanliness</p>
+      </div>
       <ReviewItem></ReviewItem>
-  </main>
+    </main>
   );
 }

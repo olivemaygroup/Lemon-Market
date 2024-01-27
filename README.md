@@ -1,8 +1,9 @@
 
 
-
-
 <!--
+1. run 'npx prettier . --write' in root folder.
+Steps before push
+
 
  ROUTES:
 
@@ -10,13 +11,13 @@
 ---------------------------------------------------------------------------------------------------------------------
 GET propertyCards:
 
-Client: '/'  
+Client: '/'
         >>>> At landing and search
         >>>> Royal mail API to drop down addresses
         >>>> on click, message sent to router
 
-Router: '/checkAddress'    
-        >>>> Controller: check if exists  
+Router: '/checkAddress'
+        >>>> Controller: check if exists
         >>>> YES: return full property object
         >>>> NO: Client renders placeholder propertyCard
 
@@ -25,9 +26,9 @@ Router: '/checkAddress'
 POST SIGNUP:
 
 Client: '/signup'
-        >>>> user navs to signup page 
+        >>>> user navs to signup page
 
-Router: '/signup' 
+Router: '/signup'
         >>>> response - session token in cookie
 
 ---------------------------------------------------------------------------------------------------------------------
@@ -140,7 +141,7 @@ Client: '/myreviews'
 Router: '/editreview/:id
         >>>> response success
         >>>> Requires AuthMiddleware
-        
+
 
 
 
