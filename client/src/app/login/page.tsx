@@ -1,47 +1,33 @@
 "use client";
-import Image from "next/image";
-<<<<<<< HEAD
 import styles from "@/app/login/page.module.css";
-import { useSession, signIn, signOut } from "next-auth/react";
-
+import auth from "../utils/auth";
+import apiServiceJWT from "../ApiServiceJWT";
 import type { RootState } from '@/lib/store'
-=======
-import styles from "@/app/page.module.css";
-
-import type { RootState } from "@/lib/store";
->>>>>>> dev
 import { useSelector, useDispatch } from "react-redux";
-import { increment } from "@/lib/features/counter/counterSlice";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-<<<<<<< HEAD
+import { error } from "console";
+
 type EmailType = string;
 type PasswordType = string;
 
 export default function Login () {
   const [email, setEmail] = useState<EmailType>('')
   const [password, setPasword] = useState<PasswordType>('')
-  
+  const router = useRouter();
 
-  const tryLogin = async (e:any): Promise <any> => {
+  const tryLogin = async (e:any): Promise <any | null> => {
     e.preventDefault();
+
     const user: { email: EmailType, password: PasswordType } = {
       email, password
     }
-    const response = await fetch('http://localhost:3000/login', {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const profile = await response.json();
-    if (!response.ok) {
-      console.log('Login error--',profile.error)
-    }
-    if (response.ok) {
-      console.log('login successful')
-    }
+    const res = await apiServiceJWT.login(user)
+    const { accessToken }:any = res;
+    localStorage.setItem('accessToken', accessToken);
+    auth.login(()=>router.replace('/home'))
+
     setEmail('')
     setPasword('')
   }
@@ -88,21 +74,5 @@ export default function Login () {
       </form>
     </div>
   </main>
-=======
-export default function Login() {
-  const count = useSelector((state: RootState) => state.counter.value);
-  const dispatch = useDispatch();
-
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>Login page</p>
-        <span>{count}</span>
-        <button className={styles.button} onClick={() => dispatch(increment())}>
-          Icrement
-        </button>
-      </div>
-    </main>
->>>>>>> dev
   );
 }
