@@ -1,6 +1,6 @@
 'use strict';
 
-import * as Router from "koa-router"
+import Router from "koa-router"
 import userProfile from "../controllers/userprofile.controller";
 import property from "../controllers/property.controller";
 import review from "../controllers/review.controller";
