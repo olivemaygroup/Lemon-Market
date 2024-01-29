@@ -15,21 +15,33 @@ interface Contact {
 const signup = async (ctx: Context) => {
   const { firstName, lastName, email, password } = <Contact> ctx.request.body
   try {
-    const newUser = await prisma.tenant.create({
-      data: {
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          password: password
-        }
-      })
-    ctx.status = 200;
+    const userExists = await prisma.tenant.findUnique({
+      where: {
+        email: email
+      }
+    });
+
+    if (!userExists) {
+      await prisma.tenant.create({
+        data: {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            password: password
+          }
+        })
+      ctx.status = 200;
+    } else {
+      ctx.body = "User already exists, please sign in."
+    }
   } catch (error) {
     console.log('error signing up user:', error);
     ctx.status = 500;
     ctx.body = { error: 'Error signing up' };
   }
 };
+
+
 
 interface Login {
   username: string,
