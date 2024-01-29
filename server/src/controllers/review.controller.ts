@@ -6,7 +6,7 @@ import { PropertyType, Review, Tenant } from "../types/types";
 import { createContext } from "vm";
 
 
-const updatePropertyReviewsAndAvgRating = async (property: PropertyType, total_rating: number, property_id: number): Promise<void> => {
+const updatePropertyReviewsAndAvgRating = async (property: any, total_rating: number, property_id: number): Promise<void> => {
   try {
     const numOfReviews = property?.num_of_reviews
     if (numOfReviews > 0) {
