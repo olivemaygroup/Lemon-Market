@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import prisma from "../db";
-import PropertyType from "../../types/types";
+import PropertyType from "../types/types";
 
 import { Context } from "koa";
 
