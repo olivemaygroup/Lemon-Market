@@ -1,3 +1,7 @@
+// TODO implement input sanitisation
+// TODO check if user exists before allowing sign up
+// TODO implement hashing of password
+
 import prisma from "../db";
 import { Context } from "koa";
 
@@ -21,15 +25,28 @@ const signup = async (ctx: Context) => {
       })
     ctx.status = 200;
   } catch (error) {
-    console.log('error signing up user', error)
+    console.log('error signing up user:', error);
+    ctx.status = 500;
+    ctx.body = { error: 'Error signing up' };
   }
 };
 
-// const addProfile = async (ctx) => {
+interface Login {
+  username: string,
+  password: string
+}
 
-// };
+const login = async (ctx) => {
+  const { username, password } = <Login> ctx.request.body
 
-const login = async (ctx) => {};
+  try {
+    
+  } catch (error) {
+    console.log('Error logging in;', error)
+    ctx.status = 500;
+    ctx.body = { error: 'Error logging in.'}
+  }
+};
 
 const myProfile = async (ctx) => {
   // simply return all user info
