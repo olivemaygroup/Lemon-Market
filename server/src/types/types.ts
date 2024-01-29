@@ -50,6 +50,7 @@ export interface Review {
   monthly_bill: number;
   council_tax: number;
   general_comment: string;
+  photos: Photo[];
 }
 
 export interface Tenant {
@@ -58,4 +59,9 @@ export interface Tenant {
   first_name: string;
   last_name: string;
   password: string;
+}
+
+export interface Photo {
+  photos: string[];
+  tag: string;
 }

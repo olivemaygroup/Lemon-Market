@@ -61,7 +61,8 @@ const addReview = async (ctx: Context) => {
       monthly_rent,
       monthly_bill,
       council_tax,
-      general_comment
+      general_comment,
+      photos,
     } = ctx.request.body as Review;
 
     const property_id: number = ctx.params.property_id
