@@ -7,11 +7,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import prisma from "../db";
 const signup = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    const { firstName, lastName, email, password } = ctx.request.body;
     try {
+        const newUser = yield prisma.tenant.create({
+            data: {
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                password: password
+            }
+        });
         ctx.status = 200;
     }
-    catch (error) { }
+    catch (error) {
+        console.log('error signing up user', error);
+    }
 });
 // const addProfile = async (ctx) => {
 // };
