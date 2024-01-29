@@ -4,11 +4,16 @@ import PropertyType from "../../types/types";
 
 import { Context } from "koa";
 
+// interface Test extends Context {
+//   request: {
+//     body: PropertyType
+//   }
+// }
+
 const checkAddress = async (ctx: Context) => {
   try {
-    const { number, apartment, street, postcode, city } = <PropertyType>(
-      ctx.request.body
-    );
+    const { number, apartment, street, postcode, city } = <PropertyType> ctx.request.body
+
     const propertyWithReviews = await prisma.property.findFirst({
       where: {
         number: number,
