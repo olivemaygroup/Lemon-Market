@@ -9,8 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import prisma from "../db";
 import bcrypt from "bcrypt";
-import jwt from 'jsonwebtoken';
-const SECRET_KEY = process.env.SECRET_KEY;
+;
 const signup = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     const { firstName, lastName, email, password } = ctx.request.body;
     try {
@@ -33,9 +32,8 @@ const signup = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
                     password: hash
                 }
             });
-            const token = jwt.sign(tenant.tenant_id, SECRET_KEY);
-            ctx.body = token;
-            ctx.status = 201;
+            jwt.sign;
+            ctx.status = 200;
         }
     }
     catch (error) {
@@ -44,6 +42,7 @@ const signup = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
         ctx.body = { error: 'Error signing up' };
     }
 });
+;
 const login = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = ctx.request.body;
     const sanitizedEmail = email.replace(/[$/(){}]/g, "");

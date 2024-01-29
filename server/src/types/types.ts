@@ -8,6 +8,28 @@ export interface PropertyType {
   avg_rating?: number;
 }
 
+export interface Contact {
+  firstName: string,
+  lastName: string,
+  email: string,
+  password: string
+};
+
+export interface Login {
+  email: string,
+  password: string
+}
+
+export interface PropertyType {
+  number: string;
+  apartment: string;
+  street: string;
+  postcode: string;
+  city: string;
+  num_of_reviews?: number;
+  avg_rating?: number;
+}
+
 export interface Review {
   t_start: string;
   t_end: string;

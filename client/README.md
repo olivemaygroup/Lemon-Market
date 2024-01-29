@@ -34,3 +34,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+Google API login details:
+  Client ID: 957661806384-30rgr72rk63c1g7ihv29uoh7il4tukjr.apps.googleusercontent.com
+  client secret: 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
