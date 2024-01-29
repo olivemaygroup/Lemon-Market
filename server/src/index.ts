@@ -4,12 +4,10 @@ import bodyParser from 'koa-bodyparser';
 import cors from '@koa/cors';
 
 const app = new Koa();
-const router = new Router();
-const PORT = 3000;
 
-router.get('/', ctx => { 
-  ctx.body = 'Hello World'; 
-});
+import router from './routers/router';
+
+const PORT = 3000;
 
 app
   .use(bodyParser())
