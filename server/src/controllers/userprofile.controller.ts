@@ -1,13 +1,11 @@
 import prisma from "../db";
 import { Context } from "koa";
 import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken';
+import { Contact, Login } from '../types/types'
+const SECRET_KEY = process.env.SECRET_KEY;
 
-interface Contact {
-  firstName: string, 
-  lastName: string,
-  email: string,
-  password: string
-};
+
 
 const signup = async (ctx: Context) => {
   const { firstName, lastName, email, password } = <Contact> ctx.request.body
@@ -25,7 +23,7 @@ const signup = async (ctx: Context) => {
       ctx.status = 409;
     } else {
       const hash = await bcrypt.hash(sanitizedPassword, 10);
-      await prisma.tenant.create({
+      const tenant = await prisma.tenant.create({
         data: {
             first_name: santitizedFirstName,
             last_name: santitizedLastName,
@@ -33,20 +31,15 @@ const signup = async (ctx: Context) => {
             password: hash
           }
         });
-      ctx.status = 200;
+      const token = jwt.sign( tenant.tenant_id , SECRET_KEY );
+      ctx.body = token
+      ctx.status = 201;
     }
   } catch (error) {
     console.log('error signing up user:', error);
     ctx.status = 500;
     ctx.body = { error: 'Error signing up' };
   }
-};
-
-
-
-interface Login {
-  email: string,
-  password: string
 };
 
 const login = async (ctx: Context) => {
@@ -63,6 +56,8 @@ const login = async (ctx: Context) => {
     ctx.status = 401
   };
   try {
+  
+
   } catch (error) {
     console.log('Error logging in;', error)
     ctx.status = 500;
@@ -70,11 +65,15 @@ const login = async (ctx: Context) => {
   }
 };
 
-const myProfile = async (ctx) => {};
+const myProfile = async (ctx: Context) => {
+
+};
 
 const editProfile = async (ctx) => {};
 
-const deleteAccount = async (ctx) => {};
+const deleteAccount = async (ctx: Context) => {
+  // const { email } 
+};
 
 const userProfile = { signup, login, myProfile, editProfile, deleteAccount };
 
