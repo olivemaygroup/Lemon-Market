@@ -1,9 +1,6 @@
-// TODO implement input sanitisation
-// TODO check if user exists before allowing sign up
-// TODO implement hashing of password
-
 import prisma from "../db";
 import { Context } from "koa";
+import bcrypt from "bcrypt";
 
 interface Contact {
   firstName: string, 
@@ -15,24 +12,27 @@ interface Contact {
 const signup = async (ctx: Context) => {
   const { firstName, lastName, email, password } = <Contact> ctx.request.body
   try {
-    const userExists = await prisma.tenant.findUnique({
-      where: {
-        email: email
-      }
-    });
 
-    if (!userExists) {
+    const sanitizedEmail = email.replace(/[$/(){}]/g, "");
+    const sanitizedPassword = password.replace(/[$/(){}]/g, "");
+
+    const userExists = await prisma.tenant.findUnique({ where: { email: email } });
+
+    if (userExists) {
+      ctx.body = "User already exists, please sign in."
+      ctx.status = 409
+      
+    } else {
+      const hash = await bcrypt.hash(sanitizedPassword, 10);
       await prisma.tenant.create({
         data: {
             first_name: firstName,
             last_name: lastName,
-            email: email,
-            password: password
+            email: sanitizedEmail,
+            password: hash
           }
         })
       ctx.status = 200;
-    } else {
-      ctx.body = "User already exists, please sign in."
     }
   } catch (error) {
     console.log('error signing up user:', error);
