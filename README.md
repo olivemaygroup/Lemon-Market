@@ -1,5 +1,3 @@
-
-
 <!--
 1. run 'npx prettier . --write' in root folder.
 Steps before push

@@ -1,13 +1,20 @@
-'use client'
+"use client";
 import Image from "next/image";
+<<<<<<< HEAD
 import styles from "@/app/login/page.module.css";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 import type { RootState } from '@/lib/store'
+=======
+import styles from "@/app/page.module.css";
+
+import type { RootState } from "@/lib/store";
+>>>>>>> dev
 import { useSelector, useDispatch } from "react-redux";
 import { increment } from "@/lib/features/counter/counterSlice";
 import { useState } from "react";
 
+<<<<<<< HEAD
 type EmailType = string;
 type PasswordType = string;
 
@@ -81,5 +88,21 @@ export default function Login () {
       </form>
     </div>
   </main>
+=======
+export default function Login() {
+  const count = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch();
+
+  return (
+    <main className={styles.main}>
+      <div className={styles.description}>
+        <p>Login page</p>
+        <span>{count}</span>
+        <button className={styles.button} onClick={() => dispatch(increment())}>
+          Icrement
+        </button>
+      </div>
+    </main>
+>>>>>>> dev
   );
 }
