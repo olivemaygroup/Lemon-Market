@@ -7,7 +7,7 @@ interface Contact {
   lastName: string,
   email: string,
   password: string
-}
+};
 
 const signup = async (ctx: Context) => {
   const { firstName, lastName, email, password } = <Contact> ctx.request.body
@@ -15,23 +15,24 @@ const signup = async (ctx: Context) => {
 
     const sanitizedEmail = email.replace(/[$/(){}]/g, "");
     const sanitizedPassword = password.replace(/[$/(){}]/g, "");
+    const santitizedFirstName = firstName.replace(/[$/(){}]/g, "");
+    const santitizedLastName = lastName.replace(/[$/(){}]/g, "");
 
-    const userExists = await prisma.tenant.findUnique({ where: { email: email } });
+    const userExists = await prisma.tenant.findUnique({ where: { email: sanitizedEmail } });
 
     if (userExists) {
-      ctx.body = "User already exists, please sign in."
-      ctx.status = 409
-      
+      ctx.body = "User already exists, please sign in.";
+      ctx.status = 409;
     } else {
       const hash = await bcrypt.hash(sanitizedPassword, 10);
       await prisma.tenant.create({
         data: {
-            first_name: firstName,
-            last_name: lastName,
+            first_name: santitizedFirstName,
+            last_name: santitizedLastName,
             email: sanitizedEmail,
             password: hash
           }
-        })
+        });
       ctx.status = 200;
     }
   } catch (error) {
@@ -44,15 +45,24 @@ const signup = async (ctx: Context) => {
 
 
 interface Login {
-  username: string,
+  email: string,
   password: string
-}
+};
 
-const login = async (ctx) => {
-  const { username, password } = <Login> ctx.request.body
+const login = async (ctx: Context) => {
+  const { email, password } = <Login> ctx.request.body;
 
+  const sanitizedEmail = email.replace(/[$/(){}]/g, "");
+  const sanitizedPassword = password.replace(/[$/(){}]/g, "");
+
+  const user = await prisma.tenant.findUnique({ where: {email: sanitizedEmail} });
+  const validatePassword = await bcrypt.compare(sanitizedPassword, user.password);
+
+  if (!validatePassword) {
+    ctx.body = "Email or Password is incorrect."
+    ctx.status = 401
+  };
   try {
-    
   } catch (error) {
     console.log('Error logging in;', error)
     ctx.status = 500;
@@ -60,9 +70,7 @@ const login = async (ctx) => {
   }
 };
 
-const myProfile = async (ctx) => {
-  // simply return all user info
-};
+const myProfile = async (ctx) => {};
 
 const editProfile = async (ctx) => {};
 
