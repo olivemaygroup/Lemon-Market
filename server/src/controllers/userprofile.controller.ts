@@ -56,8 +56,10 @@ const login = async (ctx: Context) => {
     ctx.status = 401
   };
   try {
-  
-
+    const token = jwt.sign( user.tenant_id , SECRET_KEY );
+    ctx.body = token;
+    ctx.status = 200;
+    console.log(token)
   } catch (error) {
     console.log('Error logging in;', error)
     ctx.status = 500;
@@ -72,9 +74,23 @@ const myProfile = async (ctx: Context) => {
 const editProfile = async (ctx) => {};
 
 const deleteAccount = async (ctx: Context) => {
-  // const { email } 
-};
 
+  const user = ctx.state.tenant;
+  try {
+    await prisma.tenant.delete({
+      where: {
+        email: user.email
+      }
+    });
+    ctx.body = "User deleted.";
+    ctx.status = 200;
+  } catch (error) {
+    console.log('Error deleting account, please contact customer support', error)
+    ctx.status = 500
+  }
+
+
+};
 const userProfile = { signup, login, myProfile, editProfile, deleteAccount };
 
 export default userProfile;
