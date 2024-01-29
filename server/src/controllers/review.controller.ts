@@ -97,7 +97,7 @@ const addReview = async (ctx: Context) => {
         monthly_rent,
         monthly_bill,
         council_tax,
-        general_comment
+        general_comment,
       }
     });
 
