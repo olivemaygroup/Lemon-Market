@@ -1,0 +1,74 @@
+.page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone_box {
+  height: 600px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 70%;
+  gap: 30px;
+  margin: 30px 0 20px 0;
+}
+
+.input_div {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.input_lbl {
+  margin-bottom: 5px;
+}
+
+.input_feild {
+  border: none;
+  border-radius: 10px;
+  height: 40px;
+}
+
+.login_btns {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  gap: 10px;
+}
+
+.login {
+  border: none;
+  border-radius: 10px;
+  height: 40px;
+  
+}
+
+.or {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.line {
+  border: 1px solid gray;
+  width: 80%;
+  height: 1px;
+}
+
+.or_p {
+  color: gray;
+  font-size: 15px;
+  
+}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import StoreProvider   from '@/app/StoreProvider'
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,19 +17,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="en">
 
       <body className={inter.className}>
-      <StoreProvider>
-        <h2 style={{"color": "grey"}}>CONSISTENT</h2>
-        <hr></hr>
-        <div>
-          {children}
-        </div>
-      </StoreProvider>
-      
+      {/* <SessionProvider session={session} > */}
+        <StoreProvider>
+          <h2 style={{"color": "grey"}}>CONSISTENT</h2>
+          <hr></hr>
+          <div>
+            {children}
+          </div>
+        </StoreProvider>
+      {/* </SessionProvider> */}
       </body>
     </html>
-  );
+  )
 }
