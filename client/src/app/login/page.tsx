@@ -7,8 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { error } from "console";
-
 type EmailType = string;
 type PasswordType = string;
 
