@@ -7,19 +7,18 @@ const SECRET_KEY = process.env.SECRET_KEY
 
 const authMiddleware = async (ctx: Context, next: Next) => {
   // Extract token from auth headers
-  const authHeader = ctx.headers['authorization'];
-  if (!authHeader) {
+  const token = ctx.headers['authorization'];
+  if (!token) {
     ctx.status = 403;
     return;
   }
-  const token = authHeader.split(' ')[1];
 
   try {
-    const decoded = jwt.verify(token, SECRET_KEY) as { _id: number };
+    const decoded: number = jwt.verify(token, SECRET_KEY)
 
     const tenant = await prisma.tenant.findUnique({
       where: {
-        tenant_id: decoded._id
+        tenant_id: +decoded
       }
     }
     );
@@ -29,9 +28,10 @@ const authMiddleware = async (ctx: Context, next: Next) => {
       return;
     }
 
-    ctx.state.tenant = tenant; // Koa convention is to use ctx.state for passing information
+    ctx.state.tenant = tenant;
     await next();
   } catch (error) {
+    ctx.body = "user not authorised"
     ctx.status = 401;
   }
 };
