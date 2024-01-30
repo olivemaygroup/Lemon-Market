@@ -36,5 +36,4 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 Google API login details:
-  Client ID: 957661806384-30rgr72rk63c1g7ihv29uoh7il4tukjr.apps.googleusercontent.com
-  client secret: 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
+  
