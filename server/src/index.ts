@@ -6,7 +6,7 @@ const app = new Koa();
 
 import router from "./routers/router";
 
-const PORT = 3000;
+const PORT = 3001;
 
 app
   .use(bodyParser())

@@ -29,7 +29,6 @@ router.post("/addfavorite/:review_id", authMiddleware, favorite.addFavorite);
 router.delete("/removefavorite/:review_id/:favourite_id", authMiddleware, favorite.removeFavorite);
 
 // property get commands
-router.post("/checkaddress", property.checkAddress);
-// router.get('/propertydetail', property.propertyDetail);
+router.post("/checkaddress",authMiddleware, property.checkAddress);
 
 export default router;
