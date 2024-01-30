@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "@/app/signup/page.module.css";
 import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
-import apiService from "../ApiServices/apiServices";
+import apiService from "../ApiServices/userAPI";
 
 
 const initialError = {
@@ -78,7 +78,7 @@ export default function Signup() {
       setState(initilaState);
       setPassword1(Password);
       setPasswordCheck(Password)
-    } 
+    }
     if (!response) {
       console.log('ah heeelll no!')
       console.log('res.body --', response)

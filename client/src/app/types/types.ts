@@ -12,13 +12,6 @@ export interface PropertyTypeFull extends PropertyType {
   reviews: Review[]
 }
 
-export interface Contact {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
-
 export interface Login {
   email: string;
   password: string;
@@ -70,4 +63,22 @@ export interface Photo {
   url: string;
   tag: string;
   review_id: number;
+}
+
+export interface NewUser {
+  email: string;
+  fistName: string;
+  lastName: string;
+  password: string;
+}
+
+export interface LogIn {
+  username: string;
+  password: string;
+}
+
+export interface Profile {
+  firstName: string;
+  lastName: string;
+  email: string;
 }
