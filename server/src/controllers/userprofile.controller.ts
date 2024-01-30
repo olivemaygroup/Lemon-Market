@@ -12,7 +12,7 @@ const signup = async (ctx: Context) => {
   const { firstName, lastName, email, password } = <Contact>ctx.request.body
   try {
 
-    const sanitizedEmail = email.replace(/[$/(){}]/g, "");
+    const sanitizedEmail = email.replace(/[$/(){}]/g, "").toLowerCase();
     const sanitizedPassword = password.replace(/[$/(){}]/g, "");
     const santitizedFirstName = firstName.replace(/[$/(){}]/g, "");
     const santitizedLastName = lastName.replace(/[$/(){}]/g, "");
@@ -46,7 +46,7 @@ const signup = async (ctx: Context) => {
 const login = async (ctx: Context) => {
   const { email, password } = <Login>ctx.request.body;
 
-  const sanitizedEmail = email.replace(/[$/(){}]/g, "");
+  const sanitizedEmail = email.replace(/[$/(){}]/g, "").toLowerCase();
   const sanitizedPassword = password.replace(/[$/(){}]/g, "");
 
   const user = await prisma.tenant.findUnique({ where: { email: sanitizedEmail } });
