@@ -14,12 +14,12 @@
   flex-direction: column;
   justify-content: flex-end;
   overflow: scroll;
-  position: relative;
   margin: 5px;
+  gap: 20px;
 }
 
 .h2 {
-  margin-bottom: 50px;
+  margin-bottom: 80px;
 }
 
 .form {
@@ -61,17 +61,36 @@
   border-radius: 10px;
   height: 40px;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 .errorbox {
+  display: flex;
+  flex-direction: column;
   border-radius: 20px;
   width: 80%;
-  height: 100px;
+  height: auto;
   z-index: 9;
-  background-color: palevioletred;
+  background-color: rgb(231, 174, 193);
   padding: 20px;
+  gap: 20px;
+  
 }
 
 .noerrorbox {
   height: 0px;
+}
+
+.btn {
+  width: 60%;
+  align-self: center;
+}
+
+.div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }

@@ -1,6 +1,6 @@
 **User Account Routes**
 POST /signup
-Input: Request body with user registration data (username, email, password).
+Input: Request body with user registration data (firstName, lastName, email, password).
 Output: New user account created and logged in, or an error message.
 
 POST /login
