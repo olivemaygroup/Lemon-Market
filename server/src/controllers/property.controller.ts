@@ -51,30 +51,4 @@ const checkAddress = async (ctx: Context) => {
   }
 };
 
-// const propertyDetail = async (ctx: Context) => {
-//   try {
-//     const { number, apartment, street, postcode, city } = <PropertyType>ctx.request.body
-//     const propertyWithReviews = await prisma.property.findFirst({
-//       where: {
-//         number: number,
-//         street: street,
-//         postcode: postcode,
-//         city: city,
-//       },
-//       include: {
-//         reviews: {
-//           include: {
-//             photos: true,
-//           }
-//         }
-//       }
-//     });
-//     ctx.status = 200;
-//   } catch (err) {
-//     console.error(err)
-//     ctx.body = err;
-//     ctx.status = 500;
-//   }
-// };
-
 export default { checkAddress };

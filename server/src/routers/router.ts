@@ -23,9 +23,13 @@ router.get("/myreviews", authMiddleware, review.myReviews);
 router.put("/editreview/:review_id", authMiddleware, review.editReview);
 router.delete("/deletereview/:review_id", authMiddleware, review.deleteReview);
 
-// user favourites
+
+// search results
 router.get("/getsearchresults", authMiddleware, favorite.getSearchResults);
 router.get("/addsearchresults", authMiddleware, favorite.addSearchResult);
+
+
+// user favourites
 router.get("/getfavourite", authMiddleware, favorite.getFavorites);
 router.post("/addfavourite/:property_id", authMiddleware, favorite.addFavorite);
 router.delete(
