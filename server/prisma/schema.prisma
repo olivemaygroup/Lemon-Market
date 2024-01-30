@@ -8,22 +8,25 @@ datasource db {
 }
 
 model Property {
-  id         Int      @id @default(autoincrement())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  number     String
-  apartment  String?
-  street     String
-  postcode   String
-  city       String
-  avg_rating Int?
+  id             Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  number         String
+  apartment      String?
+  street         String
+  postcode       String
+  city           String
+  num_of_reviews Int?     @default(0)
+  avg_rating     Int?
 
-  reviews Review[]
+  reviews    Review[]
+  searches   Search[]
+  favourites Favourite[]
 }
 
 model Review {
-  review_id                       Int      @id @default(autoincrement())
-  review_date                     DateTime @default(now())
+  review_id                       Int       @id @default(autoincrement())
+  review_date                     DateTime? @default(now())
   t_start                         DateTime
   t_end                           DateTime
   cleanliness                     Int
@@ -38,6 +41,7 @@ model Review {
   amenities_comment               String?
   landlord_responsiveness         Int
   landlord_responsiveness_comment String?
+  total_review_rating             Int
   monthly_rent                    Int
   monthly_bill                    Int
   council_tax                     Int
@@ -62,6 +66,8 @@ model Tenant {
   reviews Review[]
 
   searches Search[]
+
+  favourites Favourite[]
 }
 
 model Photo {
@@ -76,7 +82,19 @@ model Photo {
 model Search {
   search_id   Int      @id @default(autoincrement())
   search_date DateTime @default(now())
-  review_id   Int
+
+  property_id Int
+  property    Property @relation(fields: [property_id], references: [id])
+
+  tenant_id Int
+  tenant    Tenant @relation(fields: [tenant_id], references: [tenant_id])
+}
+
+model Favourite {
+  favourite_id Int @id @default(autoincrement())
+
+  property_id Int
+  property    Property @relation(fields: [property_id], references: [id])
 
   tenant_id Int
   tenant    Tenant @relation(fields: [tenant_id], references: [tenant_id])

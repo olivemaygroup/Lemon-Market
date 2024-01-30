@@ -35,12 +35,4 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-
-## Tasks to complete
-
-IAN: signup/login / OAuth / normal signup
-ED: homepage / burger / search / propertyCard
-
-property card
-property detail
-add review
+Google API login details:

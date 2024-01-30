@@ -1,9 +1,13 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import styles from "@/app/page.module.css";
-import type { RootState } from '@/lib/store'
-import { increment, decrement, incrementByAmout } from "@/lib/features/counter/counterSlice";
+import type { RootState } from "@/lib/store";
+import {
+  increment,
+  decrement,
+  incrementByAmout,
+} from "@/lib/features/counter/counterSlice";
 import { useSearchParams } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { useDebugValue } from "react";
