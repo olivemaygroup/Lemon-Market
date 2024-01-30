@@ -1,7 +1,7 @@
 "use client";
 import styles from "@/app/login/page.module.css";
 import auth from "../utils/auth";
-import apiServiceJWT from "../ApiServiceJWT";
+import apiService from "../ApiServices/apiServices";
 import type { RootState } from "@/lib/store";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
@@ -22,11 +22,11 @@ export default function Login() {
       email,
       password,
     };
-    const res = await apiServiceJWT.login(user);
-    const { accessToken }: any = res;
-    localStorage.setItem("accessToken", accessToken);
-    auth.login(() => router.replace("/home"));
+    console.log('user obj - ', user)
+    const res:any= await apiService.login(user);
+    console.log('res--', res)
 
+    localStorage.setItem('accessToken', res)
     setEmail("");
     setPasword("");
   };

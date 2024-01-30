@@ -45,7 +45,7 @@ const signup = async (ctx: Context) => {
 
 const login = async (ctx: Context) => {
   const { email, password } = <Login>ctx.request.body;
-
+  console.log('email-',email, password)
   const sanitizedEmail = email.replace(/[$/(){}]/g, "").toLowerCase();
   const sanitizedPassword = password.replace(/[$/(){}]/g, "");
 
@@ -60,7 +60,7 @@ const login = async (ctx: Context) => {
     const token = jwt.sign(user.tenant_id, SECRET_KEY);
     ctx.body = token;
     ctx.status = 200;
-    console.log(token)
+    console.log(ctx.body)
   } catch (error) {
     console.log('Error logging in;', error)
     ctx.status = 500;
