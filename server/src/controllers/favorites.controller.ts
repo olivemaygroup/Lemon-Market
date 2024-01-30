@@ -9,36 +9,18 @@ const getFavorites = async (ctx: Context) => {
   try {
     const tenant: Tenant = ctx.state.tenant
 
-    const favourites = await prisma.favourite.findMany({
+    const favourites = await prisma.property.findMany({
       where: {
-        tenant_id: tenant.tenant_id
+        favourites: {
+          some: {
+            tenant_id: tenant.tenant_id
+          }
+        }
       }
     })
 
-    // const resultArr: Promise<Review> = favourites.map(async (review) => {
-    //   try {
-    //     return await prisma.review.findUnique({
-    //       where: {
-    //         tenant_id: tenant.tenant_id,
-    //         review_id: review.review_id,
-    //       },
-    //       include: {
-    //         photos: true
-    //       }
-    //     })
-    //   } catch (error) {
-    //     console.error(error)
-    //   }
-    // })
-
-    // Promise.all(resultArr).then((response) => {
-    //   ctx.body = response;
-    //   ctx.status = 200;
-    // }).catch(error => {
-    //   console.error(error)
-    //   ctx.body = 'unable to successfully get favourites'
-    //   ctx.status = 500
-    // })
+    ctx.body = favourites;
+    ctx.status = 200;
 
   } catch (error) {
     console.error(error)
@@ -47,18 +29,62 @@ const getFavorites = async (ctx: Context) => {
   }
 };
 
+const getSearchResults = async (ctx: Context) => {
+  try {
+    const tenant: Tenant = ctx.state.tenant
+
+    const getSearchResults = await prisma.property.findMany({
+      where: {
+        searches: {
+          some: {
+            tenant_id: tenant.tenant_id
+          }
+        }
+      }
+    })
+
+    ctx.body = getSearchResults;
+    ctx.status = 200;
+
+  } catch (error) {
+    console.error(error)
+    ctx.body = 'unable to successfully add favourite'
+    ctx.status = 500
+  }
+};
+
+const addSearchResult = async (ctx: Context) => {
+  try {
+    const property_id: number = +ctx.params.property_id
+    const tenant: Tenant = ctx.state.tenant
+
+    await prisma.search.create({
+      data: {
+        property_id,
+        tenant_id: +tenant.tenant_id,
+      }
+    })
+
+  } catch (error) {
+    console.error(error)
+    ctx.body = 'unable to successfully add search result'
+    ctx.status = 500
+  }
+}
+
 const addFavorite = async (ctx: Context) => {
   try {
-    const reviewID: number = ctx.params.review_id
+    const property_id: number = +ctx.params.property_id
     const tenant: Tenant = ctx.state.tenant
 
     await prisma.favourite.create({
       data: {
-        review_id: reviewID,
-        tenant_id: tenant.tenant_id,
+        property_id,
+        tenant_id: +tenant.tenant_id,
       }
     })
-
+    ctx.body = 'property added to favourites'
+    ctx.status = 200
   } catch (error) {
     console.error(error)
     ctx.body = 'unable to successfully add favourite'
@@ -68,15 +94,15 @@ const addFavorite = async (ctx: Context) => {
 
 const removeFavorite = async (ctx: Context) => {
   try {
-    const reviewID: number = ctx.params.review_id
-    const favouriteID: number = ctx.params.favourite_id
+    const property_id: number = +ctx.params.property_id
+    const favouriteID: number = +ctx.params.favourite_id
     const tenant: Tenant = ctx.state.tenant
 
     const deletedFavouriate = await prisma.favourite.delete({
       where: {
         favourite_id: favouriteID,
-        tenant_id: tenant.tenant_id,
-        review_id: reviewID,
+        tenant_id: +tenant.tenant_id,
+        property_id,
       }
     })
     ctx.body = deletedFavouriate;
@@ -91,6 +117,6 @@ const removeFavorite = async (ctx: Context) => {
 
 
 
-const favorite = { getFavorites, addFavorite, removeFavorite };
+const favorite = { addSearchResult, getSearchResults, getFavorites, addFavorite, removeFavorite };
 
 export default favorite;

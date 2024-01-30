@@ -8,12 +8,16 @@ const checkAddress = async (ctx: Context) => {
   try {
     const { number, apartment, street, postcode, city } = <PropertyType>ctx.request.body
 
+    if (!number || !street || !postcode || !city || !apartment){
+      ctx.body = "undefined number, street or postcode";
+      ctx.status = 500;
+    }
+
     const propertyWithReviews = await prisma.property.findFirst({
       where: {
         number: number,
         street: street,
         postcode: postcode,
-        city: city,
       },
       include: {
         reviews: {

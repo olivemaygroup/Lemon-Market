@@ -6,31 +6,25 @@ import { PropertyType, Review, Tenant } from "../types/types";
 import { createContext } from "vm";
 
 
-const updatePropertyReviewsAndAvgRating = async (property: any, total_rating: number, property_id: number): Promise<void> => {
+const updatePropertyReviewsAndAvgRating = async (property: any, total_rating: number): Promise<void> => {
   try {
     const numOfReviews = property?.num_of_reviews
     if (numOfReviews > 0) {
       const totalPropertyRating = property?.avg_rating * numOfReviews
       const newNumOfReviews = numOfReviews + 1
       const newTotalPropertyRating = (totalPropertyRating + total_rating) / newNumOfReviews
-      await prisma.property.update({
-        where: {
-          id: property_id,
-        },
-        data: {
-          avg_rating: newTotalPropertyRating,
-          num_of_reviews: (newNumOfReviews)
-        }
-      })
+
+      await updatePropertyRating(property, newTotalPropertyRating, newNumOfReviews)
+
     } else {
       const newNumOfReviews = numOfReviews + 1
       await prisma.property.update({
         where: {
-          id: property_id,
+          id: +property.id,
         },
         data: {
           avg_rating: total_rating,
-          num_of_reviews: (newNumOfReviews)
+          num_of_reviews: newNumOfReviews
         }
       })
     }
@@ -38,6 +32,29 @@ const updatePropertyReviewsAndAvgRating = async (property: any, total_rating: nu
     console.error(error)
   }
 }
+
+const updatePropertyRating = async (property: any, newTotalPropertyRating: number, newNumOfReviews: number) => {
+  await prisma.property.update({
+    where: {
+      id: +property.id,
+    },
+    data: {
+      avg_rating: newTotalPropertyRating,
+      num_of_reviews: newNumOfReviews
+    }
+  })
+}
+
+const getRelatedProperty = async (ctx: Context) => {
+  const property_id: number = ctx.params.property_id
+  const property = await prisma.property.findFirst({
+    where: {
+      id: +property_id,
+    }
+  })
+  return property
+}
+
 
 const addReview = async (ctx: Context) => {
   try {
@@ -65,19 +82,18 @@ const addReview = async (ctx: Context) => {
       photos,
     } = ctx.request.body as Review;
 
-    const property_id: number = ctx.params.property_id
+    const property = await getRelatedProperty(ctx)
 
-    const property = await prisma.property.findFirst({
-      where: {
-        id: property_id,
-      }
-    })
+    if (property) {
+      ctx.body = "property does not exist";
+      ctx.status = 500;
+    }
 
     const tenant: Tenant = ctx.state.tenant
 
-    await prisma.review.create({
+    const newReview = await prisma.review.create({
       data: {
-        property_id,
+        property_id: property.id,
         tenant_id: tenant.tenant_id,
         t_start,
         t_end,
@@ -100,10 +116,26 @@ const addReview = async (ctx: Context) => {
         general_comment,
       }
     });
+    await prisma.photo.createMany({
+      data: photos.map(photo => ({
+        ...photo,
+        review_id: newReview.review_id,
+      }))
+    });
 
-    await updatePropertyReviewsAndAvgRating(property, total_review_rating, property_id)
 
-    ctx.body = "successfully added review"
+    await updatePropertyReviewsAndAvgRating(property, total_review_rating)
+
+    const returnValue = await prisma.review.findFirst({
+      where: {
+        review_id: newReview.review_id
+      },
+      include: {
+        photos: true
+      }
+    })
+
+    ctx.body = returnValue
     ctx.status = 200;
   } catch (err) {
     console.error(err);
@@ -125,6 +157,8 @@ const myReviews = async (ctx: Context) => {
       }
     })
 
+    ctx.body = allReviews
+    ctx.status = 200
 
   } catch (err) {
     console.error(err);
@@ -132,13 +166,14 @@ const myReviews = async (ctx: Context) => {
     ctx.status = 500;
   }
 
-
 };
 
 const editReview = async (ctx: Context) => {
   try {
-    const reviewId = ctx.params.review_id
+    const reviewId = +ctx.params.review_id
+
     const tenant: Tenant = ctx.state.tenant
+
     const {
       t_start,
       t_end,
@@ -158,10 +193,10 @@ const editReview = async (ctx: Context) => {
       monthly_rent,
       monthly_bill,
       council_tax,
-      general_comment
+      general_comment,
     } = ctx.request.body as Review;
 
-    await prisma.review.update({
+    const editedReview = await prisma.review.update({
       where: {
         review_id: reviewId,
         tenant_id: tenant.tenant_id
@@ -185,9 +220,14 @@ const editReview = async (ctx: Context) => {
         monthly_rent,
         monthly_bill,
         council_tax,
-        general_comment
+        general_comment,
+      },
+      include: {
+        photos: true
       }
     })
+    ctx.body = editedReview
+    ctx.status = 200
   } catch (err) {
     console.error(err);
     ctx.body = "Error when adding review";
@@ -197,8 +237,14 @@ const editReview = async (ctx: Context) => {
 
 const deleteReview = async (ctx: Context) => {
   try {
-    const reviewID = ctx.params.review_id
+    const reviewID = +ctx.params.review_id
     const tenant: Tenant = ctx.state.tenant
+
+    await prisma.photo.deleteMany({
+      where: {
+        review_id: reviewID
+      }
+    })
 
     const deleteReview = await prisma.review.delete({
       where: {
@@ -210,7 +256,7 @@ const deleteReview = async (ctx: Context) => {
     ctx.status = 200;
   } catch (err) {
     console.error(err);
-    ctx.body = "Error when adding review";
+    ctx.body = "Error when deleting review";
     ctx.status = 500;
   }
 };

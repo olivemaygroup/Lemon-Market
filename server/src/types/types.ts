@@ -62,6 +62,6 @@ export interface Tenant {
 }
 
 export interface Photo {
-  photos: string[];
+  url: string;
   tag: string;
 }
