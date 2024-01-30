@@ -46,6 +46,8 @@ export default function Signup() {
         }))
     }
   }
+
+  
   const handleSubmit = async (e:any) => {
     e.preventDefault();
     const testWord = password1
@@ -66,9 +68,22 @@ export default function Signup() {
       return;
     }
     const newUser = state;
-
-    console.log('form done --', newUser)
+    const response = await apiService.signUp(newUser);
+    const profile = await response.json();
+    if (response.ok) {
+      console.log('new profile --',profile)
+      console.log('form done --', newUser)
+      setState(initilaState);
+      setPassword1(Password);
+      setPasswordCheck(Password)
+    } 
+    if (!response.ok) {
+      console.log('ah heeelll no!')
+      console.log('res.body --', profile)
+    }
   }
+
+
   return (
     <main className={styles.page}>
       <div className={styles.phone_box}>
