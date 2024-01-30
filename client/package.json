@@ -9,7 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@ideal-postcodes/address-finder": "^4.4.1",
+    "@mui/icons-material": "^5.15.6",
+    "@mui/material-nextjs": "^5.15.6",
     "@reduxjs/toolkit": "^2.1.0",
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.1",
     "next": "14.1.0",
     "next-pwa": "^5.6.0",
     "react": "^18",
