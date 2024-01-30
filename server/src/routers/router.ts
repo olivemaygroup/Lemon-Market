@@ -26,12 +26,12 @@ router.delete("/deletereview/:review_id", authMiddleware, review.deleteReview);
 
 // search results
 router.get("/getsearchresults", authMiddleware, favorite.getSearchResults);
-router.get("/addsearchresults", authMiddleware, favorite.addSearchResult);
+router.get("/addsearchresults/:property_id", authMiddleware, favorite.addSearchResult);
 
 
 // user favourites
-router.get("/getfavourite", authMiddleware, favorite.getFavorites);
-router.post("/addfavourite/:property_id", authMiddleware, favorite.addFavorite);
+router.get("/getfavourites", authMiddleware, favorite.getFavorites);
+router.post("/addfavourites/:property_id", authMiddleware, favorite.addFavorite);
 router.delete(
   "/deletefavourite/:property_id/:favourite_id",
   authMiddleware,

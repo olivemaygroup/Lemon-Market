@@ -142,7 +142,7 @@ const addReview = async (ctx: Context) => {
       },
     });
 
-    ctx.body = returnValue;
+    ctx.body = 'review added';
     ctx.status = 200;
   } catch (err) {
     console.error(err);

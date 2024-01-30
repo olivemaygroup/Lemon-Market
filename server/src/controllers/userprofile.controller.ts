@@ -60,7 +60,6 @@ const login = async (ctx: Context) => {
     const token = jwt.sign(user.tenant_id, SECRET_KEY);
     ctx.body = token;
     ctx.status = 200;
-    console.log(token)
   } catch (error) {
     console.log('Error logging in;', error)
     ctx.status = 500;
