@@ -1,6 +1,7 @@
 import { Photo } from "../types/types";
 import axios from "axios";
 import { AxiosResponse } from "axios";
+import { error } from "console";
 
 
 
@@ -13,8 +14,10 @@ function createCloudinaryURL(): string {
     return "";
   }
 }
-/*
-const cloudinaryImagesToURLS = async (files: File[]) => {
+
+//Takes an array of uploaded files and returns and array of string containg their urls
+
+const cloudinaryImagesToURLS = async (files: File[]): Promise<string[] | AxiosResponse<any, any>[]> => {
 
   const CLOUDINARYURL: string = createCloudinaryURL();
 
@@ -30,32 +33,16 @@ const cloudinaryImagesToURLS = async (files: File[]) => {
   }
 
   if (imagePromises.length > 0) {
-    Promise.all(imagePromises)
-      .then((responses) => {
-        responses.forEach((response) => {
-          data.append("imagePaths", response.data.secure_url);
-        });
-        return axios
-          .post("http://localhost:3000/spot/addSpot", data, {
-            withCredentials: true,
-          })
-          .catch((err) => {
-            if (err.response.status === 401) {
-              dispatch(setAuth(false));
-              console.log("user not authenticaed please log in");
-            } else {
-              console.log(err, "test");
-            }
-          });
-      })
-      .then((response) => {
-        navigate("/mapScreen");
-      })
+    return Promise.all(imagePromises)
+      .then((res) => res)
       .catch((error) => {
         console.error("Error:", error);
+        throw new Error('error resolving promises')
       });
+  } else {
+    throw new Error('error creating Cloudinary promises')
   }
 }
 
 export default cloudinaryImagesToURLS;
-*/
+
