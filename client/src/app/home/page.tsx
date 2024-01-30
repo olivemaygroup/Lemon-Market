@@ -1,18 +1,24 @@
+'use client'
+
 import Image from "next/image";
-import styles from "@/app/page.module.css";
+import styles from "@/app/home/page.module.css";
 import Search from "@/app/components/Landing/search";
 import PropertyCard from "@/app/components/Landing/propertyCard";
+import { useState } from "react";
 
-// this is the landing page and at localhost:3000/
 
 export default function Home() {
+  const [searchAddress, SetSearchAddress] = useState('')
+
+  console.log(searchAddress)
+
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>Landing page</p>
-      </div>
-      <Search></Search>
-      <PropertyCard></PropertyCard>
+        <Search></Search>
+        <PropertyCard></PropertyCard>
+        <PropertyCard></PropertyCard>
+        <PropertyCard></PropertyCard>
     </main>
   );
 }
