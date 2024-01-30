@@ -56,6 +56,10 @@ const login = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     }
     ;
     try {
+        const token = jwt.sign(user.tenant_id, SECRET_KEY);
+        ctx.body = token;
+        ctx.status = 200;
+        console.log(token);
     }
     catch (error) {
         console.log('Error logging in;', error);
@@ -64,10 +68,34 @@ const login = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 const myProfile = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const tenant = ctx.state.tenant;
+        const tenantWithoutPassword = { firstName: tenant.first_name, lastName: tenant.last_name, email: tenant.email };
+        ctx.body = tenantWithoutPassword;
+        ctx.status = 200;
+    }
+    catch (error) {
+        console.error(error);
+        ctx.body = "Error geting profile";
+        ctx.status = 500;
+    }
 });
 const editProfile = (ctx) => __awaiter(void 0, void 0, void 0, function* () { });
 const deleteAccount = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    // const { email } 
+    const user = ctx.state.tenant;
+    try {
+        yield prisma.tenant.delete({
+            where: {
+                email: user.email
+            }
+        });
+        ctx.body = "User deleted.";
+        ctx.status = 200;
+    }
+    catch (error) {
+        console.log('Error deleting account, please contact customer support', error);
+        ctx.status = 500;
+    }
 });
 const userProfile = { signup, login, myProfile, editProfile, deleteAccount };
 export default userProfile;

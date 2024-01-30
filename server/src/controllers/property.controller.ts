@@ -6,14 +6,20 @@ import { Context } from "koa";
 
 const checkAddress = async (ctx: Context) => {
   try {
-    const { number, apartment, street, postcode, city } = <PropertyType>ctx.request.body
+    const { number, apartment, street, postcode, city } = <PropertyType>(
+      ctx.request.body
+    );
+
+    if (!number || !street || !postcode || !city || !apartment) {
+      ctx.body = "undefined number, street or postcode";
+      ctx.status = 500;
+    }
 
     const propertyWithReviews = await prisma.property.findFirst({
       where: {
         number: number,
         street: street,
         postcode: postcode,
-        city: city,
       },
       include: {
         reviews: {
@@ -33,8 +39,8 @@ const checkAddress = async (ctx: Context) => {
           street: street,
           postcode: postcode,
           city: city,
-        }
-      })
+        },
+      });
       ctx.body = newProperty;
       ctx.status = 201;
     }
@@ -44,31 +50,5 @@ const checkAddress = async (ctx: Context) => {
     ctx.status = 500;
   }
 };
-
-// const propertyDetail = async (ctx: Context) => {
-//   try {
-//     const { number, apartment, street, postcode, city } = <PropertyType>ctx.request.body
-//     const propertyWithReviews = await prisma.property.findFirst({
-//       where: {
-//         number: number,
-//         street: street,
-//         postcode: postcode,
-//         city: city,
-//       },
-//       include: {
-//         reviews: {
-//           include: {
-//             photos: true,
-//           }
-//         }
-//       }
-//     });
-//     ctx.status = 200;
-//   } catch (err) {
-//     console.error(err)
-//     ctx.body = err;
-//     ctx.status = 500;
-//   }
-// };
 
 export default { checkAddress };

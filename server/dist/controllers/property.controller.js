@@ -8,20 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import prisma from "../db";
-// interface Test extends Context {
-//   request: {
-//     body: PropertyType
-//   }
-// }
 const checkAddress = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { number, apartment, street, postcode, city } = ctx.request.body;
+        const { number, apartment, street, postcode, city } = (ctx.request.body);
+        if (!number || !street || !postcode || !city || !apartment) {
+            ctx.body = "undefined number, street or postcode";
+            ctx.status = 500;
+        }
         const propertyWithReviews = yield prisma.property.findFirst({
             where: {
                 number: number,
                 street: street,
                 postcode: postcode,
-                city: city,
             },
             include: {
                 reviews: {
@@ -36,39 +34,22 @@ const checkAddress = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
             ctx.status = 200;
         }
         else {
-            ctx.body = "address with review(s) not found";
+            const newProperty = yield prisma.property.create({
+                data: {
+                    number: number,
+                    street: street,
+                    postcode: postcode,
+                    city: city,
+                },
+            });
+            ctx.body = newProperty;
             ctx.status = 201;
         }
     }
     catch (err) {
         console.error(err);
-        ctx.body = "error when looking for address";
+        ctx.body = "error when looking for or creating address";
         ctx.status = 500;
     }
 });
-// const propertyDetail = async (ctx: Context) => {
-//   try {
-//     const { number, apartment, street, postcode, city } = <PropertyType>ctx.request.body
-//     const propertyWithReviews = await prisma.property.findFirst({
-//       where: {
-//         number: number,
-//         street: street,
-//         postcode: postcode,
-//         city: city,
-//       },
-//       include: {
-//         reviews: {
-//           include: {
-//             photos: true,
-//           }
-//         }
-//       }
-//     });
-//     ctx.status = 200;
-//   } catch (err) {
-//     console.error(err)
-//     ctx.body = err;
-//     ctx.status = 500;
-//   }
-// };
 export default { checkAddress };

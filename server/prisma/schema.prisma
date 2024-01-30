@@ -19,7 +19,9 @@ model Property {
   num_of_reviews Int?     @default(0)
   avg_rating     Int?
 
-  reviews Review[]
+  reviews    Review[]
+  searches   Search[]
+  favourites Favourite[]
 }
 
 model Review {
@@ -80,7 +82,9 @@ model Photo {
 model Search {
   search_id   Int      @id @default(autoincrement())
   search_date DateTime @default(now())
-  review_id   Int
+
+  property_id Int
+  property    Property @relation(fields: [property_id], references: [id])
 
   tenant_id Int
   tenant    Tenant @relation(fields: [tenant_id], references: [tenant_id])
@@ -88,7 +92,9 @@ model Search {
 
 model Favourite {
   favourite_id Int @id @default(autoincrement())
-  review_id Int
+
+  property_id Int
+  property    Property @relation(fields: [property_id], references: [id])
 
   tenant_id Int
   tenant    Tenant @relation(fields: [tenant_id], references: [tenant_id])

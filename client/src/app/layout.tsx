@@ -16,21 +16,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
   return (
     <html lang="en">
       <body className={inter.className}>
-      {/* <SessionProvider session={session} > */}
+        {/* <SessionProvider session={session} > */}
         <StoreProvider>
-          <h2 style={{"color": "grey"}}>CONSISTENT</h2>
+          <h2 style={{ color: "grey" }}>CONSISTENT</h2>
           <hr></hr>
-          <div>
-            {children}
-          </div>
+          <div>{children}</div>
         </StoreProvider>
-      {/* </SessionProvider> */}
+        {/* </SessionProvider> */}
       </body>
     </html>
-  )
+  );
 }
