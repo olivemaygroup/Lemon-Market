@@ -6,9 +6,11 @@ import { Context } from "koa";
 
 const checkAddress = async (ctx: Context) => {
   try {
-    const { number, apartment, street, postcode, city } = <PropertyType>ctx.request.body
+    const { number, apartment, street, postcode, city } = <PropertyType>(
+      ctx.request.body
+    );
 
-    if (!number || !street || !postcode || !city || !apartment){
+    if (!number || !street || !postcode || !city || !apartment) {
       ctx.body = "undefined number, street or postcode";
       ctx.status = 500;
     }
@@ -37,8 +39,8 @@ const checkAddress = async (ctx: Context) => {
           street: street,
           postcode: postcode,
           city: city,
-        }
-      })
+        },
+      });
       ctx.body = newProperty;
       ctx.status = 201;
     }

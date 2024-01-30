@@ -28,7 +28,11 @@ router.get("/getsearchresults", authMiddleware, favorite.getSearchResults);
 router.get("/addsearchresults", authMiddleware, favorite.addSearchResult);
 router.get("/getfavourite", authMiddleware, favorite.getFavorites);
 router.post("/addfavourite/:property_id", authMiddleware, favorite.addFavorite);
-router.delete("/deletefavourite/:property_id/:favourite_id", authMiddleware, favorite.removeFavorite);
+router.delete(
+  "/deletefavourite/:property_id/:favourite_id",
+  authMiddleware,
+  favorite.removeFavorite,
+);
 
 // property get commands
 router.post("/checkaddress", authMiddleware, property.checkAddress);

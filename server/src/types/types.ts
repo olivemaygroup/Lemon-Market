@@ -9,15 +9,15 @@ export interface PropertyType {
 }
 
 export interface Contact {
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string
-};
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
 
 export interface Login {
-  email: string,
-  password: string
+  email: string;
+  password: string;
 }
 
 export interface PropertyType {
