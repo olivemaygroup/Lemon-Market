@@ -11,20 +11,16 @@ dotenv.config();
 const googleKey = process.env.GOOGLEMAPS;
 
 interface AdrPro {
-  value:  {
+  value: {
     description: string;
     place_id: string;
   }
 
-  }
 }
 
 const Search = () => {
 
-  const dispatch = useDispatch()
-  const [address, SetAddress] = useState<AdrPro>({ value: { description: "", place_id: "" } });
 
-  console.log(address)
   let [description, SetDescription] = useState('')
   let [placeID, SetPlaceID] = useState('')
   const stateAddress = useSelector((state: RootState) => state.addAddress);
@@ -43,29 +39,25 @@ const Search = () => {
     dispatch(addAddress(placeID))
 
 
-  },[address])
+  }, [address])
 
 
 
 
 
+  return (
+    <div className={styles.searchContainer}>
+      <GooglePlacesAutocomplete
+        selectProps={{
+          placeholder: 'search for a property',
+          onChange: SetAddress
 
-    return (
+        }}
+      />
+      <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`} />
+    </div>
+  );
 
-      <div className={styles.searchContainer}>
-
-        <GooglePlacesAutocomplete
-          selectProps={{
-            placeholder: 'search for a property',
-            onChange: SetAddress
-
-          }}
-          />
-          <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`}/>
-
-      </div>
-
-);
   useEffect(() => {
     const newAddress = {
       value: {
@@ -85,7 +77,7 @@ const Search = () => {
           onChange: (address) => setAddress(address)
         }}
       />
-      <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`}/>
+      <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`} />
     </div>
   );
 };

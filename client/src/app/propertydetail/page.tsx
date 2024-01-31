@@ -1,4 +1,5 @@
 'use client'
+import Image from "next/image";
 
 import styles from "@/app/page.module.css";
 import TopImageScroll from "@/app/components/PropertyDetail/topImageScroll";
