@@ -116,8 +116,8 @@ const myReviews = async (ctx: Context) => {
 const editReview = async (ctx: Context) => {
   try {
     const reviewId = +ctx.params.review_id;
-
     const tenant: Tenant = ctx.state.tenant;
+    const property = await getRelatedProperty(ctx);
 
     const {
       t_start,
@@ -143,6 +143,7 @@ const editReview = async (ctx: Context) => {
 
     const editedReview = await prisma.review.update({
       where: {
+        property_id: property.property_id,
         review_id: reviewId,
         tenant_id: tenant.tenant_id,
       },
@@ -171,6 +172,9 @@ const editReview = async (ctx: Context) => {
         photos: true,
       },
     });
+
+    await updatePropertyReviewsAndAvgRating(property, editedReview.total_review_rating);
+
     ctx.body = editedReview;
     ctx.status = 200;
   } catch (err) {
@@ -260,11 +264,23 @@ const updatePropertyRating = async (
 
 const getRelatedProperty = async (ctx: Context) => {
   const property_id: string = ctx.params.property_id;
+
+  if (!property_id) {
+    ctx.body = 'property id is undefined'
+    ctx.state = 400
+  }
+
+
   const property = await prisma.property.findFirst({
     where: {
       property_id: property_id,
     },
   });
+
+  if (!property) {
+    ctx.body = 'unable to find property'
+    ctx.state = 400
+  }
   return property;
 };
 
