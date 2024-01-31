@@ -8,14 +8,8 @@ import { useSelector, useDispatch } from "react-redux/dist/react-redux";
 import { cleanliness, landlord } from "@/lib/features/review/addReviewSlice";
 import { RootState } from "@/lib/store";
 
-<<<<<<< HEAD
-
-const review = useSelector((state: RootState) => state.addReview)
-const dispatch = useDispatch()
-=======
 const review = useSelector((state: RootState) => state.addReview);
 const dispatch = useDispatch();
->>>>>>> dev
 
 // localhost:3000/login
 
