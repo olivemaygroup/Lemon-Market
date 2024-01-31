@@ -35,9 +35,10 @@
 }
 
 .input_feild {
-  border: none;
+  border: 0.7px solid;
   border-radius: 10px;
   height: 40px;
+
 }
 
 .login_btns {
@@ -46,6 +47,7 @@
   width: 80%;
   gap: 10px;
 }
+.login:hover {background-color: yellow;}
 
 .login {
   border: none;
