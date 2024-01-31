@@ -39,6 +39,6 @@ router.delete(
 );
 
 // property get commands
-router.post("/checkaddress", authMiddleware, property.checkAddress);
+router.post("/checkaddress", property.checkAddress);
 
 export default router;

@@ -4,7 +4,6 @@ import handleAuthenticationError from "../utils/auth-router";
 const BASE_URL = process.env.SERVER_URL;
 
 const checkAddress = async (
-  accessToken: string,
   property: PropertyType,
 ): Promise<PropertyType | PropertyTypeFull | undefined> => {
   try {
@@ -14,7 +13,6 @@ const checkAddress = async (
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        authorisation: accessToken,
       },
       body: JSON.stringify(property),
     });
