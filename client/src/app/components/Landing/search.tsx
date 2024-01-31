@@ -1,5 +1,3 @@
-'use client'
-
 import styles from "@/app/components/Landing/page.module.css";
 import dotenv from "dotenv";
 import * as React from 'react';
@@ -10,10 +8,10 @@ import { addAddress } from "@/lib/features/address/addressSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 dotenv.config();
-const googleKey = 'AIzaSyDqaCEUt7p2PmlmASpKI_Biud4NSY9iw4g'
+const googleKey = process.env.GOOGLEPLACES;
 
 interface AdrPro {
-  value:  {
+  value: {
     description: string;
     place_id: string;
   }
@@ -48,7 +46,7 @@ const Search = () => {
           onChange: (address) => setAddress(address)
         }}
       />
-      <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`}/>
+      <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`} />
     </div>
   );
 };
