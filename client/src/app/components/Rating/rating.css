@@ -1,0 +1,11 @@
+.invisible-btn {
+  background-color: indigo;
+  color: white;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  border-style: solid;
+  border-radius: 0.3rem;
+  border-color: black;
+  cursor: pointer;
+  margin-top: 1rem;
+}

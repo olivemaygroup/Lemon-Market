@@ -19,14 +19,14 @@ const Search = () => {
  
   const apiKey = 'ZD23lmGQEJojUp48N8h7l8cbwq6xwSEM';
 
-  async function find() {
-    axios.get('https://api.os.uk/search/places/v1/find?maxresults=1&query=Ordnance%20Survey,%20Adanac%20Drive,%20SO16&key=' + apiKey)
-    .then(function(response) {
-        const response = JSON.stringify(response.data, null, 2);
-        console.log(response);
-    });
-  }
-  find()
+  // async function find() {
+  //   axios.get('https://api.os.uk/search/places/v1/find?maxresults=1&query=Ordnance%20Survey,%20Adanac%20Drive,%20SO16&key=' + apiKey)
+  //   .then(function(response) {
+  //       const response = JSON.stringify(response.data, null, 2);
+  //       console.log(response);
+  //   });
+  // }
+  // find()
 
 
 
