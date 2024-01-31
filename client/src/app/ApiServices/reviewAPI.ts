@@ -63,11 +63,12 @@ const getMyReviews = async (accessToken: string): Promise<Review[] | undefined> 
 
 const editReview = async (
   review_id: number,
+  property_id: number,
   updatedReviewData: Review,
   accessToken: string,
 ): Promise<Review | undefined> => {
   try {
-    const response = await fetch(`${BASE_URL}/editreview/${review_id}`, {
+    const response = await fetch(`${BASE_URL}/editreview/${property_id}/${review_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -82,11 +83,9 @@ const editReview = async (
 
     if (!response.ok) {
       return undefined
-
     }
 
     const editedReview: Review = await response.json();
-
     //return the full edited review
     return editedReview;
   } catch (err) {

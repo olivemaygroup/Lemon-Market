@@ -32,9 +32,10 @@ const addReview = async (ctx: Context) => {
 
     const property = await getRelatedProperty(ctx);
 
-    if (property) {
+    if (!property) {
       ctx.body = "property does not exist";
       ctx.status = 500;
+      return
     }
 
     const tenant: Tenant = ctx.state.tenant;
@@ -64,6 +65,8 @@ const addReview = async (ctx: Context) => {
         general_comment,
       },
     });
+
+    console.log(newReview)
     await prisma.photo.createMany({
       data: photos.map((photo) => ({
         ...photo,
@@ -73,7 +76,7 @@ const addReview = async (ctx: Context) => {
 
     await updatePropertyReviewsAndAvgRating(property, newReview.total_review_rating);
 
-    const returnValue = await prisma.review.findFirst({
+    await prisma.review.findFirst({
       where: {
         review_id: newReview.review_id,
       },
@@ -115,9 +118,9 @@ const myReviews = async (ctx: Context) => {
 
 const editReview = async (ctx: Context) => {
   try {
-    const reviewId = +ctx.params.review_id;
-
+    const review_id = +ctx.params.review_id;
     const tenant: Tenant = ctx.state.tenant;
+    const property = await getRelatedProperty(ctx);
 
     const {
       t_start,
@@ -139,14 +142,19 @@ const editReview = async (ctx: Context) => {
       monthly_bill,
       council_tax,
       general_comment,
+      photos,
     } = ctx.request.body as Review;
 
     const editedReview = await prisma.review.update({
       where: {
-        review_id: reviewId,
+        property_id: property.property_id,
+        review_id: review_id,
         tenant_id: tenant.tenant_id,
       },
       data: {
+        property_id: property.property_id,
+        review_id: review_id,
+        tenant_id: tenant.tenant_id,
         t_start,
         t_end,
         cleanliness,
@@ -171,6 +179,26 @@ const editReview = async (ctx: Context) => {
         photos: true,
       },
     });
+
+    // looking to decide whether how photos should be updated or removed from reviews - currently just delted and add the updated photos
+
+
+    await prisma.photo.deleteMany({
+      where: {
+        review_id: review_id,
+      },
+    });
+
+    await prisma.photo.createMany({
+      data: photos.map((photo) => ({
+        ...photo,
+        review_id: editedReview.review_id,
+      })),
+    });
+
+
+    await updatePropertyReviewsAndAvgRating(property, editedReview.total_review_rating);
+
     ctx.body = editedReview;
     ctx.status = 200;
   } catch (err) {
@@ -182,18 +210,18 @@ const editReview = async (ctx: Context) => {
 
 const deleteReview = async (ctx: Context) => {
   try {
-    const reviewID = +ctx.params.review_id;
+    const review_id = +ctx.params.review_id;
     const tenant: Tenant = ctx.state.tenant;
 
     await prisma.photo.deleteMany({
       where: {
-        review_id: reviewID,
+        review_id: review_id,
       },
     });
 
     const deleteReview = await prisma.review.delete({
       where: {
-        review_id: reviewID,
+        review_id: review_id,
         tenant_id: tenant.tenant_id,
       },
     });
@@ -260,11 +288,15 @@ const updatePropertyRating = async (
 
 const getRelatedProperty = async (ctx: Context) => {
   const property_id: string = ctx.params.property_id;
+
+
+
   const property = await prisma.property.findFirst({
     where: {
       property_id: property_id,
     },
   });
+
   return property;
 };
 

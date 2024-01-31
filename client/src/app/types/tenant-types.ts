@@ -16,3 +16,10 @@ export interface LogIn {
   username: string;
   password: string;
 }
+
+export interface Response {
+  fistName: string;
+  lastName: string;
+  email: string;
+  accessToken: string
+}
