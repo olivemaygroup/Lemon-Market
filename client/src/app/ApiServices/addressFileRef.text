@@ -1,0 +1,58 @@
+// {
+//   "label": "37 Parc Peneglos, Mylor Bridge, Falmouth, UK",
+//   "value": {
+//     "description": "37 Parc Peneglos, Mylor Bridge, Falmouth, UK",
+//     "matched_substrings": [
+//       {
+//         "length": 2,
+//         "offset": 0
+//       },
+//       {
+//         "length": 13,
+//         "offset": 3
+//       }
+//     ],
+//     "place_id": "ChIJl8rgaNw8a0gRlAl6hqKzFFI",
+//     "reference": "ChIJl8rgaNw8a0gRlAl6hqKzFFI",
+//     "structured_formatting": {
+//       "main_text": "37 Parc Peneglos",
+//       "main_text_matched_substrings": [
+//         {
+//           "length": 2,
+//           "offset": 0
+//         },
+//         {
+//           "length": 13,
+//           "offset": 3
+//         }
+//       ],
+//       "secondary_text": "Mylor Bridge, Falmouth, UK"
+//     },
+//     "terms": [
+//       {
+//         "offset": 0,
+//         "value": "37"
+//       },
+//       {
+//         "offset": 3,
+//         "value": "Parc Peneglos"
+//       },
+//       {
+//         "offset": 18,
+//         "value": "Mylor Bridge"
+//       },
+//       {
+//         "offset": 32,
+//         "value": "Falmouth"
+//       },
+//       {
+//         "offset": 42,
+//         "value": "UK"
+//       }
+//     ],
+//     "types": [
+//       "premise",
+//       "geocode"
+//     ]
+//   }
+// }

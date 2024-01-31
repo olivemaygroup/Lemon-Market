@@ -3,14 +3,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "@/lib/features/counter/counterSlice";
 import addReviewReducer from "@/lib/features/review/addReviewSlice";
-import addressReduced from "@/lib/features/address/addressSlice";
+import addAddressReducer from "@/lib/features/address/addressSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       counter: counterReducer,
       addReview: addReviewReducer,
-      address: addReviewReducer,
+      addAddress: addAddressReducer,
     },
   });
 };
