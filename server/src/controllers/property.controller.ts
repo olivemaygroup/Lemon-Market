@@ -4,22 +4,23 @@ import { PropertyType } from "../types/types";
 
 import { Context } from "koa";
 
+interface Address {
+  property_id: string;
+  fullAddress: string;
+}
+
 const checkAddress = async (ctx: Context) => {
   try {
-    const { number, apartment, street, postcode, city } = <PropertyType>(
-      ctx.request.body
-    );
+    const { property_id, fullAddress } = ctx.request.body as Address
 
-    if (!number || !street || !postcode || !city || !apartment) {
-      ctx.body = "undefined number, street or postcode";
+    if (!property_id) {
+      ctx.body = 'property_id undefined'
       ctx.status = 500;
     }
 
     const propertyWithReviews = await prisma.property.findFirst({
       where: {
-        number: number,
-        street: street,
-        postcode: postcode,
+        property_id: property_id
       },
       include: {
         reviews: {
@@ -29,16 +30,15 @@ const checkAddress = async (ctx: Context) => {
         },
       },
     });
+
     if (propertyWithReviews) {
       ctx.body = propertyWithReviews;
       ctx.status = 200;
     } else {
       const newProperty = await prisma.property.create({
         data: {
-          number: number,
-          street: street,
-          postcode: postcode,
-          city: city,
+          property_id,
+          fullAddress,
         },
       });
       ctx.body = newProperty;

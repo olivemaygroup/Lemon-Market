@@ -26,7 +26,7 @@ const updatePropertyReviewsAndAvgRating = async (
       const newNumOfReviews = numOfReviews + 1;
       await prisma.property.update({
         where: {
-          id: +property.id,
+          property_id: property.id,
         },
         data: {
           avg_rating: total_rating,
@@ -46,7 +46,7 @@ const updatePropertyRating = async (
 ) => {
   await prisma.property.update({
     where: {
-      id: +property.id,
+      property_id: property.id,
     },
     data: {
       avg_rating: newTotalPropertyRating,
@@ -56,10 +56,10 @@ const updatePropertyRating = async (
 };
 
 const getRelatedProperty = async (ctx: Context) => {
-  const property_id: number = ctx.params.property_id;
+  const property_id: string = ctx.params.property_id;
   const property = await prisma.property.findFirst({
     where: {
-      id: +property_id,
+      property_id: property_id,
     },
   });
   return property;
@@ -101,7 +101,7 @@ const addReview = async (ctx: Context) => {
 
     const newReview = await prisma.review.create({
       data: {
-        property_id: property.id,
+        property_id: property.property_id,
         tenant_id: tenant.tenant_id,
         t_start,
         t_end,
@@ -142,7 +142,7 @@ const addReview = async (ctx: Context) => {
       },
     });
 
-    ctx.body = returnValue;
+    ctx.body = 'review added';
     ctx.status = 200;
   } catch (err) {
     console.error(err);
