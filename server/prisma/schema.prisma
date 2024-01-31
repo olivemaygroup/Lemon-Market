@@ -8,14 +8,10 @@ datasource db {
 }
 
 model Property {
-  id             Int      @id @default(autoincrement())
+  property_id             String   @id @unique
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-  number         String
-  apartment      String?
-  street         String
-  postcode       String
-  city           String
+  fullAddress    String
   num_of_reviews Int?     @default(0)
   avg_rating     Int?
 
@@ -47,8 +43,8 @@ model Review {
   council_tax                     Int
   general_comment                 String
 
-  property_id Int
-  property    Property @relation(fields: [property_id], references: [id])
+  property_id String
+  property    Property @relation(fields: [property_id], references: [property_id])
 
   tenant_id Int
   tenant    Tenant @relation(fields: [tenant_id], references: [tenant_id])
@@ -83,8 +79,8 @@ model Search {
   search_id   Int      @id @default(autoincrement())
   search_date DateTime @default(now())
 
-  property_id Int
-  property    Property @relation(fields: [property_id], references: [id])
+  property_id String
+  property    Property @relation(fields: [property_id], references: [property_id])
 
   tenant_id Int
   tenant    Tenant @relation(fields: [tenant_id], references: [tenant_id])
@@ -93,8 +89,8 @@ model Search {
 model Favourite {
   favourite_id Int @id @default(autoincrement())
 
-  property_id Int
-  property    Property @relation(fields: [property_id], references: [id])
+  property_id String
+  property    Property @relation(fields: [property_id], references: [property_id])
 
   tenant_id Int
   tenant    Tenant @relation(fields: [tenant_id], references: [tenant_id])

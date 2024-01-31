@@ -1,27 +1,22 @@
-import { PropertyType, PropertyTypeFull } from "../types/types";
+import { PropertyType, PropertyTypeFull } from "../types/property-type";
 import handleAuthenticationError from "../utils/auth-router";
 
 const BASE_URL = process.env.SERVER_URL;
 
 const checkAddress = async (
-  accesToken: string,
-  propertyData: PropertyType,
-): Promise<PropertyType | PropertyTypeFull> => {
+  accessToken: string,
+  property: PropertyType,
+): Promise<PropertyType | PropertyTypeFull | undefined> => {
   try {
-    const { number, apartment, street, postcode, city } = propertyData;
-
-    if (!number || !street || !postcode || !city || !apartment) {
-      throw new Error("Undefined number, street, postcode, city, or apartment");
-    }
 
     const response = await fetch(`${BASE_URL}/checkaddress`, {
       method: "POST",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        authorisation: accesToken,
+        authorisation: accessToken,
       },
-      body: JSON.stringify(propertyData),
+      body: JSON.stringify(property),
     });
 
     if (response.status === 401) {
@@ -29,7 +24,7 @@ const checkAddress = async (
     }
 
     if (!response.ok) {
-      throw new Error("Failed to fetch search results");
+      return undefined
     } else if (response.status === 200) {
       const propertyWithReviews: PropertyTypeFull = await response.json();
       return propertyWithReviews;
@@ -38,7 +33,7 @@ const checkAddress = async (
       return propertyWithoutReviews;
     }
   } catch (err) {
-    throw new Error("Error when looking for or creating address");
+    return undefined
   }
 };
 

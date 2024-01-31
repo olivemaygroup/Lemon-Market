@@ -47,6 +47,12 @@ export default function Signup() {
     }
   };
 
+  const resetStates = () => {
+    setState(initilaState);
+    setPassword1(Password);
+    setPasswordCheck(Password)
+  }
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const testWord = password1;
@@ -54,9 +60,7 @@ export default function Signup() {
       password1.value === passwordCheck.value &&
       passwordChecker(testWord.value)
     ) {
-      console.log("test word--", testWord);
       const { name, value } = testWord;
-      console.log(name, value);
       setState((prevState) => ({
         ...prevState,
         [name]: value,
@@ -70,19 +74,23 @@ export default function Signup() {
       return;
     }
     const newUser = state;
-    const response = await apiService.signUp(newUser);
-    // const profile = await response.json();
+    const response= await apiService.signUp(newUser);
     if (response) {
       console.log('new profile --',response)
-      console.log('form done --', newUser)
-      setState(initilaState);
-      setPassword1(Password);
-      setPasswordCheck(Password)
+      if (response === 'User already exists, please sign in.') {
+        resetStates();
+        const err = {
+          error: true,
+          msg: "Error, User already exists",
+        }; 
+        console.log('ERROR---', err)
+        setError(err);
+      } else {
+        console.log('RESPONSE---',response)
+        resetStates();
+        return response;
+      }
     } 
-    if (!response) {
-      console.log('ah heeelll no!')
-      console.log('res.body --', response)
-    }
   }
 
 

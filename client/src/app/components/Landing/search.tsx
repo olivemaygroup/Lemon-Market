@@ -1,57 +1,67 @@
 'use client'
-
 import styles from "@/app/components/Landing/page.module.css";
 import dotenv from "dotenv";
 import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
 import { useState } from "react";
-import axios from 'axios'
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+
+import { addAddress } from "@/lib/features/address/addressSlice";
+import StoreProvider from "@/app/StoreProvider";
+import { Provider, useDispatch } from "react-redux";
+
 
 dotenv.config()
+const googleKey = process.env.GOOGLEMAPS
 
+interface AdrPro {
+  value:  {
+    description: string;
+    place_id: string;
+  } 
+
+}
 
 const Search = () => {
+  
+  const dispatch = useDispatch()
+  const [address, SetAddress] = useState<AdrPro>({ value: { description: "", place_id: "" } });
+  
+  console.log(address)
+  let [description, SetDescription] = useState('')
+  let [placeID, SetPlaceID] = useState('')
+
+  React.useEffect(() => {
+    description = address.value.description
+    placeID = address.value.place_id
+    dispatch(addAddress(description))
+    dispatch(addAddress(placeID))
 
 
-  const [searchAddress, SetSearchAddress] = useState('')
+  },[address])
 
  
-  const apiKey = 'ZD23lmGQEJojUp48N8h7l8cbwq6xwSEM';
-
-  // async function find() {
-  //   axios.get('https://api.os.uk/search/places/v1/find?maxresults=1&query=Ordnance%20Survey,%20Adanac%20Drive,%20SO16&key=' + apiKey)
-  //   .then(function(response) {
-  //       const response = JSON.stringify(response.data, null, 2);
-  //       console.log(response);
-  //   });
-  // }
-  // find()
+  
 
 
-
-  return (
+  
+    return (
+      
       <div className={styles.searchContainer}>
-        <Box
-          component="form"
-          sx={{
-            '& > :not(style)': { m: 1, width: '90%' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            sx={{
-              '& > :not(style)': { m: 1, width: '100%' },
-            }} id="outlined-basic" label="search address" variant="outlined"
+     
+        <GooglePlacesAutocomplete
+          selectProps={{
+            placeholder: 'search for a property',
+            onChange: SetAddress
             
+          }}
           />
-
-        </Box>
+          <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`}/>
+    
       </div>
 
-  );
+);
 };
 
 
 export default Search;
+

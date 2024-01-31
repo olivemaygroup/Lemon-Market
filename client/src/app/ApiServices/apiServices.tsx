@@ -9,16 +9,26 @@ interface AS {
 }
 
 const apiService = {
-  signUp: (newUser:any) => {
-    return fetch(`${BASE_URL}/signup`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newUser),
-      })
-      .then((res) => res.text())
-      .catch((err) => console.log(err,'---err'));
-    },
+  // signUp: (newUser:any) => {
+  //   return fetch(`${BASE_URL}/signup`, {
+  //     method: 'POST',
+  //     mode: 'cors',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(newUser),
+  //     })
+  //     .then((res) => res.text())
+  //     .catch((err) => console.log(err,'---err'));
+  //   },
+
+  signUp: async (newUser:any): Promise<string | number> => {
+        const response = await fetch(`${BASE_URL}/signup`, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newUser),
+        })
+        return response.text();
+  },
 
     login: async (user:any) => {
       console.log('URL--', BASE_URL)

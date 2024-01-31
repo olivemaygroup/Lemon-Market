@@ -1,24 +1,3 @@
-export interface Contact {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
-
-export interface Login {
-  email: string;
-  password: string;
-}
-
-export interface PropertyType {
-  property_id: string;
-  fullAddress: string;
-  num_of_reviews?: number;
-  avg_rating?: number;
-  updatedAt?: Date;
-  createdAt?: Date;
-}
-
 export interface Review {
   t_start: string;
   t_end: string;
@@ -42,15 +21,9 @@ export interface Review {
   photos: Photo[];
 }
 
-export interface Tenant {
-  tenant_id: number;
-  email: string;
-  first_name: string;
-  last_name: string;
-  password: string;
-}
-
 export interface Photo {
+  photo_id: number;
   url: string;
   tag: string;
+  review_id: number;
 }

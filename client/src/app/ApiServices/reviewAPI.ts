@@ -1,13 +1,13 @@
-import { Review } from "../types/types";
+import { Review } from "../types/review-types";
 import handleAuthenticationError from "../utils/auth-router";
 
 const BASE_URL = process.env.SERVER_URL;
 
 const addReview = async (
-  property_id: number,
+  property_id: string,
   reviewData: Review,
   accessToken: string,
-): Promise<void> => {
+): Promise<void | undefined> => {
   try {
     const response = await fetch(`${BASE_URL}/addreview/${property_id}`, {
       method: "POST",
@@ -23,17 +23,17 @@ const addReview = async (
     }
 
     if (!response.ok) {
-      throw new Error("Failed to fetch search results");
+      return undefined
     }
 
     //return nothing
   } catch (err) {
     console.error(err);
-    throw err;
+    return undefined
   }
 };
 
-const getMyReviews = async (accessToken: string): Promise<Review[]> => {
+const getMyReviews = async (accessToken: string): Promise<Review[] | undefined> => {
   try {
     const response = await fetch("/api/myreviews", {
       method: "GET",
@@ -56,8 +56,8 @@ const getMyReviews = async (accessToken: string): Promise<Review[]> => {
 
     return allReviews;
   } catch (err) {
-    console.error(err);
-    throw err;
+    return undefined
+
   }
 };
 
@@ -65,7 +65,7 @@ const editReview = async (
   review_id: number,
   updatedReviewData: Review,
   accessToken: string,
-): Promise<Review> => {
+): Promise<Review | undefined> => {
   try {
     const response = await fetch(`${BASE_URL}/editreview/${review_id}`, {
       method: "PUT",
@@ -81,7 +81,8 @@ const editReview = async (
     }
 
     if (!response.ok) {
-      throw new Error("Failed to fetch search results");
+      return undefined
+
     }
 
     const editedReview: Review = await response.json();
@@ -90,14 +91,15 @@ const editReview = async (
     return editedReview;
   } catch (err) {
     console.error(err);
-    throw err;
+    return undefined
+
   }
 };
 
 const deleteReview = async (
   review_id: number,
   accessToken: string,
-): Promise<void> => {
+): Promise<void | undefined> => {
   try {
     const response = await fetch(`/api/deletereview/${review_id}`, {
       method: "DELETE",
@@ -111,13 +113,13 @@ const deleteReview = async (
     }
 
     if (!response.ok) {
-      throw new Error("Failed to fetch search results");
+      return undefined
     }
 
     //return nothing
   } catch (err) {
     console.error(err);
-    throw err;
+    return undefined
   }
 };
 

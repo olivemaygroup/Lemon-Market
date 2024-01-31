@@ -5,66 +5,6 @@ import exp from "constants";
 import { PropertyType, Review, Tenant } from "../types/types";
 import { createContext } from "vm";
 
-const updatePropertyReviewsAndAvgRating = async (
-  property: any,
-  total_rating: number,
-): Promise<void> => {
-  try {
-    const numOfReviews = property?.num_of_reviews;
-    if (numOfReviews > 0) {
-      const totalPropertyRating = property?.avg_rating * numOfReviews;
-      const newNumOfReviews = numOfReviews + 1;
-      const newTotalPropertyRating =
-        (totalPropertyRating + total_rating) / newNumOfReviews;
-
-      await updatePropertyRating(
-        property,
-        newTotalPropertyRating,
-        newNumOfReviews,
-      );
-    } else {
-      const newNumOfReviews = numOfReviews + 1;
-      await prisma.property.update({
-        where: {
-          id: +property.id,
-        },
-        data: {
-          avg_rating: total_rating,
-          num_of_reviews: newNumOfReviews,
-        },
-      });
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const updatePropertyRating = async (
-  property: any,
-  newTotalPropertyRating: number,
-  newNumOfReviews: number,
-) => {
-  await prisma.property.update({
-    where: {
-      id: +property.id,
-    },
-    data: {
-      avg_rating: newTotalPropertyRating,
-      num_of_reviews: newNumOfReviews,
-    },
-  });
-};
-
-const getRelatedProperty = async (ctx: Context) => {
-  const property_id: number = ctx.params.property_id;
-  const property = await prisma.property.findFirst({
-    where: {
-      id: +property_id,
-    },
-  });
-  return property;
-};
-
 const addReview = async (ctx: Context) => {
   try {
     const {
@@ -101,7 +41,7 @@ const addReview = async (ctx: Context) => {
 
     const newReview = await prisma.review.create({
       data: {
-        property_id: property.id,
+        property_id: property.property_id,
         tenant_id: tenant.tenant_id,
         t_start,
         t_end,
@@ -131,7 +71,7 @@ const addReview = async (ctx: Context) => {
       })),
     });
 
-    await updatePropertyReviewsAndAvgRating(property, total_review_rating);
+    await updatePropertyReviewsAndAvgRating(property, newReview.total_review_rating);
 
     const returnValue = await prisma.review.findFirst({
       where: {
@@ -176,8 +116,8 @@ const myReviews = async (ctx: Context) => {
 const editReview = async (ctx: Context) => {
   try {
     const reviewId = +ctx.params.review_id;
-
     const tenant: Tenant = ctx.state.tenant;
+    const property = await getRelatedProperty(ctx);
 
     const {
       t_start,
@@ -203,6 +143,7 @@ const editReview = async (ctx: Context) => {
 
     const editedReview = await prisma.review.update({
       where: {
+        property_id: property.property_id,
         review_id: reviewId,
         tenant_id: tenant.tenant_id,
       },
@@ -231,6 +172,9 @@ const editReview = async (ctx: Context) => {
         photos: true,
       },
     });
+
+    await updatePropertyReviewsAndAvgRating(property, editedReview.total_review_rating);
+
     ctx.body = editedReview;
     ctx.status = 200;
   } catch (err) {
@@ -267,5 +211,78 @@ const deleteReview = async (ctx: Context) => {
 };
 
 const review = { addReview, myReviews, editReview, deleteReview };
+
+const updatePropertyReviewsAndAvgRating = async (
+  property: PropertyType,
+  total_rating: number,
+): Promise<void> => {
+  try {
+    const numOfReviews = property.num_of_reviews;
+    if (numOfReviews > 0) {
+      const totalPropertyRating = property?.avg_rating * numOfReviews;
+      const newNumOfReviews = numOfReviews + 1;
+      const newTotalPropertyRating =
+        (totalPropertyRating + total_rating) / newNumOfReviews;
+
+      await updatePropertyRating(
+        property,
+        newTotalPropertyRating,
+        newNumOfReviews,
+      );
+    } else {
+      const newNumOfReviews = 1;
+      await prisma.property.update({
+        where: {
+          property_id: property.property_id,
+        },
+        data: {
+          avg_rating: total_rating,
+          num_of_reviews: newNumOfReviews,
+        },
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const updatePropertyRating = async (
+  property: PropertyType,
+  newTotalPropertyRating: number,
+  newNumOfReviews: number,
+) => {
+  await prisma.property.update({
+    where: {
+      property_id: property.property_id,
+    },
+    data: {
+      avg_rating: newTotalPropertyRating,
+      num_of_reviews: newNumOfReviews,
+    },
+  });
+};
+
+const getRelatedProperty = async (ctx: Context) => {
+  const property_id: string = ctx.params.property_id;
+
+  if (!property_id) {
+    ctx.body = 'property id is undefined'
+    ctx.state = 400
+  }
+
+
+  const property = await prisma.property.findFirst({
+    where: {
+      property_id: property_id,
+    },
+  });
+
+  if (!property) {
+    ctx.body = 'unable to find property'
+    ctx.state = 400
+  }
+  return property;
+};
+
 
 export default review;

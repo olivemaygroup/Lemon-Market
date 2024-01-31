@@ -1,7 +1,7 @@
 "use client";
 import styles from "@/app/login/page.module.css";
 import auth from "../utils/auth";
-import apiService from "../ApiServices/apiServices";
+import apiService from "../ApiServices/userAPI";
 import type { RootState } from "@/lib/store";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
