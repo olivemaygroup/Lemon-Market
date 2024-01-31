@@ -1,7 +1,5 @@
-import { Photo } from "../types/types";
 import axios from "axios";
 import { AxiosResponse } from "axios";
-import { error } from "console";
 
 
 
@@ -15,9 +13,9 @@ function createCloudinaryURL(): string {
   }
 }
 
-//Takes an array of uploaded files and returns and array of string containg their urls
+//Takes an array of uploaded files and returns and array of their urls as strings
 
-const cloudinaryImagesToURLS = async (files: File[]): Promise<string[] | AxiosResponse<any, any>[]> => {
+const cloudinaryImagesToURLS = async (files: File[]): Promise<string[] | AxiosResponse<any, any>[] | undefined> => {
 
   const CLOUDINARYURL: string = createCloudinaryURL();
 
@@ -37,10 +35,10 @@ const cloudinaryImagesToURLS = async (files: File[]): Promise<string[] | AxiosRe
       .then((res) => res)
       .catch((error) => {
         console.error("Error:", error);
-        throw new Error('error resolving promises')
+        return undefined
       });
   } else {
-    throw new Error('error creating Cloudinary promises')
+    return undefined
   }
 }
 

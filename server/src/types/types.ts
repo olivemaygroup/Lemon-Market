@@ -1,13 +1,3 @@
-export interface PropertyType {
-  number: string;
-  apartment: string;
-  street: string;
-  postcode: string;
-  city: string;
-  num_of_reviews?: number;
-  avg_rating?: number;
-}
-
 export interface Contact {
   firstName: string;
   lastName: string;
@@ -21,13 +11,12 @@ export interface Login {
 }
 
 export interface PropertyType {
-  number: string;
-  apartment: string;
-  street: string;
-  postcode: string;
-  city: string;
+  property_id: string;
+  fullAddress: string;
   num_of_reviews?: number;
   avg_rating?: number;
+  updatedAt?: Date;
+  createdAt?: Date;
 }
 
 export interface Review {
