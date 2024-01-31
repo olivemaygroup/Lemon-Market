@@ -29,6 +29,7 @@ export default function PropertyDetail() {
         console.log(error)
       })
 
+
   }, [])
   useEffect(() => {
     console.log(reviewList, 'reviewLidst')
