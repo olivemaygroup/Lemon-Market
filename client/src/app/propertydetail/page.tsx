@@ -28,9 +28,11 @@ export default function PropertyDetail() {
       .catch((error) => {
         console.log(error)
       })
-      console.log(reviewList)
 
   }, [])
+  useEffect(() => {
+    console.log(reviewList, 'reviewLidst')
+  }, [reviewList])
 
   return (
     <main className={styles.main}>
