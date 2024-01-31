@@ -1,5 +1,4 @@
 'use client'
-
 import Image from "next/image";
 import styles from "@/app/home/page.module.css";
 import Search from "@/app/components/Landing/search";
@@ -8,27 +7,19 @@ import { useState, useEffect, use } from "react";
 import { RootState } from "@/lib/store";
 import { useSelector } from "react-redux";
 import Link from 'next/link'
-
 import StoreProvider from "@/app/StoreProvider";
 
 export default function Home() {
-
-  let stateAddress = useSelector((state: RootState) => state.addAddress);
-
+  let stateAddress = useSelector((state: RootState) => state.property.value);
   const [showProperty, SetShowProperty] = useState(false)
-
   useEffect(() => {
-    SetShowProperty(stateAddress.description !== '' && stateAddress.place_id !== '')
+    SetShowProperty(stateAddress.fullAddress !== '' && stateAddress.property_id !== '')
   },[stateAddress])
-
   return (
-    
     <main className={styles.main}>
         <Search></Search>
-        { showProperty && 
+        { showProperty &&
         <PropertyCard
-        
-
         ></PropertyCard>
         }
     </main>

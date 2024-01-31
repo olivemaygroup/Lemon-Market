@@ -49,6 +49,7 @@ function NavBar() {
               letterSpacing: '.3rem',
               color: 'black',
               textDecoration: 'none',
+              
             }}
           >
            
@@ -94,7 +95,7 @@ function NavBar() {
            variant="h5"
            noWrap
            component="a"
-           href="#app-bar-with-responsive-menu"
+           href="/login"
            sx={{
              mr: 2,
              display: { xs: 'flex', md: 'flex' },

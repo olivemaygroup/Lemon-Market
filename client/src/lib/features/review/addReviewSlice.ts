@@ -2,29 +2,21 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface ReviewState {
-  cleanliness: string;
-  landlord: string;
-}
+import { Review } from "@/app/types/review-types";
 
-const initialState: ReviewState = {
-  cleanliness: "",
-  landlord: "",
-};
 
-export const addReviewSlice = createSlice({
-  name: "addreview",
-  initialState,
+export const reviewListSlice = createSlice({
+  name: "addReview",
+  initialState:  {
+    value: [],
+  },
   reducers: {
-    cleanliness: (state, action) => {
-      state.cleanliness = action.payload;
-    },
-    landlord: (state, action) => {
-      state.landlord = action.payload;
+    setReviewListSlice: (state: { value: Review[] }, action: { type: string; payload: Review[] }) => {
+      state.value = action.payload;
     },
   },
 });
 
-export const { cleanliness, landlord } = addReviewSlice.actions;
+export const { setReviewListSlice } = reviewListSlice.actions;
 
-export default addReviewSlice.reducer;
+export default reviewListSlice.reducer;
