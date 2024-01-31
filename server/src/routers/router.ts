@@ -20,7 +20,7 @@ router.delete("/deleteaccount", authMiddleware, userProfile.deleteAccount);
 // user review related
 router.post("/addreview/:property_id", authMiddleware, review.addReview);
 router.get("/myreviews", authMiddleware, review.myReviews);
-router.put("/editreview/:review_id", authMiddleware, review.editReview);
+router.put("/editreview/:property_id/:review_id", authMiddleware, review.editReview);
 router.delete("/deletereview/:review_id", authMiddleware, review.deleteReview);
 
 
