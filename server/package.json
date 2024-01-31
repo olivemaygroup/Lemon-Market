@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "tsc -w",
+    "connect": "prisma migrate dev --name init",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch ./src/index.ts"
   },

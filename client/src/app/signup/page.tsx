@@ -3,6 +3,8 @@ import Image from "next/image";
 import styles from "@/app/signup/page.module.css";
 import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
+import apiService from "../ApiServices/userAPI";
+
 
 const initialError = {
   error: false,
@@ -44,6 +46,7 @@ export default function Signup() {
       }));
     }
   };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const testWord = password1;
@@ -67,9 +70,22 @@ export default function Signup() {
       return;
     }
     const newUser = state;
+    const response = await apiService.signUp(newUser);
+    // const profile = await response.json();
+    if (response) {
+      console.log('new profile --',response)
+      console.log('form done --', newUser)
+      setState(initilaState);
+      setPassword1(Password);
+      setPasswordCheck(Password)
+    }
+    if (!response) {
+      console.log('ah heeelll no!')
+      console.log('res.body --', response)
+    }
+  }
 
-    console.log("form done --", newUser);
-  };
+
   return (
     <main className={styles.page}>
       <div className={styles.phone_box}>
@@ -131,18 +147,22 @@ export default function Signup() {
               value={passwordCheck.value}
             />
           </div>
-          <div className={error ? styles.errorbox : styles.noerrorbox}>
+          <div className={styles.div}>
             {error.error ? (
-              <div>
-                {error.msg}{" "}
-                <button onClick={() => setError(initialError)}>OK</button>{" "}
+              <div className={styles.div}>
+                <div className={styles.errorbox}>
+                  {error.msg}
+                  <button className={styles.btn} onClick={() => setError(initialError)}>OK</button>{" "}
+                </div>
+                <div className={styles.login_btns}>
+                  <button className={styles.login}>Login</button>
+                </div>
               </div>
             ) : (
-              <div></div>
+              <div className={styles.login_btns}>
+                <button className={styles.login}>Login</button>
+              </div>
             )}
-          </div>
-          <div className={styles.login_btns}>
-            <button className={styles.login}>Login</button>
           </div>
         </form>
       </div>

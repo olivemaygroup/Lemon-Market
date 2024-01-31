@@ -1,31 +1,8 @@
-import { Prisma } from "@prisma/client";
 import prisma from "../db";
-import { PropertyType, Tenant, Review } from "../types/types";
+import { Tenant } from "../types/types";
 
 import { Context } from "koa";
 
-const getFavorites = async (ctx: Context) => {
-  try {
-    const tenant: Tenant = ctx.state.tenant;
-
-    const favourites = await prisma.property.findMany({
-      where: {
-        favourites: {
-          some: {
-            tenant_id: tenant.tenant_id,
-          },
-        },
-      },
-    });
-
-    ctx.body = favourites;
-    ctx.status = 200;
-  } catch (error) {
-    console.error(error);
-    ctx.body = "unable to successfully get favourites";
-    ctx.status = 500;
-  }
-};
 
 const getSearchResults = async (ctx: Context) => {
   try {
@@ -55,15 +32,41 @@ const addSearchResult = async (ctx: Context) => {
     const property_id: number = +ctx.params.property_id;
     const tenant: Tenant = ctx.state.tenant;
 
-    await prisma.search.create({
+    const addedSearchResult = await prisma.search.create({
       data: {
         property_id,
         tenant_id: +tenant.tenant_id,
       },
     });
+
+    ctx.body = addedSearchResult;
+    ctx.status = 200;
   } catch (error) {
     console.error(error);
     ctx.body = "unable to successfully add search result";
+    ctx.status = 500;
+  }
+};
+
+const getFavorites = async (ctx: Context) => {
+  try {
+    const tenant: Tenant = ctx.state.tenant;
+
+    const favourites = await prisma.property.findMany({
+      where: {
+        favourites: {
+          some: {
+            tenant_id: tenant.tenant_id,
+          },
+        },
+      },
+    });
+
+    ctx.body = favourites;
+    ctx.status = 200;
+  } catch (error) {
+    console.error(error);
+    ctx.body = "unable to successfully get favourites";
     ctx.status = 500;
   }
 };
@@ -101,7 +104,7 @@ const removeFavorite = async (ctx: Context) => {
         property_id,
       },
     });
-    ctx.body = deletedFavouriate;
+    ctx.body = 'favourite deleted'
     ctx.status = 200;
   } catch (error) {
     console.error(error);
