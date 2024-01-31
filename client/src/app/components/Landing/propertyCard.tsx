@@ -36,6 +36,7 @@ const ProperetyCard = () => {
         const propertyWithoutReviews: PropertyType = { fullAddress: response.fullAddress, property_id: response.property_id, num_of_reviews: response.num_of_reviews, avg_rating: response.avg_rating }
         dispatch(addFullProperty(propertyWithoutReviews))
       } else {
+        dispatch(addFullProperty())
         //show empty card as no reviews for the property exist
       }
     })
@@ -61,8 +62,8 @@ const ProperetyCard = () => {
           >
             <Rating size="small" name="read-only" value={value} readOnly />
           </Box>
-          <p>Property Rating: {property.avg_rating}</p>
-          <p>{reviewList.length}</p>
+          <p>Property Rating: {fullProperty.avg_rating}</p>
+          <p>{fullProperty.num_of_reviews}</p>
         </div>
       </div>
     </Link>
