@@ -16,3 +16,8 @@ main {
 .mobile-hamburger .bar {
   background-color: var(--white);
 }
+
+.logo {
+  /* background-image: url('../../assets/TLM_Color_Landscape.jpg'); */
+  background-image: var('../../assets/TLM_Color_Landscape.jpg');
+}

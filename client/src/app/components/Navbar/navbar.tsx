@@ -11,9 +11,10 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-
+// import '../../assets/TLM_Color_Landscape.jpg'
+import logo from '../../public/TLM_Color_Landscape.jpg'
+import { StaticImageData } from 'next/image';
 const settings = ['Profile', 'My reviews', 'Logout'];
-
 
 function NavBar() {
 
@@ -32,11 +33,13 @@ function NavBar() {
     <AppBar position="fixed" >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          <img src={logo.src} alt="nooo" height='50px'/>
+          <div className='logo'></div>
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="../../assets/TLM_Color_Landscape.jpg"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'flex' },
@@ -46,9 +49,10 @@ function NavBar() {
               letterSpacing: '.3rem',
               color: 'black',
               textDecoration: 'none',
+              
             }}
           >
-            LOGO
+           
           </Typography>
       <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
       </Box>
@@ -91,7 +95,7 @@ function NavBar() {
            variant="h5"
            noWrap
            component="a"
-           href="#app-bar-with-responsive-menu"
+           href="/login"
            sx={{
              mr: 2,
              display: { xs: 'flex', md: 'flex' },
