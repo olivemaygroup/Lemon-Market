@@ -1,9 +1,10 @@
 import { Profile } from "next-auth";
 import { LogIn, NewUser } from "../types/types";
+import Email from "next-auth/providers/email";
 
 const BASE_URL = process.env.SERVER_URL;
 
-const signUp = async (newUser: NewUser): Promise<string> => {
+const signUp = async (newUser: NewUser): Promise<any> => {
   try {
     const res = await fetch(`${BASE_URL}/signup`, {
       method: 'POST',
@@ -11,15 +12,21 @@ const signUp = async (newUser: NewUser): Promise<string> => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newUser),
     })
-    const accessToken: string = await res.text()
-    return accessToken
+
+    if (res.status === 409) {
+      return 409;
+    }
+
+    const tenantWithAccessToken = await res.json()
+
+    return tenantWithAccessToken
   } catch (err) {
     console.log(err)
-    throw err;
+    return undefined
   }
 }
 
-const login = async (loginDetails: LogIn): Promise<string> => {
+const login = async (loginDetails: LogIn): Promise<any> => {
   try {
     const res = await fetch(`${BASE_URL}/login`, {
       method: 'POST',
@@ -27,9 +34,14 @@ const login = async (loginDetails: LogIn): Promise<string> => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(loginDetails),
     })
-    const accessToken: string = await res.text()
 
-    return accessToken
+    if (res.status === 409) {
+      return 409;
+    }
+
+    const tenantWithAccessToken = await res.json()
+
+    return tenantWithAccessToken
   } catch (err) {
     console.log(err)
     throw err;
