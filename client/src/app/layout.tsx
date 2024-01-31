@@ -7,7 +7,7 @@ import StoreProvider   from '@/app/StoreProvider'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import NavBar from "@/app/components/Navbar/navbar";
 import styles from '@/app/page.module.css'
-
+import NavBar2 from "./components/Navbar2/navbar2";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -29,7 +29,8 @@ export default function RootLayout({
       <body>
       <AppRouterCacheProvider>
         <StoreProvider>
-            <NavBar></NavBar>
+            {/* <NavBar></NavBar> */}
+            <NavBar2></NavBar2>
           <div className="all_pages">
             {children}
           </div>
