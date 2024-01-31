@@ -29,9 +29,13 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="fixed" >
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+    <AppBar position="fixed" 
+    style={{ backgroundColor: 'red' }}>
+      <Container maxWidth="xl"
+      style={{ backgroundColor: 'red' }}>
+        <Toolbar disableGutters
+        
+        >
           <Typography
             variant="h5"
             noWrap
@@ -46,6 +50,7 @@ function NavBar() {
               letterSpacing: '.3rem',
               color: 'black',
               textDecoration: 'none',
+              
             }}
           >
             LOGO
@@ -91,7 +96,7 @@ function NavBar() {
            variant="h5"
            noWrap
            component="a"
-           href="#app-bar-with-responsive-menu"
+           href="/login"
            sx={{
              mr: 2,
              display: { xs: 'flex', md: 'flex' },

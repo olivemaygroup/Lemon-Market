@@ -18,7 +18,9 @@ interface AdrPro {
 }
 
 const Search = () => {
+
   const stateAddress = useSelector((state: RootState) => state.addAddress);
+  
   const dispatch = useDispatch();
   
   const [address, setAddress] = useState<AdrPro>({ value: stateAddress });

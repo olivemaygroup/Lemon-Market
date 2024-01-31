@@ -26,10 +26,7 @@ export default function Home() {
     <main className={styles.main}>
         <Search></Search>
         { showProperty && 
-        <PropertyCard
-        
-
-        ></PropertyCard>
+        <PropertyCard></PropertyCard>
         }
     </main>
   );
