@@ -29,7 +29,7 @@ const getSearchResults = async (ctx: Context) => {
 
 const addSearchResult = async (ctx: Context) => {
   try {
-    const property_id: number = +ctx.params.property_id;
+    const property_id: string = ctx.params.property_id;
     const tenant: Tenant = ctx.state.tenant;
 
     const addedSearchResult = await prisma.search.create({
@@ -73,7 +73,7 @@ const getFavorites = async (ctx: Context) => {
 
 const addFavorite = async (ctx: Context) => {
   try {
-    const property_id: number = +ctx.params.property_id;
+    const property_id: string = ctx.params.property_id;
     const tenant: Tenant = ctx.state.tenant;
 
     await prisma.favourite.create({
@@ -93,7 +93,7 @@ const addFavorite = async (ctx: Context) => {
 
 const removeFavorite = async (ctx: Context) => {
   try {
-    const property_id: number = +ctx.params.property_id;
+    const property_id: string = ctx.params.property_id;
     const favouriteID: number = +ctx.params.favourite_id;
     const tenant: Tenant = ctx.state.tenant;
 

@@ -1,8 +1,7 @@
 import { Review } from "../types/review-types";
 import handleAuthenticationError from "../utils/auth-router";
 
-const BASE_URL = process.env.SERVER_URL;
-
+const BASE_URL = 'http://localhost:3001'
 const addReview = async (
   property_id: string,
   reviewData: Review,
@@ -35,7 +34,7 @@ const addReview = async (
 
 const getMyReviews = async (accessToken: string): Promise<Review[] | undefined> => {
   try {
-    const response = await fetch("/api/myreviews", {
+    const response = await fetch(`${BASE_URL}/myreviews`, {
       method: "GET",
       headers: {
         Authorization: accessToken,
@@ -47,7 +46,7 @@ const getMyReviews = async (accessToken: string): Promise<Review[] | undefined> 
     }
 
     if (!response.ok) {
-      throw new Error("Failed to fetch search results");
+      return undefined
     }
 
     const allReviews: Review[] = await response.json();

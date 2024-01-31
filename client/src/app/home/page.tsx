@@ -12,11 +12,7 @@ import { RootState } from "@/lib/store";
 
 export default function Home() {
 
-  const address  = useSelector((state: RootState) => state.address) 
-
-  // console.log(searchAddress)
-
-
+  
   return (
     <main className={styles.main}>
         <Search></Search>

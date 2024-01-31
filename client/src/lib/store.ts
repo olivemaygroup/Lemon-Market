@@ -2,15 +2,15 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "@/lib/features/counter/counterSlice";
-import addReviewReducer from "@/lib/features/review/addReviewSlice";
-import addressReduced from "@/lib/features/address/addressSlice";
+import reviewListSlice from "@/lib/features/review/addReviewSlice";
+import PropertySlice from "@/lib/features/property/propertySlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       counter: counterReducer,
-      addReview: addReviewReducer,
-      address: addReviewReducer,
+      reviewList: reviewListSlice,
+      property: PropertySlice,
     },
   });
 };
