@@ -18,14 +18,16 @@
     "@reduxjs/toolkit": "^2.1.0",
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.1",
     "google-auth-library": "^9.5.0",
     "jsonwebtoken": "^9.0.2",
-    "dotenv": "^16.4.1",
     "next": "14.1.0",
     "next-auth": "^4.24.5",
     "next-pwa": "^5.6.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-google-autocomplete": "^2.7.3",
+    "react-google-places-autocomplete": "^4.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",
