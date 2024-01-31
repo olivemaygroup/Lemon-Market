@@ -8,7 +8,7 @@ const authRouter = () => {
 const handleAuthenticationError = () => {
   authRouter();
   console.error("User not authenticated");
-  throw new Error("User not authenticated");
+  return undefined
 };
 
 export default handleAuthenticationError;
