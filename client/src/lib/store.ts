@@ -4,6 +4,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "@/lib/features/counter/counterSlice";
 import reviewListSlice from "@/lib/features/review/addReviewSlice";
 import PropertySlice from "@/lib/features/property/propertySlice";
+import addReviewReducer from "@/lib/features/review/addReviewSlice";
+import addAddressReducer from "@/lib/features/address/addressSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -11,6 +13,8 @@ export const makeStore = () => {
       counter: counterReducer,
       reviewList: reviewListSlice,
       property: PropertySlice,
+      addReview: addReviewReducer,
+      addAddress: addAddressReducer,
     },
   });
 };
