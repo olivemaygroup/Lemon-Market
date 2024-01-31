@@ -33,7 +33,12 @@ const signup = async (ctx: Context) => {
         }
       });
       const token = jwt.sign(tenant.tenant_id, SECRET_KEY);
-      ctx.body = token
+      const tenantWithoutPassword = { firstName: tenant.first_name, lastName: tenant.last_name, email: tenant.email };
+
+      const tenantWithToken = {
+        ...tenantWithoutPassword, accessToken: token
+      }
+      ctx.body = tenantWithToken
       ctx.status = 201;
     }
   } catch (error) {
@@ -45,19 +50,27 @@ const signup = async (ctx: Context) => {
 
 const login = async (ctx: Context) => {
   const { email, password } = <Login>ctx.request.body;
-  console.log('email-',email, password)
+  console.log('email-', email, password)
   const sanitizedEmail = email.replace(/[$/(){}]/g, "").toLowerCase();
   const sanitizedPassword = password.replace(/[$/(){}]/g, "");
 
-  const user = await prisma.tenant.findUnique({ where: { email: sanitizedEmail } });
-  const validatePassword = await bcrypt.compare(sanitizedPassword, user.password);
+  const tenant = await prisma.tenant.findUnique({ where: { email: sanitizedEmail } });
+  const validatePassword = await bcrypt.compare(sanitizedPassword, tenant.password);
 
   if (!validatePassword) {
     ctx.body = "Email or Password is incorrect."
     ctx.status = 401
   };
   try {
-    const token = jwt.sign(user.tenant_id, SECRET_KEY);
+    const token = jwt.sign(tenant.tenant_id, SECRET_KEY);
+
+    const tenantWithoutPassword = { firstName: tenant.first_name, lastName: tenant.last_name, email: tenant.email };
+
+    const tenantWithToken = {
+      ...tenantWithoutPassword, accessToken: token
+    }
+    ctx.body = tenantWithToken
+
     ctx.body = token;
     ctx.status = 200;
   } catch (error) {

@@ -1,4 +1,4 @@
-import { PropertyType } from "../types/types";
+import { PropertyType } from "../types/property-type";
 import handleAuthenticationError from "../utils/auth-router";
 
 const BASE_URL = process.env.SERVER_URL;
@@ -6,7 +6,7 @@ const BASE_URL = process.env.SERVER_URL;
 // Get search results
 const getSearchResults = async (
   accesToken: string,
-): Promise<PropertyType[]> => {
+): Promise<PropertyType[] | undefined> => {
   try {
     const response = await fetch(`${BASE_URL}/getsearchresults`, {
       method: "GET",
@@ -22,14 +22,14 @@ const getSearchResults = async (
     }
 
     if (!response.ok) {
-      throw new Error("Failed to fetch search results");
+      return undefined
     }
 
     const data: PropertyType[] = await response.json();
     return data; // Array of search results
   } catch (error) {
     console.error(error);
-    throw error;
+    return undefined
   }
 };
 
@@ -37,7 +37,7 @@ const getSearchResults = async (
 const addSearchResult = async (
   accesToken: string,
   property_id: number,
-): Promise<PropertyType> => {
+): Promise<PropertyType | undefined> => {
   try {
     const response = await fetch(
       `${BASE_URL}/addsearchresults/${property_id}`,
@@ -55,19 +55,19 @@ const addSearchResult = async (
     }
 
     if (!response.ok) {
-      throw new Error("Failed to add search results");
+      return undefined
     }
 
     const data: PropertyType = await response.json();
     return data; //search results that has been added
   } catch (error) {
     console.error(error);
-    throw error;
+    return undefined
   }
 };
 
 // Get user favorites
-const getFavorites = async (accesToken: string): Promise<PropertyType[]> => {
+const getFavorites = async (accesToken: string): Promise<PropertyType[] | undefined> => {
   try {
     const response = await fetch(`${BASE_URL}/getfavourites`, {
       method: "GET",
@@ -83,14 +83,14 @@ const getFavorites = async (accesToken: string): Promise<PropertyType[]> => {
     }
 
     if (!response.ok) {
-      throw new Error("Failed to fetch favorite properties");
+      return undefined
     }
 
     const data: PropertyType[] = await response.json();
     return data; // Array of favorite properties
   } catch (error) {
     console.error(error);
-    throw error;
+    return undefined
   }
 };
 
@@ -98,7 +98,7 @@ const getFavorites = async (accesToken: string): Promise<PropertyType[]> => {
 const addFavorite = async (
   accesToken: string,
   property_id: number,
-): Promise<void> => {
+): Promise<void | undefined> => {
   try {
     const response = await fetch(`${BASE_URL}/addfavourites/${property_id}`, {
       method: "POST",
@@ -114,13 +114,13 @@ const addFavorite = async (
     }
 
     if (!response.ok) {
-      throw new Error("Failed to add property to favorites");
+       return undefined
     }
 
     //doesn't return anything
   } catch (error) {
     console.error(error);
-    throw error;
+    return undefined
   }
 };
 
@@ -129,7 +129,7 @@ const removeFavorite = async (
   accesToken: string,
   property_id: number,
   favourite_id: number,
-): Promise<void> => {
+): Promise<void | undefined> => {
   try {
     const response = await fetch(
       `${BASE_URL}/deletefavourite/${property_id}/${favourite_id}`,
@@ -148,12 +148,12 @@ const removeFavorite = async (
     }
 
     if (!response.ok) {
-      throw new Error("Failed to remove property from favorites");
+      return undefined
     }
     //doesn't return anything
   } catch (error) {
     console.error(error);
-    throw error;
+    return undefined
   }
 };
 
