@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "@/app/signup/page.module.css";
 import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
-import apiService from "../ApiServices/userAPI";
+import apiService from "../ApiServices/apiServices";
 
 
 const initialError = {
