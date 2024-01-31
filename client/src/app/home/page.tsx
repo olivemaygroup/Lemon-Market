@@ -4,23 +4,33 @@ import Image from "next/image";
 import styles from "@/app/home/page.module.css";
 import Search from "@/app/components/Landing/search";
 import PropertyCard from "@/app/components/Landing/propertyCard";
-import { useState } from "react";
+import { useState, useEffect, use } from "react";
+import { RootState } from "@/lib/store";
+import { useSelector } from "react-redux";
+import Link from 'next/link'
 
 import StoreProvider from "@/app/StoreProvider";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/lib/store";
 
 export default function Home() {
 
-  const address  = useSelector((state: RootState) => state.address) 
+  let stateAddress = useSelector((state: RootState) => state.addAddress);
 
-  // console.log(searchAddress)
+  const [showProperty, SetShowProperty] = useState(false)
 
+  useEffect(() => {
+    SetShowProperty(stateAddress.description !== '' && stateAddress.place_id !== '')
+  },[stateAddress])
 
   return (
+    
     <main className={styles.main}>
         <Search></Search>
-        <PropertyCard></PropertyCard>
+        { showProperty && 
+        <PropertyCard
+        
+
+        ></PropertyCard>
+        }
     </main>
   );
 }

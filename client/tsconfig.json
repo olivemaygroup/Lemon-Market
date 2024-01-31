@@ -21,6 +21,6 @@
       "@/*": ["./src/*"],
     },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/additional-API-services"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/additional-API-services", "src/app/ApiServices/addressFileRef.text"],
   "exclude": ["node_modules"],
 }
