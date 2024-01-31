@@ -3,7 +3,7 @@
   width: 100vw;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .phone_box {
@@ -14,7 +14,6 @@
   flex-direction: column;
   justify-content: flex-end;
   overflow: scroll;
-  margin: 5px;
   gap: 20px;
 }
 
