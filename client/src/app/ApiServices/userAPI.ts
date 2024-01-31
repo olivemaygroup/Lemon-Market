@@ -1,6 +1,5 @@
 import { Profile } from "next-auth";
-import { LogIn, NewUser } from "../types/types";
-import Email from "next-auth/providers/email";
+import { LogIn, NewUser } from "../types/tenant-types";
 
 const BASE_URL = process.env.SERVER_URL;
 
@@ -48,7 +47,7 @@ const login = async (loginDetails: LogIn): Promise<any> => {
   }
 }
 
-const myProfile = async (accessToken: string): Promise<Profile> => {
+const myProfile = async (accessToken: string): Promise<Profile | undefined> => {
   try {
     const res = await fetch(`${BASE_URL}/myprofile`, {
       method: 'GET',
@@ -64,7 +63,7 @@ const myProfile = async (accessToken: string): Promise<Profile> => {
     return tenant
   } catch (err) {
     console.log(err)
-    throw err;
+    return undefined
   }
 }
 const userAPI = { signUp, login, myProfile }

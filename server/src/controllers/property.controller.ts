@@ -4,14 +4,9 @@ import { PropertyType } from "../types/types";
 
 import { Context } from "koa";
 
-interface Address {
-  property_id: string;
-  fullAddress: string;
-}
-
 const checkAddress = async (ctx: Context) => {
   try {
-    const { property_id, fullAddress } = ctx.request.body as Address
+    const { property_id, fullAddress } = ctx.request.body as PropertyType
 
     if (!property_id) {
       ctx.body = 'property_id undefined'

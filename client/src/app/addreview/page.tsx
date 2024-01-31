@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-'use client'
-import { useState } from 'react';
-import { Provider, useDispatch, useSelector } from "react-redux/dist/react-redux";
-import { cleanliness, landlord } from '@/lib/features/review/addReviewSlice'; // Adjust the path based on your project structure
-import { RootState } from '@/lib/store';
-import styles from '@/app/page.module.css';
-import StoreProvider from '../StoreProvider';
-=======
 "use client";
 import { useState } from "react";
 import { Provider, useDispatch } from "react-redux";
@@ -16,7 +7,6 @@ import { useSelector } from "react-redux";
 import styles from "@/app/page.module.css";
 import StoreProvider from "../StoreProvider";
 
->>>>>>> dev
 export default function addReview() {
   const review = useSelector((state: RootState) => state.addReview);
   const [cleanlinessComment, setCleanlinessComment] = useState("");

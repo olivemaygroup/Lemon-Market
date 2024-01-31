@@ -5,59 +5,57 @@ import * as React from 'react';
 import { useState } from "react";
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
+import { addAddress } from "@/lib/features/address/addressSlice";
+import StoreProvider from "@/app/StoreProvider";
+import { Provider, useDispatch } from "react-redux";
+
 
 dotenv.config()
+const googleKey = process.env.GOOGLEMAPS
 
+interface AdrPro {
+  value:  {
+    description: string;
+    place_id: string;
+  } 
+
+}
 
 const Search = () => {
   
-  const googleKey = process.env.GOOGLEMAPS
+  const dispatch = useDispatch()
+  const [address, SetAddress] = useState<AdrPro>({ value: { description: "", place_id: "" } });
+  
+  console.log(address)
+  let [description, SetDescription] = useState('')
+  let [placeID, SetPlaceID] = useState('')
 
-  const [address, SetAddress] = useState(null)
-  const [componentAddress, SetComponentAddress] = useState(null)
-  const [componentRating, SetComponentRating] = useState(null)
-  const [photos, SetPhotos] = useState(null)
-
-  const handleChange = async (e) => {
-    e.preventDefault()
-
-    const newAddress = address;
-
-      try {
-        const response = await fetch('http://localhost:3000/...', {
-          method: 'GET',
-          mode: 'cors',
-          body: JSON.stringify(newAddress),
-          
-        })
-
-        const json = await response.json()
-
-        if (!response.ok) {
-          // Render the generic component from 
-        }
-        if (response.ok) {
-          
-        }
+  React.useEffect(() => {
+    description = address.value.description
+    placeID = address.value.place_id
+    dispatch(addAddress(description))
+    dispatch(addAddress(placeID))
 
 
-      } catch {
+  },[address])
 
-      }
-  }
+ 
+  
+
 
   
     return (
+      
       <div className={styles.searchContainer}>
      
         <GooglePlacesAutocomplete
-          apiKey="AIzaSyC5sowPUHSSPyo022u07VJcHzMnoLifn1Q"
           selectProps={{
             placeholder: 'search for a property',
-            onChange: handleChange((e) => e.target.value),
+            onChange: SetAddress
             
           }}
-        />
+          />
+          <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`}/>
     
       </div>
 
