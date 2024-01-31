@@ -10,10 +10,10 @@ import Link from 'next/link'
 import StoreProvider from "@/app/StoreProvider";
 
 export default function Home() {
-  let stateAddress = useSelector((state: RootState) => state.addAddress);
+  let stateAddress = useSelector((state: RootState) => state.property.value);
   const [showProperty, SetShowProperty] = useState(false)
   useEffect(() => {
-    SetShowProperty(stateAddress.description !== '' && stateAddress.place_id !== '')
+    SetShowProperty(stateAddress.fullAddress !== '' && stateAddress.property_id !== '')
   },[stateAddress])
   return (
     <main className={styles.main}>

@@ -6,6 +6,8 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { RootState } from "@/lib/store";
 import { addAddress } from "@/lib/features/address/addressSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { addProperty } from "@/lib/features/property/propertySlice";
+import { PropertyType } from "@/app/types/property-type";
 
 dotenv.config();
 const googleKey = process.env.GOOGLEPLACES;
@@ -17,24 +19,30 @@ interface AdrPro {
   }
 }
 
+interface PropertyTypeRedux {
+  value: PropertyType;
+}
+
 const Search = () => {
-  const stateAddress = useSelector((state: RootState) => state.addAddress);
+
   const dispatch = useDispatch();
 
-  const [address, setAddress] = useState<AdrPro>({ value: stateAddress });
+  const reviewList = useSelector((state: RootState) => state.reviewList.value)
+
+  const property = useSelector((state: RootState) => state.property.value)
+
+  const [address, setAddress] = useState<PropertyType>(property);
 
   useEffect(() => {
-    setAddress({ value: stateAddress });
-  }, [stateAddress]);
+    setAddress(property);
+  }, [property]);
 
   useEffect(() => {
-    const newAddress = {
-      value: {
-        description: address.value.description,
-        place_id: address.value.place_id
-      }
+    const newAddress: PropertyType = {
+      fullAddress: address.fullAddress,
+      property_id: address.property_id
     };
-    dispatch(addAddress(newAddress));
+    dispatch(addProperty(newAddress));
   }, [address, dispatch]);
 
   return (

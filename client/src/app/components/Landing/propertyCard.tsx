@@ -13,13 +13,15 @@ import Link from 'next/link'
 const ProperetyCard = () => {
 
 
-  const address  = useSelector((state: RootState) => state.addAddress) 
+  const address  = useSelector((state: RootState) => state.property.value)
+
+  console.log(address)
 
   const [value, setValue] = React.useState<number | null>(5);
 
 
   return (
-    <Link 
+    <Link
       href="/propertydetail"
       style={{ textDecoration: 'none' }}>
       <div className={styles.card_container}>
@@ -27,7 +29,7 @@ const ProperetyCard = () => {
           <p>Picture</p>
         </div>
         <div className={styles.card_address}>
-          <p>{address.description}</p>
+          <p>{address.fullAddress}</p>
         </div>
         <div className={styles.card_rating_container}>
           <Box
