@@ -8,24 +8,28 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Error, Login } from "../types/types";
 
+const initialError: Error = {
+  error: false,
+  msg: "",
+};
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPasword] = useState("");
-  const [error, setError] = useState<Error>()
+  const [error, setError] = useState<Error>(initialError)
   const router = useRouter();
 
   const tryLogin = async (e: any): Promise<any | null> => {
     e.preventDefault();
     const user: Login = {
-      email,
-      password,
+      email: email,
+      password: password,
     };
     const res:any= await apiService.login(user);
-    console.log('res--', res)
-    if (res === 409) {
+    if (res === 401) {
       const err: Error = {
         error: true,
-        msg: "Error, Login details incorrect",
+        msg: "Login details incorrect or sign up here",
       }; 
       setError(err);
       setEmail("");
@@ -33,12 +37,10 @@ export default function Login() {
     } else {
       return res;
     }
-    localStorage.setItem('accessToken', res)
+    localStorage.setItem('accessToken', res.accessToken)
     setEmail("");
     setPasword("");
   };
-
-  const clickGoogle = () => {};
 
   return (
     <main className={styles.page}>
@@ -69,18 +71,23 @@ export default function Login() {
               value={password}
             />
           </div>
-          <div className={styles.login_btns}>
-            <button onClick={clickGoogle} className={styles.login}>
-              Login
-            </button>
-            {/* <div className={styles.or}>
-              <div className={styles.line}></div>
-              <p className={styles.or_p}>or</p>
-              <div className={styles.line}></div>
-            </div>
-            <button type="submit" className={styles.login}>
-              Login with Google
-            </button> */}
+          <div className={styles.div}>
+            {error.error ? (
+              <div className={styles.div}>
+                <div className={styles.errorbox}>
+                  {error.msg}
+                  <button className={styles.btn} onClick={() => setError(initialError)}>OK</button>
+                  <button className={styles.btn}>signup here</button>
+                </div>
+                <div className={styles.login_btns}>
+                  <button className={styles.login}>Login</button>
+                </div>
+              </div>
+            ) : (
+              <div className={styles.login_btns}>
+                <button className={styles.login}>Login</button>
+              </div>
+            )}
           </div>
         </form>
       </div>

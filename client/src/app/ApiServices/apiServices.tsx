@@ -25,7 +25,7 @@ const apiService = {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(user),
         })
-        if (response.status === 409) return 409;
+        if (response.status === 401) return 401;
         return response.text()
         
   } 

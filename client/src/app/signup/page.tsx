@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
 import apiService from "../ApiServices/apiServices";
 import { NewUser, Error, Password } from "../types/types";
-
+import { Response } from "../types/tenant-types";
 
 const initialError: Error = {
   error: false,
@@ -75,7 +75,7 @@ export default function Signup() {
       return;
     }
     const newUser: NewUser = state;
-    const response= await apiService.signUp(newUser);
+    const response:string | number = await apiService.signUp(newUser);
     if (response === 409) {
       resetStates();
      const err: Error = {
@@ -85,7 +85,7 @@ export default function Signup() {
       setError(err);
     } else {
       resetStates();
-      return response;
+      // localStorage.setItem('accessToken',response);
     }
   }
 
