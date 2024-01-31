@@ -4,19 +4,20 @@ import styles from "@/app/signup/page.module.css";
 import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
 import apiService from "../ApiServices/apiServices";
+import { NewUser, Error, Password } from "../types/types";
 
 
-const initialError = {
+const initialError: Error = {
   error: false,
   msg: "",
 };
-const initilaState = {
+const initilaState: NewUser = {
+  email: "",
   firstName: "",
   lastName: "",
-  email: "",
   password: "",
 };
-const Password = {
+const password: Password = {
   name: "",
   value: "",
 };
@@ -24,8 +25,8 @@ const Password = {
 export default function Signup() {
   const [error, setError] = useState(initialError);
   const [state, setState] = useState(initilaState);
-  const [password1, setPassword1] = useState(Password);
-  const [passwordCheck, setPasswordCheck] = useState(Password);
+  const [password1, setPassword1] = useState(password);
+  const [passwordCheck, setPasswordCheck] = useState(password);
 
   const passwordChecker = (password: string): boolean => {
     const regex = /^(?=.*[A-Z])(?=.*\d).+$/;
@@ -49,8 +50,8 @@ export default function Signup() {
 
   const resetStates = () => {
     setState(initilaState);
-    setPassword1(Password);
-    setPasswordCheck(Password)
+    setPassword1(password);
+    setPasswordCheck(password)
   }
 
   const handleSubmit = async (e: any) => {
@@ -73,24 +74,19 @@ export default function Signup() {
       setError(err);
       return;
     }
-    const newUser = state;
+    const newUser: NewUser = state;
     const response= await apiService.signUp(newUser);
-    if (response) {
-      console.log('new profile --',response)
-      if (response === 'User already exists, please sign in.') {
-        resetStates();
-        const err = {
-          error: true,
-          msg: "Error, User already exists",
-        }; 
-        console.log('ERROR---', err)
-        setError(err);
-      } else {
-        console.log('RESPONSE---',response)
-        resetStates();
-        return response;
-      }
-    } 
+    if (response === 409) {
+      resetStates();
+     const err: Error = {
+        error: true,
+        msg: "Error, User already exists",
+      }; 
+      setError(err);
+    } else {
+      resetStates();
+      return response;
+    }
   }
 
 

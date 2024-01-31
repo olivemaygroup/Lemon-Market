@@ -67,7 +67,7 @@ export interface Photo {
 
 export interface NewUser {
   email: string;
-  fistName: string;
+  firstName: string;
   lastName: string;
   password: string;
 }
@@ -81,4 +81,14 @@ export interface Profile {
   firstName: string;
   lastName: string;
   email: string;
+}
+
+export interface Error {
+  error: boolean;
+  msg: string;
+}
+
+export interface Password {
+  name: string;
+  value: string;
 }

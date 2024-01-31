@@ -1,31 +1,38 @@
 "use client";
 import styles from "@/app/login/page.module.css";
 import auth from "../utils/auth";
-import apiService from "../ApiServices/userAPI";
+import apiService from "../ApiServices/apiServices";
 import type { RootState } from "@/lib/store";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
-type EmailType = string;
-type PasswordType = string;
+import { Error, Login } from "../types/types";
 
 export default function Login() {
-  const [email, setEmail] = useState<EmailType>("");
-  const [password, setPasword] = useState<PasswordType>("");
+  const [email, setEmail] = useState("");
+  const [password, setPasword] = useState("");
+  const [error, setError] = useState<Error>()
   const router = useRouter();
 
   const tryLogin = async (e: any): Promise<any | null> => {
     e.preventDefault();
-
-    const user: { email: EmailType; password: PasswordType } = {
+    const user: Login = {
       email,
       password,
     };
-    console.log('user obj - ', user)
     const res:any= await apiService.login(user);
     console.log('res--', res)
-
+    if (res === 409) {
+      const err: Error = {
+        error: true,
+        msg: "Error, Login details incorrect",
+      }; 
+      setError(err);
+      setEmail("");
+      setPasword("");
+    } else {
+      return res;
+    }
     localStorage.setItem('accessToken', res)
     setEmail("");
     setPasword("");
@@ -66,17 +73,19 @@ export default function Login() {
             <button onClick={clickGoogle} className={styles.login}>
               Login
             </button>
-            <div className={styles.or}>
+            {/* <div className={styles.or}>
               <div className={styles.line}></div>
               <p className={styles.or_p}>or</p>
               <div className={styles.line}></div>
             </div>
             <button type="submit" className={styles.login}>
               Login with Google
-            </button>
+            </button> */}
           </div>
         </form>
       </div>
     </main>
   );
 }
+
+// {"firstName":"kim","lastName":"kim","email":"kim@mail.com","accessToken":"eyJhbGciOiJIUzI1NiJ9.NA.oeLKdo1U0E5x9a0N6_Gb3tOj8DZiucVe5Z7BNWwpfzc"}
