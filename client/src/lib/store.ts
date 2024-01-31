@@ -6,6 +6,7 @@ import reviewListSlice from "@/lib/features/review/addReviewSlice";
 import PropertySlice from "@/lib/features/property/propertySlice";
 import addReviewReducer from "@/lib/features/review/addReviewSlice";
 import addAddressReducer from "@/lib/features/address/addressSlice";
+import fullPropertySlice  from "./features/property/fullProperty";
 
 export const makeStore = () => {
   return configureStore({
@@ -13,6 +14,7 @@ export const makeStore = () => {
       counter: counterReducer,
       reviewList: reviewListSlice,
       property: PropertySlice,
+      fullProperty: fullPropertySlice,
       addReview: addReviewReducer,
       addAddress: addAddressReducer,
     },

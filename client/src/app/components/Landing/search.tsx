@@ -6,8 +6,10 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { RootState } from "@/lib/store";
 import { addAddress } from "@/lib/features/address/addressSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { addProperty } from "@/lib/features/property/propertySlice";
 import { PropertyType } from "@/app/types/property-type";
+import checkAddress from "@/app/ApiServices/propertyAPI";
+import { setReviewListSlice } from "@/lib/features/review/addReviewSlice";
+import { addProperty } from "@/lib/features/property/propertySlice";
 
 dotenv.config();
 const googleKey = process.env.GOOGLEPLACES;
@@ -28,14 +30,9 @@ const Search = () => {
   const dispatch = useDispatch();
 
   const reviewList = useSelector((state: RootState) => state.reviewList.value)
-
   const property = useSelector((state: RootState) => state.property.value)
 
   const [address, setAddress] = useState<PropertyType>(property);
-
-  useEffect(() => {
-    setAddress(property);
-  }, [property]);
 
   useEffect(() => {
     const newAddress: PropertyType = {
@@ -43,19 +40,23 @@ const Search = () => {
       property_id: address.property_id
     };
     dispatch(addProperty(newAddress));
-  }, [address, dispatch]);
+  }, [address]);
 
   return (
-    <div className={styles.searchContainer}>
-      <GooglePlacesAutocomplete
-        selectProps={{
-          placeholder: 'search for a property',
-          address,
-          onChange: (address) => setAddress(address)
-        }}
-      />
-      <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`} />
-    </div>
+    <>
+      <div className={styles.searchContainer}>
+        <GooglePlacesAutocomplete
+          selectProps={{
+            placeholder: 'search for a property',
+            onChange: (address) => {
+              setAddress({ fullAddress: address?.value.description, property_id: address?.value.place_id })
+            }
+          }
+          }
+        />
+        <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`} />
+      </div>
+    </>
   );
 };
 
