@@ -63,13 +63,15 @@
 }
 
 .login {
+  font-family: 'virgil';
+  font-size: 20px;
   border: none;
   border-radius: 10px;
   height: 40px;
   margin-bottom: 30px;
   width: 100%;
 }
-.login:hover {background-color: rgb(239, 230, 56);}
+.login:hover {background-color: #fae301;}
 
 .errorbox {
   display: flex;

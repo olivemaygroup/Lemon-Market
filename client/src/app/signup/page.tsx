@@ -159,12 +159,12 @@ export default function Signup() {
                   <button className={styles.btn} onClick={() => setError(initialError)}>OK</button>{" "}
                 </div>
                 <div className={styles.login_btns}>
-                  <button className={styles.login}>Login</button>
+                  <button className={styles.login}>signup</button>
                 </div>
               </div>
             ) : (
               <div className={styles.login_btns}>
-                <button className={styles.login}>Login</button>
+                <button className={styles.login}>signup</button>
               </div>
             )}
           </div>
