@@ -7,21 +7,38 @@ import { useSelector } from "react-redux";
 import styles from "@/app/page.module.css";
 // import StoreProvider from "../StoreProvider";
 import StarRating from "./StarRating";
-import UploadPhoto from "./UploadPhoto";
+import PhotoUploadComponent from "./PhotoUpload";
 import AddComment from "./AddComment";
+import CustomizedRating from "./StyledRating";
 
-const RatingContainer = () => {
+interface RatingContainerInterface {
+  metric: string
+}
+
+const RatingContainer: React.FC<RatingContainerInterface> = ({ metric }) => {
   
   const [rating, setRating] = useState<number>(0);
-
+  const [imgURL, setImgURL] = useState<string[]>([]);
+  const [comment, setComment] = useState<string>('')
   return (
     <>
     
       <div className='star-container'> 
+      <h2>{metric}</h2>
         <div className='col text-center'>
-          <StarRating rating={rating} onRating={(rate: number) => setRating(rate)} />
-          <UploadPhoto />
-          <AddComment />
+          <CustomizedRating 
+          rating={rating} 
+          onRating={(rate: number) => setRating(rate)} 
+          />
+          <PhotoUploadComponent 
+          imgURL={imgURL} 
+          setImgURL={setImgURL}
+          metric={metric}
+          />
+          <AddComment 
+          comment={comment}
+          setComment={setComment}
+          />
         </div>
       </div>
     </>

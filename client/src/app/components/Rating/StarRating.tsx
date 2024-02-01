@@ -40,8 +40,8 @@ const StarRating: React.FC<StarRatingInterface> = ({ count, rating, color, onRat
         icon="star"
         onClick={() => onRating(idx)}
         style={{color: getColor(idx)}}
-        onMouseEnter={() => setHoverRating(idx)}
-        onMouseLeave={() => setHoverRating(0)}
+        // onMouseEnter={() => setHoverRating(idx)}
+        // onMouseLeave={() => setHoverRating(0)}
         />
       ));
   }, [ count, rating, hoverRating ])

@@ -10,10 +10,21 @@ import RatingContainer from "../components/Rating/RatingContainer";
 
 export default function addReview () {
 
+  const ratingMetrics = [
+    'Cleanliness', 
+    'Maintenance', 
+    'Signing and Process', 
+    'Deposit Handling', 
+    'Amenities', 
+    'Landlord Responsiveness'
+  ]
+
   return (
     <>
       <div className="review-subject-container">
-        <RatingContainer />
+        {ratingMetrics.map((metric) => (
+          <RatingContainer metric={metric} /> 
+        ))}
       </div>
     </>
   )
