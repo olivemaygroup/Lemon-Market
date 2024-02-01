@@ -51,29 +51,36 @@ const signup = async (ctx: Context) => {
 const login = async (ctx: Context) => {
   try {
     const { email, password } = <Login>ctx.request.body;
-    console.log('email-', email, password)
+
+
     const sanitizedEmail = email.replace(/[$/(){}]/g, "").toLowerCase();
     const sanitizedPassword = password.replace(/[$/(){}]/g, "");
-
     const tenant = await prisma.tenant.findUnique({ where: { email: sanitizedEmail } });
+
+    if (!tenant) {
+      ctx.body = "Email or Password is incorrect."
+      ctx.status = 401
+      return
+    }
+
     const validatePassword = await bcrypt.compare(sanitizedPassword, tenant.password);
 
     if (!validatePassword) {
       ctx.body = "Email or Password is incorrect."
       ctx.status = 401
+      return
     } else {
       const token = jwt.sign(tenant.tenant_id, SECRET_KEY);
-
       const tenantWithoutPassword = { firstName: tenant.first_name, lastName: tenant.last_name, email: tenant.email };
 
       const tenantWithToken = {
         ...tenantWithoutPassword, accessToken: token
       }
-      ctx.body = tenantWithToken
 
-      ctx.body = tenantWithToken;
+      ctx.body = tenantWithToken
       ctx.status = 200;
     }
+
   } catch (error) {
     console.log('Error logging in;', error)
     ctx.status = 500;
