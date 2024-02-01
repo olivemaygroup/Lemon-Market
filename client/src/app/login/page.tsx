@@ -1,21 +1,24 @@
 "use client";
 import styles from "@/app/login/page.module.css";
-import auth from "../utils/auth";
-import apiService from "../ApiServices/apiServices";
+import { redirect } from "next/navigation";
 import type { RootState } from "@/lib/store";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Error, Login } from "../types/types";
+import { Error, Login, UserType } from "../types/types";
+import { setUserSlice } from "@/lib/features/user/userSlice";
+import userAPI from "../ApiServices/userAPI";
 
 const initialError: Error = {
   error: false,
   msg: "",
 };
 
+
 export default function Login() {
+  const dispatch = useDispatch()
   const [email, setEmail] = useState("");
-  const [password, setPasword] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<Error>(initialError)
   const router = useRouter();
 
@@ -25,7 +28,15 @@ export default function Login() {
       email: email,
       password: password,
     };
-    const res:any= await apiService.login(user);
+    const res:any = await userAPI.login(user);
+    const currUser: UserType = {
+      firstName: res.firstName,
+      lastName: res.lastName,
+      email: res.email
+    }
+    console.log('CURRENT USER', currUser)
+    dispatch(setUserSlice(currUser))
+
     if (res === 401) {
       const err: Error = {
         error: true,
@@ -33,13 +44,14 @@ export default function Login() {
       }; 
       setError(err);
       setEmail("");
-      setPasword("");
+      setPassword("");
     } else {
-      return res;
+      console.log('RES--',res)
+      localStorage.setItem('accessToken', res.accessToken)
+      setEmail("");
+      setPassword("");
+      router.push('/myprofile')
     }
-    localStorage.setItem('accessToken', res.accessToken)
-    setEmail("");
-    setPasword("");
   };
 
   return (
@@ -63,7 +75,7 @@ export default function Login() {
             <label className={styles.input_lbl}>password</label>
             <input
               onChange={(e) => {
-                setPasword(e.target.value);
+                setPassword(e.target.value);
               }}
               type="password"
               className={styles.input_feild}

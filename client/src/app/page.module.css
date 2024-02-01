@@ -1,4 +1,5 @@
 .main {
+  font-family: 'virgil';
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */

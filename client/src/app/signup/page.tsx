@@ -3,9 +3,12 @@ import Image from "next/image";
 import styles from "@/app/signup/page.module.css";
 import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
-import apiService from "../ApiServices/apiServices";
-import { NewUser, Error, Password } from "../types/types";
+import { NewUser, Error, Password, UserType } from "../types/types";
+import { useSelector, useDispatch } from "react-redux";
 import { Response } from "../types/tenant-types";
+import { setUserSlice } from "@/lib/features/user/userSlice";
+import userAPI from "../ApiServices/userAPI";
+import { passwordChecker } from "../ApiServices/apiServices";
 
 const initialError: Error = {
   error: false,
@@ -28,14 +31,7 @@ export default function Signup() {
   const [password1, setPassword1] = useState(password);
   const [passwordCheck, setPasswordCheck] = useState(password);
 
-  const passwordChecker = (password: string): boolean => {
-    const regex = /^(?=.*[A-Z])(?=.*\d).+$/;
-    if (password.length > 6 || regex.test(password)) {
-      return true;
-    } else {
-      return false;
-    }
-  };
+  const dispatch = useDispatch();
 
   const handleChange = (e: any) => {
     if (e.target.name !== "password2" || "password1") {
@@ -75,17 +71,23 @@ export default function Signup() {
       return;
     }
     const newUser: NewUser = state;
-    const response:string | number = await apiService.signUp(newUser);
+    const currUser: UserType = {
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email
+    }
+    const response:any = await userAPI.signUp(newUser);
     if (response === 409) {
-      resetStates();
-     const err: Error = {
+      const err: Error = {
         error: true,
         msg: "Error, User already exists",
       }; 
+      resetStates();
       setError(err);
     } else {
+      dispatch(setUserSlice(currUser));
+      localStorage.setItem('accessToken',response.accessToken);
       resetStates();
-      // localStorage.setItem('accessToken',response);
     }
   }
 
@@ -159,12 +161,12 @@ export default function Signup() {
                   <button className={styles.btn} onClick={() => setError(initialError)}>OK</button>{" "}
                 </div>
                 <div className={styles.login_btns}>
-                  <button className={styles.login}>Login</button>
+                  <button className={styles.login}>signup</button>
                 </div>
               </div>
             ) : (
               <div className={styles.login_btns}>
-                <button className={styles.login}>Login</button>
+                <button className={styles.login}>signup</button>
               </div>
             )}
           </div>

@@ -1,16 +1,19 @@
-import React from 'react';
-import './rating.css';
+import React, { useState } from 'react';
 
-const UploadPhoto = () => {
-  return (
-    <div className='upload-photo-btn-container'>
-      <form action="/action_page.php">
-        {/* <input type="file" id="photo" name="filename"/> */}
-        <input type="file" id="upload-photo-btn" hidden name="filename"/>
-        <label className="invisible-btn" for="upload-photo-btn">Add Photo</label>
-      </form>
-    </div>
-  )
+interface PhotoUploadComponentProps {
+  TOPIC: string,
+  photoURLs: [],
+  setPhotoURLs: Function
 }
 
-export default UploadPhoto
+const PhotoUploadComponent: React.FC<PhotoUploadComponentProps> = ({ TOPIC, photoURLs, setPhotoURLs }) => {
+
+  return (
+    <form>
+      <label>Upload Photo</label>
+      <input type="file" accept=".jpg, .png, .jpeg"></input>
+    </form>
+  )
+};
+
+export default PhotoUploadComponent;

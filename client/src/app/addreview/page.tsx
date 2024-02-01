@@ -1,86 +1,114 @@
 "use client";
-import { useState } from "react";
-import { Provider, useDispatch } from "react-redux";
-import { cleanliness, landlord } from "@/lib/features/review/addReviewSlice"; // Adjust the path based on your project structure
-import { RootState } from "@/lib/store";
-import { useSelector } from "react-redux";
-import styles from "@/app/page.module.css";
-import StoreProvider from "../StoreProvider";
-import RatingContainer from "../components/Rating/RatingContainer";
+import React, { useState } from "react";
+import {Photo} from '../types/types'
+import RentBillsTaxComponent from "../components/Rating/RatingTopics/RentBillsTax";
+import TenancyDuration from "../components/Rating/TenancyDuration";
+import CleanlinessRating from "../components/Rating/RatingTopics/CleanlinessRating";
+import MaintenanceRating from "../components/Rating/RatingTopics/MaintenanceRating";
+import SigningProcessRating from "../components/Rating/RatingTopics/ValueForMoneyRating";
+import DepositHandlingRating from "../components/Rating/RatingTopics/DepositHandlingRating";
+import AmenitiesRating from "../components/Rating/RatingTopics/AmenitiesRating";
+import LandlordResponsivenessRating from "../components/Rating/RatingTopics/LandlordResponsivenessRating";
+import { Review } from "@/app/types/types";
 
 export default function addReview () {
+
+  const [imageURLs, setImageURLs] = useState<Photo[]>([])
+  const [dbReviewObject, setDBReviewObject] = useState<Review>({
+    t_start: '',
+    t_end: '',
+    cleanliness: 0,
+    cleanliness_comment: '',
+    maintenance: 0,
+    maintenance_comment: '',
+    value_for_money: 0,
+    value_for_money_comment: '',
+    deposit_handling: 0,
+    deposit_handling_comment: '',
+    amenities: 0,
+    amenities_comment: '',
+    landlord_responsiveness: 0,
+    landlord_responsiveness_comment: '',
+    total_review_rating: 0,
+    monthly_rent: 0,
+    monthly_bill: 0,
+    council_tax: 0,
+    general_comment: '',
+    photos: []
+  })
 
   return (
     <>
       <div className="review-subject-container">
-        <RatingContainer />
+        <div className="rating-item">
+        <TenancyDuration 
+          dbReviewObject={dbReviewObject}/>
+        </div>
+
+        <div className="rating-item">
+        <CleanlinessRating 
+          dbReviewObject={dbReviewObject}
+          imageURLs={imageURLs}
+          setImageURLs={setImageURLs}
+          />
+        </div>
+
+        <div className="rating-item">
+        <MaintenanceRating
+          dbReviewObject={dbReviewObject} 
+          imageURLs={imageURLs}
+          setImageURLs={setImageURLs}
+          />
+        </div>
+
+        <div className="rating-item">
+        <SigningProcessRating
+          dbReviewObject={dbReviewObject} 
+          imageURLs={imageURLs}
+          setImageURLs={setImageURLs}
+        />
+        </div>
+
+        <div className="rating-item">
+        <DepositHandlingRating 
+          dbReviewObject={dbReviewObject}
+          imageURLs={imageURLs}
+          setImageURLs={setImageURLs}
+        />
+        </div>
+
+        <div className="rating-item">
+        <AmenitiesRating
+          dbReviewObject={dbReviewObject} 
+          imageURLs={imageURLs}
+          setImageURLs={setImageURLs}
+        />
+        </div>
+
+        <div className="rating-item">
+        <LandlordResponsivenessRating 
+          dbReviewObject={dbReviewObject}
+          imageURLs={imageURLs}
+          setImageURLs={setImageURLs}
+        />
+        </div>
+
+        {/* {ratingMetrics.map((metric) => (
+          <RatingContainer 
+          rating={rating}
+          setRating={setRating}
+          metric={metric}
+          imageURLs={imageURLs}
+          setImageURLs={setImageURLs}
+          /> 
+        ))} */}
+
+
+        <div className="rating-item">
+        <RentBillsTaxComponent 
+        dbReviewObject={dbReviewObject}/>
+        </div>
       </div>
     </>
   )
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const review = useSelector((state: RootState) => state.addReview);
-// const [cleanlinessComment, setCleanlinessComment] = useState("");
-// const [landlordComment, setLandlordComment] = useState("");
-// const dispatch = useDispatch();
-// const count = useSelector((state: RootState) => state.counter.value);
-
-// const handleFormSubmit = (event: onClick) => {
-//   event.preventDefault();
-
-//   dispatch(cleanliness(cleanlinessComment));
-//   dispatch(landlord(landlordComment));
-
-//   setCleanlinessComment("");
-//   setLandlordComment("");
-// };
-
-// return (
-//   <main className={styles.main}>
-//     <div className={styles.description}>
-//       <p>Add a review</p>
-//     </div>
-//     <span>{count}</span>
-//     <div>
-//       <form onSubmit={handleFormSubmit}>
-//         <label htmlFor="cleanliness">Cleanliness</label>
-//         <input
-//           id="cleanliness"
-//           type="text"
-//           placeholder="Add cleanliness comment"
-//           value={cleanlinessComment}
-//           onChange={(e) => setCleanlinessComment(e.target.value)}
-//         />
-//         <label htmlFor="landlord">Landlord</label>
-//         <input
-//           id="landlord"
-//           type="text"
-//           placeholder="Add landlord comment"
-//           value={landlordComment}
-//           onChange={(e) => setLandlordComment(e.target.value)}
-//         />
-//         <button type="submit">Submit</button>
-//       </form>
-//     </div>
-//     <ul>
-//       <li>{review.cleanliness}</li>
-//       <li>{review.landlord}</li>
-//     </ul>
-//   </main>
-// );

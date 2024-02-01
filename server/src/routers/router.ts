@@ -4,7 +4,7 @@ import Router from "koa-router";
 import userProfile from "../controllers/userprofile.controller.js";
 import property from "../controllers/property.controller.js";
 import review from "../controllers/review.controller.js";
-import favorite from "../controllers/favorites.controller.js";
+import favorite from "../controllers/favourites.controller.js";
 
 import authMiddleware from "../auth/auth.js";
 
@@ -14,7 +14,7 @@ const router = new Router();
 router.post("/signup", userProfile.signup);
 router.post("/login", userProfile.login);
 router.get("/myprofile", authMiddleware, userProfile.myProfile);
-router.put("/editprofile/:id", authMiddleware, userProfile.editProfile);
+router.put("/editprofile", authMiddleware, userProfile.editProfile);
 router.delete("/deleteaccount", authMiddleware, userProfile.deleteAccount);
 
 // user review related
@@ -33,7 +33,7 @@ router.get("/addsearchresults/:property_id", authMiddleware, favorite.addSearchR
 router.get("/getfavourites", authMiddleware, favorite.getFavorites);
 router.post("/addfavourites/:property_id", authMiddleware, favorite.addFavorite);
 router.delete(
-  "/deletefavourite/:property_id/:favourite_id",
+  "/deletefavourite/:property_id",
   authMiddleware,
   favorite.removeFavorite,
 );
