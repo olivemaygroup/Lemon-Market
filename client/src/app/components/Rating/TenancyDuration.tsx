@@ -1,19 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-interface TenancyDurationInterface {
-  handleTStart: Function,
-  handleTEnd: Function
-}
 
-const TenancyDuration: React.FC<TenancyDurationInterface> = (handleTStart, handleTEnd) => {
+const TenancyDuration = () => {
 
-  const handleStartInput = (event: DateConstructor) => {
-    handleTStart(event.target.value);
-  };
-  const handleEndInput = (event: DateConstructor) => {
-    handleTEnd(event.target.value);
-  };
+  const [tenancyStart, setTenancyStart] = useState("")
+  const [tenancyEnd, setTenancyEnd] = useState("")
 
+
+  
   return (
     <form>
       <h2>Tenancy Dates</h2>
@@ -24,7 +18,7 @@ const TenancyDuration: React.FC<TenancyDurationInterface> = (handleTStart, handl
       name="tenancy-start"
       className="input"
       placeholder="When did your tenancy start?"
-      onChange={handleStartInput}
+      onChange={(event) => {setTenancyStart(event.target.value)}}
       />
       </div>
       <div>
@@ -34,11 +28,11 @@ const TenancyDuration: React.FC<TenancyDurationInterface> = (handleTStart, handl
         name="tenancy-end"
         className="input"
         placeholder="When did your tenancy end?"
-        onChange={handleEndInput}
+        onChange={(event) => {setTenancyEnd(event.target.value)}}
         />
       </div>    
     </form>
   )
 }
 
-export default TenancyDuration
+export default TenancyDuration;

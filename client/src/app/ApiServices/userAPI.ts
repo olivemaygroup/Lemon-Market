@@ -67,6 +67,28 @@ const myProfile = async (accessToken: string): Promise<Profile | undefined> => {
   }
 }
 
+const editProfile = async (newUser: NewUser): Promise<any> => {
+  try {
+    const res = await fetch(`${BASE_URL}/editprofile`, {
+      method: 'PUT',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newUser),
+    })
+
+    if (res.status === 409) {
+      return 409;
+    }
+
+    const tenantWithAccessToken = await res.json()
+
+    return tenantWithAccessToken
+  } catch (err) {
+    console.log(err)
+    return undefined
+  }
+}
+
 
 const logOut = (): string => {
   const accessToken = localStorage.getItem('accessToken')
@@ -80,6 +102,6 @@ const logOut = (): string => {
 }
 
 
-const userAPI = { signUp, login, myProfile, logOut }
+const userAPI = { signUp, login, myProfile, logOut, editProfile }
 
 export default userAPI

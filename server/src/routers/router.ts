@@ -14,7 +14,7 @@ const router = new Router();
 router.post("/signup", userProfile.signup);
 router.post("/login", userProfile.login);
 router.get("/myprofile", authMiddleware, userProfile.myProfile);
-router.put("/editprofile/:id", authMiddleware, userProfile.editProfile);
+router.put("/editprofile", authMiddleware, userProfile.editProfile);
 router.delete("/deleteaccount", authMiddleware, userProfile.deleteAccount);
 
 // user review related
