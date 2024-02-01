@@ -85,7 +85,7 @@ export default function Signup() {
       setError(err);
     } else {
       resetStates();
-      // localStorage.setItem('accessToken',response);
+      // localStorage.setItem('accessToken',response.accessToken);
     }
   }
 

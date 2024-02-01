@@ -1,4 +1,11 @@
+
+@font-face {
+  font-family: 'virgil';
+  src: url('../../../../public/fonts/Virgil.woff2');
+}
+
 .body {
+  font-family: 'virgil';
   width: 100vw;
   height: 60px;
   display: flex;
@@ -20,6 +27,7 @@
 }
 
 .menuitem {
+  font-size: 20px;
   align-self: center;
   text-decoration: none;
   color: black;
@@ -52,11 +60,12 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 50px;
+  gap: 60px;
   flex-direction: column;
 }
 
 .link {
+  font-size: 25px;
   text-decoration: none;
   color: black;
 }

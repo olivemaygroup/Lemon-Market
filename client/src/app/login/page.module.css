@@ -1,4 +1,11 @@
+
+@font-face {
+  font-family: 'virgil';
+  src: url('../../../public/fonts/Virgil.woff2');
+}
+
 .page {
+  font-family: 'virgil';
   height: 100vh;
   width: 100vw;
   display: flex;
