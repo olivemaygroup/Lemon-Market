@@ -7,7 +7,6 @@ const initialState: UserType = {
   firstName: '',
   lastName: '',
   email: '',
-  accessToken: '',
 }
 
 export const userSlice = createSlice({

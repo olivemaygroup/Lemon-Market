@@ -26,7 +26,7 @@ const apiService = {
           body: JSON.stringify(user),
         })
         if (response.status === 401) return 401;
-        return response.text()
+        return response.json()
         
   } 
 }
