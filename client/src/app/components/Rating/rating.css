@@ -9,3 +9,20 @@
   cursor: pointer;
   margin-top: 1rem;
 }
+
+.review-subject-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+}
+
+.rating-item {
+  border-style: solid;
+  margin: 5px;
+}
+
+.rating-elements {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
