@@ -94,24 +94,38 @@ const addFavorite = async (ctx: Context) => {
 const removeFavorite = async (ctx: Context) => {
   try {
     const property_id: string = ctx.params.property_id;
-    const favouriteID: number = +ctx.params.favourite_id;
     const tenant: Tenant = ctx.state.tenant;
 
-    const deletedFavouriate = await prisma.favourite.delete({
+    // Find the favorite based on property_id and tenant_id
+    const favoriteToDelete = await prisma.favourite.findFirst({
       where: {
-        favourite_id: favouriteID,
         tenant_id: +tenant.tenant_id,
         property_id,
       },
     });
-    ctx.body = 'favourite deleted'
+
+    if (!favoriteToDelete) {
+      ctx.body = 'Favorite not found';
+      ctx.status = 404;
+      return;
+    }
+
+    // Delete the found favorite
+    await prisma.favourite.delete({
+      where: {
+        favourite_id: favoriteToDelete.favourite_id,
+      },
+    });
+
+    ctx.body = 'Favorite deleted';
     ctx.status = 200;
   } catch (error) {
     console.error(error);
-    ctx.body = "unable to successfully delete favourite";
+    ctx.body = 'Unable to successfully delete favorite';
     ctx.status = 500;
   }
 };
+
 
 const favorite = {
   addSearchResult,

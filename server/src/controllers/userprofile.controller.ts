@@ -94,7 +94,44 @@ const myProfile = async (ctx: Context) => {
   }
 };
 
-const editProfile = async (ctx) => { };
+const editProfile = async (ctx: Context) => {
+  const { firstName, lastName, email, password } = ctx.request.body as Contact;
+  try {
+
+    const sanitizedEmail = email.replace(/[$/(){}]/g, "").toLowerCase();
+    const sanitizedPassword = password.replace(/[$/(){}]/g, "");
+    const santitizedFirstName = firstName.replace(/[$/(){}]/g, "");
+    const santitizedLastName = lastName.replace(/[$/(){}]/g, "");
+
+    const user: Tenant = ctx.state.tenant;
+
+    const hash = await bcrypt.hash(sanitizedPassword, 10);
+    const tenant = await prisma.tenant.update({
+      where: {
+        tenant_id: user.tenant_id
+      },
+      data: {
+        first_name: santitizedFirstName,
+        last_name: santitizedLastName,
+        email: sanitizedEmail,
+        password: hash
+      }
+    });
+
+    const token = jwt.sign(tenant.tenant_id, SECRET_KEY);
+    const tenantWithoutPassword = { firstName: tenant.first_name, lastName: tenant.last_name, email: tenant.email };
+
+    const tenantWithToken = {
+      ...tenantWithoutPassword, accessToken: token
+    }
+
+    ctx.body = tenantWithToken
+    ctx.status = 201;
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = { error: 'Error updating user details' };
+  }
+};
 
 const deleteAccount = async (ctx: Context) => {
 

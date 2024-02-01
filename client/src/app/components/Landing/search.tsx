@@ -29,7 +29,6 @@ const Search = () => {
 
   const dispatch = useDispatch();
 
-  const reviewList = useSelector((state: RootState) => state.reviewList.value)
   const property = useSelector((state: RootState) => state.property.value)
 
   const [address, setAddress] = useState<PropertyType>(property);

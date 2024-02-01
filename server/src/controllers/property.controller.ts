@@ -13,9 +13,9 @@ const checkAddress = async (ctx: Context) => {
       ctx.status = 500;
     }
 
-    const propertyWithReviews = await prisma.property.findFirst({
+    const property = await prisma.property.findFirst({
       where: {
-        property_id: property_id
+        property_id: property_id,
       },
       include: {
         reviews: {
@@ -26,9 +26,16 @@ const checkAddress = async (ctx: Context) => {
       },
     });
 
-    if (propertyWithReviews) {
-      ctx.body = propertyWithReviews;
-      ctx.status = 200;
+    if (property) {
+      if (property.num_of_reviews > 0){
+        ctx.body = property;
+        ctx.status = 200;
+        return
+      } else {
+        ctx.body = property;
+        ctx.status = 201;
+        return
+      }
     } else {
       const newProperty = await prisma.property.create({
         data: {
@@ -37,7 +44,7 @@ const checkAddress = async (ctx: Context) => {
         },
       });
       ctx.body = newProperty;
-      ctx.status = 201;
+      ctx.status = 202;
     }
   } catch (err) {
     console.error(err);
