@@ -92,3 +92,10 @@ export interface Password {
   name: string;
   value: string;
 }
+
+export interface UserType {
+  firstName: string;
+  lastName: string;
+  email: string;
+  accessToken: string;
+}
