@@ -22,8 +22,6 @@ export interface Review {
 }
 
 export interface Photo {
-  photo_id: number;
   url: string;
   tag: string;
-  review_id: number;
 }

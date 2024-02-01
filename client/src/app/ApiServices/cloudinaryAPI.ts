@@ -1,5 +1,6 @@
 import axios from "axios";
 import { AxiosResponse } from "axios";
+import { Photo } from "../types/review-types";
 
 
 
@@ -13,9 +14,9 @@ function createCloudinaryURL(): string {
   }
 }
 
-//Takes an array of uploaded files and returns and array of their urls as strings
+//Takes an array of uploaded files and returns and array of object that containe a url and the corresponding tag
 
-const cloudinaryImagesToURLS = async (files: File[]): Promise<string[] | AxiosResponse<any, any>[] | undefined> => {
+const cloudinaryImagesToURLS = async (files: File[], tag: string): Promise<{ url: AxiosResponse<any, any>, tag: string }[] | undefined> => {
 
   const CLOUDINARYURL: string = createCloudinaryURL();
 
@@ -32,7 +33,14 @@ const cloudinaryImagesToURLS = async (files: File[]): Promise<string[] | AxiosRe
 
   if (imagePromises.length > 0) {
     return Promise.all(imagePromises)
-      .then((res) => res)
+      .then((res) => {
+        if (res) {
+          const photoArray = res.map(url => {
+            return { url: url, tag: tag.toLowerCase() }
+          })
+          return photoArray
+        }
+      })
       .catch((error) => {
         console.error("Error:", error);
         return undefined
