@@ -7,11 +7,13 @@ import styles from "@/app/page.module.css";
 // import StoreProvider from "../StoreProvider";
 import PhotoUploadComponent from "../UploadPhoto";
 import AddComment from "../AddComment";
-import CustomizedRating from "../StyledRating";
+import CustomizedRating from "../CustomizedRating";
+import { Review } from "@/app/types/types";
 
 interface RatingContainerInterface {
   imageURLs: [], 
   setImageURLs: Function
+  dbReviewObject: Review
 }
 
 const LandlordResponsivenessRating: React.FC<RatingContainerInterface> = ({ dbReviewObject, imageURLs, setImageURLs }) => {
@@ -24,6 +26,9 @@ const LandlordResponsivenessRating: React.FC<RatingContainerInterface> = ({ dbRe
     "rating": rating,
     "comment": comment
   }
+
+  dbReviewObject.landlord_responsiveness = rating;
+  dbReviewObject.landlord_responsiveness_comment = comment;
 
   return (
     <>

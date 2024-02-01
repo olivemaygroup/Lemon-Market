@@ -8,7 +8,7 @@ import styles from "@/app/page.module.css";
 import StarRating from "./StarRating";
 import PhotoUploadComponent from "./UploadPhoto";
 import AddComment from "./AddComment";
-import CustomizedRating from "./StyledRating";
+import CustomizedRating from "./CustomizedRating";
 
 interface RatingContainerInterface {
   metric: string

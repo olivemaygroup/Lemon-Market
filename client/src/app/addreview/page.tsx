@@ -5,16 +5,16 @@ import RentBillsTaxComponent from "../components/Rating/RatingTopics/RentBillsTa
 import TenancyDuration from "../components/Rating/TenancyDuration";
 import CleanlinessRating from "../components/Rating/RatingTopics/CleanlinessRating";
 import MaintenanceRating from "../components/Rating/RatingTopics/MaintenanceRating";
-import SigningProcessRating from "../components/Rating/RatingTopics/SigningProcessRating";
+import SigningProcessRating from "../components/Rating/RatingTopics/ValueForMoneyRating";
 import DepositHandlingRating from "../components/Rating/RatingTopics/DepositHandlingRating";
 import AmenitiesRating from "../components/Rating/RatingTopics/AmenitiesRating";
 import LandlordResponsivenessRating from "../components/Rating/RatingTopics/LandlordResponsivenessRating";
+import { Review } from "@/app/types/types";
 
 export default function addReview () {
 
   const [imageURLs, setImageURLs] = useState<Photo[]>([])
-
-  const dbReviewObject = {
+  const [dbReviewObject, setDBReviewObject] = useState<Review>({
     t_start: '',
     t_end: '',
     cleanliness: 0,
@@ -34,10 +34,8 @@ export default function addReview () {
     monthly_bill: 0,
     council_tax: 0,
     general_comment: '',
-    photos: [],
-  }
-
-
+    photos: []
+  })
 
   return (
     <>
@@ -107,7 +105,8 @@ export default function addReview () {
 
 
         <div className="rating-item">
-        <RentBillsTaxComponent />
+        <RentBillsTaxComponent 
+        dbReviewObject={dbReviewObject}/>
         </div>
       </div>
     </>

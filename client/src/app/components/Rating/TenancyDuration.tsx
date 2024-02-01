@@ -1,12 +1,16 @@
 import React, {useState} from 'react'
+import { Review } from "@/app/types/types";
 
-
-const TenancyDuration = () => {
+interface TenancyDurationPropsInterface {
+  dbReviewObject: Review
+}
+const TenancyDuration: React.FC<TenancyDurationPropsInterface> = ({ dbReviewObject }) => {
 
   const [tenancyStart, setTenancyStart] = useState("")
   const [tenancyEnd, setTenancyEnd] = useState("")
 
-
+  dbReviewObject.t_start = tenancyStart
+  dbReviewObject.t_end = tenancyEnd
   
   return (
     <form>
