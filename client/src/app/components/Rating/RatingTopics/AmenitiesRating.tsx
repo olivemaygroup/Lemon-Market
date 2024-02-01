@@ -5,17 +5,19 @@ import { RootState } from "@/lib/store";
 import { useSelector } from "react-redux";
 import styles from "@/app/page.module.css";
 // import StoreProvider from "../StoreProvider";
-import StarRating from "./StarRating";
-import PhotoUploadComponent from "./UploadPhoto";
-import AddComment from "./AddComment";
-import CustomizedRating from "./StyledRating";
+import PhotoUploadComponent from "../UploadPhoto";
+import AddComment from "../AddComment";
+import CustomizedRating from "../StyledRating";
 
 interface RatingContainerInterface {
   metric: string
+  imageURLs: [], 
+  setImageURLs: Function
 }
 
-const RatingContainer: React.FC<RatingContainerInterface> = ({ metric, imageURLs, setImageURLs }) => {
+const AmenitiesRating: React.FC<RatingContainerInterface> = ({ metric, imageURLs, setImageURLs }) => {
   
+  const TOPIC = 'Amenities'
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>('')
 
@@ -31,7 +33,7 @@ const RatingContainer: React.FC<RatingContainerInterface> = ({ metric, imageURLs
   return (
     <>
       <div className='rating-item'> 
-      <h2>{metric}</h2>
+      <h2>{TOPIC}</h2>
         <div className='col text-center'>
           <CustomizedRating 
           metric={metric}
@@ -54,4 +56,4 @@ const RatingContainer: React.FC<RatingContainerInterface> = ({ metric, imageURLs
   );
 };
 
-export default RatingContainer
+export default AmenitiesRating;

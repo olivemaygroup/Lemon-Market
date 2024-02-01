@@ -14,14 +14,16 @@ const StyledRating = styled(Rating)({
   },
 });
 
-export default function CustomizedRating({ rating, setRating }) {
+export default function CustomizedRating({ metric, rating, setRating }) {
+
+
+
   return (
     <Box
       sx={{
         '& > legend': { mt: 2 },
       }}
     >
-      {/* <Typography component="legend">Rate ...</Typography> */}
       <StyledRating
         name="customized-color"
         defaultValue={0}

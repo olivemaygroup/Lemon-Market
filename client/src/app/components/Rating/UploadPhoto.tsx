@@ -4,7 +4,7 @@ interface PhotoUploadComponentProps {
   metric: string; 
 }
 
-const PhotoUploadComponent: React.FC<PhotoUploadComponentProps> = ({ metric }) => {
+const PhotoUploadComponent: React.FC<PhotoUploadComponentProps> = ({ metric, photoURLs, setPhotoURLs }) => {
   const [files, setFiles] = useState<File[]>([]);
   const [uploadResponses, setUploadResponses] = useState<string[]>([]);
 
