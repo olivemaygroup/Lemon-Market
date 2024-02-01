@@ -3,11 +3,12 @@ import Image from "next/image";
 import styles from "@/app/signup/page.module.css";
 import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
-import apiService from "../ApiServices/apiServices";
 import { NewUser, Error, Password, UserType } from "../types/types";
 import { useSelector, useDispatch } from "react-redux";
 import { Response } from "../types/tenant-types";
 import { setUserSlice } from "@/lib/features/user/userSlice";
+import userAPI from "../ApiServices/userAPI";
+import { passwordChecker } from "../ApiServices/apiServices";
 
 const initialError: Error = {
   error: false,
@@ -31,15 +32,6 @@ export default function Signup() {
   const [passwordCheck, setPasswordCheck] = useState(password);
 
   const dispatch = useDispatch();
-
-  const passwordChecker = (password: string): boolean => {
-    const regex = /^(?=.*[A-Z])(?=.*\d).+$/;
-    if (password.length > 6 || regex.test(password)) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   const handleChange = (e: any) => {
     if (e.target.name !== "password2" || "password1") {
@@ -84,7 +76,7 @@ export default function Signup() {
       lastName: newUser.lastName,
       email: newUser.email
     }
-    const response:any = await apiService.signUp(newUser);
+    const response:any = await userAPI.signUp(newUser);
     if (response === 409) {
       const err: Error = {
         error: true,
