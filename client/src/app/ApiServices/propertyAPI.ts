@@ -1,12 +1,11 @@
 import { PropertyType, PropertyTypeFull } from "../types/property-type";
 import handleAuthenticationError from "../utils/auth-router";
 
-const BASE_URL = process.env.SERVER_URL;
+const BASE_URL = 'http://localhost:3001'
 
 const checkAddress = async (
-  accessToken: string,
   property: PropertyType,
-): Promise<PropertyType | PropertyTypeFull | undefined> => {
+): Promise<PropertyTypeFull | undefined> => {
   try {
 
     const response = await fetch(`${BASE_URL}/checkaddress`, {
@@ -14,23 +13,25 @@ const checkAddress = async (
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        authorisation: accessToken,
       },
       body: JSON.stringify(property),
     });
 
     if (response.status === 401) {
       handleAuthenticationError();
+    } else if (response.status === 201) {
+      return
     }
 
     if (!response.ok) {
       return undefined
     } else if (response.status === 200) {
       const propertyWithReviews: PropertyTypeFull = await response.json();
+      console.log(propertyWithReviews)
       return propertyWithReviews;
     } else {
-      const propertyWithoutReviews: PropertyType = await response.json();
-      return propertyWithoutReviews;
+      const propertyWithoutReview: PropertyTypeFull = await response.json();
+      return propertyWithoutReview;
     }
   } catch (err) {
     return undefined

@@ -7,18 +7,18 @@
 }
 
 .phone_box {
-  border: 1px solid;
-  height: 600px;
+  margin-top: -70px;
+  height: 100%;
   width: 350px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   overflow: scroll;
   gap: 20px;
 }
 
 .h2 {
-  margin-bottom: 80px;
+  /* margin-bottom: 40px; */
 }
 
 .form {
@@ -42,7 +42,7 @@
 }
 
 .input_feild {
-  border: none;
+  border: 0.7px solid;
   border-radius: 10px;
   height: 40px;
 }
@@ -62,6 +62,7 @@
   margin-bottom: 30px;
   width: 100%;
 }
+.login:hover {background-color: rgb(239, 230, 56);}
 
 .errorbox {
   display: flex;

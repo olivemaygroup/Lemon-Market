@@ -7,11 +7,14 @@
 }
 
 .phone_box {
-  height: 600px;
+  margin-top: -70px;
+  height: 100%;
   width: 350px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  overflow: scroll;
+  gap: 20px;
 }
 
 .form {
@@ -35,9 +38,10 @@
 }
 
 .input_feild {
-  border: none;
+  border: 0.7px solid;
   border-radius: 10px;
   height: 40px;
+
 }
 
 .login_btns {
@@ -46,6 +50,7 @@
   width: 80%;
   gap: 10px;
 }
+.login:hover {background-color: rgb(239, 230, 56);}
 
 .login {
   border: none;
@@ -69,4 +74,35 @@
 .or_p {
   color: gray;
   font-size: 15px;
+}
+
+.errorbox {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  width: 80%;
+  height: auto;
+  z-index: 9;
+  background-color: rgb(231, 174, 193);
+  padding: 20px;
+  gap: 20px;
+  
+}
+
+.noerrorbox {
+  height: 0px;
+}
+
+.btn {
+  width: 60%;
+  align-self: center;
+}
+
+.div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }

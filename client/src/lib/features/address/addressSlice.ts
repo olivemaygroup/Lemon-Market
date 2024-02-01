@@ -12,18 +12,19 @@ const initialState: AddressState = {
   place_id: '',
 };
 
-export const addressSlice = createSlice({
-  name: "address",
+export const addAddressSlice = createSlice({
+  name: "addAddress",
   initialState,
   reducers: {
-  
+
     addAddress: (state, action) => {
+      console.log('action console', action.payload)
       state.description = action.payload.value.description;
       state.place_id = action.payload.value.place_id;
     },
   },
 });
 
-export const { addAddress } = addressSlice.actions;
+export const { addAddress } = addAddressSlice.actions;
 
-export default addressSlice.reducer;
+export default addAddressSlice.reducer;
