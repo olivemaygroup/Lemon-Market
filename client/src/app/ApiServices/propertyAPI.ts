@@ -27,7 +27,6 @@ const checkAddress = async (
       return undefined
     } else if (response.status === 200) {
       const propertyWithReviews: PropertyTypeFull = await response.json();
-      console.log(propertyWithReviews)
       return propertyWithReviews;
     } else {
       const propertyWithoutReview: PropertyTypeFull = await response.json();

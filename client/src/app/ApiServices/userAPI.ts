@@ -66,6 +66,20 @@ const myProfile = async (accessToken: string): Promise<Profile | undefined> => {
     return undefined
   }
 }
-const userAPI = { signUp, login, myProfile }
+
+
+const logOut = (): string => {
+  const accessToken = localStorage.getItem('accessToken')
+
+  if (accessToken) {
+    localStorage.removeItem('accessToken')
+    return 'User logged out'
+  } else {
+    return 'User no logged in'
+  }
+}
+
+
+const userAPI = { signUp, login, myProfile, logOut }
 
 export default userAPI
