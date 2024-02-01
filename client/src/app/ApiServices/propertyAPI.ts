@@ -28,9 +28,12 @@ const checkAddress = async (
     } else if (response.status === 200) {
       const propertyWithReviews: PropertyTypeFull = await response.json();
       return propertyWithReviews;
-    } else {
+    } else if (response.status == 201) {
       const propertyWithoutReview: PropertyTypeFull = await response.json();
       return propertyWithoutReview;
+    } else {
+      const newProperty: PropertyTypeFull = await response.json();
+      return newProperty
     }
   } catch (err) {
     return undefined
