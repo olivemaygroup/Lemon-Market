@@ -1,17 +1,14 @@
 "use client";
 import { useState } from "react";
-import { Provider, useDispatch } from "react-redux";
-import { RootState } from "@/lib/store";
-import { useSelector } from "react-redux";
-import styles from "@/app/page.module.css";
-// import StoreProvider from "../StoreProvider";
 import PhotoUploadComponent from "../UploadPhoto";
 import AddComment from "../AddComment";
-import CustomizedRating from "../StyledRating";
+import CustomizedRating from "../CustomizedRating";
+import { Review } from "@/app/types/types";
 
 interface RatingContainerInterface {
   imageURLs: [], 
   setImageURLs: Function
+  dbReviewObject: Review
 }
 
 const MaintenanceRating: React.FC<RatingContainerInterface> = ({ dbReviewObject, imageURLs, setImageURLs }) => {
@@ -24,6 +21,9 @@ const MaintenanceRating: React.FC<RatingContainerInterface> = ({ dbReviewObject,
     "rating": rating,
     "comment": comment
   }
+
+  dbReviewObject.maintenance = rating;
+  dbReviewObject.maintenance_comment = comment;
 
   return (
     <>

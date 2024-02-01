@@ -1,14 +1,22 @@
 import React, { useState } from 'react'
+import { Review } from "@/app/types/types";
 
-export const RentBillsTaxComponent = () => {
+interface RentBillsTaxPropsInterface {
+  dbReviewObject: Review
+}
+export const RentBillsTaxComponent: React.FC<RentBillsTaxPropsInterface> = ({ dbReviewObject }) => {
 
-  const [rent, setRent] = useState('')
-  const [bills, setBills] = useState('')
-  const [councilTax, setCouncilTax] = useState('')
+  const [rent, setRent] = useState<number>(0)
+  const [bills, setBills] = useState<number>(0)
+  const [councilTax, setCouncilTax] = useState<number>(0)
 
   const handleRentChange = (event) => setRent(event.target.value);
   const handleBillsChange = (event) => setBills(event.target.value);
   const handleCouncilTaxChange = (event) => setCouncilTax(event.target.value);
+
+  dbReviewObject.monthly_rent = rent
+  dbReviewObject.monthly_bill = bills
+  dbReviewObject.council_tax = councilTax
 
   return (
     <div>
