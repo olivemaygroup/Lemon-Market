@@ -37,8 +37,33 @@ export default function addReview () {
     photos: []
   })
 
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); 
+    const finalReviewObject = {
+      ...dbReviewObject,
+      photos: imageURLs
+    };
+
+    try {
+      const response = await fetch('http://localhost:3001/addreview', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(finalReviewObject),
+      });
+
+      if (!response.ok) throw new Error('Unable to send final review object to backend. Check addreview component');
+      const data = await response.json();
+      console.log(data); 
+    } catch (error) {
+      console.error('Error check addreview component', error);
+    }
+  };
+
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <div className="review-subject-container">
         <div className="rating-item">
         <TenancyDuration 
@@ -108,7 +133,9 @@ export default function addReview () {
         <RentBillsTaxComponent 
         dbReviewObject={dbReviewObject}/>
         </div>
+
+        <button className="rating-item" type="submit">Submit Review</button>
       </div>
-    </>
+    </form>
   )
 };

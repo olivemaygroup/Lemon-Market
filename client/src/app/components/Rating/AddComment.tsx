@@ -22,7 +22,7 @@ interface AddCommentInterface {
   setComment: Function;
 }
 
-const AddComment = ({ setComment }) => {
+const AddComment: React.FC<AddCommentInterface> = ({ setComment }) => {
   const [input, setInput] = useState('');
   const [open, setOpen] = useState(false);
 
