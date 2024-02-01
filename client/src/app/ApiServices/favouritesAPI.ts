@@ -1,7 +1,10 @@
 import { PropertyType } from "../types/property-type";
 import handleAuthenticationError from "../utils/auth-router";
+import dotenv from "dotenv";
 
-const BASE_URL = process.env.SERVER_URL;
+dotenv.config();
+
+const BASE_URL = 'http://localhost:3001'
 
 // Get search results
 const getSearchResults = async (
@@ -13,7 +16,7 @@ const getSearchResults = async (
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        authorisation: accesToken,
+        Authorization: accesToken,
       },
     });
 
@@ -67,14 +70,14 @@ const addSearchResult = async (
 };
 
 // Get user favorites
-const getFavorites = async (accesToken: string): Promise<PropertyType[] | undefined> => {
+const getFavourites = async (accesToken: string): Promise<PropertyType[] | undefined> => {
   try {
     const response = await fetch(`${BASE_URL}/getfavourites`, {
       method: "GET",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        authorisation: accesToken,
+        Authorization: accesToken,
       },
     });
 
@@ -97,7 +100,7 @@ const getFavorites = async (accesToken: string): Promise<PropertyType[] | undefi
 // Add user favorite
 const addFavorite = async (
   accesToken: string,
-  property_id: number,
+  property_id: string,
 ): Promise<void | undefined> => {
   try {
     const response = await fetch(`${BASE_URL}/addfavourites/${property_id}`, {
@@ -105,7 +108,7 @@ const addFavorite = async (
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        authorisation: accesToken,
+        Authorization: accesToken,
       },
     });
 
@@ -114,7 +117,7 @@ const addFavorite = async (
     }
 
     if (!response.ok) {
-       return undefined
+      return undefined
     }
 
     //doesn't return anything
@@ -127,18 +130,17 @@ const addFavorite = async (
 // Remove user favorite
 const removeFavorite = async (
   accesToken: string,
-  property_id: number,
-  favourite_id: number,
+  property_id: string,
 ): Promise<void | undefined> => {
   try {
     const response = await fetch(
-      `${BASE_URL}/deletefavourite/${property_id}/${favourite_id}`,
+      `${BASE_URL}/deletefavourite/${property_id}`,
       {
         method: "DELETE",
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
-          authorisation: accesToken,
+          Authorization: accesToken,
         },
       },
     );
@@ -160,7 +162,7 @@ const removeFavorite = async (
 const favouriteAPIservice = {
   getSearchResults,
   addSearchResult,
-  getFavorites,
+  getFavourites,
   addFavorite,
   removeFavorite,
 };

@@ -14,10 +14,7 @@ import { addProperty } from "@/lib/features/property/propertySlice";
 import { PropertyType } from "@/app/types/property-type";
 
 
-
-const ReviewCard = () => {
-
-  const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
+const NoReviewsPropertyCard = ({ property }: { property: PropertyType }) => {
 
   return (
     <Link href="/propertydetail" style={{ textDecoration: 'none' }} >
@@ -26,7 +23,7 @@ const ReviewCard = () => {
           <p>Picture</p>
         </div>
         <div className={styles.card_address}>
-          <p>{fullProperty.fullAddress}</p>
+          <p>{property.fullAddress}</p>
         </div>
         <div className={styles.card_rating_container}>
           <Box
@@ -34,12 +31,12 @@ const ReviewCard = () => {
               '& > legend': { mt: 2 },
             }}
           >
-            <Rating size="small" name="read-only" value={fullProperty.avg_rating} readOnly />
+            <Rating size="small" name="read-only" value={0} readOnly />
           </Box>
-          <p>Number of Reviews: {fullProperty.num_of_reviews}</p>
+          <p>{0}</p>
         </div>
       </div>
     </Link >
   )
 }
-export default ReviewCard
+export default NoReviewsPropertyCard

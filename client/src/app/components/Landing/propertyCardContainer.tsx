@@ -1,4 +1,3 @@
-
 'use client'
 
 import styles from "@/app/components/Landing/page.module.css";
@@ -12,34 +11,33 @@ import Link from 'next/link'
 import checkAddress from "@/app/ApiServices/propertyAPI";
 import { addProperty } from "@/lib/features/property/propertySlice";
 import { PropertyType } from "@/app/types/property-type";
+import ReviewCard from "./propertyCard";
+import NoReviewsCard from "./noReviewsPropertyCard";
+import PropertyCard from "./propertyCard";
+import NoReviewsPropertyCard from "./noReviewsPropertyCard";
 
 
-const NoReviewsCard = () => {
+
+const ProperetyCardContainer = () => {
 
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
   const property = useSelector((state: RootState) => state.property.value)
 
+
+
   return (
-    <Link href="/propertydetail" style={{ textDecoration: 'none' }} >
-      <div className={styles.card_container}>
-        <div className={styles.card_image}>
-          <p>Picture</p>
-        </div>
-        <div className={styles.card_address}>
-          <p>{property.fullAddress}</p>
-        </div>
-        <div className={styles.card_rating_container}>
-          <Box
-            sx={{
-              '& > legend': { mt: 2 },
-            }}
-          >
-            <Rating size="small" name="read-only" value={0} readOnly />
-          </Box>
-          <p>{0}</p>
-        </div>
-      </div>
-    </Link >
-  )
-}
-export default NoReviewsCard
+    <>
+      {
+        fullProperty.num_of_reviews !== 0 ? (
+          <>
+            <PropertyCard fullProperty={fullProperty} />
+          </>
+        ) : (
+          <NoReviewsPropertyCard property={property} />
+        )
+      }
+    </>
+  );
+};
+
+export default ProperetyCardContainer;
