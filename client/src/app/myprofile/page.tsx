@@ -33,19 +33,18 @@ export default function MyProfile () {
 
   const dispatch = useDispatch();
 
-  const user: UserType = {
-    firstName: 'steve',
-    lastName: 'mcstehead',
-    email: 'mcste@mail.com'
-  }
+  // const user: UserType = {
+  //   firstName: 'steve',
+  //   lastName: 'mcstehead',
+  //   email: 'mcste@mail.com'
+  // }
   
-  // const user = useSelector((state: RootState) => state.user.value)
-  // console.log('USER--', user)
-
+  const user = useSelector((state: RootState) => state.user.value)
+  const token1:string | null = localStorage.getItem('accessToken')
+  const token: string = token1 as string
   const handleChange = (e: any) => {
     if (e.target.name !== "password2" || "password1") {
       const { name, value } = e.target;
-      console.log(name, value);
       setState((prevState) => ({
         ...prevState,
         [name]: value,
@@ -55,13 +54,15 @@ export default function MyProfile () {
 
   const resetStates = () => {
     setState(initilaState);
-    setPassword(password);
-    setPasswordCheck(password)
+    setPassword(initPassword);
+    setPasswordCheck(initPassword)
   }
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const testWord = password;
+    console.log('TEST WORD', testWord)
+    console.log('TOKEN?', token)
     if (
       password.value === passwordCheck.value &&
       passwordChecker(testWord.value)
@@ -80,12 +81,15 @@ export default function MyProfile () {
       return;
     }
     const newUser: NewUser = state;
+    console.log('NEW USER--',newUser)
     const currUser: UserType = {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       email: newUser.email
     }
-    const response:any = await userAPI.signUp(newUser);
+    console.log('CURR USER --', currUser)
+    const response:any = await userAPI.editProfile(newUser, token);
+    console.log('comp RESPONSE--',response)
     if (response === 409) {
       const err: Error = {
         error: true,
@@ -95,8 +99,8 @@ export default function MyProfile () {
       setError(err);
     } else {
       dispatch(setUserSlice(currUser));
-      localStorage.setItem('accessToken',response.accessToken);
       resetStates();
+      setEdit(!edit)
     }
   }
 
@@ -111,21 +115,21 @@ export default function MyProfile () {
         <div className={styles.attname}>email :<p className={styles.att}>{user.email}</p></div>
         <button className={styles.profilebtn} onClick={()=>setEdit(!edit)}>edit profile</button>
         </div>):( 
-          <form className={styles.editdiv}>
+          <form onSubmit={handleSubmit} className={styles.editdiv}>
         <div className={styles.attname}>first name : 
           <input 
           type="text" 
           className={styles.editinput} 
-          onChange={(e)=>{handleChange}} 
+          onChange={handleChange} 
           name="firstName"
-          value={state.lastName}
+          value={state.firstName}
           placeholder={user.firstName}
         /></div>
         <div className={styles.attname}>last name : 
           <input 
           type="text" 
           className={styles.editinput} 
-          onChange={(e)=>{handleChange}} 
+          onChange={handleChange} 
           name="lastName"
           value={state.lastName}
           placeholder={user.lastName}
@@ -134,7 +138,7 @@ export default function MyProfile () {
           <input 
           type="email" 
           className={styles.editinput} 
-          onChange={(e)=>{handleChange}} 
+          onChange={handleChange} 
           name="email"
           value={state.email}
           placeholder={user.email}
@@ -162,7 +166,7 @@ export default function MyProfile () {
           value={passwordCheck.value}
         /></div>
         
-        <button className={styles.profilebtn} onClick={()=>setEdit(!edit)}>submit changes</button>
+        <button className={styles.profilebtn} type="submit">submit changes</button>
         </form>
         )}
       </div>

@@ -34,6 +34,7 @@ export default function Login() {
       lastName: res.lastName,
       email: res.email
     }
+    console.log(res,'res')
     console.log('CURRENT USER', currUser)
     dispatch(setUserSlice(currUser))
 

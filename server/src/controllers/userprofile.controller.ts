@@ -70,7 +70,7 @@ const login = async (ctx: Context) => {
         ...tenantWithoutPassword, accessToken: token
       }
       ctx.body = tenantWithToken
-
+      console.log('TWT--',tenantWithToken)
       ctx.body = tenantWithToken;
       ctx.status = 200;
     }
