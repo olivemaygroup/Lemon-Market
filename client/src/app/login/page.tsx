@@ -29,7 +29,13 @@ export default function Login() {
       password: password,
     };
     const res:any = await apiService.login(user);
-    dispatch(setUserSlice(res))
+    const currUser: UserType = {
+      firstName: res.firstName,
+      lastName: res.lastName,
+      email: res.email
+    }
+    console.log('CURRENT USER', currUser)
+    dispatch(setUserSlice(currUser))
 
     if (res === 401) {
       const err: Error = {

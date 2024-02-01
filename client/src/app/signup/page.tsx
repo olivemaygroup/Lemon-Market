@@ -4,8 +4,10 @@ import styles from "@/app/signup/page.module.css";
 import { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
 import apiService from "../ApiServices/apiServices";
-import { NewUser, Error, Password } from "../types/types";
+import { NewUser, Error, Password, UserType } from "../types/types";
+import { useSelector, useDispatch } from "react-redux";
 import { Response } from "../types/tenant-types";
+import { setUserSlice } from "@/lib/features/user/userSlice";
 
 const initialError: Error = {
   error: false,
@@ -27,6 +29,8 @@ export default function Signup() {
   const [state, setState] = useState(initilaState);
   const [password1, setPassword1] = useState(password);
   const [passwordCheck, setPasswordCheck] = useState(password);
+
+  const dispatch = useDispatch();
 
   const passwordChecker = (password: string): boolean => {
     const regex = /^(?=.*[A-Z])(?=.*\d).+$/;
@@ -75,17 +79,23 @@ export default function Signup() {
       return;
     }
     const newUser: NewUser = state;
-    const response:string | number = await apiService.signUp(newUser);
+    const currUser: UserType = {
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email
+    }
+    const response:any = await apiService.signUp(newUser);
     if (response === 409) {
-      resetStates();
-     const err: Error = {
+      const err: Error = {
         error: true,
         msg: "Error, User already exists",
       }; 
+      resetStates();
       setError(err);
     } else {
+      dispatch(setUserSlice(currUser));
+      localStorage.setItem('accessToken',response.accessToken);
       resetStates();
-      // localStorage.setItem('accessToken',response.accessToken);
     }
   }
 
