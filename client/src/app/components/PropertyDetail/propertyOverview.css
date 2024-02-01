@@ -1,0 +1,54 @@
+/* property detail CSS */
+
+/* container */
+.overviewContainer {
+  width: 90vw;
+  max-width: 900px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+  border-radius: 10px;
+
+}
+
+/* pictureContainer */
+
+.pictureContainer {
+  margin-bottom: 10px;
+  align-self: center;
+  width: 100%;
+  max-width: 500px;
+  
+}
+
+.address {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.rating {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.reviews {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.spacer {
+  margin-top: 20px;
+  height: 0px;
+  border-bottom: solid 4px #fae301;
+  width: 90%;
+}
+
