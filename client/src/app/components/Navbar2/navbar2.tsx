@@ -9,7 +9,6 @@ function NavBar2 () {
 
   const burgerMenu = () => {
     const mCheck = !menu;
-    console.log(mCheck)
     setMenu(mCheck)
   }
 
@@ -32,7 +31,7 @@ function NavBar2 () {
         </div>
         <div className={styles.links}>
           <Link className={styles.link} href="/home">home</Link>
-          <Link className={styles.link} href="/me">profile</Link>
+          <Link className={styles.link} href="/myprofile">profile</Link>
           <Link className={styles.link} href="/myreviews">my reviews</Link>
           <Link className={styles.link} href="/logout">logout</Link>
         </div>
@@ -51,7 +50,7 @@ function NavBar2 () {
       </div>
       <div className={styles.topmenu}>
         <Link className={styles.menuitem} href="/home">home</Link>
-        <Link className={styles.menuitem} href="/me">profile</Link>
+        <Link className={styles.menuitem} href="/myprofile">profile</Link>
         <Link className={styles.menuitem} href="/myreviews">my reviews</Link>
         <Link className={styles.menuitem} href="/logout">logout</Link>
       </div>

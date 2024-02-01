@@ -2,6 +2,7 @@ import { Review } from "../types/review-types";
 import handleAuthenticationError from "../utils/auth-router";
 
 const BASE_URL = 'http://localhost:3001'
+
 const addReview = async (
   property_id: string,
   reviewData: Review,
