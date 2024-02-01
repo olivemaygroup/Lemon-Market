@@ -10,47 +10,41 @@ import AddComment from "../AddComment";
 import CustomizedRating from "../StyledRating";
 
 interface RatingContainerInterface {
-  metric: string
   imageURLs: [], 
   setImageURLs: Function
 }
 
-const MaintenanceRating: React.FC<RatingContainerInterface> = ({ metric, imageURLs, setImageURLs }) => {
+const MaintenanceRating: React.FC<RatingContainerInterface> = ({ dbReviewObject, imageURLs, setImageURLs }) => {
   
   const TOPIC = 'Maintenance'
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>('')
 
-  // {
-  //   {metric}.rating: 5,
-  //   {metric}.imageURLS: {
-  //     ""
-  //     ""
-  //   },
-  //   metr
-  // }
+  const Maintenance = {
+    "rating": rating,
+    "comment": comment
+  }
 
   return (
     <>
-      <div className='rating-item'> 
-      <h2>{TOPIC}</h2>
-        <div className='col text-center'>
-          <CustomizedRating 
-          metric={metric}
-          rating={rating} 
-          onRating={(rate: number) => setRating(rate)} 
-          />
-          <PhotoUploadComponent 
-          metric={metric}
-          imageURLs={imageURLs}
-          setImageURLs={setImageURLs}
-          />
-          <AddComment 
-          metric={metric}
-          comment={comment}
-          setComment={setComment}
-          />
-        </div>
+      <div className='rating-elements'> 
+        <h2>{TOPIC}</h2>
+        <CustomizedRating 
+        TOPIC={TOPIC}
+        rating={rating}
+        setRating={setRating}
+        />
+
+        <PhotoUploadComponent 
+        TOPIC={TOPIC}
+        imageURLs={imageURLs}
+        setImageURLs={setImageURLs}
+        />
+        <AddComment 
+        TOPIC={TOPIC}
+        comment={comment}
+        setComment={setComment}
+        />
       </div>
     </>
   );
