@@ -32,7 +32,7 @@ export default function PropertyDetail() {
 
   }, [])
   useEffect(() => {
-    console.log(reviewList, 'reviewLidst')
+    console.log(reviewList, 'reviewList')
   }, [reviewList])
 
   return (
