@@ -9,6 +9,9 @@ import { useEffect } from "react";
 import Link from 'next/link'
 import { PropertyType } from "@/app/types/property-type";
 
+
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import { GoBookmarkFill } from "react-icons/go";
 import { GoBookmark } from "react-icons/go";
 import favouriteAPIservice from "@/app/ApiServices/favouritesAPI";
@@ -40,34 +43,32 @@ const PropertyCard = ({ fullProperty }: { fullProperty: PropertyType }) => {
   }, [favouriteFlag])
 
   return (
-    <div className={styles.card_container}>
-      <Link href="/propertydetail" style={{ textDecoration: 'none' }} >
-        <div className={styles.card_image}>
-          <p>Picture</p>
-        </div>
-        <div className={styles.card_address}>
-          <p>{fullProperty.fullAddress}</p>
-        </div>
-      </Link >
-      <div className={styles.card_rating_container}>
-        <Box
-          sx={{
-            '& > legend': { mt: 2 },
-          }}
-        >
+    <>
+      <Card variant="outlined" className={styles.card_container}>
+        <Link href="/propertydetail" style={{ textDecoration: 'none' }} >
+          <div className={styles.image_address_container}>
+            <div className={styles.card_image}>
+              <p>Picture</p>
+            </div>
+            <div className={styles.card_address}>
+              <p>{fullProperty.fullAddress}</p>
+            </div>
+          </div>
+        </Link >
+        <div className={styles.card_rating_container}>
           <Rating size="small" name="read-only" value={fullProperty.avg_rating} readOnly />
-        </Box>
-        <p>Number of Reviews: {fullProperty.num_of_reviews}</p>
-      </div>
-      <div>
-        <button onClick={favouriteHandler} >
-          {favouriteFlag ? (
-            <GoBookmarkFill />) : (
-            <GoBookmark />
-          )}
-        </button>
-      </div>
-    </div>
+          <p>{fullProperty.num_of_reviews} Reviews</p>
+        </div>
+        <div>
+          <button onClick={favouriteHandler} >
+            {favouriteFlag ? (
+              <GoBookmarkFill />) : (
+              <GoBookmark />
+            )}
+          </button>
+        </div>
+      </Card>
+    </>
   )
 }
 export default PropertyCard
