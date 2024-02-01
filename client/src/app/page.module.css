@@ -4,7 +4,8 @@
   flex-direction: column;
   /* justify-content: space-between; */
   align-items: center;
-  padding: 6rem;
+  width: 90vw;
+  max-width: 1000px
   /* min-height: 100vh; */
 }
 

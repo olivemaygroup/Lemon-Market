@@ -7,7 +7,7 @@ export interface Tenant {
 
 export interface NewUser {
   email: string;
-  fistName: string;
+  firstName: string;
   lastName: string;
   password: string;
 }

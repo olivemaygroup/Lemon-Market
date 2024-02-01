@@ -7,12 +7,15 @@ import styles from "@/app/page.module.css";
 // import StoreProvider from "../StoreProvider";
 import PhotoUploadComponent from "../UploadPhoto";
 import AddComment from "../AddComment";
-import CustomizedRating from "../StyledRating";
+import CustomizedRating from "../CustomizedRating";
+import { Review } from "@/app/types/types";
 
 interface RatingContainerInterface {
   imageURLs: [], 
   setImageURLs: Function
+  dbReviewObject: Review
 }
+
 
 const CleanlinessRating: React.FC<RatingContainerInterface> = ({ dbReviewObject, imageURLs, setImageURLs }) => {
   
@@ -25,6 +28,9 @@ const CleanlinessRating: React.FC<RatingContainerInterface> = ({ dbReviewObject,
     "rating": rating,
     "comment": comment
   }
+
+  dbReviewObject.cleanliness = rating;
+  dbReviewObject.cleanliness_comment = comment;
 
   return (
     <>

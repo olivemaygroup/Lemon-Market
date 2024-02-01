@@ -51,6 +51,7 @@ const AddComment = ({ setComment }) => {
               value={input}
               onChange={(event) => setInput(event.target.value)}
               autoFocus
+              maxLength="120"
             />
             <button type="submit">Save Comment</button>
           </form>

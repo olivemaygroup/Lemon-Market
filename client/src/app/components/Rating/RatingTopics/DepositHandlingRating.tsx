@@ -7,12 +7,15 @@ import styles from "@/app/page.module.css";
 // import StoreProvider from "../StoreProvider";
 import PhotoUploadComponent from "../UploadPhoto";
 import AddComment from "../AddComment";
-import CustomizedRating from "../StyledRating";
+import CustomizedRating from "../CustomizedRating";
+import { Review } from "@/app/types/types";
 
 interface RatingContainerInterface {
   imageURLs: [], 
   setImageURLs: Function
+  dbReviewObject: Review
 }
+
 
 const DepositHandlingRating: React.FC<RatingContainerInterface> = ({ dbReviewObject, imageURLs, setImageURLs }) => {
   
@@ -24,6 +27,9 @@ const DepositHandlingRating: React.FC<RatingContainerInterface> = ({ dbReviewObj
     "rating": rating,
     "comment": comment
   }
+
+  dbReviewObject.deposit_handling = rating;
+  dbReviewObject.deposit_handling_comment = comment;
 
   return (
     <>

@@ -5,6 +5,9 @@ import { setUserSlice } from "@/lib/features/user/userSlice"
 import styles from "./page.module.css"
 import { Error, NewUser, Password, UserType } from "../types/types"
 import { useState } from "react"
+import { passwordChecker } from "../ApiServices/apiServices"
+import userAPI from "../ApiServices/userAPI"
+
 
 const initilaState: NewUser = {
   email: "",
@@ -28,19 +31,74 @@ export default function MyProfile () {
   const [passwordCheck, setPasswordCheck] = useState(initPassword)
   const [error, setError] = useState(initialError)
 
+  const dispatch = useDispatch();
+
   const user: UserType = {
     firstName: 'steve',
     lastName: 'mcstehead',
-    email: 'mcste@mail.com',
-    accessToken: 'stestoken'
-  }
-
-  const handleChange = (e:any) => {
-
+    email: 'mcste@mail.com'
   }
   
   // const user = useSelector((state: RootState) => state.user.value)
   // console.log('USER--', user)
+
+  const handleChange = (e: any) => {
+    if (e.target.name !== "password2" || "password1") {
+      const { name, value } = e.target;
+      console.log(name, value);
+      setState((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
+  };
+
+  const resetStates = () => {
+    setState(initilaState);
+    setPassword(password);
+    setPasswordCheck(password)
+  }
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const testWord = password;
+    if (
+      password.value === passwordCheck.value &&
+      passwordChecker(testWord.value)
+    ) {
+      const { name, value } = testWord;
+      setState((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    } else {
+      const err = {
+        error: true,
+        msg: "passwords must be over 6 charators long, contain at least 1 number & 1 uppercase letter and they must match",
+      };
+      setError(err);
+      return;
+    }
+    const newUser: NewUser = state;
+    const currUser: UserType = {
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email
+    }
+    const response:any = await userAPI.signUp(newUser);
+    if (response === 409) {
+      const err: Error = {
+        error: true,
+        msg: "Error, User already exists",
+      }; 
+      resetStates();
+      setError(err);
+    } else {
+      dispatch(setUserSlice(currUser));
+      localStorage.setItem('accessToken',response.accessToken);
+      resetStates();
+    }
+  }
 
   return (
     <div className={styles.page}>
