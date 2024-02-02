@@ -143,6 +143,7 @@ export default function MyProfile () {
           /></div>
           
           <button className={styles.profilebtn} type="submit">submit changes</button>
+          <button className={styles.profilebtn} onClick={()=>setEdit(!edit)} >back</button>
           </form>
         )}
       </div>
