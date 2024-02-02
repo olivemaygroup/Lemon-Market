@@ -104,52 +104,50 @@ export default function addReview () {
   }
   ];
 
-  // function handleSubmit () {}
+  function handleSubmit () {}
 
   //  let avg_rating = (cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness)/6;
   //   setTotal_review_rating(avg_rating)
 
   let tempKey = 0;
 
-  console.log(dbReviewObject)
-
   return (
-      <div className="review-subject-container">
-        <div className="rating-item">
+  <div className="review-subject-container">
+    <div className="rating-item">
 
-        <TenancyDuration 
-          t_start={t_start}
-          t_end={t_end}
-          setT_end={setT_end}
-          setT_start={setT_start}
-          />
-        </div>
+    <TenancyDuration 
+      t_start={t_start}
+      t_end={t_end}
+      setT_end={setT_end}
+      setT_start={setT_start}
+      />
+    </div>
 
-        {ratingMetrics.map((metric) => (
-          <RatingContainer 
-          key={tempKey++}
-          ratingState={metric.ratingState}
-          ratingSetter={metric.RatingSetter}
-          commentState={metric.commentState}
-          commentSetter={metric.commentSetter}
-          metricName={metric.name}
-          imageURLs={imageURLs}
-          setImageURLs={setImageURLs}
-          /> 
-        ))}
+    {ratingMetrics.map((metric) => (
+      <RatingContainer 
+      key={tempKey++}
+      ratingState={metric.ratingState}
+      ratingSetter={metric.RatingSetter}
+      commentState={metric.commentState}
+      commentSetter={metric.commentSetter}
+      metricName={metric.name}
+      imageURLs={imageURLs}
+      setImageURLs={setImageURLs}
+      /> 
+      ))}
 
-        <div className="rating-item">
-        <RentBillsTaxComponent 
-        monthly_rent={monthly_rent}
-        monthly_bill={monthly_bill}
-        council_tax={council_tax}
-        setMonthly_rent={setMonthly_rent}
-        setMonthly_bill={setMonthly_bill}
-        setCouncil_tax={setCouncil_tax}
-        />
-        </div>
+    <div className="rating-item">
+    <RentBillsTaxComponent 
+    monthly_rent={monthly_rent}
+    monthly_bill={monthly_bill}
+    council_tax={council_tax}
+    setMonthly_rent={setMonthly_rent}
+    setMonthly_bill={setMonthly_bill}
+    setCouncil_tax={setCouncil_tax}
+    />
+    </div>
 
-        <button className="rating-item" type="submit">Submit Review</button>
-      </div>
+    <button className="rating-item" onClick={handleSubmit}>Submit Review</button>
+  </div>
   )
 };

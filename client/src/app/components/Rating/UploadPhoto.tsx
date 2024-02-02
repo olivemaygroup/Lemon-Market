@@ -1,30 +1,29 @@
 import React from 'react';
-import cloudinaryImagesToURLS from '@/app/ApiServices/cloudinaryAPI';
 import { Photo } from '@/app/types/types';
 
 interface PhotoUploadComponentProps {
   metricName: string;
-  imageURLs: Photo[]; 
-  setImageURLs: Function
+  imageURLs: File[];
+  setImageURLs: React.Dispatch<React.SetStateAction<File[]>>;
 };
 
-const PhotoUploadComponent: React.FC<PhotoUploadComponentProps> = ({ metricName, imageURLs, setImageURLs }) => {
+const PhotoUploadComponent: React.FC<PhotoUploadComponentProps> = ({
+  metricName,
+  imageURLs,
+  setImageURLs
+}) => {
 
-  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
-      const imagesArray: File[] = Array.from(event.target.files);
-      const uploadedURLs = await cloudinaryImagesToURLS(imagesArray, metricName);
-      if (uploadedURLs) {
-        setImageURLs([...imageURLs, ...uploadedURLs.map(item => item.url.data.url)]);
-      }
+      const newImagesArray: File[] = Array.from(event.target.files);
+      setImageURLs(prevImages => [...prevImages, ...newImagesArray]);
     }
   };
 
   return (
     <form>
       <label>Upload Photo</label>
-      <input type="file" accept=".jpg, .png, .jpeg" onChange={handleImageUpload} multiple></input>
+      <input type="file" accept=".jpg, .png, .jpeg" onChange={handleImageUpload} multiple />
     </form>
   );
 };
