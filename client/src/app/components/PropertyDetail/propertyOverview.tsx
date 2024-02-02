@@ -33,6 +33,7 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[]}) => {
   
   let allPhotos: Array<Photo> = []
   
+  console.log('all photos: ', allPhotos)
   reviewList.forEach(review => {
     allPhotos = allPhotos.concat(review.photos);
 });
@@ -56,8 +57,8 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[]}) => {
         >
           {allPhotos.map((photo) => (
             <div key={photo.photo_id} className='image-container'>
-              <Image 
-                src={testPic}
+              <img 
+                src={photo.url}
                 alt="Picture of the property"
                 sizes="(max-width: 500px) 100vw, 33vw"
                 layout="responsive"
