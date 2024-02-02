@@ -23,7 +23,7 @@ const profileReviewsPropertyContainer = () => {
   const [favourites, setFavourites] = useState<PropertyType[] | null>(null)
 
   useEffect(() => {
-    favouriteAPIservice.getFavourites('eyJhbGciOiJIUzI1NiJ9.NA.oeLKdo1U0E5x9a0N6_Gb3tOj8DZiucVe5Z7BNWwpfzc')
+    favouriteAPIservice.getFavourites()
       .then((res) => {
         if (res) {
           setFavourites(res)
@@ -33,7 +33,6 @@ const profileReviewsPropertyContainer = () => {
         console.log(error)
       })
   })
-
 
   return (
     <div>

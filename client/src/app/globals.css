@@ -33,7 +33,7 @@
     #00000010,
     #00000080
   );
-  
+
 
   --callout-rgb: 238, 240, 241;
   --callout-border-rgb: 172, 175, 176;
@@ -52,14 +52,14 @@
 
 
 .all_pages {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
   width: 100vw;
   max-width: 1000px;
   padding: 80px 10px 10px 10px;
-  overflow-y: hidden;
+  overflow-y: hidden; */
 }
 
 

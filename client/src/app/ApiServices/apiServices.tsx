@@ -1,33 +1,19 @@
-import { NewUser, Login } from '../types/types'
 'use client'
+import { NewUser, Login } from '../types/types'
 
 // const BASE_URL = process.env.BASE_URL
 const BASE_URL = 'http://localhost:3001'
 
-const apiService = {
 
-  signUp: async (newUser: NewUser): Promise<string | number> => {
-        const response = await fetch(`${BASE_URL}/signup`, {
-          method: 'POST',
-          mode: 'cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newUser),
-        })
-        if (response.status === 409) return 409;
-        return response.json()
-  },
+  // REGISTERING FUNCTIONS
+  export const passwordChecker = (password: string): boolean => {
+    const regex = /^(?=.*[A-Z])(?=.*\d).+$/;
+    if (password.length > 6 || regex.test(password)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   
-  login: async (user: Login) => {
-        const response = await fetch(`${BASE_URL}/login`, {
-          method: 'POST',
-          mode: 'cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(user),
-        })
-        if (response.status === 401) return 401;
-        return response.json()
-        
-  } 
-}
-  export default apiService
+  // export default apiService

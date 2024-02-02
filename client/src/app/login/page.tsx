@@ -14,7 +14,6 @@ const initialError: Error = {
   msg: "",
 };
 
-
 export default function Login() {
   const dispatch = useDispatch()
   const [email, setEmail] = useState("");
@@ -24,29 +23,31 @@ export default function Login() {
 
   const tryLogin = async (e: any): Promise<any | null> => {
     e.preventDefault();
+
     const user: Login = {
       email: email,
       password: password,
     };
-    const res:any = await apiService.login(user);
+
+    const res: any = await apiService.login(user);
+
     const currUser: UserType = {
       firstName: res.firstName,
       lastName: res.lastName,
       email: res.email
     }
-    console.log('CURRENT USER', currUser)
+    console.log(res)
     dispatch(setUserSlice(currUser))
-
     if (res === 401) {
       const err: Error = {
         error: true,
         msg: "Login details incorrect or sign up here",
-      }; 
+      };
       setError(err);
       setEmail("");
       setPassword("");
     } else {
-      console.log('RES--',res)
+      console.log('RES--', res)
       localStorage.setItem('accessToken', res.accessToken)
       setEmail("");
       setPassword("");
