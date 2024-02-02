@@ -8,15 +8,20 @@ const BASE_URL = 'http://localhost:3001'
 
 // Get search results
 const getSearchResults = async (
-  accesToken: string,
 ): Promise<PropertyType[] | undefined> => {
   try {
+    const accessToken = localStorage.getItem('accessToken')
+    if (!accessToken) {
+      handleAuthenticationError();
+      return
+    }
+
     const response = await fetch(`${BASE_URL}/getsearchresults`, {
       method: "GET",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        Authorization: accesToken,
+        Authorization: accessToken,
       },
     });
 
@@ -38,10 +43,15 @@ const getSearchResults = async (
 
 // Add search results
 const addSearchResult = async (
-  accesToken: string,
   property_id: number,
 ): Promise<PropertyType | undefined> => {
   try {
+    const accessToken = localStorage.getItem('accessToken')
+    if (!accessToken) {
+      handleAuthenticationError();
+      return
+    }
+
     const response = await fetch(
       `${BASE_URL}/addsearchresults/${property_id}`,
       {
@@ -49,7 +59,7 @@ const addSearchResult = async (
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
-          authorisation: accesToken,
+          authorisation: accessToken,
         },
       },
     );
@@ -70,14 +80,21 @@ const addSearchResult = async (
 };
 
 // Get user favorites
-const getFavourites = async (accesToken: string): Promise<PropertyType[] | undefined> => {
+const getFavourites = async (): Promise<PropertyType[] | undefined> => {
   try {
+    const accessToken = localStorage.getItem('accessToken')
+    if (!accessToken) {
+      handleAuthenticationError();
+      return
+    }
+
+
     const response = await fetch(`${BASE_URL}/getfavourites`, {
       method: "GET",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        Authorization: accesToken,
+        Authorization: accessToken,
       },
     });
 
@@ -99,16 +116,21 @@ const getFavourites = async (accesToken: string): Promise<PropertyType[] | undef
 
 // Add user favorite
 const addFavorite = async (
-  accesToken: string,
   property_id: string,
 ): Promise<void | undefined> => {
   try {
+    const accessToken = localStorage.getItem('accessToken')
+    if (!accessToken) {
+      handleAuthenticationError();
+      return
+    }
+
     const response = await fetch(`${BASE_URL}/addfavourites/${property_id}`, {
       method: "POST",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        Authorization: accesToken,
+        Authorization: accessToken,
       },
     });
 
@@ -129,10 +151,16 @@ const addFavorite = async (
 
 // Remove user favorite
 const removeFavorite = async (
-  accesToken: string,
   property_id: string,
 ): Promise<void | undefined> => {
   try {
+
+    const accessToken = localStorage.getItem('accessToken')
+    if (!accessToken) {
+      handleAuthenticationError();
+      return
+    }
+
     const response = await fetch(
       `${BASE_URL}/deletefavourite/${property_id}`,
       {
@@ -140,7 +168,7 @@ const removeFavorite = async (
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
-          Authorization: accesToken,
+          Authorization: accessToken,
         },
       },
     );

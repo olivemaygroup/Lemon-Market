@@ -5,9 +5,14 @@ const BASE_URL = 'http://localhost:3001'
 const addReview = async (
   property_id: string,
   reviewData: Review,
-  accessToken: string,
 ): Promise<void | undefined> => {
   try {
+    const accessToken = localStorage.getItem('accessToken')
+    if (!accessToken) {
+      handleAuthenticationError();
+      return
+    }
+
     const response = await fetch(`${BASE_URL}/addreview/${property_id}`, {
       method: "POST",
       headers: {
@@ -16,7 +21,7 @@ const addReview = async (
       },
       body: JSON.stringify(reviewData),
     });
-
+    console.log(response)
     if (response.status === 401) {
       handleAuthenticationError();
     }
@@ -32,8 +37,14 @@ const addReview = async (
   }
 };
 
-const getMyReviews = async (accessToken: string): Promise<Review[] | undefined> => {
+const getMyReviews = async (): Promise<Review[] | undefined> => {
   try {
+    const accessToken = localStorage.getItem('accessToken')
+    if (!accessToken) {
+      handleAuthenticationError();
+      return
+    }
+
     const response = await fetch(`${BASE_URL}/myreviews`, {
       method: "GET",
       headers: {
@@ -64,9 +75,14 @@ const editReview = async (
   review_id: number,
   property_id: number,
   updatedReviewData: Review,
-  accessToken: string,
 ): Promise<Review | undefined> => {
   try {
+    const accessToken = localStorage.getItem('accessToken')
+    if (!accessToken) {
+      handleAuthenticationError();
+      return
+    }
+
     const response = await fetch(`${BASE_URL}/editreview/${property_id}/${review_id}`, {
       method: "PUT",
       headers: {
@@ -96,9 +112,14 @@ const editReview = async (
 
 const deleteReview = async (
   review_id: number,
-  accessToken: string,
 ): Promise<void | undefined> => {
   try {
+    const accessToken = localStorage.getItem('accessToken')
+    if (!accessToken) {
+      handleAuthenticationError();
+      return
+    }
+
     const response = await fetch(`/api/deletereview/${review_id}`, {
       method: "DELETE",
       headers: {

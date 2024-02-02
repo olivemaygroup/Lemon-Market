@@ -1,35 +1,57 @@
 /* search and property card CSS */
 
+@font-face {
+  font-family: 'virgil';
+  src: url('../../../../public/fonts/Virgil.woff2');
+}
+
 /* Search bar */
 .searchContainer {
-  /* margin: auto; */
-  width: 90vw;
+  padding-top: 2rem;
   max-width: 800px;
+  width: 80%;
+}
+
+.image_address_container {
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
 }
 
 /* Property Card */
 .card_container {
+  font-family: 'virgil';
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   margin: 20px;
   color: black;
-  width: 100%;
+  width: 85%;
   background-color: white;
   border-radius: 10px;
-  box-shadow: 3px 3px 20px rgba(0,0,0,0.3);
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.3);
 }
 
 .card_image {
-  width: 20%;
+  width: 40%;
+  height: 100%;
   padding: 10px;
+  overflow: hidden;
 }
+
+.card_image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .card_address {
   display: flex;
+  align-items: center;
   width: 60%;
   padding: 10px;
   text-align: left;
-  
+
 }
 
 .card_rating_container {
@@ -39,4 +61,17 @@
   padding: 10px;
   justify-content: space-around;
   align-items: center;
+}
+
+.favourite_icon {
+  background-color: transparent;
+  border: none;
+}
+
+.favourite_icon_container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: end;
+  margin-bottom: 5px;
 }

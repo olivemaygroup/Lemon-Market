@@ -14,7 +14,7 @@
 }
 
 .profilebox {
-  margin-top: -50px;
+  /* margin-top: -50px; */
   padding: 30px;
   border: 1px solid #fae301;
   border-radius: 10px;
@@ -61,4 +61,30 @@
   border: 1px solid #fae301;
   width: 30%;
   height: 1px;
+}
+
+.reviews {
+  width: 100%;
+  max-width: 800px;
+  height: 150px;
+  border: 1px solid;
+  display:  flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+
+.swipebox {
+  height: 80px;
+  width: 920px;
+  padding: 30px;
+  border: 1px solid #fae301;
+  border-radius: 10px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
 }

@@ -1,4 +1,3 @@
-
 @font-face {
   font-family: 'virgil';
   src: url('../../../public/fonts/Virgil.woff2');
@@ -25,7 +24,7 @@
 }
 
 .h2 {
-  /* margin-bottom: 40px; */
+  margin-bottom: 40px;
 }
 
 .form {
@@ -71,7 +70,10 @@
   margin-bottom: 30px;
   width: 100%;
 }
-.login:hover {background-color: #fae301;}
+
+.login:hover {
+  background-color: #fae301;
+}
 
 .errorbox {
   display: flex;
@@ -83,7 +85,7 @@
   background-color: rgb(231, 174, 193);
   padding: 20px;
   gap: 20px;
-  
+
 }
 
 .noerrorbox {
