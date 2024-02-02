@@ -7,7 +7,7 @@ import { Review } from '@/app/types/review-types';
 
 const FullReview = ({ item }: {item: Review}) => {
   
-
+// Test comment
   return (
   <div className="container">
     <Carousel
@@ -15,6 +15,7 @@ const FullReview = ({ item }: {item: Review}) => {
     infiniteLoop={true}
     dynamicHeight={true}
     className='carousel'
+    showThumbs={false} 
    
     >
       <div className='text'>
@@ -41,6 +42,7 @@ const FullReview = ({ item }: {item: Review}) => {
         <h2><ReadonlyRating rating={item.value_for_money} /></h2>
         <p>{item.value_for_money_comment}</p>
       </div>
+
       <div className='text'>
         <h2>Deposit handling</h2>
         <h2><ReadonlyRating rating={item.deposit_handling} /></h2>
@@ -59,8 +61,6 @@ const FullReview = ({ item }: {item: Review}) => {
         <p>{item.landlord_responsiveness_comment}</p>
       </div>
 
-    
-      
     </Carousel>
 
   </div>

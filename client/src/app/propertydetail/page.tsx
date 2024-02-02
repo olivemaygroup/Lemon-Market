@@ -13,6 +13,7 @@ import  PropertyOverview from "@/app/components/PropertyDetail/propertyOverview"
 import FullReview from "@/app/components/PropertyDetail/fullReview";
 import RatingDetail from "../components/PropertyDetail/ratingDetail";
 import { Review } from '@/app/types/review-types';
+import AddReview from "../components/PropertyDetail/addReview";
 
 
 export default function PropertyDetail() {
@@ -30,13 +31,14 @@ export default function PropertyDetail() {
         <h2>{property.fullAddress}</h2>
       </div>
       <PropertyOverview reviewList={reviewList}/>
-      <RatingDetail />
+      <RatingDetail reviewList={reviewList}/>
       {reviewList.map((item, index) => (
         <div key={index}>
           <h2 className={styles.reviewName}>Joe Bloggs review: Jan 22</h2>
           <FullReview  item={item} />
         </div>
       ))}
+      <AddReview></AddReview>
     </div>
   );
 }
