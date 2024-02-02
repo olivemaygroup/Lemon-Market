@@ -6,7 +6,6 @@ import { Review } from '@/app/types/review-types';
 
 const FullReview = ({ item }: { item: Review }) => {
 
-  console.log(item, 'item')
 
   return (
     <div className="container">
@@ -17,18 +16,19 @@ const FullReview = ({ item }: { item: Review }) => {
         className='carousel'
         showThumbs={false}
       >
+
         <div className='text'>
           <h2>Financials</h2>
           <p>Rent: {item.monthly_rent}</p>
           <p>Bills: {item.monthly_bill}</p>
           <p>Council tax: {item.council_tax}</p>
+
         </div>
 
         <div className='text'>
           <h2>Cleanliness</h2>
           <h2><ReadonlyRating rating={item.cleanliness} /></h2>
           <p>{item.cleanliness_comment}</p>
-          <p>kasdjhf;ldajf;laksdjf;lj</p>
         </div>
 
         <div className='text'>
@@ -59,8 +59,6 @@ const FullReview = ({ item }: { item: Review }) => {
           <h2><ReadonlyRating rating={item.landlord_responsiveness} /></h2>
           <p>{item.landlord_responsiveness_comment}</p>
         </div>
-
-
 
       </Carousel>
 
