@@ -1,4 +1,4 @@
-export interface Review {
+Revexport interface Review {
   t_start: string;
   t_end: string;
   cleanliness: number;

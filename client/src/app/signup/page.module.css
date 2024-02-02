@@ -13,7 +13,6 @@
 }
 
 .phone_box {
-  margin-top: -70px;
   height: 100%;
   width: 350px;
   display: flex;
@@ -24,7 +23,7 @@
 }
 
 .h2 {
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
 }
 
 .form {
