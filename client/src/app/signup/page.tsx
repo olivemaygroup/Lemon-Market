@@ -47,7 +47,7 @@ export default function Signup() {
     setPassword1('');
     setPasswordCheck('')
   }
-  
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     let newUser:NewUser = state
@@ -68,7 +68,7 @@ export default function Signup() {
       const err: Error = {
         error: true,
         msg: "Error, User already exists",
-      }; 
+      };
       resetStates();
       setError(err);
     } else {

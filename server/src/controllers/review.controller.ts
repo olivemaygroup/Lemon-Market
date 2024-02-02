@@ -66,7 +66,6 @@ const addReview = async (ctx: Context) => {
       },
     });
 
-    console.log(newReview)
     await prisma.photo.createMany({
       data: photos.map((photo) => ({
         ...photo,
