@@ -4,7 +4,7 @@ import { RootState } from "@/lib/store"
 import { useSelector, useDispatch } from "react-redux"
 import { setUserSlice } from "@/lib/features/user/userSlice"
 import styles from "./page.module.css"
-import { Error, NewUser, Password, UserType } from "../types/types"
+import { Error, NewUser, Password, Review, UserType } from "../types/types"
 import { useState } from "react"
 import { passwordChecker } from "../ApiServices/apiServices"
 import userAPI from "../ApiServices/userAPI"
@@ -26,6 +26,8 @@ const err: Error = {
   error: true,
   msg: "passwords must be over 6 charators long, contain at least 1 number & 1 uppercase letter and they must match",
 };
+
+// const item: Review
 
 export default function MyProfile () {
   const [edit, setEdit] = useState<boolean>(false)
@@ -141,6 +143,7 @@ export default function MyProfile () {
           /></div>
           
           <button className={styles.profilebtn} type="submit">submit changes</button>
+          <button className={styles.profilebtn} onClick={()=>setEdit(!edit)} >back</button>
           </form>
         )}
       </div>

@@ -16,11 +16,11 @@ import ProperetyCardContainer from "@/app/components/Landing/propertyCardContain
 export default function Home() {
   const dispatch = useDispatch();
   const property = useSelector((state: RootState) => state.property.value);
-  const [showProperty, SetShowProperty] = useState(false)
+  const [showProperty, setShowProperty] = useState(false)
 
   useEffect(() => {
     //currently check address does add the property if it exists - but we can change that to only occur when review happens
-    SetShowProperty(property.fullAddress !== '' && property.property_id !== '')
+    setShowProperty(property.fullAddress !== '' && property.property_id !== '')
 
     checkAddress(property).then((response) => {
       localStorage.setItem('property_id', property.property_id)
@@ -33,7 +33,6 @@ export default function Home() {
       }
     })
   }, [property])
-
 
   return (
     <main className={styles.main}>
