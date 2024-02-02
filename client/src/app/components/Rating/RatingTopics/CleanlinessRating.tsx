@@ -29,7 +29,7 @@ const CleanlinessRating: React.FC<RatingContainerInterface> = ({ dbReviewObject,
     "comment": comment
   }
 
-  dbReviewObject.cleanliness = rating;
+  dbReviewObject.cleanliness = Cleanliness.rating;
   dbReviewObject.cleanliness_comment = comment;
 
   return (

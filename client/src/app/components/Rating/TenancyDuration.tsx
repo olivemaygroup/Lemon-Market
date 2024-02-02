@@ -1,42 +1,45 @@
-import React, {useState} from 'react'
-import { Review } from "@/app/types/types";
+import React from 'react'
 
 interface TenancyDurationPropsInterface {
-  dbReviewObject: Review
-}
-const TenancyDuration: React.FC<TenancyDurationPropsInterface> = ({ dbReviewObject }) => {
+  t_start: string,
+  t_end: string,
+  setT_start: Function,
+  setT_end: Function,
+};
 
-  const [tenancyStart, setTenancyStart] = useState("")
-  const [tenancyEnd, setTenancyEnd] = useState("")
+const TenancyDuration: React.FC<TenancyDurationPropsInterface> = ({ t_start, t_end, setT_end, setT_start }) => {
 
-  dbReviewObject.t_start = tenancyStart
-  dbReviewObject.t_end = tenancyEnd
-  
+
   return (
-    <form>
-      <h2>Tenancy Dates</h2>
-      <div>
-      <p>Tenancy Start Date:</p>
-      <input
-      type="date"
-      name="tenancy-start"
-      className="input"
-      placeholder="When did your tenancy start?"
-      onChange={(event) => {setTenancyStart(event.target.value)}}
-      />
-      </div>
-      <div>
-      <p>Tenancy End Date:</p>
-        <input
-        type="date"
-        name="tenancy-end"
-        className="input"
-        placeholder="When did your tenancy end?"
-        onChange={(event) => {setTenancyEnd(event.target.value)}}
-        />
-      </div>    
-    </form>
-  )
-}
+    <>
+      <form >
+        <h2>Tenancy Dates</h2>
+        <div>
+          <label>Tenancy Start Date:</label>
+          <input
+            value={t_start}
+            type="date"
+            id="tenancy-start"
+            className="input"
+            placeholder="When did your tenancy start?"
+            onChange={(event) => setT_start(event.target.value)}
+          />
+        </div>
+        <div>
+          <label>Tenancy End Date:</label>
+          <input
+            value={t_end}
+            type="date"
+            id="tenancy-end"
+            className="input"
+            placeholder="When did your tenancy end?"
+            onChange={(event) => setT_end(event.target.value)}
+          />
+        </div>
+        <button type="submit">Submit Dates</button>
+      </form>
+    </>
+  );
+};
 
 export default TenancyDuration;

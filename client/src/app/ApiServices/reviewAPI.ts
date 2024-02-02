@@ -21,7 +21,7 @@ const addReview = async (
       },
       body: JSON.stringify(reviewData),
     });
-
+    console.log(response)
     if (response.status === 401) {
       handleAuthenticationError();
     }
