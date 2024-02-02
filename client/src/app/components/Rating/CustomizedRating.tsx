@@ -53,20 +53,22 @@ export default function CustomizedRating({ ratingState, ratingSetter, metricName
   };
 
   return (
-    <Box sx={{ '& > legend': { mt: 2 } }}>
-      <StyledRating
-        name={`customized-color-${metricName}`} 
-        value={ratingState} 
-        onChange={(event, newValue) => {
-          if (newValue !== null) {
-            ratingSetter(newValue);
-          }
-        }}
-        getLabelText={(value: number) => `${value} House${value !== 1 ? 's' : ''}`}
-        precision={1}
-        icon={React.createElement(IconComponent, { fontSize: "inherit" })}
-        emptyIcon={React.createElement(IconComponent, { fontSize: "inherit" })}
-      />
-    </Box>
+    <div className='rating-interactive'>
+      <Box sx={{ '& > legend': { mt: 2 } }}>
+        <StyledRating
+          name={`customized-color-${metricName}`} 
+          value={ratingState} 
+          onChange={(event, newValue) => {
+            if (newValue !== null) {
+              ratingSetter(newValue);
+            }
+          }}
+          getLabelText={(value: number) => `${value} House${value !== 1 ? 's' : ''}`}
+          precision={1}
+          icon={React.createElement(IconComponent, { fontSize: "inherit" })}
+          emptyIcon={React.createElement(IconComponent, { fontSize: "inherit" })}
+          />
+      </Box>
+    </div>
   );
 };
