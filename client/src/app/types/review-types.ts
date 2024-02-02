@@ -24,4 +24,5 @@ export interface Review {
 export interface Photo {
   url: string;
   tag: string;
+  photo_id: number
 }
