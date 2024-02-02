@@ -51,7 +51,7 @@ export default function Signup() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     let newUser:NewUser = state
-    if (passwordCheck===password1) {
+    if (passwordCheck===password1 && password1.length>=6) {
       newUser.password = password1
     } else {
       setError(err);

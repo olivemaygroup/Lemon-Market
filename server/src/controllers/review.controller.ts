@@ -97,16 +97,25 @@ const myReviews = async (ctx: Context) => {
   try {
     const tenant: Tenant = ctx.state.tenant;
 
-    const allReviews = await prisma.review.findMany({
+    const allReviewsWithProperty = await prisma.property.findMany({
       where: {
-        tenant_id: tenant.tenant_id,
+        reviews: {
+          some: {
+            tenant_id: tenant.tenant_id
+          }
+        }
       },
       include: {
-        photos: true,
+        reviews: {
+          include: {
+            photos: true
+          }
+        }
       },
     });
 
-    ctx.body = allReviews;
+
+    ctx.body = allReviewsWithProperty
     ctx.status = 200;
   } catch (err) {
     console.error(err);

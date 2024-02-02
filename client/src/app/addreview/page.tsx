@@ -17,9 +17,8 @@ export default function addReview() {
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
   const property = useSelector((state: RootState) => state.property.value)
 
-  const [imageFiles, setImageFiles] = useState<File[]>([])
-
-  const [imageURLs, setImageURLs] = useState<any[]>([])
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [imageURLs, setImageURLs] = useState<any[]>([]);
   const [t_start, setT_start] = useState<string>('');
   const [t_end, setT_end] = useState<string>('');
   const [cleanliness, setCleanliness] = useState<number>(0);
@@ -156,7 +155,6 @@ export default function addReview() {
       general_comment: gen_comment,
       photos: imageURLsArray
     }
-
 
     if (property_id) {
       console.log(property_id)
