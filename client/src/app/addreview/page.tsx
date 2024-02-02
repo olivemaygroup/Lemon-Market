@@ -106,7 +106,9 @@ export default function addReview () {
 
   // function handleSubmit () {}
 
-  // setTotal_review_rating((cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness)/6);
+  //  let avg_rating = (cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness)/6;
+  //   setTotal_review_rating(avg_rating)
+
   let tempKey = 0;
 
   console.log(dbReviewObject)
