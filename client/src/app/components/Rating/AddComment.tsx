@@ -17,12 +17,12 @@ const style = {
 };
 
 interface AddCommentInterface {
-  TOPIC: string,
-  comment: string, 
-  setComment: Function;
-}
+  metricName: string,
+  commentState: string, 
+  commentSetter: Function;
+};
 
-const AddComment: React.FC<AddCommentInterface> = ({ setComment }) => {
+const AddComment: React.FC<AddCommentInterface> = ({ metricName, commentState, commentSetter }) => {
   const [input, setInput] = useState('');
   const [open, setOpen] = useState(false);
 
@@ -31,7 +31,7 @@ const AddComment: React.FC<AddCommentInterface> = ({ setComment }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setComment(input);
+    commentSetter(input);
     handleClose();
     setInput('');
   };

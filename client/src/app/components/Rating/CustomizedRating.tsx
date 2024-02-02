@@ -16,24 +16,24 @@ const StyledRating = styled(Rating)({
 });
 
 interface CustomizedRatingProps {
-  TOPIC: string;
-  rating: number;
-  setRating: Function
+  ratingState: number,
+  ratingSetter: Function,
+  metricName: string,
 }
 
 // Apply TypeScript typings to function component props
-export default function CustomizedRating({ TOPIC, rating, setRating }: CustomizedRatingProps) {
+export default function CustomizedRating({ ratingState, ratingSetter, metricName }: CustomizedRatingProps) {
   return (
     <Box sx={{ '& > legend': { mt: 2 } }}>
       <StyledRating
-        name={`customized-color-${TOPIC}`} 
-        value={rating} 
+        name={`customized-color-${metricName}`} 
+        value={ratingState} 
         onChange={(event, newValue) => {
           if (newValue !== null) {
-            setRating(newValue);
+            ratingSetter(newValue);
           }
         }}
-        getLabelText={(value: number) => `${value} Heart${value !== 1 ? 's' : ''}`}
+        getLabelText={(value: number) => `${value} House${value !== 1 ? 's' : ''}`}
         precision={1}
         icon={<CottageIcon fontSize="inherit" />}
         emptyIcon={<CottageIcon fontSize="inherit" />}

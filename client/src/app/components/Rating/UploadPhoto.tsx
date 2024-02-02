@@ -3,18 +3,18 @@ import cloudinaryImagesToURLS from '@/app/ApiServices/cloudinaryAPI';
 import { Photo } from '@/app/types/types';
 
 interface PhotoUploadComponentProps {
-  TOPIC: string;
+  metricName: string;
   imageURLs: Photo[]; 
   setImageURLs: Function
-}
+};
 
-const PhotoUploadComponent: React.FC<PhotoUploadComponentProps> = ({ TOPIC, imageURLs, setImageURLs }) => {
+const PhotoUploadComponent: React.FC<PhotoUploadComponentProps> = ({ metricName, imageURLs, setImageURLs }) => {
 
   const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     
     if (event.target.files && event.target.files.length > 0) {
       const imagesArray: File[] = Array.from(event.target.files);
-      const uploadedURLs = await cloudinaryImagesToURLS(imagesArray, TOPIC);
+      const uploadedURLs = await cloudinaryImagesToURLS(imagesArray, metricName);
       if (uploadedURLs) {
         setImageURLs([...imageURLs, ...uploadedURLs.map(item => item.url.data.url)]);
       }
