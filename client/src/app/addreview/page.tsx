@@ -34,14 +34,13 @@ export default function addReview() {
   const [landlord_responsiveness, setLandlord_responsiveness] = useState<number>(0);
   const [landlord_responsiveness_comment, setLandlord_responsiveness_comment] = useState<string>('');
   const [total_review_rating, setTotal_review_rating] = useState<number>(0);
-  const [monthly_rent, setMonthly_rent] = useState<number>(0);
-  const [monthly_bill, setMonthly_bill] = useState<number>(0);
-  const [council_tax, setCouncil_tax] = useState<number>(0);
+  const [monthly_rent, setMonthly_rent] = useState<number>();
+  const [monthly_bill, setMonthly_bill] = useState<number>();
+  const [council_tax, setCouncil_tax] = useState<number>();
   const [general_comment, setGeneral_comment] = useState<string>('');
 
   /*
   TODO: add general comment box
-  TODO: remove the submit dates button
   TODO: ensure types of monthly rent bill and tax are all numbers = currently as you can see in the dbobject I have had to convert them to integers
   TODO: Fix tag system - allow it so different tags can be added to different photos.
   TODO: data validation  = provide errors on inputs that haven't been filled etc - for example right now if no photos are uploaded it should error - make it so that either they have to upload photos or if photos are not uploaded to ensure backend works with it

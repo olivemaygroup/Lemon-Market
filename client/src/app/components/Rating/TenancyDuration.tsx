@@ -13,7 +13,7 @@ const TenancyDuration: React.FC<TenancyDurationPropsInterface> = ({ t_start, t_e
   return (
     <div>
       <form >
-        <h2>Tenancy Dates</h2>
+        <h4>Tenancy Dates</h4>
         <div>
           <label>Tenancy Start:</label>
           <input
@@ -36,7 +36,6 @@ const TenancyDuration: React.FC<TenancyDurationPropsInterface> = ({ t_start, t_e
             onChange={(event) => setT_end(event.target.value)}
           />
         </div>
-        <button type="submit">Submit Dates</button>
       </form>
     </div>
   );
