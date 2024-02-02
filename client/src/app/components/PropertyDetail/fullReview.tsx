@@ -4,10 +4,9 @@ import { Carousel } from 'react-responsive-carousel'
 import ReadonlyRating from './readonlyRating';
 import { Review } from '@/app/types/review-types';
 
+const FullReview = ({ item }: { item: Review }) => {
 
-const FullReview = ({ item }: {item: Review}) => {
-  
-// Test comment
+
   return (
   <div className="container">
     <Carousel
@@ -63,9 +62,9 @@ const FullReview = ({ item }: {item: Review}) => {
 
     </Carousel>
 
-  </div>
-  
-  
+    </div>
+
+
   )
 
 }

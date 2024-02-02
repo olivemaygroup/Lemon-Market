@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/lib/store";
 import reviewAPI from "../ApiServices/reviewAPI";
 import { setReviewListSlice } from "@/lib/features/review/addReviewSlice";
-import  PropertyOverview from "@/app/components/PropertyDetail/propertyOverview";
+import PropertyOverview from "@/app/components/PropertyDetail/propertyOverview";
 import FullReview from "@/app/components/PropertyDetail/fullReview";
 import RatingDetail from "../components/PropertyDetail/ratingDetail";
 import { Review } from '@/app/types/review-types';
@@ -24,7 +24,7 @@ export default function PropertyDetail() {
   const reviewList: Review[] = useSelector((state: RootState) => state.reviewList.value)
   console.log('review list state: ', reviewList)
 
-  
+
   return (
     <div className={styles.description}>
       <div className="address">
@@ -35,7 +35,7 @@ export default function PropertyDetail() {
       {reviewList.map((item, index) => (
         <div key={index}>
           <h2 className={styles.reviewName}>Joe Bloggs review: Jan 22</h2>
-          <FullReview  item={item} />
+          <FullReview item={item} />
         </div>
       ))}
       <AddReview></AddReview>
