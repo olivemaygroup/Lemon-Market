@@ -15,7 +15,16 @@
   align-items: center;
   box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
   border-radius: 10px;
+  position: relative;
+  overflow: hidden;
 
+}
+
+.carousel .carousel-status {
+  display: none;
+}
+.carousel .control-dots {
+  display: none;
 }
 
 /* pictureContainer */
@@ -42,13 +51,15 @@
 .reviews {
   text-align: center;
   width: 100%;
-  margin-bottom: 10px;
+  height: 30px;
+  /* margin-bottom: 10px; */
 }
 
-.spacer {
-  margin-top: 20px;
-  height: 0px;
-  border-bottom: solid 4px #fae301;
-  width: 90%;
+.addButton {
+  position: absolute;
+  right: -30px;
+  bottom: 5px;
+  transform: translateX(-50%);
+  
 }
 
