@@ -33,7 +33,7 @@ body {
   justify-content: space-evenly;
   border-style: solid;
   margin: 1.5vw;
-  border-radius: 8%;
+  border-radius: 15px;
   min-width: 300px;
 }
 
@@ -45,6 +45,12 @@ body {
 
 .rating-interactive {
   display: flex;
+  justify-content: center; 
+}
+
+.title {
+  display: flex;
   justify-content: center;
-  
+  flex-direction: column;
+  align-content: center;
 }
