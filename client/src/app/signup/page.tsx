@@ -58,6 +58,7 @@ export default function Signup() {
       passwordChecker(testWord.value)
     ) {
       const { name, value } = testWord;
+      console.log(testWord)
       setState((prevState) => ({
         ...prevState,
         [name]: value,
@@ -70,6 +71,8 @@ export default function Signup() {
       setError(err);
       return;
     }
+    console.log(state,'state')
+
     const newUser: NewUser = state;
     const currUser: UserType = {
       firstName: newUser.firstName,
@@ -81,7 +84,7 @@ export default function Signup() {
       const err: Error = {
         error: true,
         msg: "Error, User already exists",
-      }; 
+      };
       resetStates();
       setError(err);
     } else {

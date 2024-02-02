@@ -2,7 +2,6 @@
 import Image from "next/image";
 import styles from "@/app/home/page.module.css";
 import Search from "@/app/components/Landing/search";
-import PropertyCard from "@/app/components/Landing/propertyCardContainer";
 import { useState, useEffect, use } from "react";
 import { RootState } from "@/lib/store";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,7 +11,6 @@ import { addFullProperty } from "@/lib/features/property/fullProperty";
 import { PropertyType } from "../types/property-type";
 
 import Link from 'next/link'
-import StoreProvider from "@/app/StoreProvider";
 import ProperetyCardContainer from "@/app/components/Landing/propertyCardContainer";
 
 export default function Home() {
