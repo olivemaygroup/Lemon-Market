@@ -21,11 +21,9 @@ export default function Home() {
   const [showProperty, SetShowProperty] = useState(false)
 
   useEffect(() => {
-    SetShowProperty(property.fullAddress !== '' && property.property_id !== '')
-  }, [property])
-
-  useEffect(() => {
     //currently check address does add the property if it exists - but we can change that to only occur when review happens
+    SetShowProperty(property.fullAddress !== '' && property.property_id !== '')
+
     checkAddress(property).then((response) => {
       if (response?.num_of_reviews !== 0 && response?.reviews) {
         dispatch(setReviewListSlice(response.reviews))
@@ -35,8 +33,9 @@ export default function Home() {
         dispatch(addFullProperty(response))
       }
     })
-
   }, [property])
+
+
   return (
     <main className={styles.main}>
       <Search></Search>

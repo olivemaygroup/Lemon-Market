@@ -13,8 +13,6 @@ const ProperetyCardContainer = () => {
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
   const property = useSelector((state: RootState) => state.property.value)
 
-
-
   return (
     <>
       {

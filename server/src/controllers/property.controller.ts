@@ -26,6 +26,7 @@ const checkAddress = async (ctx: Context) => {
       },
     });
 
+
     if (property) {
       if (property.num_of_reviews > 0){
         ctx.body = property;
@@ -36,6 +37,7 @@ const checkAddress = async (ctx: Context) => {
         ctx.status = 201;
         return
       }
+
     } else {
       const newProperty = await prisma.property.create({
         data: {
@@ -46,6 +48,7 @@ const checkAddress = async (ctx: Context) => {
       ctx.body = newProperty;
       ctx.status = 202;
     }
+    console.log('asdfasdf')
   } catch (err) {
     console.error(err);
     ctx.body = "error when looking for or creating address";

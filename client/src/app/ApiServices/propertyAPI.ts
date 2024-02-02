@@ -7,7 +7,6 @@ const checkAddress = async (
   property: PropertyType,
 ): Promise<PropertyTypeFull | undefined> => {
   try {
-
     const response = await fetch(`${BASE_URL}/checkaddress`, {
       method: "POST",
       mode: "cors",
@@ -19,9 +18,8 @@ const checkAddress = async (
 
     if (response.status === 401) {
       handleAuthenticationError();
-    } else if (response.status === 201) {
-      return
     }
+
 
     if (!response.ok) {
       return undefined
