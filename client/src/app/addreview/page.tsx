@@ -34,9 +34,9 @@ export default function addReview() {
   const [landlord_responsiveness, setLandlord_responsiveness] = useState<number>(0);
   const [landlord_responsiveness_comment, setLandlord_responsiveness_comment] = useState<string>('');
   const [total_review_rating, setTotal_review_rating] = useState<number>(0);
-  const [monthly_rent, setMonthly_rent] = useState<number>(0);
-  const [monthly_bill, setMonthly_bill] = useState<number>(0);
-  const [council_tax, setCouncil_tax] = useState<number>(0);
+  const [monthly_rent, setMonthly_rent] = useState<number>();
+  const [monthly_bill, setMonthly_bill] = useState<number>();
+  const [council_tax, setCouncil_tax] = useState<number>();
   const [general_comment, setGeneral_comment] = useState<string>('');
 
   /*

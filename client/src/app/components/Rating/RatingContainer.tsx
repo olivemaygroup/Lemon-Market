@@ -31,7 +31,7 @@ const RatingContainer: React.FC<RatingContainerInterface> = (
   return (
     <>
       <div className='rating-item'> 
-      <h2>{metricName}</h2>
+      <h4>{metricName}</h4>
         <div className='col text-center'>
           <CustomizedRating 
           metricName={metricName}
