@@ -1,4 +1,5 @@
 'use client'
+import CottageIcon from '@mui/icons-material/Cottage';
 import { RootState } from "@/lib/store"
 import { useSelector, useDispatch } from "react-redux"
 import { setUserSlice } from "@/lib/features/user/userSlice"
@@ -7,6 +8,8 @@ import { Error, NewUser, Password, UserType } from "../types/types"
 import { useState } from "react"
 import { passwordChecker } from "../ApiServices/apiServices"
 import userAPI from "../ApiServices/userAPI"
+import ProperetyCardContainer from '../components/Landing/propertyCardContainer';
+import FullReview from '../components/PropertyDetail/fullReview';
 
 
 const initilaState: NewUser = {
@@ -32,13 +35,6 @@ export default function MyProfile () {
   const [error, setError] = useState(initialError)
 
   const dispatch = useDispatch();
-
-  // const user: UserType = {
-  //   firstName: 'steve',
-  //   lastName: 'mcstehead',
-  //   email: 'mcste@mail.com'
-  // }
-  
   const user = useSelector((state: RootState) => state.user.value)
   const token1:string | null = localStorage.getItem('accessToken')
   const token: string = token1 as string
@@ -95,70 +91,77 @@ export default function MyProfile () {
         <h2>{user.firstName}'s profile</h2>
         {!edit? (
           <div className={styles.editdiv}>
-        <div className={styles.attname}>first name :<p className={styles.att}>{user.firstName}</p></div>
-        <div className={styles.attname}> last name :<p className={styles.att}>{user.lastName}</p></div>
-        <div className={styles.attname}>email :<p className={styles.att}>{user.email}</p></div>
-        <button className={styles.profilebtn} onClick={()=>setEdit(!edit)}>edit profile</button>
-        </div>):( 
-          <form onSubmit={handleSubmit} className={styles.editdiv}>
-        <div className={styles.attname}>first name : 
-          <input 
-          type="text" 
-          className={styles.editinput} 
-          onChange={handleChange} 
-          name="firstName"
-          value={state.firstName}
-          placeholder={user.firstName}
-        /></div>
-        <div className={styles.attname}>last name : 
-          <input 
-          type="text" 
-          className={styles.editinput} 
-          onChange={handleChange} 
-          name="lastName"
-          value={state.lastName}
-          placeholder={user.lastName}
-        /></div>
-        <div className={styles.attname}>email : 
-          <input 
-          type="email" 
-          className={styles.editinput} 
-          onChange={handleChange} 
-          name="email"
-          value={state.email}
-          placeholder={user.email}
-        /></div>
-        <div className={styles.attname}>password : 
-          <input 
-          type="password" 
-          className={styles.editinput} 
-          onChange={(e)=>setPassword(e.target.value)} 
-          name="password1"
-        /></div>
-        <div className={styles.attname}> confrim password : 
-          <input 
-          type="password" 
-          className={styles.editinput} 
-          onChange={(e) => setPasswordCheck(e.target.value)}
-          onBlur={()=>{if(!passwordChecker(password)) setError(err)}} 
-          name="password2"
-        /></div>
-        
-        <button className={styles.profilebtn} type="submit">submit changes</button>
-        </form>
+            <div className={styles.attname}>first name :<p className={styles.att}>{user.firstName}</p></div>
+            <div className={styles.attname}> last name :<p className={styles.att}>{user.lastName}</p></div>
+            <div className={styles.attname}>email :<p className={styles.att}>{user.email}</p></div>
+            <button className={styles.profilebtn} onClick={()=>setEdit(!edit)}>edit profile</button>
+          </div>):( 
+            <form onSubmit={handleSubmit} className={styles.editdiv}>
+          <div className={styles.attname}>first name : 
+            <input 
+            type="text" 
+            className={styles.editinput} 
+            onChange={handleChange} 
+            name="firstName"
+            value={state.firstName}
+            placeholder={user.firstName}
+          /></div>
+          <div className={styles.attname}>last name : 
+            <input 
+            type="text" 
+            className={styles.editinput} 
+            onChange={handleChange} 
+            name="lastName"
+            value={state.lastName}
+            placeholder={user.lastName}
+          /></div>
+          <div className={styles.attname}>email : 
+            <input 
+            type="email" 
+            className={styles.editinput} 
+            onChange={handleChange} 
+            name="email"
+            value={state.email}
+            placeholder={user.email}
+          /></div>
+          <div className={styles.attname}>password : 
+            <input 
+            type="password" 
+            className={styles.editinput} 
+            onChange={(e)=>setPassword(e.target.value)} 
+            name="password1"
+          /></div>
+          <div className={styles.attname}> confrim password : 
+            <input 
+            type="password" 
+            className={styles.editinput} 
+            onChange={(e) => setPasswordCheck(e.target.value)}
+            onBlur={()=>{if(!passwordChecker(password)) setError(err)}} 
+            name="password2"
+          /></div>
+          
+          <button className={styles.profilebtn} type="submit">submit changes</button>
+          </form>
         )}
       </div>
       <div className={styles.divide}>
-          <div className={styles.divideline}></div>C<div className={styles.divideline}></div>
+          <div className={styles.divideline}></div><CottageIcon style={{ fill: '#fae301'}}/><div className={styles.divideline}></div>
       </div>
-      <div>
         <h2>{user.firstName}'s reviews</h2>
+      <div className={styles.reviews}>
+          <div className={styles.swipebox}>
+            <FullReview/>
+          </div>
       </div>
       <div className={styles.divide}>
-          <div className={styles.divideline}></div>C<div className={styles.divideline}></div>
+          <div className={styles.divideline}></div><CottageIcon style={{ fill: '#fae301'}}/><div className={styles.divideline}></div>
       </div>
-      <div>
         <h2>{user.firstName}'s favourites</h2>
+      <div className={styles.reviews}>
+          <div className={styles.swipebox}>
+            <FullReview/>
+          </div>
+
       </div>
     </div>
   )
