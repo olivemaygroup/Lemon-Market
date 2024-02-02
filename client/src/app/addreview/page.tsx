@@ -41,7 +41,6 @@ export default function addReview() {
 
   /*
   TODO: add general comment box
-  TODO: remove the submit dates button
   TODO: ensure types of monthly rent bill and tax are all numbers = currently as you can see in the dbobject I have had to convert them to integers
   TODO: Fix tag system - allow it so different tags can be added to different photos.
   TODO: data validation  = provide errors on inputs that haven't been filled etc - for example right now if no photos are uploaded it should error - make it so that either they have to upload photos or if photos are not uploaded to ensure backend works with it
