@@ -8,12 +8,13 @@ import cloudinaryImagesToURLS from "../ApiServices/cloudinaryAPI";
 import reviewAPI from "../ApiServices/reviewAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
+import propertySlice from "@/lib/features/property/propertySlice";
 
 
 export default function addReview() {
 
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
-
+  const property = useSelector((state: RootState) => state.property.value)
 
   const [imageFiles, setImageFiles] = useState<File[]>([])
 
@@ -37,6 +38,15 @@ export default function addReview() {
   const [monthly_bill, setMonthly_bill] = useState<number>(0);
   const [council_tax, setCouncil_tax] = useState<number>(0);
   const [general_comment, setGeneral_comment] = useState<string>('');
+
+  /*
+  TODO: add general comment box
+  TODO: remove the submit dates button
+  TODO: ensure types of monthly rent bill and tax are all numbers = currently as you can see in the dbobject I have had to convert them to integers
+  TODO: Fix tag system - allow it so different tags can be added to different photos.
+  TODO: data validation  = provide errors on inputs that haven't been filled etc - for example right now if no photos are uploaded it should error - make it so that either they have to upload photos or if photos are not uploaded to ensure backend works with it
+  TODO: sort typescript = make it so that there are not type errors
+  */
 
   const [dbReviewObject, setDBReviewObject] = useState<Review>({
     t_start: '',
@@ -110,6 +120,8 @@ export default function addReview() {
   const handleSubmit = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
+    const property_id = localStorage.getItem('property_id')
+
     const avgStars = await (cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness) / 6
     setTotal_review_rating(avgStars)
 
@@ -145,8 +157,9 @@ export default function addReview() {
     }
 
 
-    if (fullProperty.property_id !== '') {
-      reviewAPI.addReview(fullProperty.property_id, reviewObject)
+    if (property_id) {
+      console.log(property_id)
+      reviewAPI.addReview(property_id, reviewObject)
     } else {
       console.error('property id is undefined')
     }

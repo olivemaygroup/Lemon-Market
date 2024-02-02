@@ -23,6 +23,7 @@ export default function Home() {
     SetShowProperty(property.fullAddress !== '' && property.property_id !== '')
 
     checkAddress(property).then((response) => {
+      localStorage.setItem('property_id', property.property_id)
       if (response?.num_of_reviews !== 0 && response?.reviews) {
         dispatch(setReviewListSlice(response.reviews))
         const propertyWithoutReviews: PropertyType = { fullAddress: response.fullAddress, property_id: response.property_id, num_of_reviews: response.num_of_reviews, avg_rating: response.avg_rating }

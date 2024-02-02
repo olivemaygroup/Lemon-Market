@@ -38,7 +38,6 @@ const Search = () => {
       fullAddress: address.fullAddress,
       property_id: address.property_id
     };
-    console.log(newAddress)
     dispatch(addProperty(newAddress));
   }, [address]);
 
