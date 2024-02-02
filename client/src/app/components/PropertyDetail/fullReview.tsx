@@ -5,7 +5,6 @@ import ReadonlyRating from './readonlyRating';
 import { Review } from '@/app/types/review-types';
 
 
-
 const FullReview = ({ item }: {item: Review}) => {
   
 

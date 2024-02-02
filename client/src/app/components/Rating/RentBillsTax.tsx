@@ -14,7 +14,7 @@ export const RentBillsTaxComponent: React.FC<RentBillsTaxPropsInterface> = ({ mo
   return (
     <div>
       <form>
-      <h2 className="">Rent, Bills & Council Tax </h2>
+      <h4 className="">Rent, Bills & Council Tax </h4>
       <div className="rent-form">
           <p>Rent PCM</p>
           <input 

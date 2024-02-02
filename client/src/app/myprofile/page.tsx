@@ -150,7 +150,7 @@ export default function MyProfile () {
         <h2>{user.firstName}'s reviews</h2>
       <div className={styles.reviews}>
           <div className={styles.swipebox}>
-            <FullReview/>
+            {/* <FullReview/> */}
           </div>
       </div>
       <div className={styles.divide}>
@@ -159,7 +159,7 @@ export default function MyProfile () {
         <h2>{user.firstName}'s favourites</h2>
       <div className={styles.reviews}>
           <div className={styles.swipebox}>
-            <FullReview/>
+            {/* <FullReview/> */}
           </div>
 
       </div>
