@@ -20,6 +20,7 @@ body {
 }
 
 .review-subject-container {
+  min-width: 250px;
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
@@ -33,7 +34,7 @@ body {
   border-style: solid;
   margin: 1.5vw;
   border-radius: 8%;
-  min-width: 15vw;
+  min-width: 300px;
 }
 
 .rating-elements {
