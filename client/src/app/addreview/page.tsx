@@ -1,20 +1,18 @@
 "use client";
 import React, { useState } from "react";
-import {Photo} from '../types/types'
 import RentBillsTaxComponent from "../components/Rating/RentBillsTax";
 import TenancyDuration from "../components/Rating/TenancyDuration";
-import CleanlinessRating from "../components/Rating/RatingTopics/CleanlinessRating";
-import MaintenanceRating from "../components/Rating/RatingTopics/MaintenanceRating";
-import SigningProcessRating from "../components/Rating/RatingTopics/ValueForMoneyRating";
-import DepositHandlingRating from "../components/Rating/RatingTopics/DepositHandlingRating";
-import AmenitiesRating from "../components/Rating/RatingTopics/AmenitiesRating";
-import LandlordResponsivenessRating from "../components/Rating/RatingTopics/LandlordResponsivenessRating";
 import { Review } from "@/app/types/types";
 import RatingContainer from "../components/Rating/RatingContainer";
+import cloudinaryImagesToURLS from "../ApiServices/cloudinaryAPI";
+import reviewAPI from "../ApiServices/reviewAPI";
+
 
 export default function addReview () {
 
-  const [imageURLs, setImageURLs] = useState<Photo[]>([])
+  const [imageFiles, setImageFiles] = useState<File[]>([])
+
+  const [imageURLs, setImageURLs] = useState<any[]>([])
   const [t_start, setT_start] = useState<string>('');
   const [t_end, setT_end] = useState<string>('');
   const [cleanliness, setCleanliness] = useState<number>(0);
@@ -104,10 +102,49 @@ export default function addReview () {
   }
   ];
 
-  function handleSubmit () {}
+  const handleSubmit = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
 
-  //  let avg_rating = (cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness)/6;
-  //   setTotal_review_rating(avg_rating)
+    const avgStars = await (cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness)/6
+    setTotal_review_rating(avgStars)
+
+    const gen_comment = "Submitting review for test..."
+    setGeneral_comment(gen_comment)
+    
+    const imageURLsArray: any = await cloudinaryImagesToURLS(imageFiles, 'test');
+    if (imageURLsArray){
+      setImageURLs(imageURLsArray)
+    } 
+
+    let reviewObject: Review = {
+      t_start,
+      t_end,
+      cleanliness,
+      cleanliness_comment,
+      maintenance,
+      maintenance_comment,
+      value_for_money,
+      value_for_money_comment,
+      deposit_handling,
+      deposit_handling_comment,
+      amenities,
+      amenities_comment,
+      landlord_responsiveness,
+      landlord_responsiveness_comment,
+      total_review_rating: avgStars,
+      monthly_rent,
+      monthly_bill,
+      council_tax,
+      general_comment: gen_comment,
+      photos: imageURLsArray
+    }
+
+    console.log(reviewObject);
+
+    const property_id = "ChIJJ-pWCs0PdkgRLWrC1aZxKro"
+    reviewAPI.addReview(property_id, reviewObject)
+
+  }
 
   let tempKey = 0;
 
@@ -131,7 +168,8 @@ export default function addReview () {
       commentState={metric.commentState}
       commentSetter={metric.commentSetter}
       metricName={metric.name}
-      imageURLs={imageURLs}
+      imageFiles={imageFiles}
+      setImageFiles={setImageFiles}
       setImageURLs={setImageURLs}
       /> 
       ))}

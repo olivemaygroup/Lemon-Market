@@ -3,7 +3,6 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
-import Typography from '@mui/material/Typography';
 import CottageIcon from '@mui/icons-material/Cottage';
 
 const StyledRating = styled(Rating)({

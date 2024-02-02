@@ -1,11 +1,4 @@
 "use client";
-import { useState } from "react";
-import { Provider, useDispatch } from "react-redux";
-import { RootState } from "@/lib/store";
-import { useSelector } from "react-redux";
-import styles from "@/app/page.module.css";
-// import StoreProvider from "../StoreProvider";
-// import StarRating from "./StarRating";
 import PhotoUploadComponent from "./UploadPhoto";
 import AddComment from "./AddComment";
 import CustomizedRating from "./CustomizedRating";
@@ -16,6 +9,8 @@ interface RatingContainerInterface {
   commentState: string,
   commentSetter: Function,
   metricName: string,
+  imageFiles: File[],
+  setImageFiles: React.Dispatch<React.SetStateAction<File[]>>,
   imageURLs: [],
   setImageURLs: Function
 }
@@ -27,6 +22,8 @@ const RatingContainer: React.FC<RatingContainerInterface> = (
     commentState, 
     commentSetter, 
     metricName, 
+    imageFiles,
+    setImageFiles,
     imageURLs, 
     setImageURLs 
   }) => {
@@ -44,8 +41,8 @@ const RatingContainer: React.FC<RatingContainerInterface> = (
           />
           <PhotoUploadComponent 
           metricName={metricName}
-          imageURLs={imageURLs}
-          setImageURLs={setImageURLs}
+          imageFiles={imageFiles}
+          setImageFiles={setImageFiles}
           />
           <AddComment 
           metricName={metricName}

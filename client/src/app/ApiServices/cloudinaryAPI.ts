@@ -5,7 +5,7 @@ import { Photo } from "../types/review-types";
 
 
 function createCloudinaryURL(): string {
-  const cloudinaryName = process.env.CLOUDINARYNAME;
+  const cloudinaryName = 'dsvnavnxo';
   if (cloudinaryName) {
     return `https://api.cloudinary.com/v1_1/${cloudinaryName}/image/upload`;
   } else {
@@ -36,7 +36,7 @@ const cloudinaryImagesToURLS = async (files: File[], tag: string): Promise<{ url
       .then((res) => {
         if (res) {
           const photoArray = res.map(url => {
-            return { url: url, tag: tag.toLowerCase() }
+            return { url: url.data.secure_url, tag: tag.toLowerCase() }
           })
           return photoArray
         }
