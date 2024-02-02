@@ -1,14 +1,12 @@
 "use client";
-import Image from "next/image";
 import styles from "@/app/signup/page.module.css";
-import { useEffect, useState } from "react";
-import { signIn } from "next-auth/react";
+import { useState } from "react";
 import { NewUser, Error, Password, UserType } from "../types/types";
-import { useSelector, useDispatch } from "react-redux";
-import { Response } from "../types/tenant-types";
+import { useDispatch } from "react-redux";
 import { setUserSlice } from "@/lib/features/user/userSlice";
 import userAPI from "../ApiServices/userAPI";
 import { passwordChecker } from "../ApiServices/apiServices";
+import { useRouter } from "next/navigation";
 
 const initialError: Error = {
   error: false,
@@ -20,23 +18,23 @@ const initilaState: NewUser = {
   lastName: "",
   password: "",
 };
-const password: Password = {
-  name: "",
-  value: "",
+const err: Error = {
+  error: true,
+  msg: "passwords must be over 6 charators long, contain at least 1 number & 1 uppercase letter and they must match",
 };
 
 export default function Signup() {
   const [error, setError] = useState(initialError);
   const [state, setState] = useState(initilaState);
-  const [password1, setPassword1] = useState(password);
-  const [passwordCheck, setPasswordCheck] = useState(password);
+  const [password1, setPassword1] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState('');
 
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const handleChange = (e: any) => {
-    if (e.target.name !== "password2" || "password1") {
+    if (e.target.name !== "password2"|| "password") {
       const { name, value } = e.target;
-      console.log(name, value);
       setState((prevState) => ({
         ...prevState,
         [name]: value,
@@ -46,31 +44,20 @@ export default function Signup() {
 
   const resetStates = () => {
     setState(initilaState);
-    setPassword1(password);
-    setPasswordCheck(password)
+    setPassword1('');
+    setPasswordCheck('')
   }
-
+  
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const testWord = password1;
-    if (
-      password1.value === passwordCheck.value &&
-      passwordChecker(testWord.value)
-    ) {
-      const { name, value } = testWord;
-      setState((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
+    let newUser:NewUser = state
+    if (passwordCheck===password1) {
+      newUser.password = password1
     } else {
-      const err = {
-        error: true,
-        msg: "passwords must be over 6 charators long, contain at least 1 number & 1 uppercase letter and they must match",
-      };
       setError(err);
+      console.log(err)
       return;
     }
-    const newUser: NewUser = state;
     const currUser: UserType = {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
@@ -88,6 +75,7 @@ export default function Signup() {
       dispatch(setUserSlice(currUser));
       localStorage.setItem('accessToken',response.accessToken);
       resetStates();
+      router.push('/myprofile')
     }
   }
 
@@ -130,27 +118,20 @@ export default function Signup() {
           <div className={styles.input_div}>
             <label className={styles.input_lbl}>password</label>
             <input
-              onChange={(e) => {
-                const newPass = { name: "password", value: e.target.value };
-                setPassword1(newPass);
-              }}
+              onChange={(e)=>setPassword1(e.target.value)}
               type="password"
               className={styles.input_feild}
               name="password"
-              value={password1.value}
-            />
+              />
           </div>
           <div className={styles.input_div}>
             <label className={styles.input_lbl}>confirm password</label>
             <input
-              onChange={(e) => {
-                const newPass = { name: "password", value: e.target.value };
-                setPasswordCheck(newPass);
-              }}
+              onChange={(e) => setPasswordCheck(e.target.value)}
+              onBlur={()=>{if(!passwordChecker(password1)) setError(err)}}
               type="password"
               className={styles.input_feild}
               name="password2"
-              value={passwordCheck.value}
             />
           </div>
           <div className={styles.div}>

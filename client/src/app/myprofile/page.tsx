@@ -15,20 +15,20 @@ const initilaState: NewUser = {
   lastName: "",
   password: "",
 };
-const initPassword: Password = {
-  name: "",
-  value: "",
-};
 const initialError: Error = {
   error: false,
   msg: "",
+};
+const err: Error = {
+  error: true,
+  msg: "passwords must be over 6 charators long, contain at least 1 number & 1 uppercase letter and they must match",
 };
 
 export default function MyProfile () {
   const [edit, setEdit] = useState<boolean>(false)
   const [state, setState] = useState(initilaState)
-  const [password, setPassword] = useState(initPassword)
-  const [passwordCheck, setPasswordCheck] = useState(initPassword)
+  const [password, setPassword] = useState('')
+  const [passwordCheck, setPasswordCheck] = useState('')
   const [error, setError] = useState(initialError)
 
   const dispatch = useDispatch();
@@ -42,6 +42,7 @@ export default function MyProfile () {
   const user = useSelector((state: RootState) => state.user.value)
   const token1:string | null = localStorage.getItem('accessToken')
   const token: string = token1 as string
+
   const handleChange = (e: any) => {
     if (e.target.name !== "password2" || "password1") {
       const { name, value } = e.target;
@@ -54,42 +55,26 @@ export default function MyProfile () {
 
   const resetStates = () => {
     setState(initilaState);
-    setPassword(initPassword);
-    setPasswordCheck(initPassword)
+    setPassword('');
+    setPasswordCheck('')
   }
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const testWord = password;
-    console.log('TEST WORD', testWord)
-    console.log('TOKEN?', token)
-    if (
-      password.value === passwordCheck.value &&
-      passwordChecker(testWord.value)
-    ) {
-      const { name, value } = testWord;
-      setState((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
+    let newUser:NewUser = state
+    if (passwordCheck===password) {
+      newUser.password = password
     } else {
-      const err = {
-        error: true,
-        msg: "passwords must be over 6 charators long, contain at least 1 number & 1 uppercase letter and they must match",
-      };
       setError(err);
+      console.log(err)
       return;
     }
-    const newUser: NewUser = state;
-    console.log('NEW USER--',newUser)
     const currUser: UserType = {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       email: newUser.email
     }
-    console.log('CURR USER --', currUser)
-    const response:any = await userAPI.editProfile(newUser, token);
-    console.log('comp RESPONSE--',response)
+    const response:any = await userAPI.signUp(newUser);
     if (response === 409) {
       const err: Error = {
         error: true,
@@ -99,8 +84,8 @@ export default function MyProfile () {
       setError(err);
     } else {
       dispatch(setUserSlice(currUser));
+      localStorage.setItem('accessToken',response.accessToken);
       resetStates();
-      setEdit(!edit)
     }
   }
 
@@ -147,23 +132,16 @@ export default function MyProfile () {
           <input 
           type="password" 
           className={styles.editinput} 
-          onChange={(e)=>{
-            const newPass = { name: "password", value: e.target.value };
-            setPassword(newPass);
-          }} 
+          onChange={(e)=>setPassword(e.target.value)} 
           name="password1"
-          value={password.value}
         /></div>
         <div className={styles.attname}> confrim password : 
           <input 
           type="password" 
           className={styles.editinput} 
-          onChange={(e)=>{
-            const newPass = { name: "password", value: e.target.value };
-            setPasswordCheck(newPass);
-          }} 
+          onChange={(e) => setPasswordCheck(e.target.value)}
+          onBlur={()=>{if(!passwordChecker(password)) setError(err)}} 
           name="password2"
-          value={passwordCheck.value}
         /></div>
         
         <button className={styles.profilebtn} type="submit">submit changes</button>

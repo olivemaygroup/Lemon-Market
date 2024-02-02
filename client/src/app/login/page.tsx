@@ -1,13 +1,13 @@
 "use client";
 import styles from "@/app/login/page.module.css";
 import { redirect } from "next/navigation";
-import apiService from "../ApiServices/apiServices";
 import type { RootState } from "@/lib/store";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Error, Login, UserType } from "../types/types";
 import { setUserSlice } from "@/lib/features/user/userSlice";
+import userAPI from "../ApiServices/userAPI";
 
 const initialError: Error = {
   error: false,
@@ -29,7 +29,7 @@ export default function Login() {
       password: password,
     };
 
-    const res: any = await apiService.login(user);
+    const res: any = await userAPI.login(user);
 
     const currUser: UserType = {
       firstName: res.firstName,
