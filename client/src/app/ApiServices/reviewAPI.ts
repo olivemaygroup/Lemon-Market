@@ -21,7 +21,7 @@ const addReview = async (
       },
       body: JSON.stringify(reviewData),
     });
-    console.log(response)
+
     if (response.status === 401) {
       handleAuthenticationError();
     }
@@ -63,7 +63,6 @@ const getMyReviews = async (): Promise<Review[] | undefined> => {
     const allReviews: Review[] = await response.json();
 
     //return all the reviews
-
     return allReviews;
   } catch (err) {
     return undefined
