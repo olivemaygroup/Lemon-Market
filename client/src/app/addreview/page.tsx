@@ -109,12 +109,15 @@ export default function addReview () {
   // setTotal_review_rating((cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness)/6);
   let tempKey = 0;
 
+  console.log(dbReviewObject)
 
   return (
       <div className="review-subject-container">
         <div className="rating-item">
 
         <TenancyDuration 
+          t_start={t_start}
+          t_end={t_end}
           setT_end={setT_end}
           setT_start={setT_start}
           />
@@ -135,6 +138,9 @@ export default function addReview () {
 
         <div className="rating-item">
         <RentBillsTaxComponent 
+        monthly_rent={monthly_rent}
+        monthly_bill={monthly_bill}
+        council_tax={council_tax}
         setMonthly_rent={setMonthly_rent}
         setMonthly_bill={setMonthly_bill}
         setCouncil_tax={setCouncil_tax}

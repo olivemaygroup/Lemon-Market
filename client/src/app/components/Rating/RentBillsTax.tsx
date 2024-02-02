@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from 'react'
 
 interface RentBillsTaxPropsInterface {
+  monthly_rent: number
+  monthly_bill: number
+  council_tax: number
   setMonthly_rent: Function
   setMonthly_bill: Function
   setCouncil_tax: Function
 };
 
-export const RentBillsTaxComponent: React.FC<RentBillsTaxPropsInterface> = ({ setMonthly_rent, setMonthly_bill, setCouncil_tax }) => {
-
-  const [rent, setRent] = useState<number>(0)
-  const [bills, setBills] = useState<number>(0)
-  const [councilTax, setCouncilTax] = useState<number>(0)
-
-  const handleRentChange = (event: React.ChangeEvent<HTMLInputElement>) => setRent(Number(event.target.value));
-  const handleBillsChange = (event: React.ChangeEvent<HTMLInputElement>) => setBills(Number(event.target.value));
-  const handleCouncilTaxChange = (event: React.ChangeEvent<HTMLInputElement>) => setCouncilTax(Number(event.target.value));
-
-  useEffect(() => {
-    setMonthly_rent(rent);
-    setMonthly_bill(bills);
-    setCouncil_tax(councilTax);
-  }, [rent, bills, councilTax, setMonthly_rent, setMonthly_bill, setCouncil_tax]);
+export const RentBillsTaxComponent: React.FC<RentBillsTaxPropsInterface> = ({ monthly_rent, monthly_bill, council_tax, setMonthly_rent, setMonthly_bill, setCouncil_tax }) => {
 
   return (
     <div>
@@ -33,8 +22,8 @@ export const RentBillsTaxComponent: React.FC<RentBillsTaxPropsInterface> = ({ se
             name="rent"
             className="input"
             placeholder="£"
-            value={rent}
-            onChange={handleRentChange}
+            value={monthly_rent}
+            onChange={(event) => {setMonthly_rent(event.target.value)}}
           />
         </div>
 
@@ -45,8 +34,8 @@ export const RentBillsTaxComponent: React.FC<RentBillsTaxPropsInterface> = ({ se
             name="bills"
             className="input"
             placeholder="£"
-            value={bills}
-            onChange={handleBillsChange}
+            value={monthly_bill}
+            onChange={(event) => {setMonthly_bill(event.target.value)}}
           />
         </div>
 
@@ -57,8 +46,8 @@ export const RentBillsTaxComponent: React.FC<RentBillsTaxPropsInterface> = ({ se
             name="council-tax"
             className="input"
             placeholder="£"
-            value={councilTax}
-            onChange={handleCouncilTaxChange}
+            value={council_tax}
+            onChange={(event) => setCouncil_tax(event.target.value)}
           />
         </div>
       </form>
