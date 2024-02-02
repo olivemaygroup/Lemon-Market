@@ -1,5 +1,6 @@
 import React from 'react';
 import { Photo } from '@/app/types/types';
+import Button from '@mui/material/Button'
 
 interface PhotoUploadComponentProps {
   metricName: string;
@@ -22,8 +23,25 @@ const PhotoUploadComponent: React.FC<PhotoUploadComponentProps> = ({
 
   return (
     <form>
-      <label>Upload Photo</label>
-      <input type="file" accept=".jpg, .png, .jpeg" onChange={handleImageUpload} multiple />
+      <Button
+      variant="contained"
+      component="label"
+    >
+      Add Photo
+      <input
+        type="file"
+        accept=".jpg, .png, .jpeg"
+        onChange={handleImageUpload} multiple 
+        hidden/>
+      </Button>
+
+      {/* <label>Upload Photo</label> */}
+      {/* <input 
+      type="file" 
+       
+      
+      placeholder='Hello'
+      /> */}
     </form>
   );
 };

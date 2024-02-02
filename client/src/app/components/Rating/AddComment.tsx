@@ -29,7 +29,7 @@ const AddComment: React.FC<AddCommentInterface> = ({ metricName, commentState, c
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     commentSetter(input);
     handleClose();
@@ -46,8 +46,9 @@ const AddComment: React.FC<AddCommentInterface> = ({ metricName, commentState, c
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className='specific-comment-box'>
             <input
+              className="final_comment_input"
               value={input}
               onChange={(event) => setInput(event.target.value)}
               autoFocus

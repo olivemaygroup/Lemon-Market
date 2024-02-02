@@ -9,10 +9,11 @@ import reviewAPI from "../ApiServices/reviewAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import propertySlice from "@/lib/features/property/propertySlice";
+import styles from './page.module.css'
 
 
 export default function addReview() {
-
+  const address: string = '123 love lane'
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
   const property = useSelector((state: RootState) => state.property.value)
 
@@ -43,8 +44,9 @@ export default function addReview() {
   TODO: add general comment box
   TODO: ensure types of monthly rent bill and tax are all numbers = currently as you can see in the dbobject I have had to convert them to integers
   TODO: Fix tag system - allow it so different tags can be added to different photos.
-  TODO: data validation  = provide errors on inputs that haven't been filled etc - for example right now if no photos are uploaded it should error - make it so that either they have to upload photos or if photos are not uploaded to ensure backend works with it
+  TODO: data validation = Null? provide errors on inputs that haven't been filled etc - for example right now if no photos are uploaded it should error - make it so that either they have to upload photos or if photos are not uploaded to ensure backend works with it
   TODO: sort typescript = make it so that there are not type errors
+  TODO: comment box
   */
 
   const [dbReviewObject, setDBReviewObject] = useState<Review>({
@@ -168,30 +170,32 @@ export default function addReview() {
   let tempKey = 0;
 
   return (
-    <div className="review-subject-container">
+    <div className={styles.addreview_page}>
+      <div className={styles.address_title}>{address}</div>
+      <div className={styles.review_subject_container}>
+  
       <div className="rating-item">
-
         <TenancyDuration
           t_start={t_start}
           t_end={t_end}
           setT_end={setT_end}
           setT_start={setT_start}
-        />
+          />
       </div>
 
       {ratingMetrics.map((metric) => (
         <RatingContainer
-          key={tempKey++}
-          ratingState={metric.ratingState}
-          ratingSetter={metric.RatingSetter}
-          commentState={metric.commentState}
-          commentSetter={metric.commentSetter}
-          metricName={metric.name}
-          imageFiles={imageFiles}
-          setImageFiles={setImageFiles}
-          setImageURLs={setImageURLs}
+        key={tempKey++}
+        ratingState={metric.ratingState}
+        ratingSetter={metric.RatingSetter}
+        commentState={metric.commentState}
+        commentSetter={metric.commentSetter}
+        metricName={metric.name}
+        imageFiles={imageFiles}
+        setImageFiles={setImageFiles}
+        setImageURLs={setImageURLs}
         />
-      ))}
+        ))}
 
       <div className="rating-item">
         <RentBillsTaxComponent
@@ -201,10 +205,23 @@ export default function addReview() {
           setMonthly_rent={setMonthly_rent}
           setMonthly_bill={setMonthly_bill}
           setCouncil_tax={setCouncil_tax}
-        />
+          />
       </div>
 
-      <button className="rating-item" onClick={handleSubmit}>Submit Review</button>
+      <form className="rating-item">
+        <textarea
+        className={styles.final_comment_input} 
+        onChange={(event)=>{setGeneral_comment(event.target.value)}} 
+        placeholder="General comments"
+        >
+        </textarea>
+      </form>
+
+      <button 
+      className="rating-item" 
+      onClick={handleSubmit}
+      >Submit Review</button>
+          </div>
     </div>
   )
 };
