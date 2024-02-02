@@ -41,8 +41,6 @@ const MaintenanceRating: React.FC<RatingContainerInterface> = ({ dbReviewObject,
         setImageURLs={setImageURLs}
         />
         <AddComment 
-        TOPIC={TOPIC}
-        comment={comment}
         setComment={setComment}
         />
       </div>
