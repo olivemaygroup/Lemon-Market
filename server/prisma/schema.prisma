@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Property {
-  property_id             String   @id @unique
+  property_id    String   @id @unique
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   fullAddress    String
@@ -23,8 +23,8 @@ model Property {
 model Review {
   review_id                       Int       @id @default(autoincrement())
   review_date                     DateTime? @default(now())
-  t_start                         DateTime
-  t_end                           DateTime
+  t_start                         String
+  t_end                           String
   cleanliness                     Int
   cleanliness_comment             String?
   maintenance                     Int
@@ -38,9 +38,9 @@ model Review {
   landlord_responsiveness         Int
   landlord_responsiveness_comment String?
   total_review_rating             Int
-  monthly_rent                    Int
-  monthly_bill                    Int
-  council_tax                     Int
+  monthly_rent                    Int       @default(0)
+  monthly_bill                    Int       @default(0)
+  council_tax                     Int       @default(0)
   general_comment                 String
 
   property_id String

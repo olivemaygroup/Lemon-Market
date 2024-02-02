@@ -6,9 +6,14 @@ import { Review } from "@/app/types/types";
 import RatingContainer from "../components/Rating/RatingContainer";
 import cloudinaryImagesToURLS from "../ApiServices/cloudinaryAPI";
 import reviewAPI from "../ApiServices/reviewAPI";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
 
 
-export default function addReview () {
+export default function addReview() {
+
+  const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
+
 
   const [imageFiles, setImageFiles] = useState<File[]>([])
 
@@ -55,66 +60,66 @@ export default function addReview () {
     general_comment: '',
     photos: []
   });
-  
-  const ratingMetrics = [
-  {
-    name: "Cleanliness",
-    ratingState: cleanliness,
-    RatingSetter: setCleanliness,
-    commentState: cleanliness_comment,
-    commentSetter: setCleanliness_comment
-  },
-  {
-    name: "Maintenance",
-    ratingState: maintenance,
-    RatingSetter: setMaintenance,
-    commentState: maintenance_comment,
-    commentSetter: setMaintenance_comment
-  },
-  {
-    name: "Value For Money",
-    ratingState: value_for_money,
-    RatingSetter: setValue_for_money,
-    commentState: value_for_money_comment,
-    commentSetter: setValue_for_money_comment
-  },
-  {
-    name: "Deposit Handling",
-    ratingState: deposit_handling,
-    RatingSetter: setDeposit_handling,
-    commentState: deposit_handling_comment,
-    commentSetter: setDeposit_handling_comment
-  },
-  {
-    name: "Amenities",
-    ratingState: amenities,
-    RatingSetter: setAmenities,
-    commentState: amenities_comment,
-    commentSetter: setAmenities_comment
 
-  },
-  {
-    name: "Landlord Responsiveness",
-    ratingState: landlord_responsiveness,
-    RatingSetter: setLandlord_responsiveness,
-    commentState: landlord_responsiveness_comment,
-    commentSetter: setLandlord_responsiveness_comment
-  }
+  const ratingMetrics = [
+    {
+      name: "Cleanliness",
+      ratingState: cleanliness,
+      RatingSetter: setCleanliness,
+      commentState: cleanliness_comment,
+      commentSetter: setCleanliness_comment
+    },
+    {
+      name: "Maintenance",
+      ratingState: maintenance,
+      RatingSetter: setMaintenance,
+      commentState: maintenance_comment,
+      commentSetter: setMaintenance_comment
+    },
+    {
+      name: "Value For Money",
+      ratingState: value_for_money,
+      RatingSetter: setValue_for_money,
+      commentState: value_for_money_comment,
+      commentSetter: setValue_for_money_comment
+    },
+    {
+      name: "Deposit Handling",
+      ratingState: deposit_handling,
+      RatingSetter: setDeposit_handling,
+      commentState: deposit_handling_comment,
+      commentSetter: setDeposit_handling_comment
+    },
+    {
+      name: "Amenities",
+      ratingState: amenities,
+      RatingSetter: setAmenities,
+      commentState: amenities_comment,
+      commentSetter: setAmenities_comment
+
+    },
+    {
+      name: "Landlord Responsiveness",
+      ratingState: landlord_responsiveness,
+      RatingSetter: setLandlord_responsiveness,
+      commentState: landlord_responsiveness_comment,
+      commentSetter: setLandlord_responsiveness_comment
+    }
   ];
 
   const handleSubmit = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
-    const avgStars = await (cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness)/6
+    const avgStars = await (cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness) / 6
     setTotal_review_rating(avgStars)
 
     const gen_comment = "Submitting review for test..."
     setGeneral_comment(gen_comment)
-    
+
     const imageURLsArray: any = await cloudinaryImagesToURLS(imageFiles, 'test');
-    if (imageURLsArray){
+    if (imageURLsArray) {
       setImageURLs(imageURLsArray)
-    } 
+    }
 
     let reviewObject: Review = {
       t_start,
@@ -132,60 +137,62 @@ export default function addReview () {
       landlord_responsiveness,
       landlord_responsiveness_comment,
       total_review_rating: avgStars,
-      monthly_rent,
-      monthly_bill,
-      council_tax,
+      monthly_rent: +monthly_rent,
+      monthly_bill: +monthly_bill,
+      council_tax: +council_tax,
       general_comment: gen_comment,
       photos: imageURLsArray
     }
 
-    console.log(reviewObject);
 
-    const property_id = "ChIJJ-pWCs0PdkgRLWrC1aZxKro"
-    reviewAPI.addReview(property_id, reviewObject)
+    if (fullProperty.property_id !== '') {
+      reviewAPI.addReview(fullProperty.property_id, reviewObject)
+    } else {
+      console.error('property id is undefined')
+    }
 
   }
 
   let tempKey = 0;
 
   return (
-  <div className="review-subject-container">
-    <div className="rating-item">
+    <div className="review-subject-container">
+      <div className="rating-item">
 
-    <TenancyDuration 
-      t_start={t_start}
-      t_end={t_end}
-      setT_end={setT_end}
-      setT_start={setT_start}
-      />
-    </div>
+        <TenancyDuration
+          t_start={t_start}
+          t_end={t_end}
+          setT_end={setT_end}
+          setT_start={setT_start}
+        />
+      </div>
 
-    {ratingMetrics.map((metric) => (
-      <RatingContainer 
-      key={tempKey++}
-      ratingState={metric.ratingState}
-      ratingSetter={metric.RatingSetter}
-      commentState={metric.commentState}
-      commentSetter={metric.commentSetter}
-      metricName={metric.name}
-      imageFiles={imageFiles}
-      setImageFiles={setImageFiles}
-      setImageURLs={setImageURLs}
-      /> 
+      {ratingMetrics.map((metric) => (
+        <RatingContainer
+          key={tempKey++}
+          ratingState={metric.ratingState}
+          ratingSetter={metric.RatingSetter}
+          commentState={metric.commentState}
+          commentSetter={metric.commentSetter}
+          metricName={metric.name}
+          imageFiles={imageFiles}
+          setImageFiles={setImageFiles}
+          setImageURLs={setImageURLs}
+        />
       ))}
 
-    <div className="rating-item">
-    <RentBillsTaxComponent 
-    monthly_rent={monthly_rent}
-    monthly_bill={monthly_bill}
-    council_tax={council_tax}
-    setMonthly_rent={setMonthly_rent}
-    setMonthly_bill={setMonthly_bill}
-    setCouncil_tax={setCouncil_tax}
-    />
-    </div>
+      <div className="rating-item">
+        <RentBillsTaxComponent
+          monthly_rent={monthly_rent}
+          monthly_bill={monthly_bill}
+          council_tax={council_tax}
+          setMonthly_rent={setMonthly_rent}
+          setMonthly_bill={setMonthly_bill}
+          setCouncil_tax={setCouncil_tax}
+        />
+      </div>
 
-    <button className="rating-item" onClick={handleSubmit}>Submit Review</button>
-  </div>
+      <button className="rating-item" onClick={handleSubmit}>Submit Review</button>
+    </div>
   )
 };
