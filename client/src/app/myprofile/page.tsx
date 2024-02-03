@@ -27,7 +27,8 @@ const err: Error = {
   msg: "passwords must be over 6 charators long, contain at least 1 number & 1 uppercase letter and they must match",
 };
 
-// const item: Review
+// TODO: add check on whether the global state auth is true or false, rerouting the user to the login page
+
 
 export default function MyProfile () {
   const [edit, setEdit] = useState<boolean>(false)
@@ -77,7 +78,7 @@ export default function MyProfile () {
       const err: Error = {
         error: true,
         msg: "Error, User already exists",
-      }; 
+      };
       resetStates();
       setError(err);
     } else {
@@ -97,51 +98,51 @@ export default function MyProfile () {
             <div className={styles.attname}> last name :<p className={styles.att}>{user.lastName}</p></div>
             <div className={styles.attname}>email :<p className={styles.att}>{user.email}</p></div>
             <button className={styles.profilebtn} onClick={()=>setEdit(!edit)}>edit profile</button>
-          </div>):( 
+          </div>):(
             <form onSubmit={handleSubmit} className={styles.editdiv}>
-          <div className={styles.attname}>first name : 
-            <input 
-            type="text" 
-            className={styles.editinput} 
-            onChange={handleChange} 
+          <div className={styles.attname}>first name :
+            <input
+            type="text"
+            className={styles.editinput}
+            onChange={handleChange}
             name="firstName"
             value={state.firstName}
             placeholder={user.firstName}
           /></div>
-          <div className={styles.attname}>last name : 
-            <input 
-            type="text" 
-            className={styles.editinput} 
-            onChange={handleChange} 
+          <div className={styles.attname}>last name :
+            <input
+            type="text"
+            className={styles.editinput}
+            onChange={handleChange}
             name="lastName"
             value={state.lastName}
             placeholder={user.lastName}
           /></div>
-          <div className={styles.attname}>email : 
-            <input 
-            type="email" 
-            className={styles.editinput} 
-            onChange={handleChange} 
+          <div className={styles.attname}>email :
+            <input
+            type="email"
+            className={styles.editinput}
+            onChange={handleChange}
             name="email"
             value={state.email}
             placeholder={user.email}
           /></div>
-          <div className={styles.attname}>password : 
-            <input 
-            type="password" 
-            className={styles.editinput} 
-            onChange={(e)=>setPassword(e.target.value)} 
+          <div className={styles.attname}>password :
+            <input
+            type="password"
+            className={styles.editinput}
+            onChange={(e)=>setPassword(e.target.value)}
             name="password1"
           /></div>
-          <div className={styles.attname}> confrim password : 
-            <input 
-            type="password" 
-            className={styles.editinput} 
+          <div className={styles.attname}> confrim password :
+            <input
+            type="password"
+            className={styles.editinput}
             onChange={(e) => setPasswordCheck(e.target.value)}
-            onBlur={()=>{if(!passwordChecker(password)) setError(err)}} 
+            onBlur={()=>{if(!passwordChecker(password)) setError(err)}}
             name="password2"
           /></div>
-          
+
           <button className={styles.profilebtn} type="submit">submit changes</button>
           <button className={styles.profilebtn} onClick={()=>setEdit(!edit)} >back</button>
           </form>

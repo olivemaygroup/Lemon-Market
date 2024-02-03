@@ -16,7 +16,7 @@ import { GoBookmarkFill } from "react-icons/go";
 import { GoBookmark } from "react-icons/go";
 import favouriteAPIservice from "@/app/ApiServices/favouritesAPI";
 
-const PropertyCard = ({ fullProperty }: { fullProperty: PropertyType }) => {
+const PropertyCard = ({ fullProperty, profilePhoto }: { fullProperty: PropertyType, profilePhoto: string }) => {
 
   const [favouriteFlag, setFavouriteFlag] = React.useState<boolean>(false)
 
@@ -48,7 +48,7 @@ const PropertyCard = ({ fullProperty }: { fullProperty: PropertyType }) => {
         <Link href="/propertydetail" style={{ textDecoration: 'none', color: 'inherit' }} >
           <div className={styles.image_address_container}>
             <div className={styles.card_image}>
-              <img src="https://alto-live.s3.amazonaws.com/wvxuv4PRkq8d6Ptl1XeMpfyQWS4/trpskNcSCnw-FTY7tNK-qS43Ut8/Photo/%5B3%5D/hy8rawWs90qec_U6NO2pAQ.jpg" alt="" />
+              <img src={profilePhoto} />
             </div>
             <div className={styles.card_address}>
               <p>{fullProperty.fullAddress}</p>
