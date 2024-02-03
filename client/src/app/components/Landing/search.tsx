@@ -12,7 +12,9 @@ import { setReviewListSlice } from "@/lib/features/review/addReviewSlice";
 import { addProperty } from "@/lib/features/property/propertySlice";
 
 dotenv.config();
-const googleKey = process.env.GOOGLEPLACES;
+
+// console.log('google key',googleKey)
+
 
 interface AdrPro {
   value: {
@@ -53,7 +55,6 @@ const Search = () => {
           }
           }
         />
-        <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`} />
       </div>
     </>
   );
