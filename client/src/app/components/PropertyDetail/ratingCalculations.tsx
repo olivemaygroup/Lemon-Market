@@ -2,6 +2,7 @@ import { Review } from "@/app/types/review-types";
 
 export const cleanlinessRating = (reviews: Review[]): number => {
   const filteredReviews = reviews.filter(review => review.cleanliness !== 0);
+  console.log('rating calc, cleanliness', filteredReviews)
   const length: number = filteredReviews.length;
   const total: number = filteredReviews.reduce((total, review) => total + review.cleanliness, 0);
   const cleanlinessAverage: number = Math.round(total / length);
@@ -11,7 +12,7 @@ export const cleanlinessRating = (reviews: Review[]): number => {
 export const maintenanceRating = (reviews: Review[]): number => {
   const filteredReviews = reviews.filter(review => review.maintenance !== 0);
   const length: number = filteredReviews.length;
-  const total: number = filteredReviews.reduce((total, review) => total + review.cleanliness, 0);
+  const total: number = filteredReviews.reduce((total, review) => total + review.maintenance, 0);
   const maintenanceAverage: number = Math.round(total / length);
   return maintenanceAverage;
 };
@@ -19,7 +20,7 @@ export const maintenanceRating = (reviews: Review[]): number => {
 export const valueRating = (reviews: Review[]): number => {
   const filteredReviews = reviews.filter(review => review.value_for_money !== 0);
   const length: number = filteredReviews.length;
-  const total: number = filteredReviews.reduce((total, review) => total + review.cleanliness, 0);
+  const total: number = filteredReviews.reduce((total, review) => total + review.value_for_money, 0);
   const valueAverage: number = Math.round(total / length);
   return valueAverage;
 };
@@ -27,7 +28,7 @@ export const valueRating = (reviews: Review[]): number => {
 export const depositRating = (reviews: Review[]): number => {
   const filteredReviews = reviews.filter(review => review.deposit_handling !== 0);
   const length: number = filteredReviews.length;
-  const total: number = filteredReviews.reduce((total, review) => total + review.cleanliness, 0);
+  const total: number = filteredReviews.reduce((total, review) => total + review.deposit_handling, 0);
   const depositAverage: number = Math.round(total / length);
   return depositAverage;
 };
@@ -35,7 +36,7 @@ export const depositRating = (reviews: Review[]): number => {
 export const amenitiesRating = (reviews: Review[]): number => {
   const filteredReviews = reviews.filter(review => review.amenities !== 0);
   const length: number = filteredReviews.length;
-  const total: number = filteredReviews.reduce((total, review) => total + review.cleanliness, 0);
+  const total: number = filteredReviews.reduce((total, review) => total + review.amenities, 0);
   const amenitiesAverage: number = Math.round(total / length);
   return amenitiesAverage;
 };
@@ -43,7 +44,7 @@ export const amenitiesRating = (reviews: Review[]): number => {
 export const landlordRating = (reviews: Review[]): number => {
   const filteredReviews = reviews.filter(review => review.landlord_responsiveness !== 0);
   const length: number = filteredReviews.length;
-  const total: number = filteredReviews.reduce((total, review) => total + review.cleanliness, 0);
+  const total: number = filteredReviews.reduce((total, review) => total + review.landlord_responsiveness, 0);
   const landlordAverage: number = Math.round(total / length);
   return landlordAverage;
 };
@@ -51,7 +52,7 @@ export const landlordRating = (reviews: Review[]): number => {
 export const rentRating = (reviews: Review[]): number => {
   const filteredReviews = reviews.filter(review => review.monthly_rent !== 0);
   const length: number = filteredReviews.length;
-  const total: number = filteredReviews.reduce((total, review) => total + review.cleanliness, 0);
+  const total: number = filteredReviews.reduce((total, review) => total + review.monthly_rent, 0);
   const rentAverage: number = Math.round(total / length);
   return rentAverage;
 };
@@ -59,7 +60,7 @@ export const rentRating = (reviews: Review[]): number => {
 export const councilRating = (reviews: Review[]): number => {
   const filteredReviews = reviews.filter(review => review.council_tax !== 0);
   const length: number = filteredReviews.length;
-  const total: number = filteredReviews.reduce((total, review) => total + review.cleanliness, 0);
+  const total: number = filteredReviews.reduce((total, review) => total + review.council_tax, 0);
   const councilAverage: number = Math.round(total / length);
   return councilAverage;
 };

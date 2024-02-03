@@ -8,6 +8,9 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import NavBar from "@/app/components/Navbar/navbar";
 import styles from '@/app/page.module.css'
 import NavBar2 from "./components/Navbar2/navbar2";
+import dotev from 'dotenv'
+
+dotev.config()
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,11 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const googleKey = 'AIzaSyDAd7OruGIG3B8V1h-mljieNfYonubfYQY'
+  const googleKey = process.env.NEXT_PUBLIC_GOOGLEPLACES
 
   return (
     <html lang="en">
-
       <body>
       <AppRouterCacheProvider>
         <StoreProvider>
@@ -35,12 +37,12 @@ export default function RootLayout({
             <NavBar2></NavBar2>
           <div className="all_pages">
             {children}
-      <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`} />
           </div>
         </StoreProvider>
       </AppRouterCacheProvider>
       
       </body>
+      <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`} />
     </html>
   );
 }
