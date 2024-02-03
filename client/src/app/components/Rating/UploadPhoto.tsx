@@ -15,18 +15,17 @@ const PhotoUploadComponent: React.FC<PhotoUploadComponentProps> = ({ metricName,
     if (event.target.files && event.target.files.length > 0) {
       const newImagesArray: File[] = Array.from(event.target.files);
       const imagesObjectArray: ImageFileObject[] = newImagesArray.map( (image)=> {
-        return {file:image,tag:metricName}
-      })
+        return { file:image, tag:metricName }
+      });
       setImageFiles([...imageFiles, ...imagesObjectArray]);
-    }
+    };
   };
 
   return (
     <form>
       <Button
       variant="contained"
-      component="label"
-    >
+      component="label">
       Add Photo
       <input
         type="file"
@@ -34,14 +33,6 @@ const PhotoUploadComponent: React.FC<PhotoUploadComponentProps> = ({ metricName,
         onChange={handleImageUpload} multiple 
         hidden/>
       </Button>
-
-      {/* <label>Upload Photo</label> */}
-      {/* <input 
-      type="file" 
-       
-      
-      placeholder='Hello'
-      /> */}
     </form>
   );
 };
