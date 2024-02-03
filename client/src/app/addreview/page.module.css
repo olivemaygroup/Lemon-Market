@@ -5,9 +5,7 @@
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  width: 100vw;
 }
-
 
 .review_subject_container {
   min-width: 250px;
