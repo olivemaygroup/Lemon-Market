@@ -25,8 +25,8 @@
 
 .attname {
   display: flex;
-  gap: 5px;
-  justify-content: space-between;
+  gap: 7px;
+  /* justify-content: space-between; */
 }
 
 .att {
