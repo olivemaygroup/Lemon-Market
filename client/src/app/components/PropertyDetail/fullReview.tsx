@@ -6,6 +6,7 @@ import { Review } from '@/app/types/review-types';
 
 const FullReview = ({ item }: { item: Review }) => {
 
+  console.log(item, 'item')
 
   return (
   <div className="container">
