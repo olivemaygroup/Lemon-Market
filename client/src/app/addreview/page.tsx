@@ -169,10 +169,11 @@ export default function addReview() {
 
   return (
     <div className={styles.addreview_page}>
-      <div className={styles.address_title}>{address}</div>
+      <h1 className={styles.address_title}>{address}</h1>
       <div className={styles.review_subject_container}>
   
       <div className="rating-item">
+      <h4 className="title">Tenancy Dates</h4>
         <TenancyDuration
           t_start={t_start}
           t_end={t_end}
@@ -182,20 +183,23 @@ export default function addReview() {
       </div>
 
       {ratingMetrics.map((metric) => (
-        <RatingContainer
-        key={tempKey++}
-        ratingState={metric.ratingState}
-        ratingSetter={metric.RatingSetter}
-        commentState={metric.commentState}
-        commentSetter={metric.commentSetter}
-        metricName={metric.name}
-        imageFiles={imageFiles}
-        setImageFiles={setImageFiles}
-        setImageURLs={setImageURLs}
-        />
+        <div className='rating-item'> 
+          <RatingContainer
+          key={tempKey++}
+          ratingState={metric.ratingState}
+          ratingSetter={metric.RatingSetter}
+          commentState={metric.commentState}
+          commentSetter={metric.commentSetter}
+          metricName={metric.name}
+          imageFiles={imageFiles}
+          setImageFiles={setImageFiles}
+          setImageURLs={setImageURLs}
+          />
+        </div>
         ))}
 
       <div className="rating-item">
+      <h4 className="title">Rent, Bills & Council Tax </h4>
         <RentBillsTaxComponent
           monthly_rent={monthly_rent}
           monthly_bill={monthly_bill}

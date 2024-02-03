@@ -1,11 +1,4 @@
-@font-face {
-  font-family: 'virgil';
-  src: url('../../../../public/fonts/Virgil.woff2');
-}
 
-. {
-  font-family: virgil;
-}
 
 .rating-item {
   display: flex;
@@ -15,14 +8,16 @@
   border-style: solid;
   margin: 1.5vw;
   border-radius: 15px;
-  min-width: 300px;
-  height: 35vh;
+  max-width: 400px;
+  width: 70vw;
+  height: 50vh;
 }
 
 .rating-elements {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: 200px;
 }
 
 .rating-interactive {
@@ -33,8 +28,9 @@
 .title {
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   align-content: center;
+  text-align: center;
 }
 
 .specific-comment-box {
