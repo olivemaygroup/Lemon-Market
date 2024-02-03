@@ -18,9 +18,17 @@ const AddComment: React.FC<AddCommentInterface> = ({ metricName, commentState, c
     // setInput(''); // Resetting input
   };
 
+  const handleCancel = () => {
+    setInput('');
+    commentSetter('');
+    handleClose;
+  }
+
   return (
     <div>
-      <Button onClick={handleOpen}>Add Comment</Button>
+      <Button 
+      className='addreview-addcomment-btn'
+      onClick={handleOpen}>Add Comment</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -39,7 +47,7 @@ const AddComment: React.FC<AddCommentInterface> = ({ metricName, commentState, c
             />
 
             <div className='modal-btns-container'>
-            <button className='modal-btns' type="reset">Cancel</button>
+            <button className='modal-btns' onClick={handleCancel}>Cancel</button>
             <button className='modal-btns' type="submit">Save</button>
             </div>
 

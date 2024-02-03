@@ -40,6 +40,7 @@ const RatingContainer: React.FC<RatingContainerInterface> = (
           </div>
 
           <div className="rating-btns">
+            
           <PhotoUploadComponent 
           metricName={metricName}
           imageFiles={imageFiles}
