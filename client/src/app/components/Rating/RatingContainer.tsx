@@ -27,16 +27,19 @@ const RatingContainer: React.FC<RatingContainerInterface> = (
 
   return (
     <>
-      <h2 className="title">{metricName}</h2>
-        <div>
-    
+      <h1 className="title">{metricName}</h1>
+        <div className="rating-bits">
+
+          <div className='rating-interactive-icons'>
           <CustomizedRating 
           metricName={metricName}
           ratingState={ratingState}
           ratingSetter={ratingSetter}
           onRating={(rate: number) => ratingSetter(rate)} 
           />
+          </div>
 
+          <div className="rating-btns">
           <PhotoUploadComponent 
           metricName={metricName}
           imageFiles={imageFiles}
@@ -48,6 +51,8 @@ const RatingContainer: React.FC<RatingContainerInterface> = (
           commentState={commentState}
           commentSetter={commentSetter}
           />
+          </div>
+          
         </div>
     </>
   );

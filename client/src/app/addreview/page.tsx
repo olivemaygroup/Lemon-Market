@@ -173,7 +173,7 @@ export default function addReview() {
       <div className={styles.review_subject_container}>
   
       <div className="rating-item">
-      <h4 className="title">Tenancy Dates</h4>
+      <h1 className="title">Tenancy Dates</h1>
         <TenancyDuration
           t_start={t_start}
           t_end={t_end}
@@ -199,7 +199,7 @@ export default function addReview() {
         ))}
 
       <div className="rating-item">
-      <h4 className="title">Rent, Bills & Council Tax </h4>
+      <h1 className="title">Rent, Bills & Council Tax </h1>
         <RentBillsTaxComponent
           monthly_rent={monthly_rent}
           monthly_bill={monthly_bill}

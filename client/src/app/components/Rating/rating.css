@@ -11,6 +11,7 @@
   max-width: 400px;
   width: 70vw;
   height: 50vh;
+  flex: 2 8;
 }
 
 .rating-elements {
@@ -20,20 +21,40 @@
   margin-right: 200px;
 }
 
-.rating-interactive {
-  display: flex;
-  justify-content: center; 
-}
-
 .title {
   display: flex;
   justify-content: center;
   flex-direction: row;
   align-content: center;
   text-align: center;
+  margin-top: 3vh;
+  flex: 1;
+}
+
+.rating-bits {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  flex: 5
 }
 
 .specific-comment-box {
   display: flex;
   flex-direction: column;
+}
+
+.rating-interactive {
+  display: flex;
+  justify-content: center; 
+  width: 100%;
+  align-items: center;
+  align-self: center;
+  width: 70%;
+  size: 100px;
+}
+
+.rating-btns {
+
 }
