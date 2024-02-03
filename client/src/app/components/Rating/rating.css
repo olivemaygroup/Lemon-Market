@@ -160,11 +160,45 @@
 
 /* ADD COMMENT BUTTON */
 
-.addreview-addcomment-btn {
-  width: 50%;
-  height: 100%;
-  border-radius: 10px;
-  background-color: white;
-  font-family: virgil;
-  font-size: large;
+
+.addreview-add-btn.MuiButton-root {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 10px !important;
+  background-color: white !important;
+  font-family: Virgil, sans-serif !important; /* Ensure the font-family is correctly defined */
+  font-size: large !important;
+  color: #000 !important; 
+  border: solid !important; 
+  cursor: pointer !important; 
+  box-shadow: 24px 24px 48px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.addreview-submit-btn {
+  width: 70% !important;
+  height: 20% !important;
+  border-radius: 10px !important;
+  background-color: white !important;
+  font-family: Virgil, sans-serif !important; /* Ensure the font-family is correctly defined */
+  font-size: large !important;
+  color: #000 !important; 
+  cursor: pointer !important; 
+  box-shadow: 24px 24px 48px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.rating-item-submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-style: none;
+  margin: 1.5vw;
+  border-radius: 15px;
+  max-width: 400px;
+  width: 70vw;
+  height: 50vh;
+  flex: 2 8;
+  margin: 2vh;
 }

@@ -170,58 +170,60 @@ export default function addReview() {
       <h1 className={styles.address_title}>{address}</h1>
       <div className={styles.review_subject_container}>
   
-      <div className="rating-item">
-      <h1 className="title">Tenancy Dates</h1>
-        <TenancyDuration
-          t_start={t_start}
-          t_end={t_end}
-          setT_end={setT_end}
-          setT_start={setT_start}
-          />
-      </div>
-
-      {ratingMetrics.map((metric) => (
-        <div className='rating-item'> 
-          <RatingContainer
-          key={tempKey++}
-          ratingState={metric.ratingState}
-          ratingSetter={metric.RatingSetter}
-          commentState={metric.commentState}
-          commentSetter={metric.commentSetter}
-          metricName={metric.name}
-          imageFiles={imageFiles}
-          setImageFiles={setImageFiles}
-          setImageURLs={setImageURLs}
-          />
+        <div className="rating-item">
+        <h1 className="title">Tenancy Dates</h1>
+          <TenancyDuration
+            t_start={t_start}
+            t_end={t_end}
+            setT_end={setT_end}
+            setT_start={setT_start}
+            />
         </div>
-        ))}
 
-      <div className="rating-item">
-      <h1 className="title">Rent, Bills & Council Tax </h1>
-        <RentBillsTaxComponent
-          monthly_rent={monthly_rent}
-          monthly_bill={monthly_bill}
-          council_tax={council_tax}
-          setMonthly_rent={setMonthly_rent}
-          setMonthly_bill={setMonthly_bill}
-          setCouncil_tax={setCouncil_tax}
-          />
-      </div>
-
-      <form className="rating-item">
-        <textarea
-        className="general-comment-input" 
-        onChange={(event)=>{setGeneral_comment(event.target.value)}} 
-        placeholder="General comments"
-        >
-        </textarea>
-      </form>
-
-      <button 
-      className="rating-item" 
-      onClick={handleSubmit}
-      >Submit Review</button>
+        {ratingMetrics.map((metric) => (
+          <div className='rating-item'> 
+            <RatingContainer
+            key={tempKey++}
+            ratingState={metric.ratingState}
+            ratingSetter={metric.RatingSetter}
+            commentState={metric.commentState}
+            commentSetter={metric.commentSetter}
+            metricName={metric.name}
+            imageFiles={imageFiles}
+            setImageFiles={setImageFiles}
+            setImageURLs={setImageURLs}
+            />
           </div>
+          ))}
+
+        <div className="rating-item">
+        <h1 className="title">Rent, Bills & Council Tax </h1>
+          <RentBillsTaxComponent
+            monthly_rent={monthly_rent}
+            monthly_bill={monthly_bill}
+            council_tax={council_tax}
+            setMonthly_rent={setMonthly_rent}
+            setMonthly_bill={setMonthly_bill}
+            setCouncil_tax={setCouncil_tax}
+            />
+        </div>
+
+        <form className="rating-item">
+          <textarea
+          className="general-comment-input" 
+          onChange={(event)=>{setGeneral_comment(event.target.value)}} 
+          placeholder="General comments"
+          >
+          </textarea>
+        </form>
+
+        <div className="rating-item-submit" >
+          <button 
+          className="addreview-submit-btn"
+          onClick={handleSubmit}
+          >Submit Review</button>
+        </div>
+      </div>
     </div>
   )
 };
