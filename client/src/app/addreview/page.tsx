@@ -14,7 +14,6 @@ import propertySlice from "@/lib/features/property/propertySlice";
 export default function addReview() {
 
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
-  const property = useSelector((state: RootState) => state.property.value)
 
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [imageURLs, setImageURLs] = useState<any[]>([]);
@@ -118,8 +117,6 @@ export default function addReview() {
   const handleSubmit = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
-    const property_id = localStorage.getItem('property_id')
-
     const avgStars = await (cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness) / 6
     setTotal_review_rating(avgStars)
 
@@ -154,9 +151,8 @@ export default function addReview() {
       photos: imageURLsArray
     }
 
-    if (property_id) {
-      console.log(property_id)
-      reviewAPI.addReview(property_id, reviewObject)
+    if (fullProperty.property_id) {
+      reviewAPI.addReview(fullProperty.property_id, reviewObject)
     } else {
       console.error('property id is undefined')
     }
