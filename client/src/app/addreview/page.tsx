@@ -41,12 +41,10 @@ export default function addReview() {
   const [general_comment, setGeneral_comment] = useState<string>('');
 
   /*
-  TODO: add general comment box
+
   TODO: ensure types of monthly rent bill and tax are all numbers = currently as you can see in the dbobject I have had to convert them to integers
-  TODO: Fix tag system - allow it so different tags can be added to different photos.
   TODO: data validation = Null? provide errors on inputs that haven't been filled etc - for example right now if no photos are uploaded it should error - make it so that either they have to upload photos or if photos are not uploaded to ensure backend works with it
   TODO: sort typescript = make it so that there are not type errors
-  TODO: comment box
   TODO: introduce required for rating
   */
 
@@ -212,7 +210,7 @@ export default function addReview() {
 
       <form className="rating-item">
         <textarea
-        className={styles.final_comment_input} 
+        className="general-comment-input" 
         onChange={(event)=>{setGeneral_comment(event.target.value)}} 
         placeholder="General comments"
         >

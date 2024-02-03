@@ -35,8 +35,8 @@ export default function CustomizedRating({ ratingState, ratingSetter, metricName
           }}
           getLabelText={(value: number) => `${value} House${value !== 1 ? 's' : ''}`}
           precision={1}
-          icon={<CottageIcon style={{ fontSize: 50 }} />}
-          emptyIcon={<CottageIcon style={{ fontSize: 50 }} />}
+          icon={<CottageIcon style={{ fontSize: 45 }} />}
+          emptyIcon={<CottageIcon style={{ fontSize: 45 }} />}
           />
       </Box>
     </div>

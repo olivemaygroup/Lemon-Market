@@ -12,9 +12,9 @@ interface RentBillsTaxPropsInterface {
 export const RentBillsTaxComponent: React.FC<RentBillsTaxPropsInterface> = ({ monthly_rent, monthly_bill, council_tax, setMonthly_rent, setMonthly_bill, setCouncil_tax }) => {
 
   return (
-    <div>
-      <form>
-      <div className="rent-form">
+    <div className='form-container'>
+      <form className='rbt-form'>
+      <div className="rbt-form-input">
           <p>Rent PCM</p>
           <input 
             type="number"
@@ -26,7 +26,7 @@ export const RentBillsTaxComponent: React.FC<RentBillsTaxPropsInterface> = ({ mo
           />
         </div>
 
-        <div className="bills-form">
+        <div className="rbt-form-input">
           <div>
         <p>Bills PCM</p>
           </div>
@@ -40,7 +40,7 @@ export const RentBillsTaxComponent: React.FC<RentBillsTaxPropsInterface> = ({ mo
           />
         </div>
 
-        <div className="CouncilTax-form">
+        <div className="rbt-form-input">
           <p>Council Tax PCM</p>
           <input 
             type="number" 

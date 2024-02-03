@@ -18,6 +18,14 @@
   margin: 2vh;
 }
 
+.general-comment-input {
+  margin: 5px;
+  height: 90%;
+  width: 90%;
+  border-radius: 15px;
+  padding: 10px;
+}
+
 .rating-elements {
   display: flex;
   flex-direction: column;
@@ -59,10 +67,46 @@
   size: 100px;
 }
 
-.rating-btns {
 
+/* Rent, Bills & Council Tax */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
 }
 
+.rbt-form-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 15px;
+}
+
+/* TENANCY FORM */
+.tenancy-html-div-container {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+}
+
+.tenancy-html-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.tenancy-form-input {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+}
+
+.tenancy-html-input {
+  width: 100%;
+  border-radius: 10px;
+  background-color: white;
+  font-family: virgil;
+  font-size: large;
+}
 
 /* FOR MODAL COMMENT */
 .modal-container {
