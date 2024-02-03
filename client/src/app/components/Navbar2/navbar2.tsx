@@ -12,6 +12,8 @@ function NavBar2 () {
     setMenu(mCheck)
   }
 
+  
+
   return (
         
     <div className={styles.body}>
