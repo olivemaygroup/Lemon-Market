@@ -16,16 +16,21 @@ import {
 
 const RatingDetail = ({ reviewList }: {reviewList: Review[]}) => {
 
-  const cleanlinessAverage = cleanlinessRating(reviewList)
-  const maintenanceAverage = maintenanceRating(reviewList)
-  const valueAverage = valueRating(reviewList)
-  const depositAverage = depositRating(reviewList)
-  const amenitiesAverage = amenitiesRating(reviewList)
-  const landlordAverage = landlordRating(reviewList)
-  const rentAverage = rentRating(reviewList)
-  const councilAverage = councilRating(reviewList)
+  console.log('reviewList at detail',reviewList)
+  let cleanlinessAverage = cleanlinessRating(reviewList)
+  let maintenanceAverage = maintenanceRating(reviewList)
+  let valueAverage = valueRating(reviewList)
+  let depositAverage = depositRating(reviewList)
+  let amenitiesAverage = amenitiesRating(reviewList)
+  let landlordAverage = landlordRating(reviewList)
+  let rentAverage = rentRating(reviewList)
+  let councilAverage = councilRating(reviewList)
 
   console.log('Cleanliness at rating detail', cleanlinessAverage)
+  console.log('maintenance at rating detail', maintenanceAverage)
+  console.log('value at rating detail', valueAverage)
+  console.log('deposit at rating detail', depositAverage)
+
   return (
     <div className="container">
       <div className="cleanliness">
@@ -47,10 +52,10 @@ const RatingDetail = ({ reviewList }: {reviewList: Review[]}) => {
        <div><h2>Landlord responsiveness</h2><span><ReadonlyRating rating={landlordAverage} /></span></div>
       </div>
       <div className="monthly">
-        <div><h2>Rent PCM</h2><span><ReadonlyRating rating={rentAverage} /></span></div>
+        <div><h2>Rent PCM</h2><span>{rentAverage}</span></div>
       </div>
       <div className="council">
-        <div><h2>Council tax PCM</h2><span><ReadonlyRating rating={councilAverage} /></span></div>
+        <div><h2>Council tax PCM</h2><span>{councilAverage}</span></div>
       </div>
     </div>
   )

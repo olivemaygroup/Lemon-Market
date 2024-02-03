@@ -4,12 +4,17 @@ import { RootState } from "@/lib/store"
 import { useSelector, useDispatch } from "react-redux"
 import { setUserSlice } from "@/lib/features/user/userSlice"
 import styles from "./page.module.css"
-import { Error, NewUser, Password, Review, UserType } from "../types/types"
-import { useState } from "react"
+import { Error, NewUser, UserType } from "../types/types"
+import { PropertyType, PropertyTypeFull } from "../types/property-type";
+import { useState, useEffect } from "react"
 import { passwordChecker } from "../ApiServices/apiServices"
 import userAPI from "../ApiServices/userAPI"
 import ProperetyCardContainer from '../components/Landing/propertyCardContainer';
 import FullReview from '../components/PropertyDetail/fullReview';
+import favouriteAPIservice from '../ApiServices/favouritesAPI';
+import reviewAPI from '../ApiServices/reviewAPI';
+import { addFullProperty } from '@/lib/features/property/fullProperty';
+import PropertyCard from '../components/Landing/propertyCard';
 
 
 const initilaState: NewUser = {
@@ -30,16 +35,45 @@ const err: Error = {
 // const item: Review
 
 export default function MyProfile () {
+  // profile and update profile states...
   const [edit, setEdit] = useState<boolean>(false)
   const [state, setState] = useState(initilaState)
   const [password, setPassword] = useState('')
   const [passwordCheck, setPasswordCheck] = useState('')
   const [error, setError] = useState(initialError)
+  // user's reviews states...
+  const [favourites, setFavourites] = useState<PropertyType[] | null>(null)
+  const [myReviews, setReviews] = useState<PropertyTypeFull[] | null>(null)
+
 
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.value)
   const token1:string | null = localStorage.getItem('accessToken')
   const token: string = token1 as string
+
+  useEffect(() => {
+    favouriteAPIservice.getFavourites()
+      .then((res) => {
+        if (res) {
+          setFavourites(res)
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+    })
+
+    reviewAPI.getMyReviews()
+      .then((res) => {
+        if (res) {
+          console.log('RES_',res)
+          setReviews(res)
+          // dispatch(addFullProperty(usersReviews))
+          // console.log('USER REVIEWS', usersReviews)
+        }
+      }).catch((error) => {
+        console.error(error)
+    })
+  }, [])
 
   const handleChange = (e: any) => {
     if (e.target.name !== "password2" || "password1") {
@@ -93,9 +127,9 @@ export default function MyProfile () {
         <h2>{user.firstName}'s profile</h2>
         {!edit? (
           <div className={styles.editdiv}>
-            <div className={styles.attname}>first name :<p className={styles.att}>{user.firstName}</p></div>
-            <div className={styles.attname}> last name :<p className={styles.att}>{user.lastName}</p></div>
-            <div className={styles.attname}>email :<p className={styles.att}>{user.email}</p></div>
+            <div className={styles.attname}>first name:<p className={styles.att}>{user.firstName}</p></div>
+            <div className={styles.attname}> last name:<p className={styles.att}>{user.lastName}</p></div>
+            <div className={styles.attname}>email:<p className={styles.att}>{user.email}</p></div>
             <button className={styles.profilebtn} onClick={()=>setEdit(!edit)}>edit profile</button>
           </div>):( 
             <form onSubmit={handleSubmit} className={styles.editdiv}>
@@ -153,7 +187,9 @@ export default function MyProfile () {
         <h2>{user.firstName}'s reviews</h2>
       <div className={styles.reviews}>
           <div className={styles.swipebox}>
-            {/* <FullReview/> */}
+            {myReviews?.map((review)=>(
+              <PropertyCard fullProperty={review}/>
+            ))}
           </div>
       </div>
       <div className={styles.divide}>

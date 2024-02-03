@@ -13,7 +13,6 @@ import { addProperty } from "@/lib/features/property/propertySlice";
 
 dotenv.config();
 
-// console.log('google key',googleKey)
 
 
 interface AdrPro {
