@@ -1,4 +1,7 @@
-
+@font-face {
+  font-family: 'virgil';
+  src: url('../../../../public/fonts/Virgil.woff2');
+}
 
 .rating-item {
   display: flex;
@@ -12,6 +15,7 @@
   width: 70vw;
   height: 50vh;
   flex: 2 8;
+  margin: 2vh;
 }
 
 .rating-elements {
@@ -58,3 +62,52 @@
 .rating-btns {
 
 }
+
+
+/* FOR MODAL COMMENT */
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: 50vh;
+  margin-top: 6vh;
+  background-color: #fff; /* Assuming 'background.paper' maps to white */
+  border: 2px solid #000;
+  box-shadow: 24px 24px 48px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  border-radius: 15px;
+  max-width: 400px;
+  min-height: 270px;
+}
+
+.specific-comment-box {
+  height: 100%;
+}
+
+.comment_input {
+  margin: 5px;
+  height: 100%;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.modal-btns-container {
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.modal-btns{
+  width: 50%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: white;
+  font-family: virgil;
+  font-size: large;
+ }
