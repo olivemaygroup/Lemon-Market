@@ -23,9 +23,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
+  const googleKey = 'AIzaSyDAd7OruGIG3B8V1h-mljieNfYonubfYQY'
 
   return (
     <html lang="en">
+
       <body>
       <AppRouterCacheProvider>
         <StoreProvider>
@@ -33,6 +35,7 @@ export default function RootLayout({
             <NavBar2></NavBar2>
           <div className="all_pages">
             {children}
+      <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`} />
           </div>
         </StoreProvider>
       </AppRouterCacheProvider>

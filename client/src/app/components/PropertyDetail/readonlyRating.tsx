@@ -15,7 +15,7 @@ const StyledRating = styled(Rating)({
 });
 
 interface ReadonlyRatingProps {
-  rating: number;
+  rating: number | undefined;
 }
 
 export default function ReadonlyRating({ rating }: ReadonlyRatingProps) {

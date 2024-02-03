@@ -9,7 +9,7 @@ import { Review } from "../types/review-types";
 import { useDispatch, useSelector } from "react-redux";
 import { setReviewListSlice } from "@/lib/features/review/addReviewSlice";
 import favouriteAPIservice from "../ApiServices/favouritesAPI";
-import { PropertyType } from "../types/property-type";
+import { PropertyType, PropertyTypeFull } from "../types/property-type";
 import PropertyCard from "../components/Landing/propertyCard";
 import FullReview from "../components/PropertyDetail/fullReview";
 
@@ -21,7 +21,7 @@ const profileReviewsPropertyContainer = () => {
   const property = useSelector((state: RootState) => state.property.value)
 
   const [favourites, setFavourites] = useState<PropertyType[] | null>(null)
-  const [reviews, setReviews] = useState<Review[] | null>(null)
+  const [reviewsWithProperty, setReviews] = useState<PropertyTypeFull[] | null>(null)
 
   useEffect(() => {
     favouriteAPIservice.getFavourites()
@@ -35,13 +35,16 @@ const profileReviewsPropertyContainer = () => {
       })
 
     reviewAPI.getMyReviews()
+      // now get reviews with the property information
       .then((res) => {
         if (res) {
           setReviews(res)
         }
       }).catch((error) => {
-        console.log(error)
+        console.error(error)
       })
+
+
   }, [])
 
   return (
@@ -51,10 +54,18 @@ const profileReviewsPropertyContainer = () => {
         <PropertyCard key={property.property_id} fullProperty={property} />
       ))}
       <h2> My Reviews: </h2>
-      {reviews && reviews.map((item, index) => (
-        <div key={index}>
-          <FullReview item={item} />
-        </div>
+      {reviewsWithProperty && reviewsWithProperty.map((property, index) => (
+        <>
+          {/* This now renderers property with a reviews array. It will then render all the appropriate reviews for each property a user may have*/}
+          <h1> {property.fullAddress}</h1>
+          <div key={property.property_id}>
+            {property.reviews.map((review, index) => (
+              <div key={index}>
+                <FullReview item={review} />
+              </div>
+            ))}
+          </div>
+        </>
       ))}
     </div>
   );

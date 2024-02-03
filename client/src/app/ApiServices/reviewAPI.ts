@@ -1,3 +1,4 @@
+import { PropertyTypeFull } from "../types/property-type";
 import { Review } from "../types/review-types";
 import handleAuthenticationError from "../utils/auth-router";
 
@@ -37,9 +38,11 @@ const addReview = async (
   }
 };
 
-const getMyReviews = async (): Promise<Review[] | undefined> => {
+const getMyReviews = async (): Promise<PropertyTypeFull[] | undefined> => {
   try {
+
     const accessToken = localStorage.getItem('accessToken')
+
     if (!accessToken) {
       handleAuthenticationError();
       return
@@ -60,7 +63,7 @@ const getMyReviews = async (): Promise<Review[] | undefined> => {
       return undefined
     }
 
-    const allReviews: Review[] = await response.json();
+    const allReviews: PropertyTypeFull[] = await response.json();
 
     //return all the reviews
     return allReviews;

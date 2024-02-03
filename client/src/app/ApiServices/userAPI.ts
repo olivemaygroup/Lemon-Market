@@ -26,25 +26,27 @@ const login = async (user: Login) => {
   })
   if (response.status === 401) return 401;
   return response.json()
-  
-} 
+
+}
 
 const editProfile = async (newUser: NewUser, accessToken: string): Promise<any> => {
   try {
     const res = await fetch(`${BASE_URL}/editprofile`, {
       method: 'PUT',
       mode: 'cors',
-      headers: { 'Content-Type': 'application/json',
-      'authorization': accessToken },
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': accessToken
+      },
       body: JSON.stringify(newUser),
     })
 
     if (res.status === 409) {
       return 409;
     }
-    console.log('api RES',res)
+    console.log('api RES', res)
     const tenantWithAccessToken = await res.json()
-    console.log('TWAT--',tenantWithAccessToken)
+    console.log('TWAT--', tenantWithAccessToken)
     return tenantWithAccessToken
   } catch (err) {
     console.log(err)
