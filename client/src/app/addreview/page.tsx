@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import propertySlice from "@/lib/features/property/propertySlice";
 import styles from './page.module.css'
+import { ImageFileObject } from "../types/review-types";
 
 
 export default function addReview() {
@@ -17,7 +18,7 @@ export default function addReview() {
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
   const property = useSelector((state: RootState) => state.property.value)
 
-  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [imageFiles, setImageFiles] = useState<ImageFileObject[]>([]);
   const [imageURLs, setImageURLs] = useState<any[]>([]);
   const [t_start, setT_start] = useState<string>('');
   const [t_end, setT_end] = useState<string>('');
@@ -46,6 +47,7 @@ export default function addReview() {
   TODO: data validation = Null? provide errors on inputs that haven't been filled etc - for example right now if no photos are uploaded it should error - make it so that either they have to upload photos or if photos are not uploaded to ensure backend works with it
   TODO: sort typescript = make it so that there are not type errors
   TODO: comment box
+  TODO: introduce required for rating
   */
 
   const [dbReviewObject, setDBReviewObject] = useState<Review>({
@@ -120,15 +122,13 @@ export default function addReview() {
   const handleSubmit = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
-    const property_id = localStorage.getItem('property_id')
-
     const avgStars = await (cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness) / 6
     setTotal_review_rating(avgStars)
 
     const gen_comment = "Submitting review for test..."
     setGeneral_comment(gen_comment)
 
-    const imageURLsArray: any = await cloudinaryImagesToURLS(imageFiles, 'test');
+    const imageURLsArray: any = await cloudinaryImagesToURLS(imageFiles);
     if (imageURLsArray) {
       setImageURLs(imageURLsArray)
     }
@@ -156,9 +156,9 @@ export default function addReview() {
       photos: imageURLsArray
     }
 
-    if (property_id) {
-      console.log(property_id)
-      reviewAPI.addReview(property_id, reviewObject)
+    if (fullProperty.property_id != "") {
+      console.log('🔥',fullProperty.property_id)
+      reviewAPI.addReview(fullProperty.property_id, reviewObject)
     } else {
       console.error('property id is undefined')
     }

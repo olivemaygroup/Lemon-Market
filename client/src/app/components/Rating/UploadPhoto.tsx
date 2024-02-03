@@ -1,23 +1,23 @@
 import React from 'react';
 import { Photo } from '@/app/types/types';
 import Button from '@mui/material/Button'
+import { ImageFileObject } from '@/app/types/review-types';
 
 interface PhotoUploadComponentProps {
   metricName: string;
-  imageFiles: File[];
-  setImageFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  imageFiles: ImageFileObject[];
+  setImageFiles: React.Dispatch<React.SetStateAction<ImageFileObject[]>>;
 };
 
-const PhotoUploadComponent: React.FC<PhotoUploadComponentProps> = ({
-  metricName,
-  imageFiles,
-  setImageFiles
-}) => {
+const PhotoUploadComponent: React.FC<PhotoUploadComponentProps> = ({ metricName, imageFiles, setImageFiles}) => {
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       const newImagesArray: File[] = Array.from(event.target.files);
-      setImageFiles(prevImages => [...prevImages, ...newImagesArray]);
+      const imagesObjectArray: ImageFileObject[] = newImagesArray.map( (image)=> {
+        return {file:image,tag:metricName}
+      })
+      setImageFiles([...imageFiles, ...imagesObjectArray]);
     }
   };
 

@@ -26,3 +26,8 @@ export interface Photo {
   tag: string;
   photo_id: number
 }
+
+export interface ImageFileObject {
+  file: File;
+  tag: string
+};
