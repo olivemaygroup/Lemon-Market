@@ -1,0 +1,30 @@
+
+
+.addreview_page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.review_subject_container {
+  min-width: 250px;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+}
+
+.address_title {
+  display: flex;
+  position: absolute;
+  margin-top: -20px;
+}
+
+.final_comment_input {
+  display: flex;
+  height: 75%;
+  width: 75%;
+}
+.carousel-root .carousel {
+  background-color: red;
+}
