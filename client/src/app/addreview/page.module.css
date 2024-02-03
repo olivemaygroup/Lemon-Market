@@ -8,16 +8,17 @@
 }
 
 .review_subject_container {
-  min-width: 250px;
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
+  margin-left:90%;
 }
 
 .address_title {
   display: flex;
   position: absolute;
-  margin-top: -20px;
+  margin-top: -50px;
+  font-size: 35;
 }
 
 .final_comment_input {
@@ -25,6 +26,4 @@
   height: 75%;
   width: 75%;
 }
-.carousel-root .carousel {
-  background-color: red;
-}
+
