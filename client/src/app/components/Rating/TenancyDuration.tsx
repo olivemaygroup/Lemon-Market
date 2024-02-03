@@ -13,7 +13,7 @@ const TenancyDuration: React.FC<TenancyDurationPropsInterface> = ({ t_start, t_e
   return (
     <div>
       <form >
-        <h4>Tenancy Dates</h4>
+        <h4 className='title'>Tenancy Dates</h4>
         <div>
           <label>Tenancy Start:</label>
           <input
