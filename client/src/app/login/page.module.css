@@ -14,7 +14,7 @@
 }
 
 .phone_box {
-  margin-top: -90px;
+  /* margin-top: -90px; */
   height: 100%;
   width: 350px;
   display: flex;
