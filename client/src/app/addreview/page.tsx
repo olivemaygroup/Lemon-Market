@@ -166,7 +166,7 @@ export default function addReview() {
 
   return (
     <div className={styles.addreview_page}>
-      <h1 className={styles.address_title}>{address}</h1>
+      <h1 className={styles.address_title}>{fullProperty.fullAddress}</h1>
       <div className={styles.review_subject_container}>
 
         <div className="rating-item">
