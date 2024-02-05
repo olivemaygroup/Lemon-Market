@@ -20,11 +20,12 @@ interface ReadonlyRatingProps {
 
 export default function ReadonlyRating({ rating }: ReadonlyRatingProps) {
   return (
-    <Box sx={{ '& > legend': { mt: 2 } }}>
+    <Box sx={{ '& > legend': { mt: 2 } }} >
       <StyledRating
+        data-testid='readonly-rating'
         name={`rating`} 
         value={rating} 
-        getLabelText={(value: number) => `${value} Heart${value !== 1 ? 's' : ''}`}
+        getLabelText={(value: number) => `${value}`}
         precision={1}
         icon={<CottageIcon fontSize="inherit" />}
         emptyIcon={<CottageIcon fontSize="inherit" />}

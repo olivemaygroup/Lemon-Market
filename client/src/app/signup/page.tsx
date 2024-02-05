@@ -32,7 +32,7 @@ export default function Signup() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const handleChange = (e: any) => {
+  const handleChange : React.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.name !== "password2"|| "password") {
       const { name, value } = e.target;
       setState((prevState) => ({
@@ -48,7 +48,7 @@ export default function Signup() {
     setPasswordCheck('')
   }
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     let newUser:NewUser = state
     if (passwordCheck===password1 && password1.length>=6) {

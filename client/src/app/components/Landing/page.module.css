@@ -45,6 +45,12 @@
   display: block;
 }
 
+.no_image_available{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .card_address {
   display: flex;
   align-items: center;

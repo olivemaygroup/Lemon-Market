@@ -16,7 +16,6 @@ import { ImageFileObject } from "../types/review-types";
 export default function addReview() {
   const address: string = '123 love lane'
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
-  const property = useSelector((state: RootState) => state.property.value)
 
   const [imageFiles, setImageFiles] = useState<ImageFileObject[]>([]);
   const [imageURLs, setImageURLs] = useState<any[]>([]);
@@ -155,7 +154,7 @@ export default function addReview() {
     }
 
     if (fullProperty.property_id != "") {
-      console.log('🔥',fullProperty.property_id)
+      console.log('🔥', fullProperty.property_id)
       reviewAPI.addReview(fullProperty.property_id, reviewObject)
     } else {
       console.error('property id is undefined')
@@ -169,7 +168,7 @@ export default function addReview() {
     <div className={styles.addreview_page}>
       <h1 className={styles.address_title}>{fullProperty.fullAddress}</h1>
       <div className={styles.review_subject_container}>
-  
+
         <div className="rating-item">
         <h1 className="title">Tenancy Dates</h1>
           <TenancyDuration
@@ -181,7 +180,7 @@ export default function addReview() {
         </div>
 
         {ratingMetrics.map((metric) => (
-          <div className='rating-item'> 
+          <div className='rating-item'>
             <RatingContainer
             key={tempKey++}
             ratingState={metric.ratingState}
@@ -210,15 +209,15 @@ export default function addReview() {
 
         <form className="rating-item">
           <textarea
-          className="general-comment-input" 
-          onChange={(event)=>{setGeneral_comment(event.target.value)}} 
+          className="general-comment-input"
+          onChange={(event)=>{setGeneral_comment(event.target.value)}}
           placeholder="General comments"
           >
           </textarea>
         </form>
 
         <div className="rating-item-submit" >
-          <button 
+          <button
           className="addreview-submit-btn"
           onClick={handleSubmit}
           >Submit Review</button>
