@@ -3,12 +3,16 @@ import styles from './page.module.css'
 import logOut from '../ApiServices/userAPI'
 import Link from 'next/link'
 import { useRouter } from "next/navigation";
+import { useDispatch } from 'react-redux';
+import { changeAuthStatus } from '@/lib/features/authentication/authSlice';
 
 export default function logout () {
   const router = useRouter()
+  const dispatch = useDispatch()
 
   const handleClickLogout = async () => {
     await logOut.logOut();
+    dispatch(changeAuthStatus(false))
     router.push('/home')
   }
     
