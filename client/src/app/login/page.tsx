@@ -21,7 +21,7 @@ export default function Login() {
   const [error, setError] = useState<Error>(initialError)
   const router = useRouter();
 
-  const tryLogin = async (e: any): Promise<any | null> => {
+  const tryLogin = async (e: React.SyntheticEvent): Promise<any | null> => {
     e.preventDefault();
 
     const user: Login = {

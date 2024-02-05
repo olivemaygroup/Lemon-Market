@@ -75,7 +75,7 @@ export default function MyProfile () {
     })
   }, [])
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name !== "password2" || "password1") {
       const { name, value } = e.target;
       setState((prevState) => ({
@@ -91,7 +91,7 @@ export default function MyProfile () {
     setPasswordCheck('')
   }
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     let newUser:NewUser = state
     if (passwordCheck===password) {
