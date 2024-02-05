@@ -101,6 +101,23 @@ const myProfile = async (ctx: Context) => {
   }
 };
 
+const checkUser = async (ctx: Context) => {
+  try {
+    const tenant: Tenant = ctx.state.tenant;
+    if (tenant) {
+      ctx.body = 'user logged in'
+      ctx.status = 200;
+    } else {
+      ctx.body = 'user not authenticated'
+      ctx.status = 401;
+    }
+  } catch (error) {
+    console.error(error)
+    ctx.body = "error checking user"
+    ctx.status = 500
+  }
+};
+
 const editProfile = async (ctx: Context) => {
   const { firstName, lastName, email, password } = ctx.request.body as Contact;
   try {
@@ -158,6 +175,6 @@ const deleteAccount = async (ctx: Context) => {
 
 
 };
-const userProfile = { signup, login, myProfile, editProfile, deleteAccount };
+const userProfile = { signup, login, myProfile, editProfile, deleteAccount,checkUser };
 
 export default userProfile;

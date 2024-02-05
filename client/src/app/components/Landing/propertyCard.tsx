@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { PropertyType } from "@/app/types/property-type";
 
 
+
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { GoBookmarkFill } from "react-icons/go";

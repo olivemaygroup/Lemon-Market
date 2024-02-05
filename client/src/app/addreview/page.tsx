@@ -156,7 +156,7 @@ export default function addReview() {
     }
 
     if (fullProperty.property_id != "") {
-      console.log('🔥',fullProperty.property_id)
+      console.log('🔥', fullProperty.property_id)
       reviewAPI.addReview(fullProperty.property_id, reviewObject)
     } else {
       console.error('property id is undefined')
@@ -171,54 +171,54 @@ export default function addReview() {
       <div className={styles.address_title}>{address}</div>
       <div className={styles.review_subject_container}>
 
-      <div className="rating-item">
-        <TenancyDuration
-          t_start={t_start}
-          t_end={t_end}
-          setT_end={setT_end}
-          setT_start={setT_start}
+        <div className="rating-item">
+          <TenancyDuration
+            t_start={t_start}
+            t_end={t_end}
+            setT_end={setT_end}
+            setT_start={setT_start}
           />
-      </div>
+        </div>
 
-      {ratingMetrics.map((metric) => (
-        <RatingContainer
-        key={tempKey++}
-        ratingState={metric.ratingState}
-        ratingSetter={metric.RatingSetter}
-        commentState={metric.commentState}
-        commentSetter={metric.commentSetter}
-        metricName={metric.name}
-        imageFiles={imageFiles}
-        setImageFiles={setImageFiles}
-        setImageURLs={setImageURLs}
-        />
+        {ratingMetrics.map((metric) => (
+          <RatingContainer
+            key={tempKey++}
+            ratingState={metric.ratingState}
+            ratingSetter={metric.RatingSetter}
+            commentState={metric.commentState}
+            commentSetter={metric.commentSetter}
+            metricName={metric.name}
+            imageFiles={imageFiles}
+            setImageFiles={setImageFiles}
+            setImageURLs={setImageURLs}
+          />
         ))}
 
-      <div className="rating-item">
-        <RentBillsTaxComponent
-          monthly_rent={monthly_rent}
-          monthly_bill={monthly_bill}
-          council_tax={council_tax}
-          setMonthly_rent={setMonthly_rent}
-          setMonthly_bill={setMonthly_bill}
-          setCouncil_tax={setCouncil_tax}
+        <div className="rating-item">
+          <RentBillsTaxComponent
+            monthly_rent={monthly_rent}
+            monthly_bill={monthly_bill}
+            council_tax={council_tax}
+            setMonthly_rent={setMonthly_rent}
+            setMonthly_bill={setMonthly_bill}
+            setCouncil_tax={setCouncil_tax}
           />
+        </div>
+
+        <form className="rating-item">
+          <textarea
+            className={styles.final_comment_input}
+            onChange={(event) => { setGeneral_comment(event.target.value) }}
+            placeholder="General comments"
+          >
+          </textarea>
+        </form>
+
+        <button
+          className="rating-item"
+          onClick={handleSubmit}
+        >Submit Review</button>
       </div>
-
-      <form className="rating-item">
-        <textarea
-        className={styles.final_comment_input}
-        onChange={(event)=>{setGeneral_comment(event.target.value)}}
-        placeholder="General comments"
-        >
-        </textarea>
-      </form>
-
-      <button
-      className="rating-item"
-      onClick={handleSubmit}
-      >Submit Review</button>
-          </div>
     </div>
   )
 };

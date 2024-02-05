@@ -1,6 +1,7 @@
 import { Profile } from "next-auth";
 import { LogIn, NewUser } from "../types/tenant-types";
 import { Login } from "../types/types";
+import handleAuthenticationError from "../utils/auth-router";
 
 // const BASE_URL = process.env.SERVER_URL;
 const BASE_URL = 'http://localhost:3001'
@@ -54,6 +55,34 @@ const editProfile = async (newUser: NewUser, accessToken: string): Promise<any> 
   }
 }
 
+const checkUser = async (): Promise<void> => {
+  const accessToken = localStorage.getItem('accessToken')
+
+  if (!accessToken) {
+    handleAuthenticationError();
+    return
+  }
+  try {
+    const res = await fetch(`${BASE_URL}/checkUser`, {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': accessToken
+      },
+    })
+
+    if (res.status === 401) {
+      handleAuthenticationError();
+    }
+
+  } catch (error) {
+    console.log(error)
+    handleAuthenticationError();
+
+  }
+}
+
 
 const logOut = (): string => {
   const accessToken = localStorage.getItem('accessToken')
@@ -67,6 +96,6 @@ const logOut = (): string => {
 }
 
 
-const userAPI = { signUp, login, logOut, editProfile }
+const userAPI = { signUp, login, logOut, editProfile, checkUser }
 
 export default userAPI
