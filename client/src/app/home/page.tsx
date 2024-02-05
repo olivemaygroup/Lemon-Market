@@ -1,5 +1,5 @@
 'use client'
-import Image from "next/image";
+import logo from '../../../public/icons/TLM-icon-152x152.jpg'
 import styles from "@/app/home/page.module.css";
 import Search from "@/app/components/Landing/search";
 import { useState, useEffect, use } from "react";
@@ -37,6 +37,9 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <Search></Search>
+      {/* <div className={styles.backdrop}>
+        <img className={styles.logo} src={logo.src} alt="" />
+      </div> */}
       {showProperty &&
         <ProperetyCardContainer />
       }
