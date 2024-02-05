@@ -1,11 +1,14 @@
 import { useRouter } from "next/router";
 
-const authRouter = () => {
-  console.log('USER unauthenticated YET TO BE FIXED ON THE FRONT END - we need to create global boolean state to track this')
-};
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+import { changeAuthStatus } from "@/lib/features/authentication/authSlice";
+
+
 
 const handleAuthenticationError = () => {
-  authRouter();
+  const dispatch = useDispatch();
+  dispatch(changeAuthStatus(false))
   console.error("User not authenticated");
   return undefined
 };

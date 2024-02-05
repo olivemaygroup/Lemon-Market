@@ -16,6 +16,7 @@ router.post("/login", userProfile.login);
 router.get("/myprofile", authMiddleware, userProfile.myProfile);
 router.put("/editprofile", authMiddleware, userProfile.editProfile);
 router.delete("/deleteaccount", authMiddleware, userProfile.deleteAccount);
+router.get("/checkUser", authMiddleware, userProfile.checkUser);
 
 // user review related
 router.post("/addreview/:property_id", authMiddleware, review.addReview);
