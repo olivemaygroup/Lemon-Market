@@ -1,5 +1,6 @@
 
 'use client'
+import noimage from "../../../../public/noimage.png";
 
 import styles from "@/app/components/Landing/page.module.css";
 import * as React from 'react';
@@ -7,6 +8,7 @@ import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Link from 'next/link'
 import { PropertyType } from "@/app/types/property-type";
+import Image from "next/image";
 import Card from '@mui/material/Card';
 
 
@@ -18,7 +20,13 @@ const NoReviewsPropertyCard = ({ property }: { property: PropertyType }) => {
         <Link href="/propertydetail" style={{ textDecoration: 'none', color: 'inherit' }} >
           <div className={styles.image_address_container}>
             <div className={styles.card_image}>
-              <img src="https://alto-live.s3.amazonaws.com/wvxuv4PRkq8d6Ptl1XeMpfyQWS4/trpskNcSCnw-FTY7tNK-qS43Ut8/Photo/%5B3%5D/hy8rawWs90qec_U6NO2pAQ.jpg" alt="" />
+               <Image
+          src={noimage}
+          className="no_image_available"
+          alt="no image defulat image"
+          // sizes="(max-width: 500px) 100vw, 33vw"
+          layout="responsive"
+        />
             </div>
             <div className={styles.card_address}>
               <p>{property.fullAddress}</p>

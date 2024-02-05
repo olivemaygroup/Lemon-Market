@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import StoreProvider   from '@/app/StoreProvider'
+import StoreProvider from '@/app/StoreProvider'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import NavBar from "@/app/components/Navbar/navbar";
 import styles from '@/app/page.module.css'
@@ -31,18 +31,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-      <AppRouterCacheProvider>
-        <StoreProvider>
+        <AppRouterCacheProvider>
+          <StoreProvider>
             {/* <NavBar></NavBar> */}
             <NavBar2></NavBar2>
-          <div className="all_pages">
-            {children}
-          </div>
-        </StoreProvider>
-      </AppRouterCacheProvider>
-      
+            <div className="all_pages">
+              {children}
+            </div>
+          </StoreProvider>
+        </AppRouterCacheProvider>
+        <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`} />
       </body>
-      <script type="text/javascript" src={`https://maps.googleapis.com/maps/api/js?key=${googleKey}&libraries=places`} />
     </html>
   );
 }

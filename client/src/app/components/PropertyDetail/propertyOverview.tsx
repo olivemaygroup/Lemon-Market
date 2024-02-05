@@ -22,25 +22,26 @@ import { useState } from "react";
 import { Review } from '@/app/types/review-types';
 import ReadonlyRating from "./readonlyRating";
 import { Photo } from "@/app/types/review-types";
+import { PropertyType } from "@/app/types/property-type";
 
 
 
-
-const PropertyOverview = ({ reviewList }: {reviewList: Review[]}) => {
+const PropertyOverview = ({ reviewList }: {reviewList: Review[] | undefined}) => {
 
 
   const averageRating = useSelector((state: RootState) => state.fullProperty.value.avg_rating)
-
-  console.log('typeof console: ',typeof averageRating)
+      console.log('av rating console', averageRating)
+  // console.log('typeof console: ', averageRating)
   // const total = reviewList.reduce((total: number, review: Review) => total + review.total_review_rating, 0);
   // const average = total / reviewList.length;
   
   let allPhotos: Array<Photo> = []
   
-  // console.log('all photos: ', allPhotos)
-  reviewList.forEach(review => {
-    allPhotos = allPhotos.concat(review.photos);
-});
+  if (reviewList && Array.isArray(reviewList)) {
+    reviewList.forEach(review => {
+      allPhotos = allPhotos.concat(review.photos);
+    });
+  }
 
   const [saved, SetSaved] = useState(false)
   
@@ -60,11 +61,13 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[]}) => {
         >
           {allPhotos.map((photo) => (
             <div key={photo.photo_id} className='image-container'>
-              <img 
+              <Image
                 src={photo.url}
                 alt="Picture of the property"
                 sizes="(max-width: 500px) 100vw, 33vw"
-                // layout="responsive"
+                layout="responsive"
+                width={100}
+                height={60}
               />
             </div>
           ))}
@@ -79,8 +82,8 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[]}) => {
       )}
       
       {/* Render options for general rating */}
-      {reviewList.length !== 0 ?
-      <div className="rating">
+      {averageRating  ?
+      <div data-testid='average-rating' className="rating">
         <p><ReadonlyRating rating={averageRating} /></p>
       </div>
       :
@@ -88,7 +91,7 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[]}) => {
         <span><ReadonlyRating rating={0} /></span>
       </div>
       }
-        {reviewList.length !== 0 ?
+        {reviewList && reviewList.length !== 0 ?
       <div className="reviews">
         <p>{reviewList.length} reviews</p>
       </div>

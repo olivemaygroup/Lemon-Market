@@ -1,18 +1,18 @@
 "use client";
 
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "@/lib/features/counter/counterSlice";
 import reviewListSlice from "@/lib/features/review/addReviewSlice";
 import PropertySlice from "@/lib/features/property/propertySlice";
 import addReviewReducer from "@/lib/features/review/addReviewSlice";
 import addAddressReducer from "@/lib/features/address/addressSlice";
-import fullPropertySlice  from "./features/property/fullProperty";
+import fullPropertySlice from "./features/property/fullProperty";
 import userSlice from "./features/user/userSlice";
+import authSlice from "./features/authentication/authSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      counter: counterReducer,
+      auth: authSlice,
       reviewList: reviewListSlice,
       property: PropertySlice,
       fullProperty: fullPropertySlice,

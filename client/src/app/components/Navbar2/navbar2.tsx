@@ -4,24 +4,31 @@ import logo from '../../public/TLM_Color_Landscape.jpg'
 import { useState } from 'react'
 import Link from 'next/link'
 
+import { useSelector } from 'react-redux'
+
+import { RootState } from '@/lib/store'
+
 function NavBar2 () {
   const [menu, setMenu] = useState<boolean>(false)
+
+  const auth = useSelector((state: RootState) => state.auth.value);
+
 
   const burgerMenu = () => {
     const mCheck = !menu;
     setMenu(mCheck)
   }
 
-  
+
 
   return (
-        
+
     <div className={styles.body}>
       <img src={logo.src} alt="nooo" height='50px'/>
       <div className={styles.newmenu}>
-        {menu? 
+        {menu?
         <div className={styles.menubox}>
-        <div 
+        <div
         onClick={burgerMenu}
         className={styles.burgerbox}
         >
@@ -40,7 +47,7 @@ function NavBar2 () {
       </div>
          : <div className={styles.nomenu}></div> }
       </div>
-      <div 
+      <div
         onClick={burgerMenu}
         className={styles.burgerbox}
         >
