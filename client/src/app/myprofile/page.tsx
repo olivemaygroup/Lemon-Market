@@ -1,5 +1,6 @@
 'use client'
 import CottageIcon from '@mui/icons-material/Cottage';
+import Rating from '@mui/material/Rating';
 import { RootState } from "@/lib/store"
 import { useSelector, useDispatch } from "react-redux"
 import { setUserSlice } from "@/lib/features/user/userSlice"
@@ -9,6 +10,7 @@ import { PropertyType, PropertyTypeFull } from "../types/property-type";
 import { useState, useEffect } from "react"
 import { passwordChecker } from "../ApiServices/apiServices"
 import userAPI from "../ApiServices/userAPI"
+import house from '../../../public/Screenshot 2024-02-03 141600.png'
 import ProperetyCardContainer from '../components/Landing/propertyCardContainer';
 import FullReview from '../components/PropertyDetail/fullReview';
 import favouriteAPIservice from '../ApiServices/favouritesAPI';
@@ -67,15 +69,13 @@ export default function MyProfile () {
         if (res) {
           console.log('RES_',res)
           setReviews(res)
-          // dispatch(addFullProperty(usersReviews))
-          // console.log('USER REVIEWS', usersReviews)
         }
       }).catch((error) => {
         console.error(error)
     })
   }, [])
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name !== "password2" || "password1") {
       const { name, value } = e.target;
       setState((prevState) => ({
@@ -91,7 +91,7 @@ export default function MyProfile () {
     setPasswordCheck('')
   }
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     let newUser:NewUser = state
     if (passwordCheck===password) {
@@ -188,8 +188,14 @@ export default function MyProfile () {
       <div className={styles.reviews}>
           <div className={styles.swipebox}>
             {myReviews?.map((review)=>(
-              <PropertyCard fullProperty={review}/>
-            ))}
+              <div className={styles.prop_box} key={review.property_id}>
+                <img className={styles.prop_pic} src={house.src} alt='' />
+                <div className={styles.prop_rightside}>
+                  <div className={styles.prop_address} >{review.fullAddress}</div>
+                   <Rating className={styles.prop_rate} size="small" name="read-only" value={review.avg_rating} readOnly />
+                </div>
+              </div>
+             ))}
           </div>
       </div>
       <div className={styles.divide}>
@@ -198,7 +204,15 @@ export default function MyProfile () {
         <h2>{user.firstName}'s favourites</h2>
       <div className={styles.reviews}>
           <div className={styles.swipebox}>
-            {/* <FullReview/> */}
+            {favourites?.map((fave)=>(
+              <div className={styles.prop_box} key={fave.property_id}>
+                <img className={styles.prop_pic} src={house.src} alt='' />
+                <div className={styles.prop_rightside}>
+                  <div className={styles.prop_address} >{fave.fullAddress}</div>
+                   <Rating className={styles.prop_rate} size="small" name="read-only" value={fave.avg_rating} readOnly />
+                </div>
+              </div>
+             ))}
           </div>
 
       </div>

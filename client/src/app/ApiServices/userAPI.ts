@@ -55,7 +55,7 @@ const editProfile = async (newUser: NewUser, accessToken: string): Promise<any> 
 }
 
 
-const logOut = (): string => {
+const logOut = () => {
   const accessToken = localStorage.getItem('accessToken')
 
   if (accessToken) {

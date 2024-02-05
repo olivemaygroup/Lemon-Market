@@ -1,61 +1,62 @@
-import React, { useState } from 'react'
-import './rating.css';
+import React, { useState } from 'react';
+import './rating.css'; // Ensure CSS is correctly imported
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
 interface AddCommentInterface {
-  metricName: string,
-  commentState: string, 
-  commentSetter: Function;
-};
+  commentState: string,
+  commentSetter: React.Dispatch<React.SetStateAction<string>>
+}
 
-const AddComment: React.FC<AddCommentInterface> = ({ metricName, commentState, commentSetter }) => {
-  const [input, setInput] = useState('');
+const AddComment: React.FC<AddCommentInterface> = ({ commentState, commentSetter }) => {
+  const [input, setInput] = useState(commentState);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     commentSetter(input);
     handleClose();
+  };
+
+  const handleCancel = () => {
     setInput('');
+    commentSetter('');
+    handleClose;
   };
 
   return (
     <div>
-      <Button onClick={handleOpen}>Add Comment</Button>
+      <Button 
+      className='addreview-add-btn'
+      onClick={handleOpen}
+      >
+        {input ? 'Edit Comment' : 'Add Comment'}
+        </Button>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box className="modal-container">
           <form onSubmit={handleSubmit} className='specific-comment-box'>
-            <input
-              className="final_comment_input"
+            <textarea
+              className="comment_input"
               value={input}
-              onChange={(event) => setInput(event.target.value)}
+              onChange={(e) => setInput(e.target.value)}
               autoFocus
-              maxLength="120"
+              maxLength={120}
             />
-            <button type="submit">Save Comment</button>
+
+            <div className='modal-btns-container'>
+            <button className='modal-btns' onClick={handleCancel}>Cancel</button>
+            <button className='modal-btns' type="submit">Save</button>
+            </div>
+
           </form>
+          
         </Box>
       </Modal>
     </div>

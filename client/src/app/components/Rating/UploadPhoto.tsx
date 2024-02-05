@@ -22,8 +22,9 @@ const PhotoUploadComponent: React.FC<PhotoUploadComponentProps> = ({ metricName,
   };
 
   return (
-    <form>
+    <form >
       <Button
+      className='addreview-add-btn'
       variant="contained"
       component="label">
       Add Photo

@@ -41,12 +41,10 @@ export default function addReview() {
   const [general_comment, setGeneral_comment] = useState<string>('');
 
   /*
-  TODO: add general comment box
+
   TODO: ensure types of monthly rent bill and tax are all numbers = currently as you can see in the dbobject I have had to convert them to integers
-  TODO: Fix tag system - allow it so different tags can be added to different photos.
   TODO: data validation = Null? provide errors on inputs that haven't been filled etc - for example right now if no photos are uploaded it should error - make it so that either they have to upload photos or if photos are not uploaded to ensure backend works with it
   TODO: sort typescript = make it so that there are not type errors
-  TODO: comment box
   TODO: introduce required for rating
   */
 
@@ -169,57 +167,63 @@ export default function addReview() {
 
   return (
     <div className={styles.addreview_page}>
-      <div className={styles.address_title}>{address}</div>
+      <h1 className={styles.address_title}>{address}</h1>
       <div className={styles.review_subject_container}>
   
-      <div className="rating-item">
-        <TenancyDuration
-          t_start={t_start}
-          t_end={t_end}
-          setT_end={setT_end}
-          setT_start={setT_start}
-          />
-      </div>
+        <div className="rating-item">
+        <h1 className="title">Tenancy Dates</h1>
+          <TenancyDuration
+            t_start={t_start}
+            t_end={t_end}
+            setT_end={setT_end}
+            setT_start={setT_start}
+            />
+        </div>
 
-      {ratingMetrics.map((metric) => (
-        <RatingContainer
-        key={tempKey++}
-        ratingState={metric.ratingState}
-        ratingSetter={metric.RatingSetter}
-        commentState={metric.commentState}
-        commentSetter={metric.commentSetter}
-        metricName={metric.name}
-        imageFiles={imageFiles}
-        setImageFiles={setImageFiles}
-        setImageURLs={setImageURLs}
-        />
-        ))}
-
-      <div className="rating-item">
-        <RentBillsTaxComponent
-          monthly_rent={monthly_rent}
-          monthly_bill={monthly_bill}
-          council_tax={council_tax}
-          setMonthly_rent={setMonthly_rent}
-          setMonthly_bill={setMonthly_bill}
-          setCouncil_tax={setCouncil_tax}
-          />
-      </div>
-
-      <form className="rating-item">
-        <textarea
-        className={styles.final_comment_input} 
-        onChange={(event)=>{setGeneral_comment(event.target.value)}} 
-        placeholder="General comments"
-        >
-        </textarea>
-      </form>
-
-      <button 
-      className="rating-item" 
-      onClick={handleSubmit}
-      >Submit Review</button>
+        {ratingMetrics.map((metric) => (
+          <div className='rating-item'> 
+            <RatingContainer
+            key={tempKey++}
+            ratingState={metric.ratingState}
+            ratingSetter={metric.RatingSetter}
+            commentState={metric.commentState}
+            commentSetter={metric.commentSetter}
+            metricName={metric.name}
+            imageFiles={imageFiles}
+            setImageFiles={setImageFiles}
+            setImageURLs={setImageURLs}
+            />
           </div>
+          ))}
+
+        <div className="rating-item">
+        <h1 className="title">Rent, Bills & Council Tax </h1>
+          <RentBillsTaxComponent
+            monthly_rent={monthly_rent}
+            monthly_bill={monthly_bill}
+            council_tax={council_tax}
+            setMonthly_rent={setMonthly_rent}
+            setMonthly_bill={setMonthly_bill}
+            setCouncil_tax={setCouncil_tax}
+            />
+        </div>
+
+        <form className="rating-item">
+          <textarea
+          className="general-comment-input" 
+          onChange={(event)=>{setGeneral_comment(event.target.value)}} 
+          placeholder="General comments"
+          >
+          </textarea>
+        </form>
+
+        <div className="rating-item-submit" >
+          <button 
+          className="addreview-submit-btn"
+          onClick={handleSubmit}
+          >Submit Review</button>
+        </div>
+      </div>
     </div>
   )
 };
