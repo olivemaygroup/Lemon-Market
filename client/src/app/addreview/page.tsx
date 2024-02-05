@@ -160,9 +160,7 @@ export default function addReview() {
       console.error('property id is undefined')
     }
 
-  }
-
-  let tempKey = 0;
+  };
 
   return (
     <div className={styles.addreview_page}>
@@ -182,7 +180,7 @@ export default function addReview() {
         {ratingMetrics.map((metric) => (
           <div className='rating-item'>
             <RatingContainer
-            key={tempKey++}
+            key={metric.name}
             ratingState={metric.ratingState}
             ratingSetter={metric.RatingSetter}
             commentState={metric.commentState}
