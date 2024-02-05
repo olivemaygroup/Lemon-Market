@@ -15,7 +15,6 @@ import RatingDetail from "../components/PropertyDetail/ratingDetail";
 import { Review } from '@/app/types/review-types';
 import AddReview from "../components/PropertyDetail/addReview";
 
-
 export default function PropertyDetail() {
   const dispatch = useDispatch();
 
@@ -38,7 +37,6 @@ export default function PropertyDetail() {
           <FullReview item={item} />
         </div>
       ))}
-      <AddReview></AddReview>
     </div>
   );
 }
