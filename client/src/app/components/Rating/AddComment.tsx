@@ -4,8 +4,13 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 
-const AddComment: React.FC<AddCommentInterface> = ({ metricName, commentState, commentSetter }) => {
-  const [input, setInput] = useState(commentState); // Initialize with commentState if needed
+interface AddCommentInterface {
+  commentState: string,
+  commentSetter: React.Dispatch<React.SetStateAction<string>>
+}
+
+const AddComment: React.FC<AddCommentInterface> = ({ commentState, commentSetter }) => {
+  const [input, setInput] = useState(commentState);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -15,22 +20,29 @@ const AddComment: React.FC<AddCommentInterface> = ({ metricName, commentState, c
     event.preventDefault();
     commentSetter(input);
     handleClose();
-    // setInput(''); // Resetting input
+  };
+
+  const handleCancel = () => {
+    setInput('');
+    commentSetter('');
+    handleClose;
   };
 
   return (
     <div>
-      <Button onClick={handleOpen}>Add Comment</Button>
+      <Button 
+      className='addreview-add-btn'
+      onClick={handleOpen}
+      >
+        {input ? 'Edit Comment' : 'Add Comment'}
+        </Button>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
       >
         <Box className="modal-container">
           <form onSubmit={handleSubmit} className='specific-comment-box'>
             <textarea
-              type="text" 
               className="comment_input"
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -39,7 +51,7 @@ const AddComment: React.FC<AddCommentInterface> = ({ metricName, commentState, c
             />
 
             <div className='modal-btns-container'>
-            <button className='modal-btns' type="reset">Cancel</button>
+            <button className='modal-btns' onClick={handleCancel}>Cancel</button>
             <button className='modal-btns' type="submit">Save</button>
             </div>
 

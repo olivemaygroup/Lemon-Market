@@ -6,13 +6,13 @@ import { ImageFileObject } from "@/app/types/review-types";
 
 interface RatingContainerInterface {
   ratingState: number,
-  ratingSetter: Function,
+  ratingSetter: React.Dispatch<React.SetStateAction<number>>,
   commentState: string,
-  commentSetter: Function,
+  commentSetter: React.Dispatch<React.SetStateAction<string>>,
   metricName: string,
   imageFiles: ImageFileObject[],
   setImageFiles: React.Dispatch<React.SetStateAction<ImageFileObject[]>>,
-}
+};
 
 const RatingContainer: React.FC<RatingContainerInterface> = (
   { 
@@ -40,6 +40,7 @@ const RatingContainer: React.FC<RatingContainerInterface> = (
           </div>
 
           <div className="rating-btns">
+            
           <PhotoUploadComponent 
           metricName={metricName}
           imageFiles={imageFiles}
@@ -58,4 +59,4 @@ const RatingContainer: React.FC<RatingContainerInterface> = (
   );
 };
 
-export default RatingContainer
+export default RatingContainer;
