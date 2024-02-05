@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Error, Login, UserType } from "../types/types";
 import { setUserSlice } from "@/lib/features/user/userSlice";
 import userAPI from "../ApiServices/userAPI";
+import { changeAuthStatus } from "@/lib/features/authentication/authSlice";
 
 const initialError: Error = {
   error: false,
@@ -47,7 +48,7 @@ export default function Login() {
       setEmail("");
       setPassword("");
     } else {
-      console.log('RES--', res)
+      dispatch(changeAuthStatus(true))
       localStorage.setItem('accessToken', res.accessToken)
       setEmail("");
       setPassword("");

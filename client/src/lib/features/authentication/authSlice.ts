@@ -6,7 +6,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const authSlice = createSlice({
   name: "authentication status",
   initialState: {
-    value: true,
+    value: false
   },
   reducers: {
     changeAuthStatus: (state, action: { type: string; payload: boolean }) => {
