@@ -26,12 +26,12 @@ export default function PropertyDetail() {
 
 
   return (
-    <div className={styles.description}>
-      <div className="address">
+    <div data-testid="propertydetailcontainer"  className={styles.description}>
+      <div data-testid="Address" className="address">
         <h2>{property.fullAddress}</h2>
       </div>
-      <PropertyOverview reviewList={reviewList}/>
-      <RatingDetail reviewList={reviewList}/>
+      <PropertyOverview data-testid="property-overview" reviewList={reviewList}/>
+      <RatingDetail data-testid="rating-detail" reviewList={reviewList}/>
       {reviewList.map((item, index) => (
         <div key={index}>
           <h2 className={styles.reviewName}>Joe Bloggs review: Jan 22</h2>

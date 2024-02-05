@@ -84,7 +84,7 @@ const checkUser = async (): Promise<void> => {
 }
 
 
-const logOut = (): string => {
+const logOut = () => {
   const accessToken = localStorage.getItem('accessToken')
 
   if (accessToken) {
