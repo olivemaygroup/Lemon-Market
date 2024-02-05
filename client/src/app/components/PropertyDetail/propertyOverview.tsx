@@ -30,7 +30,7 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[] | undefined}) =>
 
 
   const averageRating = useSelector((state: RootState) => state.fullProperty.value.avg_rating)
-
+      console.log('av rating console', averageRating)
   // console.log('typeof console: ', averageRating)
   // const total = reviewList.reduce((total: number, review: Review) => total + review.total_review_rating, 0);
   // const average = total / reviewList.length;
@@ -66,6 +66,8 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[] | undefined}) =>
                 alt="Picture of the property"
                 sizes="(max-width: 500px) 100vw, 33vw"
                 layout="responsive"
+                width={100}
+                height={60}
               />
             </div>
           ))}
@@ -80,7 +82,7 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[] | undefined}) =>
       )}
       
       {/* Render options for general rating */}
-      {reviewList && reviewList.length !== 0 ?
+      {averageRating  ?
       <div data-testid='average-rating' className="rating">
         <p><ReadonlyRating rating={averageRating} /></p>
       </div>

@@ -39,6 +39,6 @@ describe('PropertyOverview Component', () => {
     console.log(ratingProp)
 
 
-    expect(ratingProp).toEqual("5"); 
+    expect(ratingProp).toEqual("4"); 
   });
 });

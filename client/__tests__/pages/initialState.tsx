@@ -24,12 +24,12 @@ export const mockStore: any = {
         general_comment: 'Overall, it was a pleasant experience living in this property.',
         photos: [
           {
-            url: 'example.com/photo1',
+            url: 'https://alto-live.s3.amazonaws.com/wvxuv4PRkq8d6Ptl1XeMpfyQWS4/trpskNcSCnw-FTY7tNK-qS43Ut8/Photo/%5B3%5D/hy8rawWs90qec_U6NO2pAQ.jpg',
             tag: 'living_room',
             photo_id: 1
           },
           {
-            url: 'example.com/photo2',
+            url: 'https://alto-live.s3.amazonaws.com/wvxuv4PRkq8d6Ptl1XeMpfyQWS4/trpskNcSCnw-FTY7tNK-qS43Ut8/Photo/%5B3%5D/hy8rawWs90qec_U6NO2pAQ.jpg',
             tag: 'bedroom',
             photo_id: 2
           }
@@ -57,12 +57,12 @@ export const mockStore: any = {
         general_comment: 'Great living experience overall.', 
         photos: [
           {
-            url: 'example.com/photo3',
+            url: 'https://alto-live.s3.amazonaws.com/wvxuv4PRkq8d6Ptl1XeMpfyQWS4/trpskNcSCnw-FTY7tNK-qS43Ut8/Photo/%5B3%5D/hy8rawWs90qec_U6NO2pAQ.jpg',
             tag: 'kitchen',
             photo_id: 3
           },
           {
-            url: 'example.com/photo4',
+            url: 'https://alto-live.s3.amazonaws.com/wvxuv4PRkq8d6Ptl1XeMpfyQWS4/trpskNcSCnw-FTY7tNK-qS43Ut8/Photo/%5B3%5D/hy8rawWs90qec_U6NO2pAQ.jpg',
             tag: 'bathroom',
             photo_id: 4
           }
@@ -83,14 +83,14 @@ export const mockStore: any = {
         amenities_comment: 'Luxurious amenities.', 
         landlord_responsiveness: 5, 
         landlord_responsiveness_comment: 'Landlord was always available and helpful.', 
-        total_review_rating: 5,  
+        total_review_rating: 4,  
         monthly_rent: 2200,      
         monthly_bill: 200,       
         council_tax: 120,        
         general_comment: 'Outstanding experience, highly recommended.', 
         photos: [
           {
-            url: 'example.com/photo5',
+            url: 'https://alto-live.s3.amazonaws.com/wvxuv4PRkq8d6Ptl1XeMpfyQWS4/trpskNcSCnw-FTY7tNK-qS43Ut8/Photo/%5B3%5D/hy8rawWs90qec_U6NO2pAQ.jpg',
             tag: 'view',
             photo_id: 5
           }
@@ -109,7 +109,7 @@ export const mockStore: any = {
       property_id: '1234',
       fullAddress: '22 Godolphin Road, London',
       num_of_reviews: 3,
-      avg_rating: 5,
+      avg_rating: 4,
       updatedAt: new Date('2024-01-31'),
       createdAt: new Date('2024-01-31')
     }
@@ -137,7 +137,12 @@ export const mockStore: any = {
       general_comment: 'Absolutely loved living here, highly recommend!',
       photos: [
         {
-          url: 'example.com/photo3',
+          url: 'https://alto-live.s3.amazonaws.com/wvxuv4PRkq8d6Ptl1XeMpfyQWS4/trpskNcSCnw-FTY7tNK-qS43Ut8/Photo/%5B3%5D/hy8rawWs90qec_U6NO2pAQ.jpg',
+          tag: 'kitchen',
+          photo_id: 3
+        },
+        {
+          url: 'https://alto-live.s3.amazonaws.com/wvxuv4PRkq8d6Ptl1XeMpfyQWS4/trpskNcSCnw-FTY7tNK-qS43Ut8/Photo/%5B3%5D/hy8rawWs90qec_U6NO2pAQ.jpg',
           tag: 'kitchen',
           photo_id: 3
         }

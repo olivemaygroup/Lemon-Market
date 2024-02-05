@@ -1,4 +1,7 @@
 export interface Review {
+  // Do we not need a review ID here
+  // review_id: bigint;
+  // review_date: Date;
   t_start: string;
   t_end: string;
   cleanliness: number;
