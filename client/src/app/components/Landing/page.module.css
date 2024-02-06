@@ -5,6 +5,10 @@
   src: url('../../../../public/fonts/Virgil.woff2');
 }
 
+.property_card_navigator {
+  background-color: transparent;
+}
+
 /* Search bar */
 .searchContainer {
   padding-top: 2rem;
@@ -32,6 +36,10 @@
   box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.3);
 }
 
+.card_container:active {
+  box-shadow: none; 
+}
+
 .card_image {
   width: 40%;
   height: 100%;
@@ -45,7 +53,7 @@
   display: block;
 }
 
-.no_image_available{
+.no_image_available {
   width: 100%;
   height: auto;
   display: block;
