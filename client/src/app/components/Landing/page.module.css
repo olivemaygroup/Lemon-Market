@@ -84,9 +84,9 @@
 }
 
 /* add review button */
-.knock-a-review-btn {
-  width: 70% !important;
-  height: 20% !important;
+.knock_a_review_btn {
+  width: 60vw !important;
+  height: 4vh !important;
   border-radius: 10px !important;
   background-color: white !important;
   font-family: Virgil, sans-serif !important;

@@ -5,6 +5,7 @@ import { RootState } from "@/lib/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from 'react';
 import PropertyCard from "./propertyCard";
+import styles from './page.module.css'
 import NoReviewsPropertyCard from "./noReviewsPropertyCard";
 import { Review } from '@/app/types/review-types';
 import Button from '@mui/material/Button';
@@ -33,15 +34,15 @@ const ProperetyCardContainer = () => {
         fullProperty.num_of_reviews !== 0 ? (
           <>
             <PropertyCard fullProperty={fullProperty} profilePhoto={profilePhoto} />
-            <Link href="/propertydetail" style={{ textDecoration: 'none', color: 'inherit' }} >
-              <Button className="knock-a-review-btn" variant="contained">Add Review</Button>
+            <Link href="/addreview" >
+              <Button className={styles.knock_a_review_btn} variant="contained">Knock a review!</Button>
             </Link >
           </>
         ) : (
           <>
             <NoReviewsPropertyCard property={property} />
-            <Link href="/propertydetail" style={{ textDecoration: 'none', color: 'inherit' }} >
-              <Button className="knock-a-review-btn" variant="contained">Add Review</Button>
+            <Link href="/addreview" >
+              <Button className={styles.knock_a_review_btn} variant="contained">Knock a review!</Button>
             </Link >
           </>
         )
