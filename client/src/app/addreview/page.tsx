@@ -94,19 +94,19 @@ export default function addReview() {
       commentSetter: setValue_for_money_comment
     },
     {
-      name: "Deposit Handling",
-      ratingState: deposit_handling,
-      RatingSetter: setDeposit_handling,
-      commentState: deposit_handling_comment,
-      commentSetter: setDeposit_handling_comment
-    },
-    {
       name: "Amenities",
       ratingState: amenities,
       RatingSetter: setAmenities,
       commentState: amenities_comment,
       commentSetter: setAmenities_comment
-
+      
+    },
+    {
+      name: "Deposit Handling",
+      ratingState: deposit_handling,
+      RatingSetter: setDeposit_handling,
+      commentState: deposit_handling_comment,
+      commentSetter: setDeposit_handling_comment
     },
     {
       name: "Landlord Responsiveness",
