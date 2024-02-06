@@ -94,7 +94,7 @@ export interface Password {
 }
 
 export interface UserType {
-  tenant_id: string,
+  tenant_id: number,
   firstName: string;
   lastName: string;
   email: string;

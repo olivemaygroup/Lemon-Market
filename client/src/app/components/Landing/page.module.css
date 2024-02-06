@@ -90,3 +90,17 @@
   /* justify-content: end; */
   margin-bottom: 5px;
 }
+
+/* add review button */
+.knock_a_review_btn {
+  width: 60vw !important;
+  height: 4vh !important;
+  border-radius: 10px !important;
+  background-color: white !important;
+  font-family: Virgil, sans-serif !important;
+  font-size: large !important;
+  color: #000 !important; 
+  cursor: pointer !important; 
+  box-shadow: 24px 24px 48px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
