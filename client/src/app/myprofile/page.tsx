@@ -15,8 +15,10 @@ import ProperetyCardContainer from '../components/Landing/propertyCardContainer'
 import FullReview from '../components/PropertyDetail/fullReview';
 import favouriteAPIservice from '../ApiServices/favouritesAPI';
 import reviewAPI from '../ApiServices/reviewAPI';
+import { useRouter } from 'next/navigation';
 import { addFullProperty } from '@/lib/features/property/fullProperty';
 import PropertyCard from '../components/Landing/propertyCard';
+import MyTiles from '../components/profile/mytiles';
 
 
 const initilaState: NewUser = {
@@ -49,6 +51,7 @@ export default function MyProfile () {
   const [myReviews, setReviews] = useState<PropertyTypeFull[] | null>(null)
 
 
+  const router = useRouter()
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.value)
   const token1:string | null = localStorage.getItem('accessToken')
@@ -189,13 +192,19 @@ export default function MyProfile () {
       <div className={styles.reviews}>
           <div className={styles.swipebox}>
             {myReviews?.map((review)=>(
-              <div className={styles.prop_box} key={review.property_id}>
-                <img className={styles.prop_pic} src={house.src} alt='' />
-                <div className={styles.prop_rightside}>
-                  <div className={styles.prop_address} >{review.fullAddress}</div>
-                   <Rating className={styles.prop_rate} size="small" name="read-only" value={review.avg_rating} readOnly />
-                </div>
-              </div>
+              <MyTiles 
+                review={review}
+                key={review.property_id}/>
+              // <div 
+              // className={styles.prop_box} 
+              // key={review.property_id}
+              // onClick={()=>router.push('/propertydetail')}>
+              //   <img className={styles.prop_pic} src={house.src} alt='' />
+              //   <div className={styles.prop_rightside}>
+              //     <div className={styles.prop_address} >{review.fullAddress}</div>
+              //      <Rating className={styles.prop_rate} size="small" name="read-only" value={review.avg_rating} readOnly />
+              //   </div>
+              // </div>
              ))}
           </div>
       </div>

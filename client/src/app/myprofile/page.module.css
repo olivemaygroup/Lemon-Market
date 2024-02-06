@@ -81,21 +81,25 @@
   align-items: center;
   gap: 10px;
   /* overflow-y: hidden; */
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
   white-space: nowrap;
   flex-wrap: nowrap;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
 }
 
 .swipebox {
   height: 150px;
   width: 100vw;
-  padding: 30px;
+  /* padding: 30px; */
   /* border: 1px solid #fae301; */
   border-radius: 10px;
-  gap: 20px;
+  gap: 0 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
+ 
+  scroll-snap-stop: always;
 }
 
 /* property box */

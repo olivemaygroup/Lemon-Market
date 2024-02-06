@@ -31,6 +31,7 @@ export default function Login() {
     };
 
     const res: any = await userAPI.login(user);
+    console.log('RES--', res)
 
     const currUser: UserType = {
       firstName: res.firstName,
