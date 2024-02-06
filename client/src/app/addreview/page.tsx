@@ -189,7 +189,6 @@ export default function addReview() {
             metricName={metric.name}
             imageFiles={imageFiles}
             setImageFiles={setImageFiles}
-            setImageURLs={setImageURLs}
             />
           </div>
           ))}
