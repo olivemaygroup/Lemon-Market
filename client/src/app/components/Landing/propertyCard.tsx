@@ -45,28 +45,30 @@ const PropertyCard = ({ fullProperty, profilePhoto }: { fullProperty: PropertyTy
 
   return (
     <>
-      <Card variant="outlined" className={styles.card_container}>
-          <div className={styles.image_address_container}>
-            <div className={styles.card_image}>
-              <img src={profilePhoto} />
+    <Link href="/propertydetail">
+        <Card variant="outlined" className={styles.card_container}>
+            <div className={styles.image_address_container}>
+              <div className={styles.card_image}>
+                <img src={profilePhoto} />
+              </div>
+              <div className={styles.card_address}>
+                <p>{fullProperty.fullAddress}</p>
+              </div>
             </div>
-            <div className={styles.card_address}>
-              <p>{fullProperty.fullAddress}</p>
+          <div className={styles.card_rating_container}>
+            <div className={styles.favourite_icon_container}>
+              <button className={styles.favourite_icon} onClick={favouriteHandler} >
+                {favouriteFlag ? (
+                  <FavoriteIcon />) : (
+                    <FavoriteBorderIcon />
+                    )}
+              </button>
             </div>
+            <Rating size="small" name="read-only" value={fullProperty.avg_rating} readOnly />
+            <p>{fullProperty.num_of_reviews} Reviews</p>
           </div>
-        <div className={styles.card_rating_container}>
-          <div className={styles.favourite_icon_container}>
-            <button className={styles.favourite_icon} onClick={favouriteHandler} >
-              {favouriteFlag ? (
-                <FavoriteIcon />) : (
-                <FavoriteBorderIcon />
-              )}
-            </button>
-          </div>
-          <Rating size="small" name="read-only" value={fullProperty.avg_rating} readOnly />
-          <p>{fullProperty.num_of_reviews} Reviews</p>
-        </div>
-      </Card>
+        </Card>
+      </Link>
     </>
   )
 }

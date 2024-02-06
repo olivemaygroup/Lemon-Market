@@ -6,12 +6,13 @@ import { Review } from "@/app/types/types";
 import RatingContainer from "../components/Rating/RatingContainer";
 import cloudinaryImagesToURLS from "../ApiServices/cloudinaryAPI";
 import reviewAPI from "../ApiServices/reviewAPI";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
-import propertySlice from "@/lib/features/property/propertySlice";
 import styles from './page.module.css'
 import { ImageFileObject } from "../types/review-types";
 import PhotoUploadComponent from "../components/Rating/UploadPhoto";
+import Link from 'next/link'
+import Button from '@mui/material/Button';
 
 
 export default function addReview() {
@@ -216,11 +217,14 @@ export default function addReview() {
           />
         </form>
 
-        <div className="rating-item-submit" >
-          <button
-          className="addreview-submit-btn"
-          onClick={handleSubmit}
-          >Submit Review</button>
+        <div className="rating-item-submit">
+          <Link href="/propertydetail" >
+            <Button
+              className={styles.addreview_submit_btn}
+              // onClick={handleSubmit}
+              >Submit Review
+            </Button>
+          </Link >
         </div>
       </div>
     </div>
