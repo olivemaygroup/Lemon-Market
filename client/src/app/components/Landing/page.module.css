@@ -72,6 +72,7 @@
 .favourite_icon {
   background-color: transparent;
   border: none;
+  color: yellow;
 }
 
 .favourite_icon_container {

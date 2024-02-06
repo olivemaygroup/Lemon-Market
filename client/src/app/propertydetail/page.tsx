@@ -1,5 +1,7 @@
 'use client'
 import Image from "next/image";
+import { FaRobot } from "react-icons/fa";
+
 
 import styles from "@/app/propertydetail/page.module.css";
 import './page.module.css'
@@ -14,6 +16,8 @@ import FullReview from "@/app/components/PropertyDetail/fullReview";
 import RatingDetail from "../components/PropertyDetail/ratingDetail";
 import { Review } from '@/app/types/review-types';
 import AddReview from "../components/PropertyDetail/addReview";
+import { Button, Classes, Popover } from "@blueprintjs/core";
+
 
 export default function PropertyDetail() {
   const dispatch = useDispatch();
@@ -26,9 +30,9 @@ export default function PropertyDetail() {
 
   },[property, reviewList])
   // useEffect(() => {
-  
+
   //   const accessToken = localStorage.getItem('acccesToken')
-  
+
   //   reviewAPI.getMyReviews()
   //     .then((res) => {
   //       if (res) {
@@ -38,13 +42,13 @@ export default function PropertyDetail() {
   //     .catch((error) => {
   //       console.log(error)
   //     })
-  
-  
+
+
   // }, [])
  
 
   return (
-    <div data-testid="propertydetailcontainer"  className={styles.description}>
+    <div data-testid="propertydetailcontainer" className={styles.description}>
       <div data-testid="Address" className="address">
         <h2>{property.fullAddress}</h2>
       </div>
@@ -56,6 +60,9 @@ export default function PropertyDetail() {
           <FullReview item={item} />
         </div>
       ))}
+      <button className={styles.robot_button_container}>
+        <FaRobot className={styles.robot_icon} />
+      </button>
     </div>
   );
 }

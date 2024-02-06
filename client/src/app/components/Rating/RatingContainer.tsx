@@ -25,6 +25,8 @@ const RatingContainer: React.FC<RatingContainerInterface> = (
     setImageFiles,
   }) => {
 
+  const metricsWithPhotoUpload = ["Cleanliness", "Maintenance", "Value For Money", "Amenities"]
+
   return (
     <>
       <h1 className="title">{metricName}</h1>
@@ -41,16 +43,19 @@ const RatingContainer: React.FC<RatingContainerInterface> = (
 
           <div className="rating-btns">
             
-          <PhotoUploadComponent 
-          metricName={metricName}
-          imageFiles={imageFiles}
-          setImageFiles={setImageFiles}
-          />
+            <AddComment 
+            commentState={commentState}
+            commentSetter={commentSetter}
+            />
 
-          <AddComment 
-          commentState={commentState}
-          commentSetter={commentSetter}
-          />
+            {metricsWithPhotoUpload.includes(metricName) &&
+            <PhotoUploadComponent 
+            metricName={metricName}
+            imageFiles={imageFiles}
+            setImageFiles={setImageFiles}
+            />
+          }
+
           </div>
           
         </div>
