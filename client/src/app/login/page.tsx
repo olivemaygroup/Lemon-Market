@@ -34,6 +34,7 @@ export default function Login() {
     console.log('RES--', res)
 
     const currUser: UserType = {
+      tenant_id: res.tenant_id,
       firstName: res.firstName,
       lastName: res.lastName,
       email: res.email

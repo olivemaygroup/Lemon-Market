@@ -105,11 +105,6 @@ export default function MyProfile () {
       console.log(err)
       return;
     }
-    const currUser: UserType = {
-      firstName: newUser.firstName,
-      lastName: newUser.lastName,
-      email: newUser.email
-    }
     const response:any = await userAPI.signUp(newUser);
     if (response === 409) {
       const err: Error = {
@@ -119,6 +114,12 @@ export default function MyProfile () {
       resetStates();
       setError(err);
     } else {
+      const currUser: UserType = {
+        tenant_id: response.tenant_id,
+        firstName: response.firstName,
+        lastName: response.lastName,
+        email: response.email
+      }
       dispatch(setUserSlice(currUser));
       localStorage.setItem('accessToken',response.accessToken);
       resetStates();
