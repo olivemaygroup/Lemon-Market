@@ -8,13 +8,13 @@ import Rating from '@mui/material/Rating';
 import { useEffect } from "react";
 import Link from 'next/link'
 import { PropertyType } from "@/app/types/property-type";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { GoBookmarkFill } from "react-icons/go";
-import { GoBookmark } from "react-icons/go";
 import favouriteAPIservice from "@/app/ApiServices/favouritesAPI";
 
 const PropertyCard = ({ fullProperty, profilePhoto }: { fullProperty: PropertyType, profilePhoto: string }) => {
@@ -46,7 +46,6 @@ const PropertyCard = ({ fullProperty, profilePhoto }: { fullProperty: PropertyTy
   return (
     <>
       <Card variant="outlined" className={styles.card_container}>
-        <Link href="/propertydetail" style={{ textDecoration: 'none', color: 'inherit' }} >
           <div className={styles.image_address_container}>
             <div className={styles.card_image}>
               <img src={profilePhoto} />
@@ -55,13 +54,12 @@ const PropertyCard = ({ fullProperty, profilePhoto }: { fullProperty: PropertyTy
               <p>{fullProperty.fullAddress}</p>
             </div>
           </div>
-        </Link >
         <div className={styles.card_rating_container}>
           <div className={styles.favourite_icon_container}>
             <button className={styles.favourite_icon} onClick={favouriteHandler} >
               {favouriteFlag ? (
-                <GoBookmarkFill />) : (
-                <GoBookmark />
+                <FavoriteIcon />) : (
+                <FavoriteBorderIcon />
               )}
             </button>
           </div>

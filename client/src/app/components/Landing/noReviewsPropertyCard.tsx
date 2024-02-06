@@ -17,22 +17,20 @@ const NoReviewsPropertyCard = ({ property }: { property: PropertyType }) => {
   return (
     <>
       <Card variant="outlined" className={styles.card_container}>
-        <Link href="/propertydetail" style={{ textDecoration: 'none', color: 'inherit' }} >
-          <div className={styles.image_address_container}>
-            <div className={styles.card_image}>
-               <Image
-          src={noimage}
-          className="no_image_available"
-          alt="no image defulat image"
-          // sizes="(max-width: 500px) 100vw, 33vw"
-          layout="responsive"
-        />
-            </div>
-            <div className={styles.card_address}>
-              <p>{property.fullAddress}</p>
-            </div>
+        <div className={styles.image_address_container}>
+          <div className={styles.card_image}>
+            <Image
+              src={noimage}
+              className="no_image_available"
+              alt="no image defulat image"
+              // sizes="(max-width: 500px) 100vw, 33vw"
+              layout="responsive"
+            />
           </div>
-        </Link >
+          <div className={styles.card_address}>
+            <p>{property.fullAddress}</p>
+          </div>
+        </div>
         <div className={styles.card_rating_container}>
           <Box
             sx={{
