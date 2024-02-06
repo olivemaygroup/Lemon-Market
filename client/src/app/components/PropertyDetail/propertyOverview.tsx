@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image";
 import "./propertyOverview.css"
 import testPic from "../../../../public/testPic.jpg";
@@ -25,19 +27,17 @@ import { Photo } from "@/app/types/review-types";
 import { PropertyType } from "@/app/types/property-type";
 
 
-
 const PropertyOverview = ({ reviewList }: {reviewList: Review[] | undefined}) => {
 
 
   const averageRating = useSelector((state: RootState) => state.fullProperty.value.avg_rating)
-      console.log('av rating console', averageRating)
   // console.log('typeof console: ', averageRating)
   // const total = reviewList.reduce((total: number, review: Review) => total + review.total_review_rating, 0);
   // const average = total / reviewList.length;
   
   let allPhotos: Array<Photo> = []
   
-  if (reviewList && Array.isArray(reviewList)) {
+  if (reviewList) {
     reviewList.forEach(review => {
       allPhotos = allPhotos.concat(review.photos);
     });
@@ -52,12 +52,23 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[] | undefined}) =>
 
   return (
     <div className='overviewContainer'>
+      <div className='photocount' data-testid='photos'>
+      { allPhotos.length > 0 ?
+        <p>{allPhotos.length}</p>
+        :
+        <p>No photos</p>
+      }
+      </div>
+
       {allPhotos.length !== 0 ? (
+        
         <Carousel
           showArrows={true}
           infiniteLoop={true}
           dynamicHeight={false}
           className='carousel'
+          data-testid={"cousel test"}
+          
         >
           {allPhotos.map((photo) => (
             <div key={photo.photo_id} className='image-container'>
@@ -78,25 +89,28 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[] | undefined}) =>
           alt="Picture of the property"
           sizes="(max-width: 500px) 100vw, 33vw"
           layout="responsive"
+          width={100}
+          height={60}
         />
       )}
       
       {/* Render options for general rating */}
       {averageRating  ?
       <div data-testid='average-rating' className="rating">
-        <p><ReadonlyRating rating={averageRating} /></p>
+        <ReadonlyRating rating={averageRating} />
       </div>
       :
       <div className="rating">
-        <span><ReadonlyRating rating={0} /></span>
+        <ReadonlyRating rating={0} />
       </div>
       }
-        {reviewList && reviewList.length !== 0 ?
-      <div className="reviews">
+
+      {reviewList && reviewList.length > 0 ?
+      <div data-testid='reviewNumber' className="reviews">
         <p>{reviewList.length} reviews</p>
       </div>
       :
-      <div className="reviews">
+      <div data-testid='reviewNumberEmpty' className="reviews">
         <p>No reviews</p>
       </div>
       }

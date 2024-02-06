@@ -10,7 +10,19 @@
   scroll-behavior: auto;
 }
 
+.backdrop {
+  border: 1px solid;
+  position: absolute;
+  opacity: 50%;
+  z-index: -5;
+  /* height: 500px; */
+  width: 100%;
+  align-self: center;
+}
 
+.logo {
+  width: 80%;
+}
 
 
 
