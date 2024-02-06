@@ -34,14 +34,14 @@ const ProperetyCardContainer = () => {
           <>
             <PropertyCard fullProperty={fullProperty} profilePhoto={profilePhoto} />
             <Link href="/propertydetail" style={{ textDecoration: 'none', color: 'inherit' }} >
-              <Button variant="contained">Add Review</Button>
+              <Button className="knock-a-review-btn" variant="contained">Add Review</Button>
             </Link >
           </>
         ) : (
           <>
             <NoReviewsPropertyCard property={property} />
             <Link href="/propertydetail" style={{ textDecoration: 'none', color: 'inherit' }} >
-              <Button variant="contained">Add Review</Button>
+              <Button className="knock-a-review-btn" variant="contained">Add Review</Button>
             </Link >
           </>
         )
