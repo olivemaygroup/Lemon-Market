@@ -218,13 +218,12 @@ export default function addReview() {
         </form>
 
         <div className="rating-item-submit">
-          <Link href="/propertydetail" >
-            <Button
+            <button
               className={styles.addreview_submit_btn}
-              // onClick={handleSubmit}
+              onClick={handleSubmit}
+              href="/propertydetail"
               >Submit Review
-            </Button>
-          </Link >
+            </button>
         </div>
       </div>
     </div>
