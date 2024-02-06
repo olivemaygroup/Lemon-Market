@@ -6,7 +6,6 @@ import Button from '@mui/material/Button'
 import SendIcon from '@mui/icons-material/Send';
 
 import OpenAI from "openai";
-import _ from 'lodash';
 
 import styles from '@/app/chatbot/page.module.css'
 import { useSelector } from "react-redux";
@@ -15,9 +14,6 @@ import userAPI from "../ApiServices/userAPI";
 import { useRouter } from 'next/navigation'
 
 import CircularProgress from '@mui/material/CircularProgress';
-
-
-
 
 
 
