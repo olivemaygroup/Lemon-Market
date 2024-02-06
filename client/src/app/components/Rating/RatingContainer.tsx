@@ -11,7 +11,7 @@ interface RatingContainerInterface {
   commentSetter: React.Dispatch<React.SetStateAction<string>>,
   metricName: string,
   imageFiles: ImageFileObject[],
-  setImageFiles: React.Dispatch<React.SetStateAction<ImageFileObject[]>>,
+  setImageFiles:  React.Dispatch<React.SetStateAction<ImageFileObject[]>>,
 };
 
 const RatingContainer: React.FC<RatingContainerInterface> = (

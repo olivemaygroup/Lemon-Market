@@ -10,6 +10,8 @@ import Link from 'next/link'
 import { PropertyType } from "@/app/types/property-type";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useRouter } from 'next/navigation'
+
 
 
 
@@ -17,9 +19,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import favouriteAPIservice from "@/app/ApiServices/favouritesAPI";
 
-const PropertyCard = ({ fullProperty, profilePhoto }: { fullProperty: PropertyType, profilePhoto: string }) => {
+const PropertyCard = ({ fullProperty, profilePhoto }: { fullProperty: PropertyType, profilePhoto: string}) => {
 
   const [favouriteFlag, setFavouriteFlag] = React.useState<boolean>(false)
+  const router = useRouter();
 
   const favouriteHandler = (() => {
     if (favouriteFlag) {
@@ -43,17 +46,21 @@ const PropertyCard = ({ fullProperty, profilePhoto }: { fullProperty: PropertyTy
     })
   }, [favouriteFlag])
 
+  const handleCardClick = () => {
+    router.push('/propertydetail')
+  };
+
   return (
     <>
-      <Card variant="outlined" className={styles.card_container}>
-          <div className={styles.image_address_container}>
-            <div className={styles.card_image}>
-              <img src={profilePhoto} />
-            </div>
-            <div className={styles.card_address}>
-              <p>{fullProperty.fullAddress}</p>
-            </div>
+      <Card variant="outlined" onClick={handleCardClick} className={styles.card_container}>
+        <div className={styles.image_address_container}>
+          <div className={styles.card_image}>
+            <img src={profilePhoto} />
           </div>
+          <div className={styles.card_address}>
+            <p>{fullProperty.fullAddress}</p>
+          </div>
+        </div>
         <div className={styles.card_rating_container}>
           <div className={styles.favourite_icon_container}>
             <button className={styles.favourite_icon} onClick={favouriteHandler} >

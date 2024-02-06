@@ -8,7 +8,7 @@
   padding-top: 12vh;
 }
 
-.review_subject_container {
+.review_items_container {
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
@@ -31,3 +31,21 @@
   width: 75%;
 }
 
+
+.addreview_submit_btn {
+  width: 40vw;
+  height: 7vh !important;
+  border-radius: 10px !important;
+  border-style: solid !important;
+  border-color: black !important;
+  font-family: Virgil, sans-serif !important;
+  font-size: large !important;
+  color: #000 !important; 
+  box-shadow: 24px 24px 48px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.mui-1e6y48t-MuiButtonBase-root-MuiButton-root {
+  border: 13;
+
+}

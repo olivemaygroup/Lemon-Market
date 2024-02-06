@@ -1,6 +1,8 @@
 'use client'
 import Image from "next/image";
 import { FaRobot } from "react-icons/fa";
+import Link from 'next/link'
+import Button from '@mui/material/Button'
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
@@ -19,7 +21,7 @@ import FullReview from "@/app/components/PropertyDetail/fullReview";
 import RatingDetail from "../components/PropertyDetail/ratingDetail";
 import { Review } from '@/app/types/review-types';
 import AddReview from "../components/PropertyDetail/addReview";
-// import { Button, Classes, Popover } from "@blueprintjs/core";
+// import { Popover } from "@blueprintjs/core";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -27,6 +29,19 @@ import Link from "next/link";
 export default function PropertyDetail() {
   const dispatch = useDispatch();
 
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  const handlePopoverInteraction = (nextOpenState: boolean) => {
+    setIsPopoverOpen(nextOpenState);
+  };
+
+  const chatBotPopUpText = 'Click me again to speak to an helpful AI assistant about any of your housing issues'
+
+  const chatBotHandler = () => {
+    // if (true){
+
+    // }
+  }
   const router = useRouter()
   const property = useSelector((state: RootState) => state.property.value)
   const reviewList: Review[] = useSelector((state: RootState) => state.reviewList.value)
@@ -86,10 +101,24 @@ export default function PropertyDetail() {
           <FullReview item={item} />
         </div>
       ))}
-      <button className={styles.robot_button_container}>
-        <FaRobot className={styles.robot_icon} />
-      </button>
-    </div>
+      <Popover
+        onInteraction={handlePopoverInteraction}
+        isOpen={isPopoverOpen}
+        placement={'right-end'}
+        content={
+          <div className={styles.chat_bot_popup}>
+            <p>{chatBotPopUpText}</p>
+            <Link className={styles.link} href="/chatbot">
+              <Button className={styles.chat_bot_link} variant="contained">AI Chat Bot </Button>
+            </Link>
+          </div>
+        }
+      >
+        <button className={styles.robot_button_container}>
+          <FaRobot className={styles.robot_icon} />
+        </button>
+      </Popover>
+    </div >
       </>
   );
 }

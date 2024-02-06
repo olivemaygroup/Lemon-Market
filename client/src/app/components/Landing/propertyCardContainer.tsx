@@ -11,15 +11,18 @@ import Button from '@mui/material/Button';
 import Link from 'next/link'
 
 
+import styles from "@/app/components/Landing/page.module.css";
+
+
 
 
 const ProperetyCardContainer = () => {
 
   const [profilePhoto, setProfilePhoto] = useState<string>('')
-
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
   const reviewList: Review[] = useSelector((state: RootState) => state.reviewList.value)
   const property = useSelector((state: RootState) => state.property.value)
+
 
   React.useEffect(() => {
     if (reviewList.length > 0 && reviewList[0].photos.length > 0) {
@@ -27,21 +30,22 @@ const ProperetyCardContainer = () => {
     }
   })
 
+
   return (
     <>
       {
         fullProperty.num_of_reviews !== 0 ? (
           <>
             <PropertyCard fullProperty={fullProperty} profilePhoto={profilePhoto} />
-            <Link href="/propertydetail" style={{ textDecoration: 'none', color: 'inherit' }} >
-              <Button variant="contained">Add Review</Button>
+            <Link href="/addreview" >
+              <Button className={styles.knock_a_review_btn} variant="contained">Knock a review!</Button>
             </Link >
           </>
         ) : (
           <>
             <NoReviewsPropertyCard property={property} />
-            <Link href="/propertydetail" style={{ textDecoration: 'none', color: 'inherit' }} >
-              <Button variant="contained">Add Review</Button>
+            <Link href="/addreview" >
+              <Button className={styles.knock_a_review_btn} variant="contained">Knock a review!</Button>
             </Link >
           </>
         )

@@ -64,7 +64,8 @@
   height: 90vh;
   max-width: 1000px;
   padding: 10px 10px 10px 10px;
-  /* overflow-y: hidden; */
+  /* overfow-y is necessary for side scrolling on /addreview */
+  overflow-y: hidden;
   position: relative;
 }
 

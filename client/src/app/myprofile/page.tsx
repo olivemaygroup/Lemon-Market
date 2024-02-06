@@ -72,6 +72,7 @@ export default function MyProfile () {
       .then((res) => {
         if (res) {
           console.log('RES_',res)
+          
           setReviews(res)
         }
       }).catch((error) => {
@@ -195,7 +196,8 @@ export default function MyProfile () {
             {myReviews?.map((review)=>(
               <MyTiles 
                 review={review}
-                key={review.property_id}/>
+                key={review.property_id}
+                user={user}/>
               // <div 
               // className={styles.prop_box} 
               // key={review.property_id}

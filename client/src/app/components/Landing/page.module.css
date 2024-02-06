@@ -5,6 +5,10 @@
   src: url('../../../../public/fonts/Virgil.woff2');
 }
 
+.property_card_navigator {
+  background-color: transparent;
+}
+
 /* Search bar */
 .searchContainer {
   padding-top: 2rem;
@@ -32,6 +36,10 @@
   box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.3);
 }
 
+.card_container:active {
+  box-shadow: none; 
+}
+
 .card_image {
   width: 40%;
   height: 100%;
@@ -45,7 +53,7 @@
   display: block;
 }
 
-.no_image_available{
+.no_image_available {
   width: 100%;
   height: auto;
   display: block;
@@ -81,4 +89,18 @@
   flex-direction: row;
   /* justify-content: end; */
   margin-bottom: 5px;
+}
+
+/* add review button */
+.knock_a_review_btn {
+  width: 60vw !important;
+  height: 4vh !important;
+  border-radius: 10px !important;
+  background-color: white !important;
+  font-family: Virgil, sans-serif !important;
+  font-size: large !important;
+  color: #000 !important; 
+  cursor: pointer !important; 
+  box-shadow: 24px 24px 48px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
 }

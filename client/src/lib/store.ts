@@ -8,6 +8,7 @@ import addAddressReducer from "@/lib/features/address/addressSlice";
 import fullPropertySlice from "./features/property/fullProperty";
 import userSlice from "./features/user/userSlice";
 import authSlice from "./features/authentication/authSlice";
+import myReviewSlice from "./features/user/myReviewSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -19,6 +20,7 @@ export const makeStore = () => {
       addReview: addReviewReducer,
       addAddress: addAddressReducer,
       user: userSlice,
+      myReview: myReviewSlice
     },
   });
 };

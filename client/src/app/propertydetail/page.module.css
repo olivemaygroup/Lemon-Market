@@ -43,9 +43,35 @@
   background-color: transparent;
   border: none;
   position: fixed;
-  bottom: 4px;
-  left: 7px;
+  bottom: 15px;
+  left: 15px;
   z-index: 1000;
+}
+
+.chat_bot_popup {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  height: 190px;
+  background-color: white;
+  border: 2px solid #ccc;
+  position: fixed;
+  bottom: 100px;
+  left: 20px;
+  z-index: 1000;
+  border-radius: 15px;
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat_bot_popup p{
+  font-size: 15px;
+}
+
+.chat_bot_link {
+  padding-bottom: 100px;
 }
 
 
