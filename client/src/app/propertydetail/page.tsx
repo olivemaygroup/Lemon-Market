@@ -23,6 +23,25 @@ export default function PropertyDetail() {
   const reviewList: Review[] = useSelector((state: RootState) => state.reviewList.value)
   console.log('review list state: ', reviewList)
 
+  // useEffect(() => {
+  
+  //   const accessToken = localStorage.getItem('acccesToken')
+  
+  //   reviewAPI.getMyReviews()
+  //     .then((res) => {
+  //       if (res) {
+  //         dispatch(setReviewListSlice(res))
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  
+  
+  // }, [])
+  // useEffect(() => {
+  //   console.log(reviewList, 'reviewLidst')
+  // }, [reviewList])
 
   return (
     <div data-testid="propertydetailcontainer"  className={styles.description}>
@@ -40,23 +59,3 @@ export default function PropertyDetail() {
     </div>
   );
 }
-
-// useEffect(() => {
-
-//   const accessToken = localStorage.getItem('acccesToken')
-
-//   reviewAPI.getMyReviews('eyJhbGciOiJIUzI1NiJ9.NA.oeLKdo1U0E5x9a0N6_Gb3tOj8DZiucVe5Z7BNWwpfzc')
-//     .then((res) => {
-//       if (res) {
-//         dispatch(setReviewListSlice(res))
-//       }
-//     })
-//     .catch((error) => {
-//       console.log(error)
-//     })
-
-
-// }, [])
-// useEffect(() => {
-//   console.log(reviewList, 'reviewLidst')
-// }, [reviewList])

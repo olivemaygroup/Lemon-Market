@@ -72,13 +72,13 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[] | undefined}) =>
         >
           {allPhotos.map((photo) => (
             <div key={photo.photo_id} className='image-container'>
-              <Image
+              <img
                 src={photo.url}
                 alt="Picture of the property"
                 sizes="(max-width: 500px) 100vw, 33vw"
-                layout="responsive"
+                // layout="responsive"
                 width={100}
-                height={60}
+                height={240}
               />
             </div>
           ))}
@@ -88,7 +88,7 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[] | undefined}) =>
           src={noimage}
           alt="Picture of the property"
           sizes="(max-width: 500px) 100vw, 33vw"
-          layout="responsive"
+          // layout="responsive"
           width={100}
           height={60}
         />
