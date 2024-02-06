@@ -6,7 +6,6 @@ import Button from '@mui/material/Button'
 import SendIcon from '@mui/icons-material/Send';
 
 import OpenAI from "openai";
-import _ from 'lodash';
 
 import styles from '@/app/chatbot/page.module.css'
 import { useSelector } from "react-redux";
@@ -15,9 +14,6 @@ import userAPI from "../ApiServices/userAPI";
 import { useRouter } from 'next/navigation'
 
 import CircularProgress from '@mui/material/CircularProgress';
-
-
-
 
 
 
@@ -43,12 +39,10 @@ const ChatBotPage = () => {
       content: starterMessage,
     }
   ]
-  
+
   const [chatBotResponse, setChatBotResponse] = useState<string | null>(null);
   const [chatBotFirstMessage, setChatBotFirstMessage] = useState<string>(`Hello ${user.firstName}! I am a helpful chatbot ready to assist you with any housing regulatory questions. Please ask me a question!`)
   const [conversationHistory, setConversationHistory] = useState<chatBot[]>(chatBotStart);
-  const [inputContainerClass, setInputContainerClass] = useState(styles.input_message_container_fixed);
-
   const [spinnerFlag, setSpinnerFlag] = useState<boolean>(false);
   const [userMessage, setUserMessage] = useState<string>('');
 
@@ -64,16 +58,6 @@ const ChatBotPage = () => {
     }
   })
 
-  useEffect(() => {
-    const chatBoxElement = document.querySelector('.' + styles.chat_box);
-    if (chatBoxElement) {
-      if (chatBoxElement.scrollHeight > chatBoxElement.clientHeight) {
-        setInputContainerClass(styles.input_message_container_relative);
-      } else {
-        setInputContainerClass(styles.input_message_container_fixed);
-      }
-    }
-  }, [conversationHistory]);
 
   const handleMessage = async () => {
     try {
@@ -108,11 +92,6 @@ const ChatBotPage = () => {
           <div className={styles.chat_bot_responses}>
             <p> {chatBotFirstMessage} </p>
           </div>
-          <div className={styles.user_message_container}>
-            <div className={styles.user_messages}>
-              <p> {chatBotFirstMessage} </p>
-            </div>
-          </div>
           {conversationHistory.slice(1).map((history, index) => {
             if (history.role === 'user') {
               return (
@@ -136,7 +115,7 @@ const ChatBotPage = () => {
             </div>
           )}
         </div >
-        <div className={styles.input_message_container}>
+        <div className={styles.input_message_container_fixed}>
           <TextField value={userMessage} className={styles.message_input} onChange={(e) => setUserMessage(e.target.value)} variant="outlined" />
           <div className={styles.button_container}>
             <Button variant="contained" onClick={handleMessage} className={styles.send_button} endIcon={<SendIcon />}>

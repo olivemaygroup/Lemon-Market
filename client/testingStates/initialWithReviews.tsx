@@ -1,4 +1,4 @@
-export const mockStore: any = {
+export const mockStateWith: any = {
   counter: { value: 0 },
   reviewList: { 
     value: [
