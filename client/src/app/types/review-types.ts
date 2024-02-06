@@ -19,6 +19,7 @@ export interface Review {
   council_tax: number;
   general_comment: string;
   photos: Photo[];
+  tenant_id?: number
 }
 
 export interface Photo {
