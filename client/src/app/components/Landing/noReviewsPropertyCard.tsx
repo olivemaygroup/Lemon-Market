@@ -10,9 +10,16 @@ import Link from 'next/link'
 import { PropertyType } from "@/app/types/property-type";
 import Image from "next/image";
 import Card from '@mui/material/Card';
+import { useRouter } from 'next/navigation'
+
 
 
 const NoReviewsPropertyCard = ({ property }: { property: PropertyType }) => {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    router.push('/propertydetail')
+  };
 
   return (
     <>

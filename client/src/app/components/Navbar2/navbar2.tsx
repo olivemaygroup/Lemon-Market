@@ -46,7 +46,7 @@ function NavBar2() {
               <div className={styles.links}>
                 <Link className={styles.link} href="/home" onClick={() => setMenu(!menu)}>home</Link>
                 <Link className={styles.link} href="/myprofile" onClick={() => setMenu(!menu)}>profile</Link>
-                <Link className={styles.link} href="/chatbot" onClick={() => setMenu(!menu)}><FaRobot/></Link>
+                <Link className={styles.link} href="/chatbot" onClick={() => setMenu(!menu)}><FaRobot /></Link>
                 <Link className={styles.link} href="/logout" onClick={() => setMenu(!menu)}>logout</Link>
               </div> :
               <div className={styles.links}>
