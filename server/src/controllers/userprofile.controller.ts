@@ -33,7 +33,7 @@ const signup = async (ctx: Context) => {
         }
       });
       const token = jwt.sign(tenant.tenant_id, SECRET_KEY);
-      const tenantWithoutPassword = { firstName: tenant.first_name, lastName: tenant.last_name, email: tenant.email };
+      const tenantWithoutPassword = {  tenant_id: tenant.tenant_id, firstName: tenant.first_name, lastName: tenant.last_name, email: tenant.email };
 
       const tenantWithToken = {
         ...tenantWithoutPassword, accessToken: token
@@ -71,7 +71,7 @@ const login = async (ctx: Context) => {
       return
     } else {
       const token = jwt.sign(tenant.tenant_id, SECRET_KEY);
-      const tenantWithoutPassword = { firstName: tenant.first_name, lastName: tenant.last_name, email: tenant.email };
+      const tenantWithoutPassword = { tenant_id: tenant.tenant_id, firstName: tenant.first_name, lastName: tenant.last_name, email: tenant.email };
 
       const tenantWithToken = {
         ...tenantWithoutPassword, accessToken: token
