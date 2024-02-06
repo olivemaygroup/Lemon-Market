@@ -1,7 +1,6 @@
 'use client'
 import Image from "next/image";
 import { FaRobot } from "react-icons/fa";
-import Link from 'next/link'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
@@ -21,7 +20,7 @@ import FullReview from "@/app/components/PropertyDetail/fullReview";
 import RatingDetail from "../components/PropertyDetail/ratingDetail";
 import { Review } from '@/app/types/review-types';
 import AddReview from "../components/PropertyDetail/addReview";
-// import { Popover } from "@blueprintjs/core";
+import { Popover } from "@blueprintjs/core";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
