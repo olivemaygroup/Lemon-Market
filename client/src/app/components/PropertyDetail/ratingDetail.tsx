@@ -1,7 +1,7 @@
 import './ratingDetail.css'
 import ReadonlyRating from './readonlyRating'
 import { Review } from '@/app/types/review-types';
-import { 
+import {
   cleanlinessRating,
   maintenanceRating,
   valueRating,

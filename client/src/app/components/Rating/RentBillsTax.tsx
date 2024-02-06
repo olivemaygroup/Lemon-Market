@@ -1,9 +1,9 @@
 import React from 'react'
 
 interface RentBillsTaxPropsInterface {
-  monthly_rent: number
-  monthly_bill: number
-  council_tax: number
+  monthly_rent: number | undefined
+  monthly_bill: number | undefined
+  council_tax: number | undefined
   setMonthly_rent: React.Dispatch<React.SetStateAction<number>>
   setMonthly_bill: React.Dispatch<React.SetStateAction<number>>
   setCouncil_tax: React.Dispatch<React.SetStateAction<number>>

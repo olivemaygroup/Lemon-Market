@@ -45,7 +45,7 @@ const AddComment: React.FC<AddCommentInterface> = ({ commentState, commentSetter
             <textarea
               className="comment_input"
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(event) => setInput(event.target.value)}
               autoFocus
               maxLength={120}
             />
