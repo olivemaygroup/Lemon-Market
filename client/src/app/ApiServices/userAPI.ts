@@ -55,12 +55,12 @@ const editProfile = async (newUser: NewUser, accessToken: string): Promise<any> 
   }
 }
 
-const checkUser = async (): Promise<void> => {
+const checkUser = async (): Promise<boolean|undefined> => {
   const accessToken = localStorage.getItem('accessToken')
 
   if (!accessToken) {
     handleAuthenticationError();
-    return
+    return false
   }
   try {
     const res = await fetch(`${BASE_URL}/checkUser`, {
@@ -74,6 +74,9 @@ const checkUser = async (): Promise<void> => {
 
     if (res.status === 401) {
       handleAuthenticationError();
+      return false
+    } else {
+      return true;
     }
 
   } catch (error) {

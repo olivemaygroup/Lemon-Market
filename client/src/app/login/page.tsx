@@ -31,8 +31,10 @@ export default function Login() {
     };
 
     const res: any = await userAPI.login(user);
+    console.log('RES--', res)
 
     const currUser: UserType = {
+      tenant_id: res.tenant_id,
       firstName: res.firstName,
       lastName: res.lastName,
       email: res.email
