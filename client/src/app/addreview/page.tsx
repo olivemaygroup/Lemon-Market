@@ -123,9 +123,6 @@ export default function addReview() {
     const avgStars = await (cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness) / 6
     setTotal_review_rating(avgStars)
 
-    const gen_comment = "Submitting review for test..."
-    setGeneral_comment(gen_comment)
-
     const imageURLsArray: any = await cloudinaryImagesToURLS(imageFiles);
     if (imageURLsArray) {
       setImageURLs(imageURLsArray)
@@ -150,7 +147,7 @@ export default function addReview() {
       monthly_rent: +monthly_rent,
       monthly_bill: +monthly_bill,
       council_tax: +council_tax,
-      general_comment: gen_comment,
+      general_comment,
       photos: imageURLsArray
     }
 
@@ -166,7 +163,7 @@ export default function addReview() {
   return (
     <div className={styles.addreview_page}>
       <h1 className={styles.address_title}>{fullProperty.fullAddress}</h1>
-      <div className={styles.review_subject_container}>
+      <div className={styles.review_items_container}>
 
         <div className="rating-item">
         <h1 className="title">Tenancy Dates</h1>
@@ -189,7 +186,6 @@ export default function addReview() {
             metricName={metric.name}
             imageFiles={imageFiles}
             setImageFiles={setImageFiles}
-            setImageURLs={setImageURLs}
             />
           </div>
           ))}

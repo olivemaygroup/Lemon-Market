@@ -17,6 +17,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import { RootState } from "@/lib/store";
 import { useSelector } from "react-redux";
@@ -25,16 +27,31 @@ import { Review } from '@/app/types/review-types';
 import ReadonlyRating from "./readonlyRating";
 import { Photo } from "@/app/types/review-types";
 import { PropertyType } from "@/app/types/property-type";
+import favoriteAPIservice  from '@/app/ApiServices/favouritesAPI'
 
+const PropertyOverview = ({ reviewList, property }: {reviewList: Review[] | undefined, property: PropertyType}) => {
 
-const PropertyOverview = ({ reviewList }: {reviewList: Review[] | undefined}) => {
-
-
+  const router = useRouter()
   const averageRating = useSelector((state: RootState) => state.fullProperty.value.avg_rating)
-  // console.log('typeof console: ', averageRating)
-  // const total = reviewList.reduce((total: number, review: Review) => total + review.total_review_rating, 0);
-  // const average = total / reviewList.length;
+  const loggedIn = useSelector((state: RootState) => state.auth.value)
+  const [saved, SetSaved] = useState(false)
   
+
+  useEffect(() => {
+    
+    const getMyFav = async () => {
+      let myFav = await favoriteAPIservice.getFavourites()
+      console.log('my fav console: ', myFav)
+      if ((myFav?.filter((item) => item.property_id === property.property_id).length === 1)) {
+        SetSaved(true)
+      } else {
+        SetSaved(false)
+      }
+    }
+    getMyFav()
+
+  },[loggedIn, averageRating, saved])
+
   let allPhotos: Array<Photo> = []
   
   if (reviewList) {
@@ -43,12 +60,31 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[] | undefined}) =>
     });
   }
 
-  const [saved, SetSaved] = useState(false)
+  const handleFavorite = async () => {
+    const newSavedState = !saved;
+    SetSaved(newSavedState); // Update the state immediately
   
+    try {
+      if (newSavedState) {
+        await favoriteAPIservice.addFavorite(property.property_id);
+      } else {
+        await favoriteAPIservice.removeFavorite(property.property_id);
+      }
+    } catch (error) {
+      console.error('Error while updating favorite:', error);
+      // Rollback the state if there's an error during the API call
+      SetSaved(!newSavedState);
+    }
+  };
 
   const handleAdd = () => {
-    // Navigate to signup or login
+    if (loggedIn) {
+      router.push('/addreview')
+    } else {
+      router.push('/login')
+    }
   }
+
 
   return (
     <div className='overviewContainer'>
@@ -115,7 +151,7 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[] | undefined}) =>
       </div>
       }
 
-      <div className="favoriteIcon" style={{ position: 'absolute', top: '10px', left: '10px', cursor: 'pointer' }} onClick={() => SetSaved(!saved)}>
+      <div className="favoriteIcon" style={{ position: 'absolute', top: '10px', left: '10px', cursor: 'pointer' }} onClick={handleFavorite}>
         {!saved ? 
           <FavoriteBorderIcon style={{ color: "#fae301", fontSize: '50px' }} /> : 
           <FavoriteIcon  style={{ color: "#fae301", fontSize: '50px' }} />
@@ -138,3 +174,4 @@ const PropertyOverview = ({ reviewList }: {reviewList: Review[] | undefined}) =>
 };
 
 export default PropertyOverview;
+

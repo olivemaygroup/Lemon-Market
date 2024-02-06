@@ -180,7 +180,7 @@
   height: 20% !important;
   border-radius: 10px !important;
   background-color: white !important;
-  font-family: Virgil, sans-serif !important; /* Ensure the font-family is correctly defined */
+  font-family: Virgil, sans-serif !important;
   font-size: large !important;
   color: #000 !important; 
   cursor: pointer !important; 

@@ -133,15 +133,15 @@ const addFavorite = async (
         Authorization: accessToken,
       },
     });
-
+    console.log('response from call', response)
     if (response.status === 401) {
       handleAuthenticationError();
     }
-
+    
     if (!response.ok) {
       return undefined
     }
-
+    
     //doesn't return anything
   } catch (error) {
     console.error(error);
@@ -152,27 +152,28 @@ const addFavorite = async (
 // Remove user favorite
 const removeFavorite = async (
   property_id: string,
-): Promise<void | undefined> => {
-  try {
-
-    const accessToken = localStorage.getItem('accessToken')
-    if (!accessToken) {
-      handleAuthenticationError();
-      return
-    }
-
-    const response = await fetch(
-      `${BASE_URL}/deletefavourite/${property_id}`,
-      {
-        method: "DELETE",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: accessToken,
+  ): Promise<void | undefined> => {
+    try {
+      
+      const accessToken = localStorage.getItem('accessToken')
+      if (!accessToken) {
+        handleAuthenticationError();
+        return
+      }
+      
+      const response = await fetch(
+        `${BASE_URL}/deletefavourite/${property_id}`,
+        {
+          method: "DELETE",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: accessToken,
+          },
         },
-      },
-    );
-
+        );
+        console.log('delete response from call', response)
+        
     if (response.status === 401) {
       handleAuthenticationError();
     }

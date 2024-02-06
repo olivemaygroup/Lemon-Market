@@ -8,10 +8,12 @@ import SendIcon from '@mui/icons-material/Send';
 import OpenAI from "openai";
 
 import styles from '@/app/chatbot/page.module.css'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/lib/store";
 import userAPI from "../ApiServices/userAPI";
 import { useRouter } from 'next/navigation'
+import { changeAuthStatus } from "@/lib/features/authentication/authSlice";
+
 
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -47,17 +49,20 @@ const ChatBotPage = () => {
   const [userMessage, setUserMessage] = useState<string>('');
 
 
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const checkUser = async () => {
-      await userAPI.checkUser()
-    }
-    checkUser()
-    if (!auth) {
-      router.push('/login')
-    }
-  })
 
+    userAPI.checkUser().then((res) => {
+      if (res === false) {
+        dispatch(changeAuthStatus(false))
+        router.push('/login')
+      } else {
+        dispatch(changeAuthStatus(true))
+      }
+    })
+
+  })
 
   const handleMessage = async () => {
     try {
