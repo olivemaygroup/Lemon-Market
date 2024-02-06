@@ -39,7 +39,11 @@ const Search = () => {
       fullAddress: address.fullAddress,
       property_id: address.property_id
     };
+
+
     dispatch(addProperty(newAddress));
+  
+  
   }, [address]);
 
   return (

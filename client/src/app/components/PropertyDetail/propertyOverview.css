@@ -19,6 +19,8 @@
   overflow: hidden;
 
 }
+
+
 .carousel.carousel-slider {
   margin-bottom: 20px;
 }
@@ -37,6 +39,7 @@
 /* pictureContainer */
 
 .pictureContainer {
+  position: absolute;
   margin-bottom: 10px;
   align-self: center;
   width: 100%;
@@ -83,4 +86,5 @@
 .photocount {
   display: none ;
 }
+
 
