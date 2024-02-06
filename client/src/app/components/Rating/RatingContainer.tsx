@@ -48,7 +48,6 @@ const RatingContainer: React.FC<RatingContainerInterface> = (
           />
 
           <AddComment 
-          metricName={metricName}
           commentState={commentState}
           commentSetter={commentSetter}
           />

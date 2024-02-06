@@ -11,6 +11,7 @@ import { RootState } from "@/lib/store";
 import propertySlice from "@/lib/features/property/propertySlice";
 import styles from './page.module.css'
 import { ImageFileObject } from "../types/review-types";
+import PhotoUploadComponent from "../components/Rating/UploadPhoto";
 
 
 export default function addReview() {
@@ -160,9 +161,7 @@ export default function addReview() {
       console.error('property id is undefined')
     }
 
-  }
-
-  let tempKey = 0;
+  };
 
   return (
     <div className={styles.addreview_page}>
@@ -182,7 +181,7 @@ export default function addReview() {
         {ratingMetrics.map((metric) => (
           <div className='rating-item'>
             <RatingContainer
-            key={tempKey++}
+            key={metric.name}
             ratingState={metric.ratingState}
             ratingSetter={metric.RatingSetter}
             commentState={metric.commentState}
@@ -211,9 +210,14 @@ export default function addReview() {
           <textarea
           className="general-comment-input"
           onChange={(event)=>{setGeneral_comment(event.target.value)}}
-          placeholder="General comments"
+          placeholder="General comments and photos..."
           >
           </textarea>
+          <PhotoUploadComponent 
+          metricName="General"
+          imageFiles={imageFiles}
+          setImageFiles={setImageFiles}
+          />
         </form>
 
         <div className="rating-item-submit" >

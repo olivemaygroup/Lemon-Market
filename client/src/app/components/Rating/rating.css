@@ -21,7 +21,7 @@
 
 .general-comment-input {
   margin: 5px;
-  height: 90%;
+  height: 70%;
   width: 90%;
   border-radius: 15px;
   padding: 10px;
@@ -158,8 +158,8 @@
   font-size: large;
  }
 
-/* ADD COMMENT BUTTON */
 
+/* ADD COMMENT BUTTON */
 
 .addreview-add-btn.MuiButton-root {
   width: 100% !important;
@@ -201,4 +201,11 @@
   height: 50vh;
   flex: 2 8;
   margin: 2vh;
+}
+
+
+/* LOADING BAR */
+.progress-bar-div {
+  width: 2vw;
+
 }
