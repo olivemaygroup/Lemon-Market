@@ -6,15 +6,17 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 import { useSelector } from 'react-redux'
+import { FaRobot } from "react-icons/fa";
+
 
 import { RootState } from '@/lib/store'
 
-function NavBar2 () {
+function NavBar2() {
   const [menu, setMenu] = useState<boolean>(false)
   const router = useRouter()
 
   const auth = useSelector((state: RootState) => state.auth.value);
-  console.log('AUTH--',auth)
+  console.log('AUTH--', auth)
 
   const burgerMenu = () => {
     const mCheck = !menu;
@@ -26,38 +28,38 @@ function NavBar2 () {
   return (
 
     <div className={styles.body}>
-      <img src={logo.src} alt="nooo" height='50px'/>
+      <img src={logo.src} alt="nooo" height='50px' />
       <div className={styles.newmenu}>
-        {menu?
-        <div className={styles.menubox}>
-        <div
-        onClick={burgerMenu}
-        className={styles.burgerbox}
-        >
-        <div className={styles.burgers}>
-          <div className={styles.bar}></div>
-          <div className={styles.bar}></div>
-          <div className={styles.bar}></div>
-        </div>
-        </div>
-        {auth? 
-          <div className={styles.links}>
-            <Link className={styles.link} href="/home" onClick={()=>setMenu(!menu)}>home</Link>
-            <Link className={styles.link} href="/myprofile" onClick={()=>setMenu(!menu)}>profile</Link>
-            <Link className={styles.link} href="/myreviews" onClick={()=>setMenu(!menu)}>my reviews</Link>
-            <Link className={styles.link} href="/logout" onClick={()=>setMenu(!menu)}>logout</Link> 
-          </div> :
-          <div className={styles.links}>
-            <Link className={styles.link} href="/home" onClick={()=>setMenu(!menu)}>home</Link>
-            <Link className={styles.link} href="/login" onClick={()=>setMenu(!menu)}>login</Link>
-          </div>}
-      </div>
-         : <div className={styles.nomenu}></div> }
+        {menu ?
+          <div className={styles.menubox}>
+            <div
+              onClick={burgerMenu}
+              className={styles.burgerbox}
+            >
+              <div className={styles.burgers}>
+                <div className={styles.bar}></div>
+                <div className={styles.bar}></div>
+                <div className={styles.bar}></div>
+              </div>
+            </div>
+            {auth ?
+              <div className={styles.links}>
+                <Link className={styles.link} href="/home" onClick={() => setMenu(!menu)}>home</Link>
+                <Link className={styles.link} href="/myprofile" onClick={() => setMenu(!menu)}>profile</Link>
+                <Link className={styles.link} href="/chatbot" onClick={() => setMenu(!menu)}><FaRobot/></Link>
+                <Link className={styles.link} href="/logout" onClick={() => setMenu(!menu)}>logout</Link>
+              </div> :
+              <div className={styles.links}>
+                <Link className={styles.link} href="/home" onClick={() => setMenu(!menu)}>home</Link>
+                <Link className={styles.link} href="/login" onClick={() => setMenu(!menu)}>login</Link>
+              </div>}
+          </div>
+          : <div className={styles.nomenu}></div>}
       </div>
       <div
         onClick={burgerMenu}
         className={styles.burgerbox}
-        >
+      >
         <div className={styles.burgers}>
           <div className={styles.bar}></div>
           <div className={styles.bar}></div>
@@ -65,10 +67,10 @@ function NavBar2 () {
         </div>
       </div>
       <div className={styles.topmenu}>
-        <Link className={styles.menuitem} onClick={()=>setMenu(!menu)} href="/home">home</Link>
-        <Link className={styles.menuitem} onClick={()=>setMenu(!menu)} href="/myprofile">profile</Link>
-        <Link className={styles.menuitem} onClick={()=>setMenu(!menu)} href="/myreviews">my reviews</Link>
-        <Link className={styles.menuitem} onClick={()=>setMenu(!menu)} href="/logout">logout</Link>
+        <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/home">home</Link>
+        <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/myprofile">profile</Link>
+        <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/myreviews">my reviews</Link>
+        <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/logout">logout</Link>
       </div>
     </div>
   )
