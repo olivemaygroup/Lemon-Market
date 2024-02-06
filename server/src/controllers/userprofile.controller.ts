@@ -4,7 +4,10 @@ import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 import { Contact, Login } from '../types/types'
 import { Tenant } from "@prisma/client";
+
 const SECRET_KEY = process.env.SECRET_KEY;
+
+console.log('key console,', SECRET_KEY)
 
 
 

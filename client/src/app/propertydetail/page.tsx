@@ -41,6 +41,9 @@ export default function PropertyDetail() {
   const property = useSelector((state: RootState) => state.property.value)
   const reviewList: Review[] = useSelector((state: RootState) => state.reviewList.value)
 
+  useEffect(() => {
+
+  },[property, reviewList])
   // useEffect(() => {
 
   //   const accessToken = localStorage.getItem('acccesToken')
@@ -57,17 +60,15 @@ export default function PropertyDetail() {
 
 
   // }, [])
-  // useEffect(() => {
-  //   console.log(reviewList, 'reviewLidst')
-  // }, [reviewList])
+ 
 
   return (
     <div data-testid="propertydetailcontainer" className={styles.description}>
       <div data-testid="Address" className="address">
         <h2>{property.fullAddress}</h2>
       </div>
-      <PropertyOverview data-testid="property-overview" reviewList={reviewList} />
-      <RatingDetail data-testid="rating-detail" reviewList={reviewList} />
+      <PropertyOverview data-testid="property-overview" reviewList={reviewList} property={property}/>
+      <RatingDetail data-testid="rating-detail" reviewList={reviewList}/>
       {reviewList.map((item, index) => (
         <div key={index}>
           <h2 className={styles.reviewName}>Joe Bloggs review: Jan 22</h2>

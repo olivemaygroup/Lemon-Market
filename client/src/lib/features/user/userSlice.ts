@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import { UserType } from "@/app/types/types"
 
 const initialState: UserType = {
+  tenant_id: '',
   firstName: '',
   lastName: '',
   email: '',
