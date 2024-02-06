@@ -1,5 +1,7 @@
 'use client'
 import Image from "next/image";
+import { FaRobot } from "react-icons/fa";
+
 
 import styles from "@/app/propertydetail/page.module.css";
 import './page.module.css'
@@ -14,6 +16,8 @@ import FullReview from "@/app/components/PropertyDetail/fullReview";
 import RatingDetail from "../components/PropertyDetail/ratingDetail";
 import { Review } from '@/app/types/review-types';
 import AddReview from "../components/PropertyDetail/addReview";
+import { Button, Classes, Popover } from "@blueprintjs/core";
+
 
 export default function PropertyDetail() {
   const dispatch = useDispatch();
@@ -24,9 +28,9 @@ export default function PropertyDetail() {
   console.log('review list state: ', reviewList)
 
   // useEffect(() => {
-  
+
   //   const accessToken = localStorage.getItem('acccesToken')
-  
+
   //   reviewAPI.getMyReviews()
   //     .then((res) => {
   //       if (res) {
@@ -36,26 +40,29 @@ export default function PropertyDetail() {
   //     .catch((error) => {
   //       console.log(error)
   //     })
-  
-  
+
+
   // }, [])
   // useEffect(() => {
   //   console.log(reviewList, 'reviewLidst')
   // }, [reviewList])
 
   return (
-    <div data-testid="propertydetailcontainer"  className={styles.description}>
+    <div data-testid="propertydetailcontainer" className={styles.description}>
       <div data-testid="Address" className="address">
         <h2>{property.fullAddress}</h2>
       </div>
-      <PropertyOverview data-testid="property-overview" reviewList={reviewList}/>
-      <RatingDetail data-testid="rating-detail" reviewList={reviewList}/>
+      <PropertyOverview data-testid="property-overview" reviewList={reviewList} />
+      <RatingDetail data-testid="rating-detail" reviewList={reviewList} />
       {reviewList.map((item, index) => (
         <div key={index}>
           <h2 className={styles.reviewName}>Joe Bloggs review: Jan 22</h2>
           <FullReview item={item} />
         </div>
       ))}
+      <button className={styles.robot_button_container}>
+        <FaRobot className={styles.robot_icon} />
+      </button>
     </div>
   );
 }

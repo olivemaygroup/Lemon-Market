@@ -10,6 +10,8 @@ import {
   landlordRating,
   rentRating,
   councilRating,
+
+
 } from './ratingCalculations';
 
 const RatingDetail = ({ reviewList }: {reviewList: Review[]}) => {
