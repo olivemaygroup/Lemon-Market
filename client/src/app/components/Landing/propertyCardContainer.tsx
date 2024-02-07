@@ -9,6 +9,7 @@ import NoReviewsPropertyCard from "./noReviewsPropertyCard";
 import { Review } from '@/app/types/review-types';
 import Button from '@mui/material/Button';
 import Link from 'next/link'
+import { useRouter } from 'next/navigation';
 
 
 import styles from "@/app/components/Landing/page.module.css";
@@ -16,12 +17,14 @@ import styles from "@/app/components/Landing/page.module.css";
 
 
 
-const ProperetyCardContainer = () => {
-
+const ProperetyCardContainer = ({SetShowPopup, showPopup}:{SetShowPopup: any, showPopup: boolean}) => {
+  
+  const router = useRouter()
   const [profilePhoto, setProfilePhoto] = useState<string>('')
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
   const reviewList: Review[] = useSelector((state: RootState) => state.reviewList.value)
   const property = useSelector((state: RootState) => state.property.value)
+  const user = useSelector((state: RootState) => state.auth.value)
 
 
   React.useEffect(() => {
@@ -30,23 +33,32 @@ const ProperetyCardContainer = () => {
     }
   })
 
+  const handleClick = () => {
+    if (user) {
+      router.push('/addreview')
+    } else {
+      SetShowPopup(!showPopup)
+    }
+  }
+
 
   return (
     <>
+      
       {
         fullProperty.num_of_reviews !== 0 ? (
           <>
             <PropertyCard fullProperty={fullProperty} profilePhoto={profilePhoto} />
-            <Link href="/addreview" >
-              <Button className={styles.knock_a_review_btn} variant="contained">Knock a review!</Button>
-            </Link >
+            {/* <Link href="/addreview" > */}
+              <Button className={styles.knock_a_review_btn} variant="contained" onClick={handleClick}>Knock a review!</Button>
+            {/* </Link > */}
           </>
         ) : (
           <>
             <NoReviewsPropertyCard property={property} />
-            <Link href="/addreview" >
-              <Button className={styles.knock_a_review_btn} variant="contained">Knock a review!</Button>
-            </Link >
+            {/* <Link href="/addreview" > */}
+              <Button className={styles.knock_a_review_btn} variant="contained" onClick={handleClick}>Knock a review!</Button>
+            {/* </Link > */}
           </>
         )
       }

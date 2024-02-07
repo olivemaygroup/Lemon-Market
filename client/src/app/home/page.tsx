@@ -10,6 +10,11 @@ import { setReviewListSlice } from "@/lib/features/review/addReviewSlice";
 import { addFullProperty } from "@/lib/features/property/fullProperty";
 import { PropertyType } from "../types/property-type";
 import Image from 'next/image';
+import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
+import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
+import { useRouter } from 'next/navigation';
+
 
 import comfortableHome from '../../../public/comfortable-home.jpg'
 import home from '../../../public/home.png'
@@ -19,10 +24,15 @@ import ProperetyCardContainer from "@/app/components/Landing/propertyCardContain
 
 export default function Home() {
   const dispatch = useDispatch();
+  const router = useRouter()
   const property = useSelector((state: RootState) => state.property.value);
   const [showProperty, setShowProperty] = useState(false)
+  const [showPopup, SetShowPopup] = useState(false)
 
+  
   useEffect(() => {
+    
+    SetShowPopup(false)
     //currently check address does add the property if it exists - but we can change that to only occur when review happens
     setShowProperty(property.fullAddress !== '' && property.property_id !== '')
 
@@ -38,7 +48,49 @@ export default function Home() {
     })
   }, [property])
 
+ 
+  const handleSignup = () => {
+    localStorage.setItem('next', '/addreview');
+    router.push('/signup')
+  }
+
+  const handleLogin = () => {
+    localStorage.setItem('next', '/addreview');
+    router.push('/login')
+  }
+
+  const handleClose = () => {
+  SetShowPopup(!showPopup)
+  }
+
+
+
   return (
+    <>
+    
+    {showPopup &&
+      <div className={styles.popupcontainer}>
+       
+        <div className={styles.popupdetails}>
+        <div className={styles.closebutton}>
+           <Box sx={{ '& > :not(style)': { m: 1 } }}>
+            <Fab style={{backgroundColor: "#fae301"}} aria-label="add" onClick={handleClose}>
+              <DoDisturbOnIcon 
+              />
+            </Fab>
+          </Box>
+        </div>
+          <h2>review or save a property?</h2>
+          <p>Please login or signup</p>
+          <div className={styles.buttons}>
+            <p onClick={handleLogin} className={styles.link} style={{'cursor': 'pointer'}}>Login</p>
+            <button className={styles.signup} onClick={handleSignup}>signup</button>
+          </div>
+        </div>
+
+      </div>
+      }
+
     <main className={styles.main}>
       <Search></Search>
       <div className={styles.backdrop}>
@@ -48,8 +100,9 @@ export default function Home() {
         alt="Comfortable home image with open plan living area. Sofa, cushions, rug. One wall is a window overlooking city. Paintings on the wall are Modgiliani and Pre-raphaelite. There are lemons on a round dining room table, door and cupboards are wood" />
       </div>
       {showProperty &&
-        <ProperetyCardContainer />
+        <ProperetyCardContainer SetShowPopup={SetShowPopup} showPopup={showPopup} />
       }
     </main>
+      </>
   );
 }
