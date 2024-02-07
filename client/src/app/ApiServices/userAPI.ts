@@ -2,6 +2,7 @@ import { Profile } from "next-auth";
 import { LogIn, NewUser } from "../types/tenant-types";
 import { Login } from "../types/types";
 import handleAuthenticationError from "../utils/auth-router";
+import { Diplomata } from "next/font/google";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
 
@@ -54,11 +55,11 @@ const editProfile = async (newUser: NewUser, accessToken: string): Promise<any> 
   }
 }
 
-const checkUser = async (): Promise<boolean|undefined> => {
+const checkUser = async (dispatch: any): Promise<boolean | undefined> => {
   const accessToken = localStorage.getItem('accessToken')
 
   if (!accessToken) {
-    handleAuthenticationError();
+    handleAuthenticationError(dispatch);
     return false
   }
   try {
