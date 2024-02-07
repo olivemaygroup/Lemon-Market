@@ -52,7 +52,7 @@ export const rentRating = (reviews: Review[]): number => {
   const filteredReviews = reviews.filter(review => review.monthly_rent !== 0);
   const length: number = filteredReviews.length;
   const total: number = filteredReviews.reduce((total, review) => total + review.monthly_rent, 0);
-  const rentAverage: number = Math.round(total / length);
+  const rentAverage: number = (total > 0 ? Math.round(total / length) : 0);
   return rentAverage;
 };
 
@@ -60,7 +60,7 @@ export const councilRating = (reviews: Review[]): number => {
   const filteredReviews = reviews.filter(review => review.council_tax !== 0);
   const length: number = filteredReviews.length;
   const total: number = filteredReviews.reduce((total, review) => total + review.council_tax, 0);
-  const councilAverage: number = Math.round(total / length);
+  const councilAverage: number = (total > 0 ? Math.round(total / length) : 0);
   return councilAverage;
 };
 

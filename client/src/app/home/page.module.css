@@ -12,13 +12,14 @@
 }
 
 .backdrop {
-  border: 1px solid;
+  border: none;
   position: absolute;
   /* opacity: 50%; */
   z-index: -5;
   /* height: 500px; */
   width: 100%;
   align-self: center;
+  height: fit-content;
 }
 
 .logo {
