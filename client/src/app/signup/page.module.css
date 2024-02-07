@@ -46,10 +46,11 @@
   margin-bottom: 5px;
 }
 
-.input_feild {
+.input_field {
   border: 0.7px solid;
   border-radius: 10px;
   height: 40px;
+  padding: 5px;
 }
 
 .login_btns {

@@ -55,6 +55,7 @@
   max-height: 20px;
   align-self: flex-end;
   width: 40%;
+  gap: 5px;
 }
 
 .divide {
