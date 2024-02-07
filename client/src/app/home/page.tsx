@@ -10,18 +10,20 @@ import { setReviewListSlice } from "@/lib/features/review/addReviewSlice";
 import { addFullProperty } from "@/lib/features/property/fullProperty";
 import { PropertyType } from "../types/property-type";
 import Image from 'next/image';
-import Box from '@mui/material/Box';
+import { FaRobot } from 'react-icons/fa';import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
-import { useRouter } from 'next/navigation';
 
 
 import comfortableHome from '../../../public/comfortable-home.jpg'
 import darkhome from '../../../public/dark-home.jpeg'
 import greenroom from '../../../public/green-room.png'
 
+import home from '../../../public/home.png'
+import bot from '../../../public/icons/Screenshot 2024-02-07 141245.png'
 import Link from 'next/link'
 import ProperetyCardContainer from "@/app/components/Landing/propertyCardContainer";
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -107,6 +109,11 @@ export default function Home() {
       {showProperty &&
         <ProperetyCardContainer SetShowPopup={SetShowPopup} showPopup={showPopup} />
       }
+      <div 
+      onClick={()=>router.push("/chatbot")}
+        className={styles.robot_box}>
+        <img className={styles.bot_face} src={bot.src} alt="" /> 
+      </div>
     </main>
       </>
   );
