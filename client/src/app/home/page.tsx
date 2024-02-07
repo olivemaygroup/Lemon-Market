@@ -10,14 +10,16 @@ import { setReviewListSlice } from "@/lib/features/review/addReviewSlice";
 import { addFullProperty } from "@/lib/features/property/fullProperty";
 import { PropertyType } from "../types/property-type";
 import Image from 'next/image';
-
+import { FaRobot } from 'react-icons/fa';
 import comfortableHome from '../../../public/comfortable-home.jpg'
 import home from '../../../public/home.png'
-
+import bot from '../../../public/icons/Screenshot 2024-02-07 141245.png'
 import Link from 'next/link'
 import ProperetyCardContainer from "@/app/components/Landing/propertyCardContainer";
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter()
   const dispatch = useDispatch();
   const property = useSelector((state: RootState) => state.property.value);
   const [showProperty, setShowProperty] = useState(false)
@@ -50,6 +52,11 @@ export default function Home() {
       {showProperty &&
         <ProperetyCardContainer />
       }
+      <div 
+      onClick={()=>router.push("/chatbot")}
+        className={styles.robot_box}>
+        <img className={styles.bot_face} src={bot.src} alt="" /> 
+      </div>
     </main>
   );
 }

@@ -25,5 +25,24 @@
   height: 50%;
 }
 
+.robot_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 35px;
+  height: 70px;
+  width: 70px;
+  margin-top: auto;
+  position: fixed;
+  border: 1px solid #fae301;
+  z-index: 5;
+  bottom: 30px;
+  align-self: flex-start; 
+}
 
+.bot_face {
+  height: 90px;
+  cursor: pointer;
+}
+.bot_face:hover {}
 
