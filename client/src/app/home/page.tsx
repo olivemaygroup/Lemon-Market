@@ -9,6 +9,10 @@ import checkAddress from "../ApiServices/propertyAPI";
 import { setReviewListSlice } from "@/lib/features/review/addReviewSlice";
 import { addFullProperty } from "@/lib/features/property/fullProperty";
 import { PropertyType } from "../types/property-type";
+import Image from 'next/image';
+
+import comfortableHome from '../../../public/comfortable-home.jpg'
+import home from '../../../public/home.png'
 
 import Link from 'next/link'
 import ProperetyCardContainer from "@/app/components/Landing/propertyCardContainer";
@@ -37,9 +41,12 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <Search></Search>
-      {/* <div className={styles.backdrop}>
-        <img className={styles.logo} src={logo.src} alt="" />
-      </div> */}
+      <div className={styles.backdrop}>
+        <Image 
+        className={styles.logo} 
+        src={comfortableHome} 
+        alt="Comfortable home image with open plan living area. Sofa, cushions, rug. One wall is a window overlooking city. Paintings on the wall are Modgiliani and Pre-raphaelite. There are lemons on a round dining room table, door and cupboards are wood" />
+      </div>
       {showProperty &&
         <ProperetyCardContainer />
       }
