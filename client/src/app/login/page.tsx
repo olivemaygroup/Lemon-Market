@@ -7,6 +7,7 @@ import { Error, Login, UserType } from "../types/types";
 import { setUserSlice } from "@/lib/features/user/userSlice";
 import userAPI from "../ApiServices/userAPI";
 import { changeAuthStatus } from "@/lib/features/authentication/authSlice";
+import Link from "next/link";
 // import { useRouter } from "next/router";
 
 const initialError: Error = {
@@ -94,7 +95,10 @@ export default function Login() {
                 <div className={styles.errorbox}>
                   {error.msg}
                   <button className={styles.btn} onClick={() => setError(initialError)}>OK</button>
+                  <Link href="/signup">
                   <button className={styles.btn}>signup here</button>
+                  </Link>
+                  
                 </div>
                 <div className={styles.login_btns}>
                   <button className={styles.login}>Login</button>
