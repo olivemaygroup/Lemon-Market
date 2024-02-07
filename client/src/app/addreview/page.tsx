@@ -13,12 +13,14 @@ import { ImageFileObject } from "../types/review-types";
 import PhotoUploadComponent from "../components/Rating/UploadPhoto";
 import Link from 'next/link'
 import Button from '@mui/material/Button';
+import { useRouter } from "next/navigation";
 
 
 export default function addReview() {
   const address: string = '123 love lane'
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
 
+  const router = useRouter()
   const [imageFiles, setImageFiles] = useState<ImageFileObject[]>([]);
   const [imageURLs, setImageURLs] = useState<any[]>([]);
   const [t_start, setT_start] = useState<string>('');
@@ -158,6 +160,7 @@ export default function addReview() {
     } else {
       console.error('property id is undefined')
     }
+    router.push('/propertydetail')
 
   };
 
