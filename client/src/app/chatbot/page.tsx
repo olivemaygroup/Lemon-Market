@@ -6,6 +6,7 @@ import Button from '@mui/material/Button'
 import SendIcon from '@mui/icons-material/Send';
 
 import OpenAI from "openai";
+import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 
 import styles from '@/app/chatbot/page.module.css'
 import { useSelector, useDispatch } from "react-redux";
@@ -16,13 +17,14 @@ import { changeAuthStatus } from "@/lib/features/authentication/authSlice";
 
 
 import CircularProgress from '@mui/material/CircularProgress';
+import { AnyCnameRecord } from "dns";
 
 
 
 const OPENAI_KEY = process.env.NEXT_PUBLIC_OPENAIKEY
 const openai = new OpenAI({ apiKey: OPENAI_KEY, dangerouslyAllowBrowser: true });
 
-interface chatBot {
+interface ChatBot {
   role: string;
   content: string;
 }
@@ -44,7 +46,7 @@ const ChatBotPage = () => {
 
   const [chatBotResponse, setChatBotResponse] = useState<string | null>(null);
   const [chatBotFirstMessage, setChatBotFirstMessage] = useState<string>(`Hello ${user.firstName}! I am a helpful chatbot ready to assist you with any housing regulatory questions. Please ask me a question!`)
-  const [conversationHistory, setConversationHistory] = useState<chatBot[]>(chatBotStart);
+  const [conversationHistory, setConversationHistory] = useState<any[]>(chatBotStart);
   const [spinnerFlag, setSpinnerFlag] = useState<boolean>(false);
   const [userMessage, setUserMessage] = useState<string>('');
 
