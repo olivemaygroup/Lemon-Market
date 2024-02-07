@@ -10,7 +10,7 @@ import { Review } from '@/app/types/review-types';
 import Button from '@mui/material/Button';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
-
+import house from '../../../../public/Screenshot 2024-02-03 141600.png'
 
 import styles from "@/app/components/Landing/page.module.css";
 
@@ -18,7 +18,7 @@ import styles from "@/app/components/Landing/page.module.css";
 const ProperetyCardContainer = ({ SetShowPopup, showPopup }: { SetShowPopup: any, showPopup: boolean }) => {
 
   const router = useRouter()
-  const [profilePhoto, setProfilePhoto] = useState<string>('')
+  const [profilePhoto, setProfilePhoto] = useState<string>(house.src)
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
   const reviewList: Review[] = useSelector((state: RootState) => state.reviewList.value)
   const property = useSelector((state: RootState) => state.property.value)
@@ -27,10 +27,12 @@ const ProperetyCardContainer = ({ SetShowPopup, showPopup }: { SetShowPopup: any
 
   React.useEffect(() => {
     if (reviewList.length > 0 && reviewList[0].photos.length > 0) {
-      const generalPhotoArray = reviewList[0].photos.filter(photo => {
+      const generalPhotoArray = reviewList[0]?.photos.filter(photo => {
         if (photo.tag === 'General') return true;
       })
-      setProfilePhoto(generalPhotoArray[0].url)
+      if (generalPhotoArray.length > 0) {
+        setProfilePhoto(generalPhotoArray[0].url)
+      }
     }
   })
 
