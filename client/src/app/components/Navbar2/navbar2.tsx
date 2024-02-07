@@ -69,15 +69,15 @@ function NavBar2() {
       </div>
       {auth? 
       <div className={styles.topmenu}>
-        <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/home">home</Link>
-        <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/myprofile">profile</Link>
-        <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/myreviews">my reviews</Link>
-        <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/logout">logout</Link>
+        <Link className={styles.menuitem}  href="/home">home</Link>
+        <Link className={styles.menuitem}  href="/myprofile">profile</Link>
+        <Link className={styles.menuitem}  href="/myreviews">my reviews</Link>
+        <Link className={styles.menuitem}  href="/logout">logout</Link>
       </div> :
       <div className={styles.topmenu}>
-        <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/home">home</Link>
-        <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/login">login</Link>
-        <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/signup">sign up</Link>
+        <Link className={styles.menuitem}  href="/home">home</Link>
+        <Link className={styles.menuitem}  href="/login">login</Link>
+        <Link className={styles.menuitem}  href="/signup">sign up</Link>
       </div>
       }
     </div>
