@@ -157,6 +157,7 @@ export default function addReview() {
     if (fullProperty.property_id != "") {
       console.log('🔥', fullProperty.property_id)
       reviewAPI.addReview(fullProperty.property_id, reviewObject)
+      
     } else {
       console.error('property id is undefined')
     }

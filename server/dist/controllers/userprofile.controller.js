@@ -19,6 +19,11 @@ const SECRET_KEY = process.env.SECRET_KEY;
 const signup = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     const { firstName, lastName, email, password } = ctx.request.body;
     try {
+        if (!firstName || !lastName || !email || !password) {
+            ctx.status = 500;
+            ctx.body = { error: 'Missing a signup property' };
+            return;
+        }
         const sanitizedEmail = email.replace(/[$/(){}]/g, "").toLowerCase();
         const sanitizedPassword = password.replace(/[$/(){}]/g, "");
         const santitizedFirstName = firstName.replace(/[$/(){}]/g, "");
@@ -39,7 +44,7 @@ const signup = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
                 }
             });
             const token = jsonwebtoken_1.default.sign(tenant.tenant_id, SECRET_KEY);
-            const tenantWithoutPassword = { firstName: tenant.first_name, lastName: tenant.last_name, email: tenant.email };
+            const tenantWithoutPassword = { tenant_id: tenant.tenant_id, firstName: tenant.first_name, lastName: tenant.last_name, email: tenant.email };
             const tenantWithToken = Object.assign(Object.assign({}, tenantWithoutPassword), { accessToken: token });
             ctx.body = tenantWithToken;
             ctx.status = 201;
@@ -70,7 +75,7 @@ const login = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
         }
         else {
             const token = jsonwebtoken_1.default.sign(tenant.tenant_id, SECRET_KEY);
-            const tenantWithoutPassword = { firstName: tenant.first_name, lastName: tenant.last_name, email: tenant.email };
+            const tenantWithoutPassword = { tenant_id: tenant.tenant_id, firstName: tenant.first_name, lastName: tenant.last_name, email: tenant.email };
             const tenantWithToken = Object.assign(Object.assign({}, tenantWithoutPassword), { accessToken: token });
             ctx.body = tenantWithToken;
             ctx.status = 200;

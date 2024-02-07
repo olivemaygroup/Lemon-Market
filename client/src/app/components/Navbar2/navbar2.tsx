@@ -14,7 +14,6 @@ import { RootState } from '@/lib/store'
 function NavBar2() {
   const [menu, setMenu] = useState<boolean>(false)
   const router = useRouter()
-
   const auth = useSelector((state: RootState) => state.auth.value);
 
   const burgerMenu = () => {
@@ -22,13 +21,13 @@ function NavBar2() {
     setMenu(mCheck)
   }
 
-
-
   return (
 
-    <div 
+    <div
       className={styles.body}>
-      <img src={logo.src} alt="nooo" height='50px' />
+      <Link href='/home'>
+      <img src={logo.src} alt="Lemon Market Logo" height='50px' />
+      </Link>
       <div className={styles.newmenu}>
         {menu ?
           <div className={styles.menubox}>
@@ -67,7 +66,7 @@ function NavBar2() {
           <div className={styles.bar}></div>
         </div>
       </div>
-      {auth? 
+      {auth?
       <div className={styles.topmenu}>
         <Link className={styles.menuitem}  href="/home">home</Link>
         <Link className={styles.menuitem}  href="/myprofile">profile</Link>

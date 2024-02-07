@@ -115,7 +115,7 @@ const removeFavorite = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
                 favourite_id: favoriteToDelete.favourite_id,
             },
         });
-        ctx.body = 'Favorite deleted';
+        ctx.body = 'Favourite deleted';
         ctx.status = 200;
     }
     catch (error) {

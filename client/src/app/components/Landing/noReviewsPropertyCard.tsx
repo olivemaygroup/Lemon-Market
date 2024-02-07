@@ -23,7 +23,7 @@ const NoReviewsPropertyCard = ({ property }: { property: PropertyType }) => {
 
   return (
     <>
-      <Card variant="outlined" className={styles.card_container}>
+      <Card variant="outlined" className={styles.card_container} onClick={handleCardClick}>
         <div className={styles.image_address_container}>
           <div className={styles.card_image}>
             <Image

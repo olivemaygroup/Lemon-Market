@@ -7,13 +7,15 @@ import { Tenant } from "@prisma/client";
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
-console.log('key console,', SECRET_KEY)
-
-
-
 const signup = async (ctx: Context) => {
   const { firstName, lastName, email, password } = <Contact>ctx.request.body
   try {
+
+    if (!firstName || !lastName || !email || !password){
+      ctx.status = 500;
+      ctx.body = { error: 'Missing a signup property' };
+      return
+    }
 
     const sanitizedEmail = email.replace(/[$/(){}]/g, "").toLowerCase();
     const sanitizedPassword = password.replace(/[$/(){}]/g, "");

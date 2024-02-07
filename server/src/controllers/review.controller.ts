@@ -34,7 +34,7 @@ const addReview = async (ctx: Context) => {
 
     if (!property) {
       ctx.body = "property does not exist";
-      ctx.status = 500;
+      ctx.status = 402;
       return
     }
 
