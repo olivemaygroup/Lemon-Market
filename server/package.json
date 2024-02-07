@@ -7,6 +7,7 @@
     "start": "tsc -w",
     "connect": "prisma migrate dev --name init",
     "test": "ENV=test jest --detectOpenHandles",
+    "testwindows": "set ENV=test&& jest --detectOpenHandles",
     "dev": "tsx watch ./src/index.ts"
   },
   "author": "",
