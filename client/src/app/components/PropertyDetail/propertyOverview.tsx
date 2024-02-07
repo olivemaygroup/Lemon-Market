@@ -118,27 +118,30 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup }: {re
         
         >
           {allPhotos.map((photo) => (
-            <div key={photo.photo_id} className='image-container'>
+            <div key={photo.photo_id} className='picturecontainer'>
               <img
                 src={photo.url}
                 alt="Picture of the property"
-                sizes="(max-width: 500px) 100vw, 33vw"
+                // sizes="(max-width: 500px) 100vw, 33vw"
                 // layout="responsive"
-                width={100}
-                height={240}
+                // width={100}
+                // height={240}
                 />
             </div>
           ))}
         </Carousel>
       ) : (
-        <Image 
-        src={noimage}
-        alt="Picture of the property"
-        sizes="(max-width: 500px) 100vw, 33vw"
-        // layout="responsive"
-        width={100}
-        height={60}
-        />
+        // <div className="no-image">
+          <Image 
+          src={noimage}
+          alt="Picture of the property"
+          sizes="(max-width: 500px) 100vw, 33vw"
+          // style={{objectFit: "contain"}}
+          // layout="fill"
+          width={300}
+          height={200}
+          />
+          // </div>
         )}
       
       {/* Render options for general rating */}

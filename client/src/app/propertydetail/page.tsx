@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
 import CancelIcon from '@mui/icons-material/Cancel';
+import moment from 'moment'
 
 import styles from "@/app/propertydetail/page.module.css";
 import './page.module.css'
@@ -72,7 +73,7 @@ export default function PropertyDetail() {
         <div className={styles.closebutton}>
            <Box sx={{ '& > :not(style)': { m: 1 } }}>
             <Fab style={{backgroundColor: "#fae301"}} aria-label="add" onClick={handleClose}>
-              <CancelIcon 
+              <DoDisturbOnIcon 
               />
             </Fab>
           </Box>
@@ -96,7 +97,7 @@ export default function PropertyDetail() {
       <RatingDetail data-testid="rating-detail" reviewList={reviewList}/>
       {reviewList.map((item, index) => (
         <div key={index}>
-          <h2 className={styles.reviewName}>Joe Bloggs review: Jan 22</h2>
+          <h2 className={styles.reviewName}>{moment(item.t_end).format("MMM YY")} to {moment(item.t_start).format("MMM YY")}</h2>
           <FullReview item={item} />
         </div>
       ))}
