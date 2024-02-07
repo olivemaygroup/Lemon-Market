@@ -55,7 +55,13 @@ export default function PropertyDetail() {
   
   
   const handleSignup = () => {
+    localStorage.setItem('next', '/addreview');
     router.push('/signup')
+  }
+
+  const handleLogin = () => {
+    localStorage.setItem('next', '/addreview');
+    router.push('/login')
   }
 
   const handleClose = () => {
@@ -81,7 +87,7 @@ export default function PropertyDetail() {
           <h2>review or save a property?</h2>
           <p>Please login or signup</p>
           <div className={styles.buttons}>
-            <Link href='/login' className={styles.link}>Login</Link>
+            <p onClick={handleLogin} className={styles.link} style={{'cursor': 'pointer'}}>Login</p>
             <button className={styles.signup} onClick={handleSignup}>signup</button>
           </div>
         </div>

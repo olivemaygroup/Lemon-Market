@@ -76,7 +76,8 @@ export default function Signup() {
       dispatch(setUserSlice(currUser));
       localStorage.setItem('accessToken',response.accessToken);
       resetStates();
-      router.push('/myprofile')
+      const next = localStorage.getItem('next')
+      router.push( next === '/addreview' ? '/addreview' : '/myprofile')
     }
   }
 

@@ -92,7 +92,7 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup }: {re
       SetShowPopup(!showPopup)
       return
     } else {
-      router.push('/addreview')
+      router.push('/addreview?next=/propertydetail')
     } 
   }
 
