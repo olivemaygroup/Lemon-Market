@@ -1,0 +1,11 @@
+.container {
+  margin-bottom: 30px;
+  padding: 10px;
+  text-align: center;
+  margin: auto;
+  height: fit-content;
+}
+.container::-webkit-scrollbar {
+  display: none;
+  overflow-y: hidden;
+}

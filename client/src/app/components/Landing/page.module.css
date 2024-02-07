@@ -1,0 +1,121 @@
+/* search and property card CSS */
+
+@font-face {
+  font-family: 'virgil';
+  src: url('../../../../public/fonts/Virgil.woff2');
+}
+
+.property_card_navigator {
+  background-color: transparent;
+}
+
+/* Search bar */
+.searchContainer {
+  margin-top: 14rem;
+  background-color: rgb(255, 255, 255, 0.95);
+  max-width: 800px;
+  width: 90%;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.catchphrase {
+  text-align: center;
+  color: #fae301;
+  padding-bottom: 2px;
+}
+
+.quick_description {
+  text-align: center;
+  color: black;
+  padding-bottom: 4px;
+}
+
+.image_address_container {
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+}
+
+/* Property Card */
+.card_container {
+  font-family: 'virgil';
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  color: black;
+  width: 85%;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card_container:active {
+  box-shadow: none; 
+}
+
+.card_image {
+  width: 40%;
+  height: 100%;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.card_image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.no_image_available {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card_address {
+  display: flex;
+  align-items: center;
+  width: 60%;
+  padding: 10px;
+  text-align: left;
+
+}
+
+.card_rating_container {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding: 10px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.favourite_icon {
+  background-color: transparent;
+  border: none;
+  color: yellow;
+}
+
+.favourite_icon_container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  /* justify-content: end; */
+  margin-bottom: 5px;
+}
+
+/* add review button */
+.knock_a_review_btn {
+  width: 60vw !important;
+  height: 4vh !important;
+  border-radius: 10px !important;
+  background-color: white !important;
+  font-family: Virgil, sans-serif !important;
+  font-size: large !important;
+  color: #000 !important; 
+  cursor: pointer !important; 
+  box-shadow: 24px 24px 48px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}

@@ -1,0 +1,128 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  /* padding: 5% 10px 5% 10px; */
+  min-height: 100vh;
+  width: 100%;
+  /* margin-top: 100px; */
+  scroll-behavior: auto;
+  position: absolute;
+}
+
+.backdrop {
+  border: none;
+  position: absolute;
+  /* opacity: 50%; */
+  z-index: -5;
+  /* height: 500px; */
+  width: 100%;
+  align-self: center;
+  height: fit-content;
+}
+
+.logo {
+  width: 100%;
+  height: 50%;
+}
+
+
+.popupcontainer {
+  position: relative;
+  z-index: 1000;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  
+}
+
+.popupdetails {
+  position: relative;
+  width: 70%;
+  height: 40%;
+  padding-top: 20px;
+  margin: auto;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  text-align: center;
+  justify-content: space-around;
+}
+.link {
+  text-decoration: none;
+  margin: auto 10px auto 10px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.signup {
+  margin: 10px;
+  background-color: #fae301;
+  border: none;
+  height: 40px;
+  width: 60px;
+  border-radius: 5px;
+  color: black;
+  font-weight: bolder;
+  font-family: 'virgil';
+  cursor: pointer;
+}
+
+.closebutton {
+  position: absolute;
+  right: -30px;
+  top: -30px;
+}
+.popupcontainer h2 {
+  margin-top: 20px;
+  font-size: large;
+  max-width: 95%;
+  margin-bottom: 15px;
+}
+
+ .robot_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  position: fixed;
+  z-index: 5;
+  bottom: 30px;
+  left: 20px;
+  align-self: flex-start; 
+} 
+
+.bot_face {
+  height: 90px;
+  cursor: pointer;
+}
+.speach {
+  display: none;
+}
+.bot_face:hover + .speach{
+   
+    border-radius: 20px 20px 20px 0;
+    align-self: flex-start;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 100px;
+    border: 1px solid #fae301;
+  
+
+}
+
+
+
+

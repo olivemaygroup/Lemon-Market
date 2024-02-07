@@ -1,0 +1,49 @@
+
+
+.swipebox {
+  height: 150px;
+  width: 100vw;
+  /* padding: 30px; */
+  /* border: 1px solid #fae301; */
+  border-radius: 10px;
+  gap: 0 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+ 
+  scroll-snap-stop: always;
+}
+
+/* property box */
+.prop_box {
+  border: 1px solid;
+  border-radius: 65px;
+  padding: 5%;
+  margin: 10px;
+  height: 130px;
+  width: 120%;
+  border: 1px solid;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0px 2px 4px gray;
+  cursor: pointer;
+}
+
+.prop_pic{
+  height: 50px;
+  border-radius: 25px;
+}
+
+.prop_rightside {
+
+}
+
+.prop_address {
+
+}
+
+.prop_rate {
+
+}

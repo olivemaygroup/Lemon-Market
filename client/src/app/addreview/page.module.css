@@ -1,0 +1,52 @@
+
+
+.addreview_page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding-top: 12vh;
+}
+
+.review_items_container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  margin-left:90%;
+  justify-content: center;
+  padding-top: 6vh;
+  padding-bottom: 2vh;
+}
+
+.address_title {
+  display: flex;
+  position: absolute;
+  margin-top: -50px;
+  font-size: 35;
+}
+
+.final_comment_input {
+  display: flex;
+  height: 75%;
+  width: 75%;
+}
+
+
+.addreview_submit_btn {
+  width: 40vw;
+  height: 7vh !important;
+  border-radius: 10px !important;
+  border-style: solid !important;
+  border-color: black !important;
+  font-family: Virgil, sans-serif !important;
+  font-size: large !important;
+  color: #000 !important; 
+  box-shadow: 24px 24px 48px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.mui-1e6y48t-MuiButtonBase-root-MuiButton-root {
+  border: 13;
+
+}

@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Review" ALTER COLUMN "t_start" SET DATA TYPE TEXT,
+ALTER COLUMN "t_end" SET DATA TYPE TEXT;

@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Property {
+  property_id    String   @id @unique
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  fullAddress    String
+  num_of_reviews Int?     @default(0)
+  avg_rating     Int?
+
+  reviews    Review[]
+  searches   Search[]
+  favourites Favourite[]
+}
+
+model Review {
+  review_id                       Int       @id @default(autoincrement())
+  review_date                     DateTime? @default(now())
+  t_start                         String
+  t_end                           String
+  cleanliness                     Int
+  cleanliness_comment             String?
+  maintenance                     Int
+  maintenance_comment             String?
+  value_for_money                 Int
+  value_for_money_comment         String?
+  deposit_handling                Int
+  deposit_handling_comment        String?
+  amenities                       Int
+  amenities_comment               String?
+  landlord_responsiveness         Int
+  landlord_responsiveness_comment String?
+  total_review_rating             Int
+  monthly_rent                    Int       @default(0)
+  monthly_bill                    Int       @default(0)
+  council_tax                     Int       @default(0)
+  general_comment                 String
+
+  property_id String
+  property    Property @relation(fields: [property_id], references: [property_id])
+
+  tenant_id Int
+  tenant    Tenant @relation(fields: [tenant_id], references: [tenant_id])
+
+  photos Photo[]
+}
+
+model Tenant {
+  tenant_id  Int    @id @default(autoincrement())
+  email      String @unique
+  first_name String
+  last_name  String
+  password   String
+
+  reviews Review[]
+
+  searches Search[]
+
+  favourites Favourite[]
+}
+
+model Photo {
+  photo_id Int    @id @default(autoincrement())
+  url      String
+  tag      String
+
+  review_id Int
+  review    Review @relation(fields: [review_id], references: [review_id])
+}
+
+model Search {
+  search_id   Int      @id @default(autoincrement())
+  search_date DateTime @default(now())
+
+  property_id String
+  property    Property @relation(fields: [property_id], references: [property_id])
+
+  tenant_id Int
+  tenant    Tenant @relation(fields: [tenant_id], references: [tenant_id])
+}
+
+model Favourite {
+  favourite_id Int @id @default(autoincrement())
+
+  property_id String
+  property    Property @relation(fields: [property_id], references: [property_id])
+
+  tenant_id Int
+  tenant    Tenant @relation(fields: [tenant_id], references: [tenant_id])
+}

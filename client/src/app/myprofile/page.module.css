@@ -1,0 +1,138 @@
+
+@font-face {
+  font-family: 'virgil';
+  src: url('../../../public/fonts/Virgil.woff2');
+}
+
+.page {
+  font-family: virgil;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow-x: scroll;
+  justify-self: flex-start;
+}
+@media screen and (max-width: 600px) {
+  .page {
+  }
+}
+
+.profilebox {
+  height: fit-content;
+  padding: 30px;
+  border: 1px solid #fae301;
+  border-radius: 10px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.attname {
+  /* margin-top: 100px; */
+  display: flex;
+  gap: 7px;
+  justify-content: space-between;
+  /* align-self: flex-end; */
+}
+
+.att {
+
+}
+
+.profilebtn {
+  height: 30px;
+  font-family: virgil;
+}
+
+.editdiv {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.editinput {
+  max-height: 20px;
+  align-self: flex-end;
+  width: 40%;
+  gap: 5px;
+}
+
+.divide {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+  gap: 20px;
+}
+
+.divideline {
+  border: 1px solid #fae301;
+  width: 30%;
+  height: 1px;
+}
+
+.reviews {
+  width: 100%;
+  max-width: 800px;
+  min-height: 150px;
+  display:  flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  /* overflow-y: hidden; */
+  /* overflow-x: scroll; */
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+}
+
+.swipebox {
+  height: 150px;
+  width: 100vw;
+  /* padding: 30px; */
+  /* border: 1px solid #fae301; */
+  border-radius: 10px;
+  gap: 0 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+ 
+  scroll-snap-stop: always;
+}
+
+/* property box */
+.prop_box {
+  border: 1px solid;
+  border-radius: 65px;
+  padding: 5%;
+  margin: 10px;
+  height: 130px;
+  width: 120%;
+  border: 1px solid;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0px 2px 4px gray;
+}
+
+.prop_pic{
+  height: 50px;
+  border-radius: 25px;
+}
+
+.prop_rightside {
+
+}
+
+.prop_address {
+
+}
+
+.prop_rate {
+
+}
