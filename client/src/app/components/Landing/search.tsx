@@ -53,7 +53,7 @@ const Search = () => {
         <p className={styles.quick_description}>Find or leave reviews for a rental</p>
         <GooglePlacesAutocomplete
           selectProps={{
-            placeholder: 'Address or postcode ',
+            placeholder: 'Search for an property ',
             onChange: (address) => {
               setAddress({ fullAddress: address?.value.description, property_id: address?.value.place_id })
             }
