@@ -3,8 +3,14 @@
   src: url('../../../public/fonts/Virgil.woff2');
 }
 
+.backdrop {
+  display: flex;
+  height: 100%;
+  /* background-image: url('../../../public/babkdrops/will-look-our-new-home-6501382.webp'); */
+}
+
 .logout_div {
-  align-self: flex-start;
+  /* align-self: flex-start; */
   display: flex;
   flex-direction: column;
   height: auto;
@@ -21,6 +27,7 @@ font-size: 30px;
 }
 
 .logout_button {
+  align-self: center;
   font-family: virgil;
   height: auto;
   min-height: 40px;
