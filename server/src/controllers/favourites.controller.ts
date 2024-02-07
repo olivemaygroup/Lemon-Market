@@ -96,7 +96,6 @@ const removeFavorite = async (ctx: Context) => {
     const property_id: string = ctx.params.property_id;
     const tenant: Tenant = ctx.state.tenant;
 
-    // Find the favorite based on property_id and tenant_id
     const favoriteToDelete = await prisma.favourite.findFirst({
       where: {
         tenant_id: +tenant.tenant_id,
@@ -110,7 +109,6 @@ const removeFavorite = async (ctx: Context) => {
       return;
     }
 
-    // Delete the found favorite
     await prisma.favourite.delete({
       where: {
         favourite_id: favoriteToDelete.favourite_id,
