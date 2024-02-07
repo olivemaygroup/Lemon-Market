@@ -105,7 +105,7 @@ export default function addReview() {
       RatingSetter: setAmenities,
       commentState: amenities_comment,
       commentSetter: setAmenities_comment
-      
+
     },
     {
       name: "Deposit Handling",
@@ -218,7 +218,7 @@ export default function addReview() {
           placeholder="General comments and photos..."
           >
           </textarea>
-          <PhotoUploadComponent 
+          <PhotoUploadComponent
           metricName="General"
           imageFiles={imageFiles}
           setImageFiles={setImageFiles}
@@ -236,7 +236,7 @@ export default function addReview() {
            
           </div>
         </div>
-        
+
       </div>
     </div>
   )

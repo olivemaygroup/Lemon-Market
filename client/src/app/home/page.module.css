@@ -88,5 +88,40 @@
   margin-bottom: 15px;
 }
 
+ .robot_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  position: fixed;
+  z-index: 5;
+  bottom: 30px;
+  left: 20px;
+  align-self: flex-start; 
+} 
+
+.bot_face {
+  height: 90px;
+  cursor: pointer;
+}
+.speach {
+  display: none;
+}
+.bot_face:hover + .speach{
+   
+    border-radius: 20px 20px 20px 0;
+    align-self: flex-start;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 100px;
+    border: 1px solid #fae301;
+  
+
+}
+
+
 
 

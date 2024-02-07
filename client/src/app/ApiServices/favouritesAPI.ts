@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const BASE_URL = 'http://localhost:3001'
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
 
 // Get search results
 const getSearchResults = async (
@@ -137,11 +137,11 @@ const addFavorite = async (
     if (response.status === 401) {
       handleAuthenticationError();
     }
-    
+
     if (!response.ok) {
       return undefined
     }
-    
+
     //doesn't return anything
   } catch (error) {
     console.error(error);
@@ -154,13 +154,13 @@ const removeFavorite = async (
   property_id: string,
   ): Promise<void | undefined> => {
     try {
-      
+
       const accessToken = localStorage.getItem('accessToken')
       if (!accessToken) {
         handleAuthenticationError();
         return
       }
-      
+
       const response = await fetch(
         `${BASE_URL}/deletefavourite/${property_id}`,
         {
@@ -173,7 +173,7 @@ const removeFavorite = async (
         },
         );
         console.log('delete response from call', response)
-        
+
     if (response.status === 401) {
       handleAuthenticationError();
     }

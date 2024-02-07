@@ -15,10 +15,8 @@ import { useRouter } from 'next/navigation';
 import styles from "@/app/components/Landing/page.module.css";
 
 
+const ProperetyCardContainer = ({ SetShowPopup, showPopup }: { SetShowPopup: any, showPopup: boolean }) => {
 
-
-const ProperetyCardContainer = ({SetShowPopup, showPopup}:{SetShowPopup: any, showPopup: boolean}) => {
-  
   const router = useRouter()
   const [profilePhoto, setProfilePhoto] = useState<string>('')
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
@@ -29,7 +27,10 @@ const ProperetyCardContainer = ({SetShowPopup, showPopup}:{SetShowPopup: any, sh
 
   React.useEffect(() => {
     if (reviewList.length > 0 && reviewList[0].photos.length > 0) {
-      setProfilePhoto(reviewList[0].photos[0].url)
+      const generalPhotoArray = reviewList[0].photos.filter(photo => {
+        if (photo.tag === 'General') return true;
+      })
+      setProfilePhoto(generalPhotoArray[0].url)
     }
   })
 
@@ -44,20 +45,20 @@ const ProperetyCardContainer = ({SetShowPopup, showPopup}:{SetShowPopup: any, sh
 
   return (
     <>
-      
+
       {
         fullProperty.num_of_reviews !== 0 ? (
           <>
             <PropertyCard fullProperty={fullProperty} profilePhoto={profilePhoto} />
             {/* <Link href="/addreview" > */}
-              <Button className={styles.knock_a_review_btn} variant="contained" onClick={handleClick}>Knock a review!</Button>
+            <Button className={styles.knock_a_review_btn} variant="contained" onClick={handleClick}>Knock a review!</Button>
             {/* </Link > */}
           </>
         ) : (
           <>
             <NoReviewsPropertyCard property={property} />
             {/* <Link href="/addreview" > */}
-              <Button className={styles.knock_a_review_btn} variant="contained" onClick={handleClick}>Knock a review!</Button>
+            <Button className={styles.knock_a_review_btn} variant="contained" onClick={handleClick}>Knock a review!</Button>
             {/* </Link > */}
           </>
         )

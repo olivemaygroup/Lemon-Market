@@ -19,6 +19,7 @@ const checkAddress = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
         if (!property_id) {
             ctx.body = 'property_id undefined';
             ctx.status = 500;
+            return;
         }
         const property = yield db_1.default.property.findFirst({
             where: {
