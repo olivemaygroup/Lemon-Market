@@ -92,12 +92,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 35px;
-  height: 70px;
-  width: 70px;
   margin-top: auto;
   position: fixed;
-  border: 1px solid #fae301;
   z-index: 5;
   bottom: 30px;
   left: 20px;
@@ -108,6 +104,24 @@
   height: 90px;
   cursor: pointer;
 }
-.bot_face:hover {}
+.speach {
+  display: none;
+}
+.bot_face:hover + .speach{
+   
+    border-radius: 20px 20px 20px 0;
+    align-self: flex-start;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 100px;
+    border: 1px solid #fae301;
+  
+
+}
+
+
 
 

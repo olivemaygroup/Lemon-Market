@@ -113,6 +113,8 @@ export default function Home() {
       onClick={()=>router.push("/chatbot")}
         className={styles.robot_box}>
         <img className={styles.bot_face} src={bot.src} alt="" /> 
+        <div className={styles.speach}>Here to help!
+        </div>
       </div>
     </main>
       </>
