@@ -95,7 +95,7 @@ export default function Signup() {
             <input
               onChange={handleChange}
               type="text"
-              className={styles.input_feild}
+              className={styles.input_field}
               name="firstName"
               value={state.firstName}
             />
@@ -105,7 +105,7 @@ export default function Signup() {
             <input
               onChange={handleChange}
               type="text"
-              className={styles.input_feild}
+              className={styles.input_field}
               name="lastName"
               value={state.lastName}
             />
@@ -115,7 +115,7 @@ export default function Signup() {
             <input
               onChange={handleChange}
               type="email"
-              className={styles.input_feild}
+              className={styles.input_field}
               name="email"
               value={state.email}
             />
@@ -125,7 +125,7 @@ export default function Signup() {
             <input
               onChange={(e)=>setPassword1(e.target.value)}
               type="password"
-              className={styles.input_feild}
+              className={styles.input_field}
               name="password"
               />
           </div>
@@ -135,7 +135,7 @@ export default function Signup() {
               onChange={(e) => setPasswordCheck(e.target.value)}
               onBlur={()=>{if(!passwordChecker(password1)) setError(err)}}
               type="password"
-              className={styles.input_feild}
+              className={styles.input_field}
               name="password2"
             />
           </div>
