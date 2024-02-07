@@ -34,8 +34,6 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, gener
   const router = useRouter()
   const user = useSelector((state: RootState) => state.auth.value)
 
-  console.log('user console: ', user)
-
   const averageRating = useSelector((state: RootState) => state.fullProperty.value.avg_rating)
 
 
@@ -83,8 +81,8 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, gener
       }
     } catch (error) {
       console.error('Error while updating favorite:', error);
-      SetSaved(!newSavedState);
     }
+    // SetSaved(!newSavedState);
   };
 
   const handleAdd = () => {
@@ -96,7 +94,6 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, gener
     }
   }
 
-  console.log('all photos: ', allPhotos)
   return (
 
     <div className={'overviewContainer'}>
