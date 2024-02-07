@@ -5,22 +5,28 @@ import { PropertyTypeFull } from '@/app/types/property-type';
 import house from '../../../../public/Screenshot 2024-02-03 141600.png'
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { UserType } from '@/app/types/types';
 import { Review } from '@/app/types/review-types';
+import { UseDispatch } from 'react-redux';
 import Link from 'next/link';
 import FullReview from '../PropertyDetail/fullReview';
+import { setMyReview } from '@/lib/features/user/myReviewSlice';
 
 
 const MyTiles = ({ review, user }: {review: PropertyTypeFull, user: UserType}) => {
-  const [myReview, setMyReview] = useState(false)
+  const dispatch = useDispatch()
+  // const [myReview, setMyReview] = useState(false)
   const router = useRouter()
   const thisUser = useSelector((state: RootState) => state.user.value)
 
-  const handleClick = (e: React.SyntheticEvent) => {
+  const handleClick = () => {
     const filteredRes: Review[] = review.reviews.filter((rev)=>rev.tenant_id === user.tenant_id)
-    const item: Review = filteredRes[0]
+    // const item: Review[] = filteredRes[0]
+    dispatch(setMyReview(filteredRes))
+    console.log('FILTERD RES', filteredRes)
+    router.push('/myreviews')
   }
   return (
     <div
