@@ -14,6 +14,6 @@ describe('My First Test', () => {
     cy.contains('type').click()
     cy.url().should('include', '/ocmmands/actions')
     cy.get('.action-email').type('fake@email.com')
-    cy.get('.action-email')
+    cy.get('.action-email').should('have.value', 'fake@email.com')
   })
 })
