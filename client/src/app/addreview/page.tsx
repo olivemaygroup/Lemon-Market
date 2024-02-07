@@ -158,7 +158,6 @@ export default function addReview() {
     }
 
     if (fullProperty.property_id != "") {
-      console.log('🔥', fullProperty.property_id)
       await reviewAPI.addReview(fullProperty.property_id, reviewObject)
       dispatch(setReviewListSlice([...reviewList, reviewObject]))
       
@@ -229,7 +228,7 @@ export default function addReview() {
           <div className="addreview-submit-btn">
               <Button
                 className={styles.addreview_submit_btn}
-                onClick={handleSubmit}
+                onClick={() => handleSubmit}
                 >
                   Submit Review
               </Button>
