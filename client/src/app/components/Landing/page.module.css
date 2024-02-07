@@ -11,7 +11,7 @@
 
 /* Search bar */
 .searchContainer {
-  margin-top: 10rem;
+  margin-top: 14rem;
   background-color: rgb(255, 255, 255, 0.95);
   max-width: 800px;
   width: 90%;
@@ -22,11 +22,13 @@
 .catchphrase {
   text-align: center;
   color: #fae301;
+  padding-bottom: 2px;
 }
 
 .quick_description {
   text-align: center;
   color: black;
+  padding-bottom: 4px;
 }
 
 .image_address_container {

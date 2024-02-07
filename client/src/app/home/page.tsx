@@ -17,7 +17,8 @@ import { useRouter } from 'next/navigation';
 
 
 import comfortableHome from '../../../public/comfortable-home.jpg'
-import home from '../../../public/home.png'
+import darkhome from '../../../public/dark-home.jpeg'
+import greenroom from '../../../public/green-room.png'
 
 import Link from 'next/link'
 import ProperetyCardContainer from "@/app/components/Landing/propertyCardContainer";
@@ -97,6 +98,10 @@ export default function Home() {
         <Image 
         className={styles.logo} 
         src={comfortableHome} 
+        alt="Comfortable home image with open plan living area. Sofa, cushions, rug. One wall is a window overlooking city. Paintings on the wall are Modgiliani and Pre-raphaelite. There are lemons on a round dining room table, door and cupboards are wood" />
+        <Image 
+        className={styles.logo} 
+        src={greenroom} 
         alt="Comfortable home image with open plan living area. Sofa, cushions, rug. One wall is a window overlooking city. Paintings on the wall are Modgiliani and Pre-raphaelite. There are lemons on a round dining room table, door and cupboards are wood" />
       </div>
       {showProperty &&
