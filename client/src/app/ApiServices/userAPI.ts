@@ -3,8 +3,7 @@ import { LogIn, NewUser } from "../types/tenant-types";
 import { Login } from "../types/types";
 import handleAuthenticationError from "../utils/auth-router";
 
-// const BASE_URL = process.env.SERVER_URL;
-const BASE_URL = 'http://localhost:3001'
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
 
 const signUp = async (newUser: NewUser): Promise<string | number> => {
   const response = await fetch(`${BASE_URL}/signup`, {

@@ -102,7 +102,7 @@ export default function addReview() {
       RatingSetter: setAmenities,
       commentState: amenities_comment,
       commentSetter: setAmenities_comment
-      
+
     },
     {
       name: "Deposit Handling",
@@ -155,9 +155,7 @@ export default function addReview() {
     }
 
     if (fullProperty.property_id != "") {
-      console.log('🔥', fullProperty.property_id)
       reviewAPI.addReview(fullProperty.property_id, reviewObject)
-      
     } else {
       console.error('property id is undefined')
     }
@@ -214,7 +212,7 @@ export default function addReview() {
           placeholder="General comments and photos..."
           >
           </textarea>
-          <PhotoUploadComponent 
+          <PhotoUploadComponent
           metricName="General"
           imageFiles={imageFiles}
           setImageFiles={setImageFiles}
@@ -223,17 +221,13 @@ export default function addReview() {
 
         <div className="rating-item-submit">
           <div className="addreview-submit-btn">
-          <Link  
-            href="/propertydetail" 
-            onClick={() => handleSubmit}>
               <Button
                 className={styles.addreview_submit_btn}
-                >Submit Review
+                onClick={handleSubmit}>Submit Review
               </Button>
-            </Link>
           </div>
         </div>
-        
+
       </div>
     </div>
   )

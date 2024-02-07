@@ -2,7 +2,8 @@ import { PropertyTypeFull } from "../types/property-type";
 import { Review } from "../types/review-types";
 import handleAuthenticationError from "../utils/auth-router";
 
-const BASE_URL = 'http://localhost:3001'
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
+
 const addReview = async (
   property_id: string,
   reviewData: Review,
@@ -22,6 +23,7 @@ const addReview = async (
       },
       body: JSON.stringify(reviewData),
     });
+
 
     if (response.status === 401) {
       handleAuthenticationError();

@@ -1,7 +1,7 @@
 import { PropertyType, PropertyTypeFull } from "../types/property-type";
 import handleAuthenticationError from "../utils/auth-router";
 
-const BASE_URL = 'http://localhost:3001'
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
 
 const checkAddress = async (
   property: PropertyType,

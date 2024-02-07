@@ -1,9 +1,7 @@
 import axios from "axios";
 import { AxiosResponse } from "axios";
 import { Photo } from "../types/review-types";
-import dotenv from "dotenv";
 import { ImageFileObject } from "../types/review-types";
-dotenv.config();
 
 
 
