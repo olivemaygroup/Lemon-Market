@@ -2,7 +2,6 @@ import { Review } from "@/app/types/review-types";
 
 export const cleanlinessRating = (reviews: Review[]): number => {
   const filteredReviews = reviews.filter(review => review.cleanliness !== 0);
-  console.log('rating calc, cleanliness', filteredReviews)
   const length: number = filteredReviews.length;
   const total: number = filteredReviews.reduce((total, review) => total + review.cleanliness, 0);
   const cleanlinessAverage: number = Math.round(total / length);
@@ -53,7 +52,7 @@ export const rentRating = (reviews: Review[]): number => {
   const filteredReviews = reviews.filter(review => review.monthly_rent !== 0);
   const length: number = filteredReviews.length;
   const total: number = filteredReviews.reduce((total, review) => total + review.monthly_rent, 0);
-  const rentAverage: number = Math.round(total / length);
+  const rentAverage: number = (total > 0 ? Math.round(total / length) : 0);
   return rentAverage;
 };
 
@@ -61,6 +60,15 @@ export const councilRating = (reviews: Review[]): number => {
   const filteredReviews = reviews.filter(review => review.council_tax !== 0);
   const length: number = filteredReviews.length;
   const total: number = filteredReviews.reduce((total, review) => total + review.council_tax, 0);
-  const councilAverage: number = Math.round(total / length);
+  const councilAverage: number = (total > 0 ? Math.round(total / length) : 0);
   return councilAverage;
+};
+
+export const generalRating = (reviews: Review[]): number => {
+  const filteredReviews = reviews.filter(review => review.total_review_rating !== 0);
+  const length: number = filteredReviews.length;
+  const total: number = filteredReviews.reduce((total, review) => total + review.total_review_rating, 0);
+  const totalAverage: number = Math.round(total / length);
+  console.log('calculation total: ', totalAverage)
+  return totalAverage;
 };

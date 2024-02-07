@@ -6,11 +6,18 @@ import { changeAuthStatus } from "@/lib/features/authentication/authSlice";
 
 
 
-const handleAuthenticationError = () => {
-  const dispatch = useDispatch();
-  dispatch(changeAuthStatus(false))
-  console.error("User not authenticated");
-  return undefined
+const handleAuthenticationError = (dispatch: any = null) => {
+
+  if (dispatch) {
+    dispatch(changeAuthStatus(false))
+    console.error("User not authenticated");
+    return undefined
+  } else {
+    const dispatch = useDispatch()
+    dispatch(changeAuthStatus(false))
+    console.error("User not authenticated");
+    return undefined
+  }
 };
 
 export default handleAuthenticationError;
