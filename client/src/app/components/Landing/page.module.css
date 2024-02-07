@@ -11,20 +11,22 @@
 
 /* Search bar */
 .searchContainer {
-  padding-top: 5rem;
+  margin-top: 10rem;
+  background-color: rgb(255, 255, 255, 0.95);
   max-width: 800px;
-  width: 80%;
+  width: 90%;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .catchphrase {
   text-align: center;
-  color: #FAE31F;
-  margin-bottom: 1rem;
+  color: #fae301;
 }
 
 .quick_description {
   text-align: center;
-  color: #FAE31F;
+  color: black;
 }
 
 .image_address_container {
