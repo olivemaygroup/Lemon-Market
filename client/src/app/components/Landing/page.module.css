@@ -11,9 +11,20 @@
 
 /* Search bar */
 .searchContainer {
-  padding-top: 2rem;
+  padding-top: 5rem;
   max-width: 800px;
   width: 80%;
+}
+
+.catchphrase {
+  text-align: center;
+  color: #FAE31F;
+  margin-bottom: 1rem;
+}
+
+.quick_description {
+  text-align: center;
+  color: #FAE31F;
 }
 
 .image_address_container {
