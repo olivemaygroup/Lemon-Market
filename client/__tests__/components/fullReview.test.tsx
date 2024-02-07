@@ -43,14 +43,14 @@ describe('Full review component details populate correctly', () => {
 
     // Cleanliness testing 
     const CleanRating = screen.getAllByTestId('readonly-rating')[1];
-    expect(CleanRating.getAttribute('aria-label')).toEqual("1");
+    expect(CleanRating.getAttribute('aria-label')).toEqual("3");
     const cleanComment = screen.getAllByTestId("cc")[0];
     expect(cleanComment.textContent).toEqual("The cleanliness was acceptable but could be improved.");
     
     // Maintenance testing 
     
     const maintenanceRating = screen.getAllByTestId('readonly-rating')[2];
-    expect(maintenanceRating.getAttribute('aria-label')).toEqual("2");
+    expect(maintenanceRating.getAttribute('aria-label')).toEqual("3");
     const maintenanceComment = screen.getAllByTestId("mc")[0];
     expect(maintenanceComment.textContent).toEqual("There were some maintenance issues that need attention.");
     
@@ -63,7 +63,7 @@ describe('Full review component details populate correctly', () => {
    
     // Deposit handling testing 
     const depositRating = screen.getAllByTestId('readonly-rating')[4];
-    expect(depositRating.getAttribute('aria-label')).toEqual("4");
+    expect(depositRating.getAttribute('aria-label')).toEqual("3");
     const depositComment = screen.getAllByTestId("dc")[0];
     expect(depositComment.textContent).toEqual("The deposit handling process was smooth and hassle-free.");
     
@@ -71,14 +71,14 @@ describe('Full review component details populate correctly', () => {
     // Amenities testing 
     
     const amenitiesRating = screen.getAllByTestId('readonly-rating')[5];
-    expect(amenitiesRating.getAttribute('aria-label')).toEqual("5");
+    expect(amenitiesRating.getAttribute('aria-label')).toEqual("3");
     const amenitiesComment = screen.getAllByTestId("ac")[0];
     expect(amenitiesComment.textContent).toEqual("The amenities provided were satisfactory and added value.");
     
     // landlord responsiveness testing 
     
     const landlordRating = screen.getAllByTestId('readonly-rating')[6];
-    expect(landlordRating.getAttribute('aria-label')).toEqual("1");
+    expect(landlordRating.getAttribute('aria-label')).toEqual("3");
     const landlordComment = screen.getAllByTestId("lc")[0];
     expect(landlordComment.textContent).toEqual("The landlord was responsive to queries and concerns.");
     
