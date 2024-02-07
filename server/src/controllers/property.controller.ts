@@ -48,7 +48,6 @@ const checkAddress = async (ctx: Context) => {
       ctx.body = newProperty;
       ctx.status = 202;
     }
-    console.log('asdfasdf')
   } catch (err) {
     console.error(err);
     ctx.body = "error when looking for or creating address";

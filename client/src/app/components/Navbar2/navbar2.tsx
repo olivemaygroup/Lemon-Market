@@ -28,7 +28,9 @@ function NavBar2() {
 
     <div 
       className={styles.body}>
-      <img src={logo.src} alt="nooo" height='50px' />
+      <Link href='/home'>
+      <img src={logo.src} alt="Lemon Market Logo" height='50px' />
+      </Link>
       <div className={styles.newmenu}>
         {menu ?
           <div className={styles.menubox}>
