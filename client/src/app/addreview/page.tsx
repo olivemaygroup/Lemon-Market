@@ -6,7 +6,7 @@ import { Review } from "@/app/types/types";
 import RatingContainer from "../components/Rating/RatingContainer";
 import cloudinaryImagesToURLS from "../ApiServices/cloudinaryAPI";
 import reviewAPI from "../ApiServices/reviewAPI";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/lib/store";
 import styles from './page.module.css'
 import { ImageFileObject } from "../types/review-types";
@@ -14,11 +14,14 @@ import PhotoUploadComponent from "../components/Rating/UploadPhoto";
 import Link from 'next/link'
 import Button from '@mui/material/Button';
 import { useRouter } from "next/navigation";
+import { setReviewListSlice } from "@/lib/features/review/addReviewSlice";
 
 
 export default function addReview() {
   const address: string = '123 love lane'
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
+  const reviewList = useSelector((state: RootState) => state.reviewList.value)
+  const dispatch = useDispatch()
 
   const router = useRouter()
   const [imageFiles, setImageFiles] = useState<ImageFileObject[]>([]);
@@ -37,7 +40,7 @@ export default function addReview() {
   const [amenities_comment, setAmenities_comment] = useState<string>('');
   const [landlord_responsiveness, setLandlord_responsiveness] = useState<number>(0);
   const [landlord_responsiveness_comment, setLandlord_responsiveness_comment] = useState<string>('');
-  const [total_review_rating, setTotal_review_rating] = useState<number>(0);
+  const [total_review_rating, setTotal_review_rating] = useState<number>();
   const [monthly_rent, setMonthly_rent] = useState<number>();
   const [monthly_bill, setMonthly_bill] = useState<number>();
   const [council_tax, setCouncil_tax] = useState<number>();
@@ -156,7 +159,8 @@ export default function addReview() {
 
     if (fullProperty.property_id != "") {
       console.log('🔥', fullProperty.property_id)
-      reviewAPI.addReview(fullProperty.property_id, reviewObject)
+      await reviewAPI.addReview(fullProperty.property_id, reviewObject)
+      dispatch(setReviewListSlice([...reviewList, reviewObject]))
       
     } else {
       console.error('property id is undefined')
@@ -223,14 +227,13 @@ export default function addReview() {
 
         <div className="rating-item-submit">
           <div className="addreview-submit-btn">
-          <Link  
-            href="/propertydetail" 
-            onClick={() => handleSubmit}>
               <Button
                 className={styles.addreview_submit_btn}
-                >Submit Review
+                onClick={handleSubmit}
+                >
+                  Submit Review
               </Button>
-            </Link>
+           
           </div>
         </div>
         

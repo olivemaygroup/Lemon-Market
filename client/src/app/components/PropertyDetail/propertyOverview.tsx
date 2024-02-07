@@ -29,7 +29,7 @@ import { Photo } from "@/app/types/review-types";
 import { PropertyType } from "@/app/types/property-type";
 import favoriteAPIservice  from '@/app/ApiServices/favouritesAPI'
 
-const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup }: {reviewList: Review[] | undefined, property: PropertyType, SetShowPopup: any, showPopup: boolean}) => {
+const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, generalRating }: {reviewList: Review[] | undefined, property: PropertyType, SetShowPopup: any, showPopup: boolean, generalRating: number}) => {
 
   const router = useRouter()
   const user = useSelector((state: RootState) => state.auth.value)
@@ -55,7 +55,7 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup }: {re
     }
     getMyFav()
 
-  },[loggedIn, averageRating, saved])
+  },[loggedIn, averageRating, saved, generalRating])
 
   let allPhotos: Array<Photo> = []
   
@@ -96,6 +96,7 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup }: {re
     } 
   }
 
+  console.log('all photos: ', allPhotos)
   return (
    
     <div className={'overviewContainer'}>
@@ -107,7 +108,7 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup }: {re
       }
       </div>
 
-      {allPhotos.length !== 0 ? (
+      {allPhotos.length !== undefined ? (
         
         <Carousel
         showArrows={true}
@@ -122,32 +123,26 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup }: {re
               <img
                 src={photo.url}
                 alt="Picture of the property"
-                // sizes="(max-width: 500px) 100vw, 33vw"
-                // layout="responsive"
-                // width={100}
-                // height={240}
+                width= {100}
+                height= {200}
                 />
             </div>
           ))}
         </Carousel>
       ) : (
-        // <div className="no-image">
           <Image 
           src={noimage}
           alt="Picture of the property"
           sizes="(max-width: 500px) 100vw, 33vw"
-          // style={{objectFit: "contain"}}
-          // layout="fill"
           width={300}
           height={200}
           />
-          // </div>
         )}
       
       {/* Render options for general rating */}
-      {averageRating  ?
+      {generalRating  ?
       <div data-testid='average-rating' className="rating">
-        <ReadonlyRating rating={averageRating} />
+        <ReadonlyRating rating={generalRating} />
       </div>
       :
       <div className="rating">

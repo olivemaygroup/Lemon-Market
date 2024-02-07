@@ -9,13 +9,13 @@ const FullReview = ({ item }: { item: Review }) => {
   console.log('item tax', item.council_tax)
   return (
   <div className="container">
-    {/* <Carousel
+    <Carousel
     showArrows={true}
     infiniteLoop={true}
     dynamicHeight={true}
     className='carousel'
     showThumbs={false} 
-    > */}
+    >
       <div className='text'>
         <h2>Financials</h2>
         <p data-testid="fr">Rent: {item.monthly_rent}</p>
@@ -59,7 +59,7 @@ const FullReview = ({ item }: { item: Review }) => {
         <p data-testid="lc">{item.landlord_responsiveness_comment}</p>
       </div>
 
-    {/* </Carousel> */}
+    </Carousel>
 
     </div>
 

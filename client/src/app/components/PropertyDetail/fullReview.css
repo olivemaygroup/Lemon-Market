@@ -15,7 +15,7 @@
   height: auto;
 }
 .text {
-  border: 0.5px solid #fae301;
+  /* border: 0.5px solid #fae301; */
   border-radius: 8px;
   margin-top: 10px; 
   text-align: left;

@@ -46,12 +46,14 @@ export default function PropertyDetail() {
   const property = useSelector((state: RootState) => state.property.value)
   const reviewList: Review[] = useSelector((state: RootState) => state.reviewList.value)
   const [showPopup, SetShowPopup] = useState(false)
+  const [generalRating, SetGeneralRating] = useState<number>(0)
 
-  console.log('show popup console', showPopup)
+  console.log('general rating at page', generalRating)
+
   useEffect(() => {
     SetShowPopup(false)
 
-  },[property, reviewList])
+  },[property, reviewList, generalRating])
   
   
   const handleSignup = () => {
@@ -68,7 +70,6 @@ export default function PropertyDetail() {
   SetShowPopup(!showPopup)
   }
 
- 
 
   return (
     <>
@@ -99,8 +100,8 @@ export default function PropertyDetail() {
       <div data-testid="Address" className="address">
         <h2>{property.fullAddress}</h2>
       </div>
-      <PropertyOverview data-testid="property-overview" reviewList={reviewList} property={property} SetShowPopup={SetShowPopup} showPopup={showPopup}/>
-      <RatingDetail data-testid="rating-detail" reviewList={reviewList}/>
+      <PropertyOverview data-testid="property-overview" reviewList={reviewList} property={property} SetShowPopup={SetShowPopup} showPopup={showPopup} generalRating={generalRating}/>
+      <RatingDetail data-testid="rating-detail" reviewList={reviewList} SetGeneralRating={SetGeneralRating}/>
       {reviewList.map((item, index) => (
         <div key={index}>
           <h2 className={styles.reviewName}>{moment(item.t_end).format("MMM YY")} to {moment(item.t_start).format("MMM YY")}</h2>
