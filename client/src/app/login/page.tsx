@@ -2,11 +2,12 @@
 import styles from "@/app/login/page.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Error, Login, UserType } from "../types/types";
 import { setUserSlice } from "@/lib/features/user/userSlice";
 import userAPI from "../ApiServices/userAPI";
 import { changeAuthStatus } from "@/lib/features/authentication/authSlice";
+// import { useRouter } from "next/router";
 
 const initialError: Error = {
   error: false,
@@ -19,6 +20,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<Error>(initialError)
   const router = useRouter();
+
+  
 
   const tryLogin = async (e: React.SyntheticEvent): Promise<any | null> => {
     e.preventDefault();
@@ -50,7 +53,9 @@ export default function Login() {
       localStorage.setItem('accessToken', res.accessToken)
       setEmail("");
       setPassword("");
-      router.push('/myprofile')
+      const next = localStorage.getItem('next')
+      router.push( next === '/addreview' ? '/addreview' : '/home')
+      localStorage.removeItem('next')
     }
   };
 

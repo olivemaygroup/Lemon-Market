@@ -11,9 +11,22 @@
 
 /* Search bar */
 .searchContainer {
-  padding-top: 2rem;
+  margin-top: 10rem;
+  background-color: rgb(255, 255, 255, 0.95);
   max-width: 800px;
-  width: 80%;
+  width: 90%;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.catchphrase {
+  text-align: center;
+  color: #fae301;
+}
+
+.quick_description {
+  text-align: center;
+  color: black;
 }
 
 .image_address_container {
