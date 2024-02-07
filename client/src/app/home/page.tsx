@@ -13,7 +13,6 @@ import Image from 'next/image';
 import { FaRobot } from 'react-icons/fa';import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
-import { useRouter } from 'next/navigation';
 
 
 import comfortableHome from '../../../public/comfortable-home.jpg'
@@ -27,7 +26,6 @@ import ProperetyCardContainer from "@/app/components/Landing/propertyCardContain
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const router = useRouter()
   const dispatch = useDispatch();
   const router = useRouter()
   const property = useSelector((state: RootState) => state.property.value);
