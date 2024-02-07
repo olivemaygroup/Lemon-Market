@@ -24,6 +24,7 @@
   margin-left: 2px;
   text-align: left;
   margin-right: auto;
+  border-radius: 10px 10px 10px 0px;
 
 }
 
@@ -31,7 +32,6 @@
 .user_messages {
   border-style: solid;
   border-width: 2px;
-  border-radius: 10px;
 
 }
 
@@ -43,6 +43,7 @@
   background-color: #0084ff;
   color: white;
   margin-left: auto;
+  border-radius: 10px 10px 0px 10px;
 }
 
 .user_message_container {
@@ -79,7 +80,7 @@
 
 .button_container {
   display: flex;
-  padding-right: 2px;
+  padding-right: 15px;
   padding-left: 5px;
   flex: 1;
 }

@@ -17,17 +17,11 @@ import { changeAuthStatus } from "@/lib/features/authentication/authSlice";
 
 
 import CircularProgress from '@mui/material/CircularProgress';
-import { AnyCnameRecord } from "dns";
-
 
 
 const OPENAI_KEY = process.env.NEXT_PUBLIC_OPENAIKEY
 const openai = new OpenAI({ apiKey: OPENAI_KEY, dangerouslyAllowBrowser: true });
 
-interface ChatBot {
-  role: string;
-  content: string;
-}
 
 
 const ChatBotPage = () => {
@@ -49,13 +43,11 @@ const ChatBotPage = () => {
   const [conversationHistory, setConversationHistory] = useState<any[]>(chatBotStart);
   const [spinnerFlag, setSpinnerFlag] = useState<boolean>(false);
   const [userMessage, setUserMessage] = useState<string>('');
-
-
   const dispatch = useDispatch();
 
   useEffect(() => {
 
-    userAPI.checkUser().then((res) => {
+    userAPI.checkUser(dispatch).then((res) => {
       if (res === false) {
         dispatch(changeAuthStatus(false))
         router.push('/login')
@@ -126,7 +118,6 @@ const ChatBotPage = () => {
           <TextField value={userMessage} className={styles.message_input} onChange={(e) => setUserMessage(e.target.value)} variant="outlined" />
           <div className={styles.button_container}>
             <Button variant="contained" onClick={handleMessage} className={styles.send_button} endIcon={<SendIcon />}>
-              Send
             </Button>
           </div>
         </div>
