@@ -1,7 +1,5 @@
 "use client";
 import styles from "@/app/login/page.module.css";
-import { redirect } from "next/navigation";
-import type { RootState } from "@/lib/store";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -31,7 +29,6 @@ export default function Login() {
     };
 
     const res: any = await userAPI.login(user);
-    console.log('RES--', res)
 
     const currUser: UserType = {
       tenant_id: res.tenant_id,
@@ -39,7 +36,6 @@ export default function Login() {
       lastName: res.lastName,
       email: res.email
     }
-    console.log(res)
     dispatch(setUserSlice(currUser))
     if (res === 401) {
       const err: Error = {
