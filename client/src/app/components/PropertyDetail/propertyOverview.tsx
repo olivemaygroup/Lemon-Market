@@ -29,10 +29,16 @@ import { Photo } from "@/app/types/review-types";
 import { PropertyType } from "@/app/types/property-type";
 import favoriteAPIservice  from '@/app/ApiServices/favouritesAPI'
 
-const PropertyOverview = ({ reviewList, property }: {reviewList: Review[] | undefined, property: PropertyType}) => {
+const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup }: {reviewList: Review[] | undefined, property: PropertyType, SetShowPopup: any, showPopup: boolean}) => {
 
   const router = useRouter()
+  const user = useSelector((state: RootState) => state.auth.value)
+
+  console.log('user console: ', user)
+
   const averageRating = useSelector((state: RootState) => state.fullProperty.value.avg_rating)
+
+
   const loggedIn = useSelector((state: RootState) => state.auth.value)
   const [saved, SetSaved] = useState(false)
   
@@ -41,7 +47,6 @@ const PropertyOverview = ({ reviewList, property }: {reviewList: Review[] | unde
     
     const getMyFav = async () => {
       let myFav = await favoriteAPIservice.getFavourites()
-      console.log('my fav console: ', myFav)
       if ((myFav?.filter((item) => item.property_id === property.property_id).length === 1)) {
         SetSaved(true)
       } else {
@@ -61,8 +66,14 @@ const PropertyOverview = ({ reviewList, property }: {reviewList: Review[] | unde
   }
 
   const handleFavorite = async () => {
+
+    if (!user && !showPopup) {
+      SetShowPopup(!showPopup)
+      return
+    }
+
     const newSavedState = !saved;
-    SetSaved(newSavedState); // Update the state immediately
+    SetSaved(newSavedState); 
   
     try {
       if (newSavedState) {
@@ -72,22 +83,22 @@ const PropertyOverview = ({ reviewList, property }: {reviewList: Review[] | unde
       }
     } catch (error) {
       console.error('Error while updating favorite:', error);
-      // Rollback the state if there's an error during the API call
       SetSaved(!newSavedState);
     }
   };
 
   const handleAdd = () => {
-    if (loggedIn) {
-      router.push('/addreview')
+    if (!user && !showPopup) {
+      SetShowPopup(!showPopup)
+      return
     } else {
-      router.push('/login')
-    }
+      router.push('/addreview')
+    } 
   }
 
-
   return (
-    <div className='overviewContainer'>
+   
+    <div className={'overviewContainer'}>
       <div className='photocount' data-testid='photos'>
       { allPhotos.length > 0 ?
         <p>{allPhotos.length}</p>
@@ -99,36 +110,39 @@ const PropertyOverview = ({ reviewList, property }: {reviewList: Review[] | unde
       {allPhotos.length !== 0 ? (
         
         <Carousel
-          showArrows={true}
-          infiniteLoop={true}
-          dynamicHeight={false}
-          className='carousel'
-          data-testid={"cousel test"}
-          
+        showArrows={true}
+        infiniteLoop={true}
+        dynamicHeight={false}
+        className='carousel'
+        data-testid={"cousel test"}
+        
         >
           {allPhotos.map((photo) => (
-            <div key={photo.photo_id} className='image-container'>
+            <div key={photo.photo_id} className='picturecontainer'>
               <img
                 src={photo.url}
                 alt="Picture of the property"
-                sizes="(max-width: 500px) 100vw, 33vw"
+                // sizes="(max-width: 500px) 100vw, 33vw"
                 // layout="responsive"
-                width={100}
-                height={240}
-              />
+                // width={100}
+                // height={240}
+                />
             </div>
           ))}
         </Carousel>
       ) : (
-        <Image 
+        // <div className="no-image">
+          <Image 
           src={noimage}
           alt="Picture of the property"
           sizes="(max-width: 500px) 100vw, 33vw"
-          // layout="responsive"
-          width={100}
-          height={60}
-        />
-      )}
+          // style={{objectFit: "contain"}}
+          // layout="fill"
+          width={300}
+          height={200}
+          />
+          // </div>
+        )}
       
       {/* Render options for general rating */}
       {averageRating  ?
@@ -159,14 +173,12 @@ const PropertyOverview = ({ reviewList, property }: {reviewList: Review[] | unde
       </div>
 
       <div className="addButton">
-        <Link href={'/addreview'}>
           <Box sx={{ '& > :not(style)': { m: 1 } }}>
             <Fab style={{backgroundColor: "#fae301"}} aria-label="add" onClick={handleAdd}>
               <AddIcon 
               />
             </Fab>
           </Box>
-        </Link>
       </div>
     </div>
     
