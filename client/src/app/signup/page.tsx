@@ -80,6 +80,7 @@ export default function Signup() {
       resetStates();
       const next = localStorage.getItem('next')
       router.push( next === '/addreview' ? '/addreview' : '/myprofile')
+      localStorage.removeItem('next')
     }
   }
 

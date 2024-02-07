@@ -55,6 +55,7 @@ export default function Login() {
       setPassword("");
       const next = localStorage.getItem('next')
       router.push( next === '/addreview' ? '/addreview' : '/home')
+      localStorage.removeItem('next')
     }
   };
 
