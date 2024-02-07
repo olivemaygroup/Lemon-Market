@@ -1,8 +1,6 @@
 'use client'
-import { NewUser, Login } from '../types/types'
 
-// const BASE_URL = process.env.BASE_URL
-const BASE_URL = 'http://localhost:3001'
+
 
 
   // REGISTERING FUNCTIONS

@@ -8,9 +8,6 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import NavBar from "@/app/components/Navbar/navbar";
 import styles from '@/app/page.module.css'
 import NavBar2 from "./components/Navbar2/navbar2";
-import dotev from 'dotenv'
-
-dotev.config()
 
 
 const inter = Inter({ subsets: ["latin"] });
