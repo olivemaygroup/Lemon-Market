@@ -20,6 +20,7 @@ const authMiddleware = async (ctx: Context, next: Next) => {
         tenant_id: +decoded,
       },
     });
+
     if (!tenant) {
       ctx.status = 401;
       ctx.body = "user not authenticated";

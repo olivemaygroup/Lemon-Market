@@ -11,7 +11,9 @@ const checkAddress = async (ctx: Context) => {
     if (!property_id) {
       ctx.body = 'property_id undefined'
       ctx.status = 500;
+      return
     }
+
 
     const property = await prisma.property.findFirst({
       where: {
@@ -25,6 +27,7 @@ const checkAddress = async (ctx: Context) => {
         },
       },
     });
+
 
 
     if (property) {
@@ -48,7 +51,6 @@ const checkAddress = async (ctx: Context) => {
       ctx.body = newProperty;
       ctx.status = 202;
     }
-    console.log('asdfasdf')
   } catch (err) {
     console.error(err);
     ctx.body = "error when looking for or creating address";

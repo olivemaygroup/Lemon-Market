@@ -19,7 +19,7 @@ const addReview = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
         const property = yield getRelatedProperty(ctx);
         if (!property) {
             ctx.body = "property does not exist";
-            ctx.status = 500;
+            ctx.status = 402;
             return;
         }
         const tenant = ctx.state.tenant;

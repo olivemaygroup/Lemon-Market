@@ -117,7 +117,7 @@ const removeFavorite = async (ctx: Context) => {
       },
     });
 
-    ctx.body = 'Favorite deleted';
+    ctx.body = 'Favourite deleted';
     ctx.status = 200;
   } catch (error) {
     console.error(error);
