@@ -4,7 +4,7 @@ import logo from '../../public/TLM_Color_Landscape.jpg'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-
+import bot from '../../../../public/icons/Screenshot 2024-02-07 141245.png'
 import { useSelector } from 'react-redux'
 import { FaRobot } from "react-icons/fa";
 
@@ -45,8 +45,8 @@ function NavBar2() {
               <div className={styles.links}>
                 <Link className={styles.link} href="/home" onClick={() => setMenu(!menu)}>home</Link>
                 <Link className={styles.link} href="/myprofile" onClick={() => setMenu(!menu)}>profile</Link>
-                <Link className={styles.link} href="/chatbot" onClick={() => setMenu(!menu)}><FaRobot /></Link>
                 <Link className={styles.link} href="/logout" onClick={() => setMenu(!menu)}>logout</Link>
+                <Link className={styles.link} href="/chatbot" onClick={() => setMenu(!menu)}><img className={styles.bot_face} src={bot.src} alt="" /></Link>
               </div> :
               <div className={styles.links}>
                 <Link className={styles.link} href="/home" onClick={() => setMenu(!menu)}>home</Link>

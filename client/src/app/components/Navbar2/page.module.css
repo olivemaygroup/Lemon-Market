@@ -71,6 +71,14 @@
   color: black;
 }
 
+.bot_face {
+  height: 80px;
+  border: 1px solid;
+  border-radius: 45px;
+  padding: -20px;
+  background-color: #fae301;
+}
+
 .burgerbox {
   
 }
