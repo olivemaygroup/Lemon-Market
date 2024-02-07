@@ -17,6 +17,6 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-  app.listen(PORT, () => {
-    console.log(`Server connected on http://localhost:${PORT}`);
-  });
+app.listen(PORT, () => {
+  console.log(`Server connected on http://0.0.0.0:${PORT}`);
+});
