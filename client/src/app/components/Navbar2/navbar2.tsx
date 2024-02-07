@@ -25,7 +25,9 @@ function NavBar2() {
 
     <div
       className={styles.body}>
-      <img src={logo.src} alt="nooo" height='50px' onClick={() => router.push('/home')} />
+      <Link href='/home'>
+      <img src={logo.src} alt="Lemon Market Logo" height='50px' />
+      </Link>
       <div className={styles.newmenu}>
         {menu ?
           <div className={styles.menubox}>
@@ -64,18 +66,18 @@ function NavBar2() {
           <div className={styles.bar}></div>
         </div>
       </div>
-      {auth ?
-        <div className={styles.topmenu}>
-          <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/home">home</Link>
-          <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/myprofile">profile</Link>
-          <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/myreviews">my reviews</Link>
-          <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/logout">logout</Link>
-        </div> :
-        <div className={styles.topmenu}>
-          <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/home">home</Link>
-          <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/login">login</Link>
-          <Link className={styles.menuitem} onClick={() => setMenu(!menu)} href="/signup">sign up</Link>
-        </div>
+      {auth?
+      <div className={styles.topmenu}>
+        <Link className={styles.menuitem}  href="/home">home</Link>
+        <Link className={styles.menuitem}  href="/myprofile">profile</Link>
+        <Link className={styles.menuitem}  href="/myreviews">my reviews</Link>
+        <Link className={styles.menuitem}  href="/logout">logout</Link>
+      </div> :
+      <div className={styles.topmenu}>
+        <Link className={styles.menuitem}  href="/home">home</Link>
+        <Link className={styles.menuitem}  href="/login">login</Link>
+        <Link className={styles.menuitem}  href="/signup">sign up</Link>
+      </div>
       }
     </div>
   )

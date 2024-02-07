@@ -176,9 +176,11 @@
 }
 
 .addreview-submit-btn {
-  width: 70% !important;
-  height: 20% !important;
+  width: 40vw;
+  height: 7vh !important;
   border-radius: 10px !important;
+  border-style: solid !important;
+  border-color: black !important;
   background-color: white !important;
   font-family: Virgil, sans-serif !important;
   font-size: large !important;
@@ -186,6 +188,7 @@
   cursor: pointer !important; 
   box-shadow: 24px 24px 48px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
+  background-color: transparent;
 }
 
 .rating-item-submit {
@@ -201,6 +204,7 @@
   height: 50vh;
   flex: 2 8;
   margin: 2vh;
+  background-color: transparent;
 }
 
 

@@ -39,15 +39,21 @@ const Search = () => {
       fullAddress: address.fullAddress,
       property_id: address.property_id
     };
+
+
     dispatch(addProperty(newAddress));
+  
+  
   }, [address]);
 
   return (
     <>
       <div className={styles.searchContainer}>
+        <h2 className={styles.catchphrase}>Turning Walls into Windows</h2>
+        <p className={styles.quick_description}>Find or leave reviews for a rental</p>
         <GooglePlacesAutocomplete
           selectProps={{
-            placeholder: 'search for a property',
+            placeholder: 'Search for an address',
             onChange: (address) => {
               setAddress({ fullAddress: address?.value.description, property_id: address?.value.place_id })
             }

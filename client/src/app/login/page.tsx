@@ -1,14 +1,14 @@
 "use client";
 import styles from "@/app/login/page.module.css";
-import { redirect } from "next/navigation";
-import type { RootState } from "@/lib/store";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Error, Login, UserType } from "../types/types";
 import { setUserSlice } from "@/lib/features/user/userSlice";
 import userAPI from "../ApiServices/userAPI";
 import { changeAuthStatus } from "@/lib/features/authentication/authSlice";
+import Link from "next/link";
+// import { useRouter } from "next/router";
 
 const initialError: Error = {
   error: false,
@@ -22,6 +22,8 @@ export default function Login() {
   const [error, setError] = useState<Error>(initialError)
   const router = useRouter();
 
+  
+
   const tryLogin = async (e: React.SyntheticEvent): Promise<any | null> => {
     e.preventDefault();
 
@@ -31,7 +33,6 @@ export default function Login() {
     };
 
     const res: any = await userAPI.login(user);
-    console.log('RES--', res)
 
     const currUser: UserType = {
       tenant_id: res.tenant_id,
@@ -39,7 +40,6 @@ export default function Login() {
       lastName: res.lastName,
       email: res.email
     }
-    console.log(res)
     dispatch(setUserSlice(currUser))
     if (res === 401) {
       const err: Error = {
@@ -54,7 +54,9 @@ export default function Login() {
       localStorage.setItem('accessToken', res.accessToken)
       setEmail("");
       setPassword("");
-      router.push('/myprofile')
+      const next = localStorage.getItem('next')
+      router.push( next === '/addreview' ? '/addreview' : '/home')
+      localStorage.removeItem('next')
     }
   };
 
@@ -93,7 +95,10 @@ export default function Login() {
                 <div className={styles.errorbox}>
                   {error.msg}
                   <button className={styles.btn} onClick={() => setError(initialError)}>OK</button>
+                  <Link href="/signup">
                   <button className={styles.btn}>signup here</button>
+                  </Link>
+                  
                 </div>
                 <div className={styles.login_btns}>
                   <button className={styles.login}>Login</button>

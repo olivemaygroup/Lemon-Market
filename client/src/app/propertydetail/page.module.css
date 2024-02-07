@@ -1,13 +1,19 @@
 .reviewName {
-  margin-bottom: 25px;
+  margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 .description {
-  margin-top: 80px;
+  padding-top: 20px;
   overflow: scroll;
   height: 100vh;
   width: 100vw;
-  margin-bottom: 70px
+  padding-bottom: 150px;
+  position: absolute;
+}
+
+.hidedescription {
+  display: none;
 }
 
 .description::-webkit-scrollbar {
@@ -67,4 +73,60 @@
 
 .chat_bot_link {
   padding-bottom: 100px;
+}
+
+
+.popupcontainer {
+  position: relative;
+  z-index: 1000;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  
+}
+.popupdetails {
+  position: relative;
+  width: 70%;
+  height: 40%;
+  padding-top: 20px;
+  margin: auto;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+}
+.link {
+  text-decoration: none;
+  margin: auto 10px auto 10px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.signup {
+  margin: 10px;
+  background-color: #fae301;
+  border: none;
+  height: 40px;
+  width: 60px;
+  border-radius: 5px;
+  color: black;
+  font-weight: bolder;
+  font-family: 'virgil';
+  cursor: pointer;
+}
+
+.closebutton {
+  position: absolute;
+  right: -30px;
+  top: -30px;
+}
+.popupcontainer h2 {
+  margin-top: 20px;
 }

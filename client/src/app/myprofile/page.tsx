@@ -173,7 +173,7 @@ export default function MyProfile () {
             onChange={(e)=>setPassword(e.target.value)}
             name="password1"
           /></div>
-          <div className={styles.attname}> confrim password :
+          <div className={styles.attname}> check password :
             <input
             type="password"
             className={styles.editinput}
@@ -198,22 +198,12 @@ export default function MyProfile () {
                 review={review}
                 key={review.property_id}
                 user={user}/>
-              // <div 
-              // className={styles.prop_box} 
-              // key={review.property_id}
-              // onClick={()=>router.push('/propertydetail')}>
-              //   <img className={styles.prop_pic} src={house.src} alt='' />
-              //   <div className={styles.prop_rightside}>
-              //     <div className={styles.prop_address} >{review.fullAddress}</div>
-              //      <Rating className={styles.prop_rate} size="small" name="read-only" value={review.avg_rating} readOnly />
-              //   </div>
-              // </div>
              ))}
           </div>
       </div>
-      <div className={styles.divide}>
-          <div className={styles.divideline}></div><CottageIcon style={{ fill: '#fae301'}}/><div className={styles.divideline}></div>
-      </div>
+      {/* <div className={styles.divide}>
+          <div className={styles.divideline}></div><CottageIcon style={{ fill: '#fae301'}}/><div className={styles.divideline}></div> */}
+      {/* </div>
         <h2>{user.firstName}'s favourites</h2>
       <div className={styles.reviews}>
           <div className={styles.swipebox}>
@@ -228,7 +218,7 @@ export default function MyProfile () {
              ))}
           </div>
 
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -1,12 +1,13 @@
 "use client";
 import styles from "@/app/signup/page.module.css";
 import { useState } from "react";
-import { NewUser, Error, Password, UserType } from "../types/types";
+import { NewUser, Error, UserType } from "../types/types";
 import { useDispatch } from "react-redux";
 import { setUserSlice } from "@/lib/features/user/userSlice";
 import userAPI from "../ApiServices/userAPI";
 import { passwordChecker } from "../ApiServices/apiServices";
 import { useRouter } from "next/navigation";
+import { changeAuthStatus } from "@/lib/features/authentication/authSlice";
 
 const initialError: Error = {
   error: false,
@@ -73,10 +74,13 @@ export default function Signup() {
         lastName: response.lastName,
         email: response.email
       }
+      dispatch(changeAuthStatus(true))
       dispatch(setUserSlice(currUser));
       localStorage.setItem('accessToken',response.accessToken);
       resetStates();
-      router.push('/myprofile')
+      const next = localStorage.getItem('next')
+      router.push( next === '/addreview' ? '/addreview' : '/myprofile')
+      localStorage.removeItem('next')
     }
   }
 

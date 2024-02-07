@@ -6,18 +6,21 @@ import { Review } from "@/app/types/types";
 import RatingContainer from "../components/Rating/RatingContainer";
 import cloudinaryImagesToURLS from "../ApiServices/cloudinaryAPI";
 import reviewAPI from "../ApiServices/reviewAPI";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
-import propertySlice from "@/lib/features/property/propertySlice";
 import styles from './page.module.css'
 import { ImageFileObject } from "../types/review-types";
 import PhotoUploadComponent from "../components/Rating/UploadPhoto";
+import Link from 'next/link'
+import Button from '@mui/material/Button';
+import { useRouter } from "next/navigation";
 
 
 export default function addReview() {
   const address: string = '123 love lane'
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
 
+  const router = useRouter()
   const [imageFiles, setImageFiles] = useState<ImageFileObject[]>([]);
   const [imageURLs, setImageURLs] = useState<any[]>([]);
   const [t_start, setT_start] = useState<string>('');
@@ -154,9 +157,11 @@ export default function addReview() {
     if (fullProperty.property_id != "") {
       console.log('🔥', fullProperty.property_id)
       reviewAPI.addReview(fullProperty.property_id, reviewObject)
+      
     } else {
       console.error('property id is undefined')
     }
+    router.push('/propertydetail')
 
   };
 
@@ -216,12 +221,19 @@ export default function addReview() {
           />
         </form>
 
-        <div className="rating-item-submit" >
-          <button
-          className="addreview-submit-btn"
-          onClick={handleSubmit}
-          >Submit Review</button>
+        <div className="rating-item-submit">
+          <div className="addreview-submit-btn">
+          <Link  
+            href="/propertydetail" 
+            onClick={() => handleSubmit}>
+              <Button
+                className={styles.addreview_submit_btn}
+                >Submit Review
+              </Button>
+            </Link>
+          </div>
         </div>
+        
       </div>
     </div>
   )
