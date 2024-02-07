@@ -10,11 +10,12 @@ import {
   landlordRating,
   rentRating,
   councilRating,
+  generalRating
 
 
 } from './ratingCalculations';
 
-const RatingDetail = ({ reviewList }: {reviewList: Review[]}) => {
+const RatingDetail = ({ reviewList, SetGeneralRating }: {reviewList: Review[], SetGeneralRating: any}) => {
 
   console.log('reviewList at detail',reviewList)
   let cleanlinessAverage = cleanlinessRating(reviewList)
@@ -26,10 +27,10 @@ const RatingDetail = ({ reviewList }: {reviewList: Review[]}) => {
   let rentAverage = rentRating(reviewList)
   let councilAverage = councilRating(reviewList)
 
-  console.log('Cleanliness at rating detail', cleanlinessAverage)
-  console.log('maintenance at rating detail', maintenanceAverage)
-  console.log('value at rating detail', valueAverage)
-  console.log('deposit at rating detail', depositAverage)
+  let totalAverage = generalRating(reviewList)
+  console.log('total average at rating Detail: ', totalAverage)
+  SetGeneralRating(totalAverage)
+
 
   return (
     <div className="container">

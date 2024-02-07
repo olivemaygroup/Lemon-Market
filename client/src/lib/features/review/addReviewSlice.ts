@@ -13,6 +13,7 @@ export const reviewListSlice = createSlice({
   reducers: {
     setReviewListSlice: (state: { value: Review[] }, action: { type: string; payload: Review[] }) => {
       state.value = action.payload;
+      console.log('reviewList', state.value)
     },
   },
 });

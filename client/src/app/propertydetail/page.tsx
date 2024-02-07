@@ -42,18 +42,20 @@ export default function PropertyDetail() {
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
   const reviewList: Review[] = useSelector((state: RootState) => state.reviewList.value)
   const [showPopup, SetShowPopup] = useState(false)
+  const [generalRating, SetGeneralRating] = useState<number>(0)
+
+  console.log('general rating at page', generalRating)
 
   useEffect(() => {
     SetShowPopup(false)
-  }, [property, reviewList])
+
+  },[property, reviewList, generalRating])
 
   useEffect(() => {
     if (fullProperty.num_of_reviews === 0) {
       dispatch(setReviewListSlice([]))
     }
   }, [])
-
-
 
   const handleSignup = () => {
     localStorage.setItem('next', '/addreview');
@@ -68,6 +70,7 @@ export default function PropertyDetail() {
   const handleClose = () => {
     SetShowPopup(!showPopup)
   }
+
 
 
 
@@ -96,36 +99,36 @@ export default function PropertyDetail() {
         </div>
       }
 
-      <div data-testid="propertydetailcontainer" className={styles.description}>
-        <div data-testid="Address" className="address">
-          <h2>{property.fullAddress}</h2>
+    <div data-testid="propertydetailcontainer" className={ styles.description}>
+      <div data-testid="Address" className="address">
+        <h2>{property.fullAddress}</h2>
+      </div>
+      <PropertyOverview data-testid="property-overview" reviewList={reviewList} property={property} SetShowPopup={SetShowPopup} showPopup={showPopup} generalRating={generalRating}/>
+      <RatingDetail data-testid="rating-detail" reviewList={reviewList} SetGeneralRating={SetGeneralRating}/>
+      {reviewList.map((item, index) => (
+        <div key={index}>
+          <h2 className={styles.reviewName}>{moment(item.t_end).format("MMM YY")} to {moment(item.t_start).format("MMM YY")}</h2>
+          <FullReview item={item} />
         </div>
-        <PropertyOverview data-testid="property-overview" reviewList={reviewList} property={property} SetShowPopup={SetShowPopup} showPopup={showPopup} />
-        <RatingDetail data-testid="rating-detail" reviewList={reviewList} />
-        {reviewList.map((item, index) => (
-          <div key={index}>
-            <h2 className={styles.reviewName}>{moment(item.t_end).format("MMM YY")} to {moment(item.t_start).format("MMM YY")}</h2>
-            <FullReview item={item} />
+      ))}
+      <Popover
+        onInteraction={handlePopoverInteraction}
+        isOpen={isPopoverOpen}
+        placement={'right-end'}
+        content={
+          <div className={styles.chat_bot_popup}>
+            <p>{chatBotPopUpText}</p>
+            <Link className={styles.link} href="/chatbot">
+              <Button className={styles.chat_bot_link} variant="contained">AI Chat Bot </Button>
+            </Link>
           </div>
-        ))}
-        <Popover
-          onInteraction={handlePopoverInteraction}
-          isOpen={isPopoverOpen}
-          placement={'right-end'}
-          content={
-            <div className={styles.chat_bot_popup}>
-              <p>{chatBotPopUpText}</p>
-              <Link className={styles.link} href="/chatbot">
-                <Button className={styles.chat_bot_link} variant="contained">AI Chat Bot </Button>
-              </Link>
-            </div>
-          }
-        >
-          <button className={styles.robot_button_container}>
-            <FaRobot className={styles.robot_icon} />
-          </button>
-        </Popover>
-      </div >
-    </>
+        }
+      >
+        <button className={styles.robot_button_container}>
+          <FaRobot className={styles.robot_icon} />
+        </button>
+      </Popover>
+    </div >
+      </>
   );
 }
