@@ -61,12 +61,18 @@ export default function Login() {
       return
     } else {
       dispatch(changeAuthStatus(true))
+      if (typeof window !== 'undefined') {
       localStorage.setItem('accessToken', res.accessToken)
+      }
       setEmail("");
       setPassword("");
+      if (typeof window !== 'undefined') {
       const next = localStorage.getItem('next')
       router.push( next === '/addreview' ? '/addreview' : '/home')
+      }
+      if (typeof window !== 'undefined') {
       localStorage.removeItem('next')
+      }
     }
   };
 

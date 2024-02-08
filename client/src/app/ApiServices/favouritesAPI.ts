@@ -81,6 +81,7 @@ const addSearchResult = async (
 
 // Get user favorites
 const getFavourites = async (): Promise<PropertyType[] | undefined> => {
+  if (typeof window !== 'undefined') {
   try {
     const accessToken = localStorage.getItem('accessToken')
     if (!accessToken) {
@@ -111,13 +112,14 @@ const getFavourites = async (): Promise<PropertyType[] | undefined> => {
   } catch (error) {
     console.error(error);
     return undefined
-  }
+  }}
 };
 
 // Add user favorite
 const addFavorite = async (
   property_id: string,
 ): Promise<void | undefined> => {
+  if (typeof window !== 'undefined') {
   try {
     const accessToken = localStorage.getItem('accessToken')
     if (!accessToken) {
@@ -147,12 +149,14 @@ const addFavorite = async (
     console.error(error);
     return undefined
   }
+}
 };
 
 // Remove user favorite
 const removeFavorite = async (
   property_id: string,
   ): Promise<void | undefined> => {
+    if (typeof window !== 'undefined') {
     try {
 
       const accessToken = localStorage.getItem('accessToken')
@@ -186,6 +190,7 @@ const removeFavorite = async (
     console.error(error);
     return undefined
   }
+    }
 };
 
 const favouriteAPIservice = {

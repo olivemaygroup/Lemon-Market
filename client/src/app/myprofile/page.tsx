@@ -54,8 +54,11 @@ export default function MyProfile () {
   const router = useRouter()
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.value)
+  
+  if (typeof window !== 'undefined') {
   const token1:string | null = localStorage.getItem('accessToken')
   const token: string = token1 as string
+  }
 
   useEffect(() => {
     favouriteAPIservice.getFavourites()
