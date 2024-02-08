@@ -19,6 +19,7 @@
     "@ideal-postcodes/address-finder": "^4.4.1",
     "@mui/icons-material": "^5.15.6",
     "@mui/material-nextjs": "^5.15.6",
+    "@netlify/plugin-nextjs": "^4.41.3",
     "@reduxjs/toolkit": "^2.1.0",
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
