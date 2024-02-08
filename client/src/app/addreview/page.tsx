@@ -121,10 +121,11 @@ export default function addReview() {
     }
   ];
 
-  const handleSubmit = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  // React.ChangeEvent<HTMLInputElement>
+  const handleSubmit = async (event: React.MouseEvent) => {
     event.preventDefault();
-
-    const avgStars = await (cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness) / 6
+    
+    const avgStars = (cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness) / 6
     setTotal_review_rating(avgStars)
 
     const imageURLsArray: any = await cloudinaryImagesToURLS(imageFiles);
@@ -226,7 +227,7 @@ export default function addReview() {
           <div className="addreview-submit-btn">
               <Button
                 className={styles.addreview_submit_btn}
-                onClick={()=>handleSubmit}
+                onClick={handleSubmit}
                 >
                   Submit Review
               </Button>
