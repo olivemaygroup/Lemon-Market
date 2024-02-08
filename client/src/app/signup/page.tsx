@@ -50,6 +50,7 @@ export default function Signup() {
   }
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
+    if (typeof window !== 'undefined') {
     e.preventDefault();
     let newUser:NewUser = state
     if (passwordCheck===password1 && password1.length>=6) {
@@ -82,6 +83,7 @@ export default function Signup() {
       router.push( next === '/addreview' ? '/addreview' : '/myprofile')
       localStorage.removeItem('next')
     }
+  }
   }
 
 

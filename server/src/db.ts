@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const dataBaseURL = process.env.ENV === 'test' ? process.env.TEST_DATABASE_URL : process.env.DATABASE_URL
-console.log(dataBaseURL)
 
 const prisma = new PrismaClient({
   datasources: {

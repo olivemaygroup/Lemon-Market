@@ -34,20 +34,18 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, gener
   const router = useRouter()
   const user = useSelector((state: RootState) => state.auth.value)
 
-  console.log('user console: ', user)
-
   const averageRating = useSelector((state: RootState) => state.fullProperty.value.avg_rating)
 
 
   const loggedIn = useSelector((state: RootState) => state.auth.value)
   const [saved, SetSaved] = useState(false)
-  
+
 
   useEffect(() => {
-    
+
     const getMyFav = async () => {
       let myFav = await favoriteAPIservice.getFavourites()
-      if ((myFav?.filter((item) => item.property_id === property.property_id).length === 1)) {
+      if ((myFav?.filter((item) => item.property_id === property.property_id).length === 1) && myFav !== undefined) {
         SetSaved(true)
       } else {
         SetSaved(false)
@@ -58,7 +56,7 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, gener
   },[loggedIn, averageRating, saved, generalRating])
 
   let allPhotos: Array<Photo> = []
-  
+
   if (reviewList) {
     reviewList.forEach(review => {
       allPhotos = allPhotos.concat(review.photos);
@@ -73,8 +71,8 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, gener
     }
 
     const newSavedState = !saved;
-    SetSaved(newSavedState); 
-  
+    SetSaved(newSavedState);
+
     try {
       if (newSavedState) {
         await favoriteAPIservice.addFavorite(property.property_id);
@@ -83,8 +81,8 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, gener
       }
     } catch (error) {
       console.error('Error while updating favorite:', error);
-      SetSaved(!newSavedState);
     }
+    // SetSaved(!newSavedState);
   };
 
   const handleAdd = () => {
@@ -93,12 +91,11 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, gener
       return
     } else {
       router.push('/addreview?next=/propertydetail')
-    } 
+    }
   }
 
-  console.log('all photos: ', allPhotos)
   return (
-   
+
     <div className={'overviewContainer'}>
       <div className='photocount' data-testid='photos'>
       { allPhotos.length > 0 ?
@@ -109,19 +106,19 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, gener
       </div>
 
       {allPhotos.length !== undefined ? (
-        
+
         <Carousel
         showArrows={true}
         infiniteLoop={true}
         dynamicHeight={false}
         className='carousel'
         data-testid={"cousel test"}
-        
+
         >
           {allPhotos.map((photo) => (
-            <div key={photo.photo_id} className='picturecontainer'>
+            <div key={photo?.photo_id} className='picturecontainer'>
               <img
-                src={photo.url}
+                src={photo?.url}
                 alt="Picture of the property"
                 width= {100}
                 height= {200}
@@ -130,7 +127,7 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, gener
           ))}
         </Carousel>
       ) : (
-          <Image 
+          <Image
           src={noimage}
           alt="Picture of the property"
           sizes="(max-width: 500px) 100vw, 33vw"
@@ -138,7 +135,7 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, gener
           height={200}
           />
         )}
-      
+
       {/* Render options for general rating */}
       {generalRating  ?
       <div data-testid='average-rating' className="rating">
@@ -161,8 +158,8 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, gener
       }
 
       <div className="favoriteIcon" style={{ position: 'absolute', top: '10px', left: '10px', cursor: 'pointer' }} onClick={handleFavorite}>
-        {!saved ? 
-          <FavoriteBorderIcon style={{ color: "#fae301", fontSize: '50px' }} /> : 
+        {!saved ?
+          <FavoriteBorderIcon style={{ color: "#fae301", fontSize: '50px' }} /> :
           <FavoriteIcon  style={{ color: "#fae301", fontSize: '50px' }} />
         }
       </div>
@@ -170,13 +167,13 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, gener
       <div className="addButton">
           <Box sx={{ '& > :not(style)': { m: 1 } }}>
             <Fab style={{backgroundColor: "#fae301"}} aria-label="add" onClick={handleAdd}>
-              <AddIcon 
+              <AddIcon
               />
             </Fab>
           </Box>
       </div>
     </div>
-    
+
   );
 };
 
