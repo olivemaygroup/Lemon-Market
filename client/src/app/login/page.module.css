@@ -103,7 +103,8 @@
 .linkbtn {
   display: flex;
   height: auto;
-  width: auto;
+  width: 100%;
+  align-self: center;
 }
 
 .btn {
