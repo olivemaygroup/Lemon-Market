@@ -33,7 +33,7 @@ export default function Login() {
     };
 
     const res: any = await userAPI.login(user);
-
+    console.log('RES login--',res)
     const currUser: UserType = {
       tenant_id: res.tenant_id,
       firstName: res.firstName,
@@ -49,6 +49,16 @@ export default function Login() {
       setError(err);
       setEmail("");
       setPassword("");
+      return
+    } else if (res.error) {
+      const err: Error = {
+        error: true,
+        msg: "Error logging in",
+      };
+      setError(err);
+      setEmail("");
+      setPassword("");
+      return
     } else {
       dispatch(changeAuthStatus(true))
       localStorage.setItem('accessToken', res.accessToken)
@@ -95,7 +105,7 @@ export default function Login() {
                 <div className={styles.errorbox}>
                   {error.msg}
                   <button className={styles.btn} onClick={() => setError(initialError)}>OK</button>
-                  <Link href="/signup">
+                  <Link  className={styles.linkbtn} href="/signup">
                   <button className={styles.btn}>signup here</button>
                   </Link>
                   
