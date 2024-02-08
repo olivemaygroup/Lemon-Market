@@ -59,13 +59,17 @@ export default function PropertyDetail() {
   // }, [])
 
   const handleSignup = () => {
+    if (typeof window !== 'undefined') {
     localStorage.setItem('next', '/addreview');
     router.push('/signup')
+    }
   }
 
   const handleLogin = () => {
+    if (typeof window !== 'undefined') {
     localStorage.setItem('next', '/addreview');
     router.push('/login')
+    }
   }
 
   const handleClose = () => {
