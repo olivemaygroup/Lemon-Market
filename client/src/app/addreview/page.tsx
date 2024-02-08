@@ -11,7 +11,6 @@ import { RootState } from "@/lib/store";
 import styles from './page.module.css'
 import { ImageFileObject } from "../types/review-types";
 import PhotoUploadComponent from "../components/Rating/UploadPhoto";
-import Link from 'next/link'
 import Button from '@mui/material/Button';
 import { useRouter } from "next/navigation";
 import { setReviewListSlice } from "@/lib/features/review/addReviewSlice";
@@ -22,7 +21,6 @@ export default function addReview() {
   const fullProperty = useSelector((state: RootState) => state.fullProperty.value)
   const reviewList = useSelector((state: RootState) => state.reviewList.value)
   const dispatch = useDispatch()
-
   const router = useRouter()
   const [imageFiles, setImageFiles] = useState<ImageFileObject[]>([]);
   const [imageURLs, setImageURLs] = useState<any[]>([]);
@@ -41,9 +39,9 @@ export default function addReview() {
   const [landlord_responsiveness, setLandlord_responsiveness] = useState<number>(0);
   const [landlord_responsiveness_comment, setLandlord_responsiveness_comment] = useState<string>('');
   const [total_review_rating, setTotal_review_rating] = useState<number>();
-  const [monthly_rent, setMonthly_rent] = useState<number>();
-  const [monthly_bill, setMonthly_bill] = useState<number>();
-  const [council_tax, setCouncil_tax] = useState<number>();
+  const [monthly_rent, setMonthly_rent] = useState<number>(0);
+  const [monthly_bill, setMonthly_bill] = useState<number>(0);
+  const [council_tax, setCouncil_tax] = useState<number>(0);
   const [general_comment, setGeneral_comment] = useState<string>('');
 
   /*
@@ -228,7 +226,7 @@ export default function addReview() {
           <div className="addreview-submit-btn">
               <Button
                 className={styles.addreview_submit_btn}
-                onClick={handleSubmit}
+                onClick={()=>handleSubmit}
                 >
                   Submit Review
               </Button>

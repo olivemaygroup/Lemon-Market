@@ -19,6 +19,7 @@
 }
 
 .address_title {
+  width: 80%;
   display: flex;
   position: absolute;
   margin-top: -50px;
