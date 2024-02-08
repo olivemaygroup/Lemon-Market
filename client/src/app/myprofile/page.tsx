@@ -122,7 +122,11 @@ export default function MyProfile () {
         email: response.email
       }
       dispatch(setUserSlice(currUser));
-      localStorage.setItem('accessToken',response.accessToken);
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('accessToken', response.accessToken);
+    }
+    
       resetStates();
     }
   }
