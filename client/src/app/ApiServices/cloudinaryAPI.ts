@@ -6,7 +6,7 @@ import { ImageFileObject } from "../types/review-types";
 
 
 function createCloudinaryURL(): string {
-  const cloudinaryName = process.env.NEXT_PUBLIC_CLOUDINARYNAME;
+  const cloudinaryName = process.env.NEXT_PUBLIC_CLOUDINARYNAME ;
   if (cloudinaryName) {
     return `https://api.cloudinary.com/v1_1/${cloudinaryName}/image/upload`;
   } else {

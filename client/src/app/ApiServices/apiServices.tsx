@@ -1,8 +1,5 @@
 'use client'
 
-
-
-
   // REGISTERING FUNCTIONS
   export const passwordChecker = (password: string): boolean => {
     const regex = /^(?=.*[A-Z])(?=.*\d).+$/;

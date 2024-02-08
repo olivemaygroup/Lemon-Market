@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+console.log(BASE_URL)
 
 // Get search results
 const getSearchResults = async (

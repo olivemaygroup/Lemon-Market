@@ -9,7 +9,7 @@ const app = new Koa();
 import router from "./routers/router";
 
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 app
   .use(bodyParser())

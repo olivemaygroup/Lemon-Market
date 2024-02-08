@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
 interface ASJwt {
   login: (user: object) => void;
