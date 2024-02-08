@@ -45,17 +45,18 @@ export default function PropertyDetail() {
   const [generalRating, SetGeneralRating] = useState<number>(0)
 
   console.log('general rating at page', generalRating)
+  console.log('PD rview list---', reviewList)
 
   useEffect(() => {
     SetShowPopup(false)
 
   },[property, reviewList, generalRating])
 
-  useEffect(() => {
-    if (fullProperty.num_of_reviews === 0) {
-      dispatch(setReviewListSlice([]))
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (fullProperty.num_of_reviews === 0) {
+  //     dispatch(setReviewListSlice([]))
+  //   }
+  // }, [])
 
   const handleSignup = () => {
     localStorage.setItem('next', '/addreview');
