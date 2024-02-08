@@ -121,13 +121,12 @@ export default function addReview() {
     }
   ];
 
-  // React.ChangeEvent<HTMLInputElement>
-  const handleSubmit = async (event: React.MouseEvent) => {
+  const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     
     const avgStars = (cleanliness + maintenance + value_for_money + deposit_handling + amenities + landlord_responsiveness) / 6
     setTotal_review_rating(avgStars)
-
+    console.log('AVG STARS--', avgStars)
     const imageURLsArray: any = await cloudinaryImagesToURLS(imageFiles);
     if (imageURLsArray) {
       setImageURLs(imageURLsArray)
@@ -158,11 +157,13 @@ export default function addReview() {
 
     if (fullProperty.property_id != "") {
       await reviewAPI.addReview(fullProperty.property_id, reviewObject)
+      console.log('REVIEW LIST', reviewObject)
       dispatch(setReviewListSlice([...reviewList, reviewObject]))
 
     } else {
       console.error('property id is undefined')
     }
+    console.log('end?')
     router.push('/propertydetail')
 
   };
@@ -225,13 +226,12 @@ export default function addReview() {
 
         <div className="rating-item-submit">
           <div className="addreview-submit-btn">
-              <Button
+            <button
                 className={styles.addreview_submit_btn}
                 onClick={handleSubmit}
                 >
                   Submit Review
-              </Button>
-
+              </button>
           </div>
         </div>
 
