@@ -66,5 +66,8 @@ export const mockStateWithout: any = {
       lastName: 'Bloggs', 
       email: 'joe@bloggs.com' 
     } 
+  },
+  auth: {
+    value: false
   }
 };

@@ -160,7 +160,7 @@ export default function addReview() {
     if (fullProperty.property_id != "") {
       await reviewAPI.addReview(fullProperty.property_id, reviewObject)
       dispatch(setReviewListSlice([...reviewList, reviewObject]))
-      
+
     } else {
       console.error('property id is undefined')
     }
@@ -228,11 +228,11 @@ export default function addReview() {
           <div className="addreview-submit-btn">
               <Button
                 className={styles.addreview_submit_btn}
-                onClick={() => handleSubmit}
+                onClick={handleSubmit}
                 >
                   Submit Review
               </Button>
-           
+
           </div>
         </div>
 

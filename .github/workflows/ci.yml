@@ -13,14 +13,14 @@ env:
 # Backend
   DATABASE_URL: ${{ secrets.DB_URL }}
   SECRET_KEY: ${{ secrets.SECRET_KEY }}
-  TEST_DATABASE_URL: ${{ TEST_DATABASE_URL }}
+  TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
    
 #frontend
-  NEXT_PUBLIC_OPENAIKEY: ${{ NEXT_PUBLIC_OPENAIKEY }}
-  NEXT_PUBLIC_CLOUDINARYNAME: ${{ NEXT_PUBLIC_CLOUDINARYNAME }}
-  NEXT_PUBLIC_GOOGLEPLACES: ${{ NEXT_PUBLIC_GOOGLEPLACES }}
-  GOOGLE_CLIENT_SECRET: ${{ GOOGLE_CLIENT_SECRET }}
-  GOOGLE_CLIENT_ID: ${{ GOOGLE_CLIENT_ID }}
+  NEXT_PUBLIC_OPENAIKEY: ${{ secrets.NEXT_PUBLIC_OPENAIKEY }}
+  NEXT_PUBLIC_CLOUDINARYNAME: ${{ secrets.NEXT_PUBLIC_CLOUDINARYNAME }}
+  NEXT_PUBLIC_GOOGLEPLACES: ${{ secrets.NEXT_PUBLIC_GOOGLEPLACES }}
+  GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+  GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
 
 jobs:
   build:
@@ -29,7 +29,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: 18.x
+        node-version: ['10.17.0', '17.9.0']
 
     steps:
     - uses: actions/checkout@v3
@@ -38,8 +38,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: cd server && npm i
+    - run: npm ci
     - run: cd server && npm run testwindows
-    - run: cd client && npm i
     - run: cd client && npx jest
     
