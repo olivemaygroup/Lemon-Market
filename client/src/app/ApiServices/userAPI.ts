@@ -45,9 +45,7 @@ const editProfile = async (newUser: NewUser, accessToken: string): Promise<any> 
     if (res.status === 409) {
       return 409;
     }
-    console.log('api RES', res)
     const tenantWithAccessToken = await res.json()
-    console.log('TWAT--', tenantWithAccessToken)
     return tenantWithAccessToken
   } catch (err) {
     console.log(err)
