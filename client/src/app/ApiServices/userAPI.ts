@@ -4,7 +4,7 @@ import { Login } from "../types/types";
 import handleAuthenticationError from "../utils/auth-router";
 import { Diplomata } from "next/font/google";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
 const signUp = async (newUser: NewUser): Promise<string | number> => {
   const response = await fetch(`${BASE_URL}/signup`, {

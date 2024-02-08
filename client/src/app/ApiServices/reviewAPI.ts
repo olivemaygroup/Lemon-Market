@@ -2,7 +2,7 @@ import { PropertyTypeFull } from "../types/property-type";
 import { Review } from "../types/review-types";
 import handleAuthenticationError from "../utils/auth-router";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
 const addReview = async (
   property_id: string,
