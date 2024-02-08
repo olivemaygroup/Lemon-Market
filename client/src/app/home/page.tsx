@@ -105,10 +105,6 @@ export default function Home() {
         className={styles.logo} 
         src={greenroom} 
         alt="Comfortable home image with open plan living area. Sofa, cushions, rug. One wall is a window overlooking city. Paintings on the wall are Modgiliani and Pre-raphaelite. There are lemons on a round dining room table, door and cupboards are wood" />
-        <Image 
-        className={styles.logo} 
-        src={comfortableHome} 
-        alt="Comfortable home image with open plan living area. Sofa, cushions, rug. One wall is a window overlooking city. Paintings on the wall are Modgiliani and Pre-raphaelite. There are lemons on a round dining room table, door and cupboards are wood" />
       </div>
       {showProperty &&
         <ProperetyCardContainer SetShowPopup={SetShowPopup} showPopup={showPopup} />
