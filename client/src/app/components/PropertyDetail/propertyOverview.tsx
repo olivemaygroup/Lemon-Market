@@ -45,7 +45,7 @@ const PropertyOverview = ({ reviewList, property, SetShowPopup, showPopup, gener
 
     const getMyFav = async () => {
       let myFav = await favoriteAPIservice.getFavourites()
-      if ((myFav?.filter((item) => item.property_id === property.property_id).length === 1)) {
+      if ((myFav?.filter((item) => item.property_id === property.property_id).length === 1) && myFav !== undefined) {
         SetSaved(true)
       } else {
         SetSaved(false)
