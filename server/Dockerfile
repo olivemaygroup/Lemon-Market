@@ -1,8 +1,8 @@
 # syntax = docker/dockerfile:1
 
 # Adjust NODE_VERSION as desired
-ARG NODE_VERSION=20.8.0
-FROM node:${NODE_VERSION}-slim as base
+ARG NODE_VERSION=20.11.0
+FROM node:${NODE_VERSION}-bullseye-slim as base
 
 LABEL fly_launch_runtime="Node.js/Prisma"
 
@@ -44,5 +44,5 @@ RUN apt-get update -qq && \
 COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD [ "npm", "run", "start" ]
+EXPOSE 8080
+CMD [ "npm", "run", "prod" ]
