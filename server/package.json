@@ -8,6 +8,8 @@
     "connect": "prisma migrate dev --name init",
     "test": "ENV=test jest --detectOpenHandles",
     "testwindows": "set ENV=test&& jest --detectOpenHandles",
+    "build": "tsc",
+    "prod": "NODE_ENV=production node ./dist/index.js",
     "dev": "tsx watch ./src/index.ts"
   },
   "author": "",
