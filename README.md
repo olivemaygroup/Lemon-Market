@@ -1,152 +1,83 @@
-<!--
-1. run 'npx prettier . --write' in root folder.
-Steps before push
+# Lemon Market
 
+The rental market in the UK is ever increasing and lacks transparency and accountabilty of landlords, placing many current or future tennants in a stressful position.
 
- ROUTES:
+Lemon Market is a next.js PWA allowing users to search for properties, read and leave reviews, increasing transparency in the market and helping tennats avoid those 'Lemons'.
+ 
+## Tech stack
 
+**Client**
+- Framework: React bootstrapped with Next.js PWA (App Router)
+- Additional: Material UI, React Google places, React responsive carousel
+- APIs: Google maps and OpenAI
 
----------------------------------------------------------------------------------------------------------------------
-GET propertyCards:
+**server**
+- KOA
+- JWT for authentication
+- Prisma ORM
 
-Client: '/'
-        >>>> At landing and search
-        >>>> Royal mail API to drop down addresses
-        >>>> on click, message sent to router
+**Database**
+- AWS realtional database server or PostgreSQL locally
 
-Router: '/checkAddress'
-        >>>> Controller: check if exists
-        >>>> YES: return full property object
-        >>>> NO: Client renders placeholder propertyCard
+**Testing**
+- JEST and supertest(backend)
 
----------------------------------------------------------------------------------------------------------------------
+## CI / CD
 
-POST SIGNUP:
+CI / CD was implemented with Github Actions, netlify for the client and fly.io for the server.
 
-Client: '/signup'
-        >>>> user navs to signup page
+## NPM installation
 
-Router: '/signup'
-        >>>> response - session token in cookie
+Open the Lemon-Market root folder
 
----------------------------------------------------------------------------------------------------------------------
+**front-end**:
+`cd client`
+`npm i`
 
-POST ADD PROFILE:
+**back-end**:
+`cd server`
+`npm i`
 
-Client: '/addprofile'
-        >>>> user navs to profile form
+## Getting started
 
-Router: '/addprofile
-        >>>> Requires AuthMiddleware
+**Client**
 
----------------------------------------------------------------------------------------------------------------------
+To run all functionality within the app, the minimum you will require:
 
-GET PROFILE:
+1) Generate a Google places API key from https://console.cloud.google.com/marketplace/product/google/places-backend.googleapis.com
+2) Signup to cloudinary and generate a cloudinary name https://cloudinary.com/documentation/how_to_integrate_cloudinary
+3) Sign up to OpenAI playground and generate an API key https://platform.openai.com/playground
+4) Create an env.local file, replicating the env.local-example.js with your keys above.
 
-Client: '/myprofile'
-        >>>> user navs to their profile page
+Running the client locally on port 3001:
+`cd client`
+`npm run dev`
 
-Router: '/myprofile
-        >>>> object contianing user info
-        >>>> requires Auth middleware
----------------------------------------------------------------------------------------------------------------------
+**Additional client**
 
-POST LOGIN:
+5) Per the server setup noted below, add the fly.io or deployment of your choice to env.local file to access the public server
 
-Client: '/login'
-        >>>> user navs to login page
 
-Router: '/login
-        >>>> response - session token in cookie
+**Server and DB**
 
----------------------------------------------------------------------------------------------------------------------
+To run all functionality within the app, the minimum you will require:
+1) Local installation of PostgreSQL for data storage
+2) Create your .env file per env-eample.js
+3) Replace:
+- DATABASE_URL (Your local PostgreSQL http)
+- PORT
+- SECRET_KEY (for JWT authentication)
+- TEST_DATABASE_URL (Your local test PostgreSQL http)
+4) If you have not initiated the connection with Prisma and PostgreSQL run `npm run connect`.
 
-POST ADD A FAVORITE:
+Run `npm run dev` to start the server.
+Run `npm run test` on Mac or `npm run testwindows` on Windows to test the backend. Ensure TEST_DATABASE has an appropriate DB connection.
 
-client: '/' or '/propertydetail'
-        >>>> Either at the home page or at the property detail page, user will be able to save a property
+**Additional server**
 
+5) AWS relational database service can be used to host the production and testing databases. Update the DATABASE_URL and TEST_DATABASE_URL accordingly in the .env file. 
 
-router: '/addFavorite'
-        >>>> Return added success
-        >>>> requires Auth middleware
+**Deployment**
 
----------------------------------------------------------------------------------------------------------------------
-
-GET FAVORITE PROPERTY:
-
-client: '/'
-        >>>> When user logs in, previously saved properties will render below the search bar
-
-
-router: '/getFavorites'
-        >>>> Return saved property object
-        >>>> requires Auth middleware
-
-
-
-
----------------------------------------------------------------------------------------------------------------------
-
-PUT EDIT PROFILE:
-
-Client: '/myprofile'
-        >>>> user edits profile
-
-Router: '/editprofile/:id
-        >>>> Requires AuthMiddleware
-
-
----------------------------------------------------------------------------------------------------------------------
-
-GET PROPERTY DETAIL:
-
-Client: '/propertydetail'
-        >>>> client clicks on property card to nav to the property detail
-
-Router: '/propertydetail
-        >>>> response - object containing the details/reviews/pics
-
----------------------------------------------------------------------------------------------------------------------
-
-POST ADD REVIEW:
-
-Client: '/addreview
-        >>>> user nav to the review form
-
-Router: '/addreview
-        >>>> add success
-        >>>> Requires AuthMiddleware
-
----------------------------------------------------------------------------------------------------------------------
-
-GET MY REVIEWS:
-
-Client: '/myreviews'
-        >>>> user navs to the myreviews page
-
-Router: '/myreviews
-        >>>> response - object of all the reviews made by the current user
-        >>>> Requires AuthMiddleware
-
----------------------------------------------------------------------------------------------------------------------
-
-PUT EDIT REVIEW:
-
-Client: '/myreviews'
-        >>>> user edits review
-
-Router: '/editreview/:id
-        >>>> response success
-        >>>> Requires AuthMiddleware
-
-
-
-
-
-
-
-
-
-
- -->
+1. Docker file is currently setup with fly.toml to deploy with `npm run prod`.
+2. You may need to ensure module import compabitility depending on your chosen deployment process.
