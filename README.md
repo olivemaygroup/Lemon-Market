@@ -62,7 +62,7 @@ Running the client locally on port 3001:
 
 To run all functionality within the app, the minimum you will require:
 1) Local installation of PostgreSQL for data storage
-2) Create your .env file per env-eample.js
+2) Create your .env file per env-example.js
 3) Replace:
 - DATABASE_URL (Your local PostgreSQL http)
 - PORT
