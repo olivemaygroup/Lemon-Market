@@ -1,38 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Lemon Market
 
-## Getting Started
+The rental market in the UK is ever increasing and a lack of transparency and accountabilty of landlords places many current or future tennants in a stressful position.
 
-First, run the development server:
+Lemon Market is a PWA allowing users to search for properties, read and leave reviews, increasing transparency in the market and helping tennats avoid those 'Lemons'.
+ 
+# Front-end tech stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Framework: React bootstrapped with Next.js PWA (App Router)
+Additional: Material UI, React Google places, React responsive carousel
+APIs: Google maps and OpenAI
+Testing: JEST
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# CI / CD
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+CI / CD utilises Github Actions and netlify for the client and fly.io for the server.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# NPM I
 
-## Learn More
+Open the Lemon-Market root folder
 
-To learn more about Next.js, take a look at the following resources:
+front-end:
+`cd client`
+`npm i`
+`npm run dev`
+back-end:
+`cd server`
+`npm i`
+`npm run dev`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Getting started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Client
+Minimu requirements to run all functionality within the app you will require:
 
-## Deploy on Vercel
+1) Generate a Google places API key from https://console.cloud.google.com/marketplace/product/google/places-backend.googleapis.com
+2) Signup to cloudinary and generate a cloudinary name https://cloudinary.com/documentation/how_to_integrate_cloudinary
+3) Sign up to OpenAI playground and generate an API key https://platform.openai.com/playground
+4) Create an env.local file, replicating the env.local-example.js with your keys above.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Running the client locally on port 3001:
+`cd client`
+`npm run dev`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Additonal:
+5) Per the server setup noted below, add the fly.io https link to env.local file to access the public server.
 
-Google API login details:
+
+
+#### Server and DB
+1) Install a local PostgreSQL server to store data
+
+
